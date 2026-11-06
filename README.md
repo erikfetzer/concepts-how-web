@@ -1,0 +1,23 @@
+# concepts.how
+
+Interactive explainers for big ideas: what each concept is and how it works.
+
+A static site with no build step. Every page is a self-contained HTML file.
+
+| Page | File | What it does |
+|---|---|---|
+| Home | `index.html` | Links to each concept |
+| Metric units | `units.html` | 64 metric units by quantity: name origins, history, original and current definitions, imperial equivalents, and a converter |
+| Voting methods | `voting.html` | Election simulator, ranked-ballot paradoxes, a guide to 12 counting methods, and a fairness-criteria table |
+
+## Run locally
+
+Open `index.html` in a browser, or serve the folder:
+
+```sh
+npx serve .
+```
+
+## Deploy
+
+Works as-is on Vercel, Netlify or GitHub Pages. No framework or build command; the output directory is the repo root.

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metric Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a metrology lab notebook. Millimetre-ruler rules divide the page; converter is the hero; units are filed by quantity like specimen drawers. */
+:root{
+  --paper:#F3F5F8;
+  --card:#FFFFFF;
+  --ink:#0E1A2B;
+  --muted:#596579;
+  --line:#D3DAE3;
+  --accent:#1D47F0;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#E4EAFE;
+  --display:"Syne", "Arial Narrow", system-ui, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+    --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* ruler rule */
+.ruler{height:14px;border-bottom:1px solid var(--ink);opacity:.55;
+  background:
+    repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 80px) bottom/100% 14px no-repeat,
+    repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 40px) bottom/100% 9px no-repeat,
+    repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 8px) bottom/100% 5px no-repeat;}
+
+/* Hero */
+.hero{padding:clamp(28px,5vw,56px) 0 36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero h1{font-size:clamp(46px,7.4vw,98px);font-weight:800;letter-spacing:-.035em;margin:14px 0 18px}
+.hero h1 span{display:block;color:var(--accent)}
+.lede{max-width:46ch;color:var(--muted);font-size:17px;margin:0 0 22px}
+.stats{display:flex;gap:28px;flex-wrap:wrap}
+.stat .v{font-family:var(--display);font-size:30px;font-weight:700}
+.stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Converter */
+.conv{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(14,26,43,.35)}
+.conv-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.conv-head h2{font-size:20px;font-weight:700}
+.conv-head small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.qtabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scrollbar-width:thin}
+.qtab{flex:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.qtab:hover{border-color:var(--accent)}
+.qtab[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.conv-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:end}
+.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field input,.field select{width:100%;min-width:0;max-width:100%;text-overflow:ellipsis;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:10px 12px;min-height:44px}
+.field input{font-family:var(--mono);font-size:20px;font-weight:500}
+.field select{cursor:pointer}
+.stack{display:grid;gap:8px;min-width:0}
+.field{min-width:0}
+.swap{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;display:grid;place-items:center;margin-bottom:46px;transition:transform .25s}
+.swap:hover{border-color:var(--accent);transform:rotate(180deg)}
+.result{margin-top:16px;padding:16px 18px;border-radius:12px;background:var(--accent);color:var(--accent-ink)}
+.result .big{font-family:var(--mono);font-size:clamp(24px,3.6vw,36px);font-weight:600;line-height:1.15;word-break:break-word}
+.result .eq{font-size:13px;opacity:.85;margin-top:4px;font-family:var(--mono)}
+.allvals{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px;max-height:230px;overflow:auto;border-top:1px dashed var(--line);padding-top:10px}
+.allvals h4{grid-column:span 1;margin:4px 0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.av{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--line);font-size:13px}
+.av span:first-child,.av button{min-width:0;overflow-wrap:anywhere}
+.av span:last-child{flex:none;max-width:60%;overflow-wrap:anywhere;font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.av button{all:unset;cursor:pointer;color:var(--muted)}
+.av button:hover{color:var(--accent);text-decoration:underline}
+
+/* Toolbar */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{display:flex;gap:12px;align-items:center;padding:10px 0;flex-wrap:wrap}
+.search{flex:1 1 220px;position:relative}
+.search input{width:100%;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px 9px 36px;min-height:42px}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;user-select:none;white-space:nowrap}
+.toggle input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;transition:background .2s;margin:0}
+.toggle input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--card);transition:transform .2s}
+.toggle input:checked{background:var(--accent)}
+.toggle input:checked::after{transform:translateX(16px)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:thin}
+.chip{flex:none;display:flex;gap:6px;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 10px;font-size:13px;cursor:pointer;text-decoration:none;color:var(--ink)}
+.chip i{width:8px;height:8px;border-radius:2px;background:var(--g)}
+.chip em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip:hover{border-color:var(--g)}
+
+/* Groups */
+main{padding:10px 0 60px}
+.group{padding-top:34px;scroll-margin-top:110px}
+.ghead{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:end;margin-bottom:14px}
+.gidx{font-family:var(--mono);font-size:12px;color:var(--g);border:1px solid var(--g);border-radius:6px;padding:2px 7px;align-self:center}
+.ghead h2{min-width:0;overflow-wrap:anywhere;font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em}
+.ghead p{grid-column:2/4;margin:0;color:var(--muted);max-width:70ch;font-size:15px}
+.gcount{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:12px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 14px;display:grid;grid-template-rows:auto auto 1fr auto;gap:6px;position:relative;overflow:hidden;transition:border-color .15s,transform .15s,box-shadow .15s;min-height:172px}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--g);opacity:.9}
+.card:hover{border-color:var(--g);transform:translateY(-2px);box-shadow:0 10px 24px -18px rgba(14,26,43,.5)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.sym{font-family:var(--mono);font-size:34px;font-weight:600;line-height:1;letter-spacing:-.02em;word-break:break-all}
+.badges{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--muted);white-space:nowrap}
+.badge.base{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.badge.lk{border-color:var(--accent);color:var(--accent)}
+.cname{font-weight:600;font-size:17px}
+.cmean{font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ceq{font-family:var(--mono);font-size:12px;border-top:1px dashed var(--line);padding-top:8px;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:40px 0;color:var(--muted);text-align:center;display:none}
+
+/* Prefixes */
+.prefix{padding-top:48px}
+.ptrack{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:10px 4px;padding-top:8px}
+.pf{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 6px;text-align:center;position:relative}
+.pf .ps{font-family:var(--mono);font-size:20px;font-weight:600}
+.pf .pn{font-size:12px}
+.pf .pe{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.pf.new{border-color:var(--accent)}
+.pf.new::after{content:"2022";position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;background:var(--accent);color:var(--accent-ink);padding:0 4px;border-radius:3px}
+.pnote{color:var(--muted);font-size:14px;margin:10px 0 0;max-width:75ch}
+
+/* Drawer */
+dialog.drawer{margin:0 0 0 auto;height:100%;max-height:100%;width:min(620px,100%);max-width:100%;border:0;border-left:1px solid var(--line);padding:0;background:var(--card);color:var(--ink);overflow:auto}
+dialog.drawer::backdrop{background:rgba(6,10,18,.45);backdrop-filter:blur(2px)}
+dialog[open].drawer{animation:slide .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes slide{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.dhead{position:relative;padding:24px 24px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,color-mix(in srgb,var(--g) 14%,var(--card)),var(--card))}
+.dclose{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:20px;line-height:1}
+.dclose:hover{border-color:var(--accent)}
+.dgroup{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.dsym{font-family:var(--mono);font-size:clamp(56px,10vw,84px);font-weight:600;line-height:1;margin:10px 0 6px;letter-spacing:-.03em;word-break:break-all}
+.dname{font-size:30px;font-weight:700}
+.dbody{padding:8px 24px 32px}
+.sec{padding:18px 0;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec h3{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px}
+.sec p{margin:0;max-width:62ch}
+.tl{display:grid;gap:0;position:relative;margin-top:4px}
+.tli{display:grid;grid-template-columns:72px 1fr;gap:14px;position:relative;padding-bottom:16px}
+.tli:last-child{padding-bottom:0}
+.tli .yr{font-family:var(--mono);font-weight:600;font-size:14px;padding-top:1px}
+.tli .tx{border-left:2px solid var(--line);padding-left:16px;position:relative}
+.tli .tx::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--muted)}
+.tli.now .tx::before{background:var(--accent);border-color:var(--accent)}
+.tli .lab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tli.now .lab{color:var(--accent)}
+.imp{font-family:var(--mono);font-size:15px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.mini{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-bottom:10px}
+.mini input{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 10px;font-family:var(--mono);font-size:18px;min-height:42px;width:100%}
+.mini span{font-family:var(--mono);color:var(--muted)}
+.minilist{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 16px}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 16px;cursor:pointer;font-weight:500;min-height:42px}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:13px}
+
+/* mobile pickers replace horizontal pill strips */
+.mselect{display:none;width:100%;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 12px;min-height:44px;font-size:16px;cursor:pointer}
+.bar .mselect{background:var(--card)}
+@media (max-width:640px){
+  .qtabs,.chips{display:none}
+  .mselect{display:block}
+  #qsel{margin-bottom:12px}
+  .bar-in{gap:8px;padding:8px 0}
+  .search{flex:1 1 100%}
+  #jump{flex:1 1 auto;width:auto}
+  .conv{padding:16px}
+  .hero{padding-top:24px}
+  .stats{gap:18px}
+  .stat .v{font-size:24px}
+  .group{scroll-margin-top:120px;padding-top:28px}
+  .dhead,.dbody{padding-left:18px;padding-right:18px}
+  .tli{grid-template-columns:58px minmax(0,1fr);gap:10px}
+}
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .conv-row{grid-template-columns:1fr}
+  .swap{margin:0 auto;transform:rotate(90deg)}
+  .swap:hover{transform:rotate(270deg)}
+  .allvals,.minilist{grid-template-columns:1fr}
+  .mini{grid-template-columns:1fr}
+  .ghead{grid-template-columns:auto 1fr}
+  .gcount{display:none}
+  .ghead p{grid-column:1/3}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Concept Atlas</a>
+    <a class="nl" href="units.html" aria-current="page">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+  </div>
+</nav>
+<div class="ruler" aria-hidden="true"></div>
+<header class="wrap hero">
+  <div>
+    <div class="eyebrow"><b>SI · CGS · accepted units</b><span>Revised for the 2019 redefinition</span></div>
+    <h1>Metric<span>Atlas</span></h1>
+    <p class="lede">Every metric unit worth knowing, from the kilogram to the barn: where each name comes from, how it was first defined, how it is defined now, and what it equals in imperial.</p>
+    <div class="stats">
+      <div class="stat"><div class="v num" id="statUnits">0</div><div class="k">Units</div></div>
+      <div class="stat"><div class="v num" id="statGroups">0</div><div class="k">Quantity groups</div></div>
+      <div class="stat"><div class="v num">7</div><div class="k">SI base units</div></div>
+      <div class="stat"><div class="v num">24</div><div class="k">SI prefixes</div></div>
+    </div>
+  </div>
+
+  <section class="conv" id="converter" aria-label="Unit converter">
+    <div class="conv-head"><h2>Converter</h2><small>metric ⇄ imperial &amp; US</small></div>
+    <div class="qtabs" id="qtabs" role="group" aria-label="Quantity"></div>
+    <select class="mselect" id="qsel" aria-label="Quantity to convert"></select>
+    <div class="conv-row">
+      <div class="stack">
+        <div class="field"><label for="cvVal">Value</label><input id="cvVal" type="text" inputmode="decimal" value="1" autocomplete="off"></div>
+        <div class="field"><label for="cvFrom">From</label><select id="cvFrom"></select></div>
+      </div>
+      <button class="swap" id="cvSwap" type="button" aria-label="Swap units" title="Swap units">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16M3 8l4-4 4 4M17 20V4M21 16l-4 4-4-4"/></svg>
+      </button>
+      <div class="stack">
+        <div class="field" aria-hidden="true" style="visibility:hidden"><label>-</label><input tabindex="-1"></div>
+        <div class="field"><label for="cvTo">To</label><select id="cvTo"></select></div>
+      </div>
+    </div>
+    <div class="result" aria-live="polite">
+      <div class="big num" id="cvOut">–</div>
+      <div class="eq" id="cvEq"></div>
+    </div>
+    <div class="allvals" id="cvAll"></div>
+  </section>
+</header>
+
+<nav class="bar" aria-label="Browse units">
+  <div class="wrap">
+    <div class="bar-in">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search units, people, symbols… try “Kelvin”, “barn”, “Å”" aria-label="Search units">
+      </div>
+      <select class="mselect" id="jump" aria-label="Jump to group"></select>
+      <label class="toggle" for="lkOnly"><input type="checkbox" id="lkOnly"> Lesser-known only</label>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div id="groups"></div>
+  <p class="empty" id="empty">No units match that search. Try a unit name, a symbol or a scientist’s surname.</p>
+
+  <section class="prefix" id="prefixes" aria-labelledby="pfh">
+    <div class="ghead" style="--g:var(--accent)">
+      <span class="gidx">×10ⁿ</span><h2 id="pfh">SI prefixes</h2><span class="gcount">quecto → quetta</span>
+      <p>Any metric unit takes these prefixes. Ronna, quetta, ronto and quecto were added in November 2022, the first new prefixes since 1991, largely because global data storage was heading toward the yottabyte.</p>
+    </div>
+    <div class="ptrack" id="ptrack"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Definitions follow the SI Brochure (9th edition, 2019) of the International Bureau of Weights and Measures (BIPM). Imperial figures are rounded to about six significant digits; the inch has been exactly 2.54 cm and the pound exactly 0.45359237 kg since 1959.
+</footer>
+
+<dialog class="drawer" id="drawer" aria-labelledby="dName">
+  <div class="dhead">
+    <button class="dclose" id="dClose" type="button" aria-label="Close">×</button>
+    <div class="dgroup" id="dGroup"></div>
+    <div class="dsym" id="dSym"></div>
+    <h2 class="dname" id="dName"></h2>
+    <div class="badges" id="dBadges" style="justify-content:flex-start;margin-top:10px"></div>
+  </div>
+  <div class="dbody" id="dBody"></div>
+</dialog>
+
+<script>
+/* ---------- Converter quantities: [key, name, symbol, factor-to-SI, group m=metric i=imperial/US/other] ---------- */
+const Q = {
+  length:{l:"Length",base:"m",u:[
+    ["m","metre","m",1,"m"],["km","kilometre","km",1e3,"m"],["cm","centimetre","cm",0.01,"m"],["mm","millimetre","mm",1e-3,"m"],
+    ["um","micrometre","µm",1e-6,"m"],["nm","nanometre","nm",1e-9,"m"],["A","ångström","Å",1e-10,"m"],["fm","fermi","fm",1e-15,"m"],
+    ["au","astronomical unit","au",149597870700,"m"],
+    ["in","inch","in",0.0254,"i"],["ft","foot","ft",0.3048,"i"],["yd","yard","yd",0.9144,"i"],["mi","mile","mi",1609.344,"i"],
+    ["thou","thou (mil)","thou",2.54e-5,"i"],["ftm","fathom","ftm",1.8288,"i"],["fur","furlong","fur",201.168,"i"],["nmi","nautical mile","nmi",1852,"i"]]},
+  mass:{l:"Mass",u:[
+    ["kg","kilogram","kg",1,"m"],["g","gram","g",1e-3,"m"],["mg","milligram","mg",1e-6,"m"],["t","tonne","t",1e3,"m"],
+    ["q","quintal","q",100,"m"],["ct","metric carat","ct",2e-4,"m"],["Da","dalton","Da",1.66053906892e-27,"m"],
+    ["gr","grain","gr",6.479891e-5,"i"],["oz","ounce","oz",0.028349523125,"i"],["lb","pound","lb",0.45359237,"i"],["st","stone","st",6.35029318,"i"],
+    ["ozt","troy ounce","oz t",0.0311034768,"i"],["ston","short ton (US)","ton",907.18474,"i"],["lton","long ton (UK)","LT",1016.0469088,"i"]]},
+  temperature:{l:"Temperature",temp:true,u:[
+    ["K","kelvin","K",0,"m"],["C","degree Celsius","°C",0,"m"],["F","degree Fahrenheit","°F",0,"i"],["R","degree Rankine","°R",0,"i"]]},
+  area:{l:"Area",u:[
+    ["m2","square metre","m²",1,"m"],["cm2","square centimetre","cm²",1e-4,"m"],["km2","square kilometre","km²",1e6,"m"],
+    ["a","are","a",100,"m"],["ha","hectare","ha",1e4,"m"],["b","barn","b",1e-28,"m"],
+    ["in2","square inch","in²",6.4516e-4,"i"],["ft2","square foot","ft²",0.09290304,"i"],["yd2","square yard","yd²",0.83612736,"i"],
+    ["ac","acre","ac",4046.8564224,"i"],["mi2","square mile","mi²",2589988.110336,"i"]]},
+  volume:{l:"Volume",u:[
+    ["L","litre","L",1e-3,"m"],["mL","millilitre","mL",1e-6,"m"],["m3","cubic metre","m³",1,"m"],["cm3","cubic centimetre","cm³",1e-6,"m"],["stere","stère","st",1,"m"],
+    ["tsp","teaspoon (US)","tsp",4.92892159375e-6,"i"],["tbsp","tablespoon (US)","tbsp",1.478676478125e-5,"i"],["usfloz","fluid ounce (US)","fl oz",2.95735295625e-5,"i"],
+    ["cup","cup (US)","cup",2.365882365e-4,"i"],["uspt","pint (US)","pt",4.73176473e-4,"i"],["usqt","quart (US)","qt",9.46352946e-4,"i"],["usgal","gallon (US)","gal",3.785411784e-3,"i"],
+    ["impfloz","fluid ounce (UK)","fl oz",2.84130625e-5,"i"],["imppt","pint (UK)","pt",5.6826125e-4,"i"],["impgal","gallon (UK)","gal",4.54609e-3,"i"],
+    ["in3","cubic inch","in³",1.6387064e-5,"i"],["ft3","cubic foot","ft³",0.028316846592,"i"],["yd3","cubic yard","yd³",0.764554857984,"i"],["cord","cord (firewood)","cd",3.624556363776,"i"]]},
+  speed:{l:"Speed",u:[
+    ["mps","metre per second","m/s",1,"m"],["kmh","kilometre per hour","km/h",1/3.6,"m"],
+    ["mph","mile per hour","mph",0.44704,"i"],["fps","foot per second","ft/s",0.3048,"i"],["kn","knot","kn",1852/3600,"i"]]},
+  force:{l:"Force",u:[
+    ["N","newton","N",1,"m"],["kN","kilonewton","kN",1e3,"m"],["dyn","dyne","dyn",1e-5,"m"],["kgf","kilogram-force","kgf",9.80665,"m"],
+    ["lbf","pound-force","lbf",4.4482216152605,"i"],["pdl","poundal","pdl",0.138254954376,"i"]]},
+  energy:{l:"Energy",u:[
+    ["J","joule","J",1,"m"],["kJ","kilojoule","kJ",1e3,"m"],["MJ","megajoule","MJ",1e6,"m"],["erg","erg","erg",1e-7,"m"],
+    ["cal","calorie","cal",4.184,"m"],["kcal","kilocalorie (food Calorie)","kcal",4184,"m"],["eV","electronvolt","eV",1.602176634e-19,"m"],
+    ["Wh","watt-hour","Wh",3600,"m"],["kWh","kilowatt-hour","kWh",3.6e6,"m"],
+    ["ftlbf","foot-pound","ft·lbf",1.3558179483314004,"i"],["BTU","British thermal unit","BTU",1055.05585262,"i"],["thm","therm","thm",105505585.262,"i"]]},
+  power:{l:"Power",u:[
+    ["W","watt","W",1,"m"],["kW","kilowatt","kW",1e3,"m"],["MW","megawatt","MW",1e6,"m"],["PS","metric horsepower","PS",735.49875,"m"],
+    ["hp","horsepower (mechanical)","hp",745.69987158227022,"i"],["ftlbfs","foot-pound per second","ft·lbf/s",1.3558179483314004,"i"],["BTUh","BTU per hour","BTU/h",0.29307107017,"i"]]},
+  pressure:{l:"Pressure",u:[
+    ["Pa","pascal","Pa",1,"m"],["hPa","hectopascal","hPa",100,"m"],["kPa","kilopascal","kPa",1e3,"m"],["MPa","megapascal","MPa",1e6,"m"],
+    ["bar","bar","bar",1e5,"m"],["mbar","millibar","mbar",100,"m"],["Ba","barye","Ba",0.1,"m"],["mmHg","millimetre of mercury","mmHg",133.322387415,"m"],
+    ["atm","standard atmosphere","atm",101325,"i"],["torr","torr","Torr",101325/760,"i"],["psi","pound per square inch","psi",6894.757293168,"i"],["inHg","inch of mercury","inHg",3386.389,"i"]]},
+  viscosity:{l:"Viscosity",u:[
+    ["Pas","pascal-second","Pa·s",1,"m"],["mPas","millipascal-second","mPa·s",1e-3,"m"],["P","poise","P",0.1,"m"],["cP","centipoise","cP",1e-3,"m"],
+    ["lbfsft2","pound-force second per sq ft","lbf·s/ft²",47.88025898033584,"i"],["reyn","reyn","reyn",6894.757293168,"i"]]},
+  frequency:{l:"Frequency",u:[
+    ["Hz","hertz","Hz",1,"m"],["kHz","kilohertz","kHz",1e3,"m"],["MHz","megahertz","MHz",1e6,"m"],["GHz","gigahertz","GHz",1e9,"m"],
+    ["rpm","revolutions per minute","rpm",1/60,"i"]]},
+  magnetic:{l:"Magnetic field",u:[
+    ["T","tesla","T",1,"m"],["mT","millitesla","mT",1e-3,"m"],["uT","microtesla","µT",1e-6,"m"],["G","gauss","G",1e-4,"m"]]},
+  illuminance:{l:"Illuminance",u:[
+    ["lx","lux","lx",1,"m"],["ph","phot","ph",1e4,"m"],["fc","foot-candle","fc",10.763910416709722,"i"]]},
+  angle:{l:"Angle",u:[
+    ["rad","radian","rad",1,"m"],["mrad","milliradian","mrad",1e-3,"m"],["gon","gon (grad)","gon",Math.PI/200,"m"],
+    ["deg","degree","°",Math.PI/180,"i"],["arcmin","arcminute","′",Math.PI/10800,"i"],["arcsec","arcsecond","″",Math.PI/648000,"i"],["turn","turn","tr",2*Math.PI,"i"]]},
+  amount:{l:"Amount of substance",u:[
+    ["mol","mole","mol",1,"m"],["mmol","millimole","mmol",1e-3,"m"],["kmol","kilomole","kmol",1e3,"m"],["lbmol","pound-mole","lb-mol",453.59237,"i"]]},
+  activity:{l:"Radioactivity",u:[
+    ["Bq","becquerel","Bq",1,"m"],["kBq","kilobecquerel","kBq",1e3,"m"],["MBq","megabecquerel","MBq",1e6,"m"],["GBq","gigabecquerel","GBq",1e9,"m"],
+    ["Ci","curie","Ci",3.7e10,"i"],["mCi","millicurie","mCi",3.7e7,"i"],["uCi","microcurie","µCi",3.7e4,"i"],["pCi","picocurie","pCi",3.7e-2,"i"]]},
+  dose:{l:"Absorbed dose",u:[
+    ["Gy","gray","Gy",1,"m"],["mGy","milligray","mGy",1e-3,"m"],["rad","rad","rad",0.01,"i"]]},
+  equiv:{l:"Equivalent dose",u:[
+    ["Sv","sievert","Sv",1,"m"],["mSv","millisievert","mSv",1e-3,"m"],["uSv","microsievert","µSv",1e-6,"m"],["rem","rem","rem",0.01,"i"],["mrem","millirem","mrem",1e-5,"i"]]}
+};
+
+/* ---------- Groups ---------- */
+const G = [
+  {id:"length",n:"Length",h:218,p:"The metre started as a slice of the planet and now rides on the speed of light. Its offspring stretch from the fermi inside an atomic nucleus to the astronomical unit."},
+  {id:"mass",n:"Mass",h:12,p:"The kilogram was the last unit tied to a physical object, a metal cylinder in a French vault, until 2019. Around it sit units for gems, grain harvests and molecules."},
+  {id:"time",n:"Time & frequency",h:275,p:"Time never went decimal (France tried 10-hour days in 1793 and dropped them by 1795), but the second is the most precisely realised unit humans have."},
+  {id:"temperature",n:"Temperature",h:350,p:"One scale starts at absolute zero, the other at freezing water. Since 2019 both hang on the Boltzmann constant."},
+  {id:"area",n:"Area",h:140,p:"Land is measured in ares and hectares. Particle physicists measure the target size of a nucleus in barns."},
+  {id:"volume",n:"Volume",h:190,p:"The litre is simply a cubic decimetre, a link from length to volume that imperial units never had. The stère was built for firewood."},
+  {id:"mechanics",n:"Force, energy & pressure",h:30,p:"Coherent SI units like the newton, joule, watt and pascal replaced a crowd of gravity-dependent and CGS units, several of which refuse to retire."},
+  {id:"electric",n:"Electricity & magnetism",h:250,p:"Named almost entirely after the 19th-century scientists who worked these effects out, and agreed at the International Electrical Congresses of 1881 and 1893."},
+  {id:"light",n:"Light",h:45,p:"Photometry weights light by how bright it looks to the human eye. The candela grew out of literal candles."},
+  {id:"chemistry",n:"Chemistry",h:160,p:"Counting atoms by the mole and measuring how fast enzymes work in katals."},
+  {id:"radiation",n:"Radiation",h:320,p:"How radioactive a source is, how much energy tissue absorbs, and how much biological harm that dose carries."},
+  {id:"angle",n:"Angle",h:300,p:"The radian makes the maths clean. The gon was revolutionary France’s attempt to give the right angle 100 parts."}
+];
+
+/* ---------- Units ----------
+ t: base | derived | multiple | accepted | cgs | older
+ o/oy: original definition & year, d/dy: current definition & year */
+const U = [
+/* LENGTH */
+{id:"metre",n:"metre",s:"m",g:"length",t:"base",cv:["length","m"],
+ m:"From the Greek metron, “a measure”. The French Academy of Sciences chose the name in 1791.",
+ h:"Revolutionary France wanted a unit “for all people, for all time”, taken from nature rather than a king’s foot. Astronomers Delambre and Méchain spent 1792–1798 surveying the meridian from Dunkirk to Barcelona to fix its length. A platinum-iridium prototype bar took over in 1889, and in 1960 the metre became 1,650,763.73 wavelengths of krypton-86 light.",
+ oy:"1791",o:"One ten-millionth of the distance from the North Pole to the Equator along the meridian through Paris. Made physical in 1799 as a platinum bar, the Mètre des Archives.",
+ dy:"1983",d:"The distance light travels in vacuum in 1/299,792,458 of a second. The speed of light is fixed at exactly 299,792,458 m/s.",
+ i:"1 m = 39.3701 in = 3.28084 ft = 1.09361 yd"},
+{id:"kilometre",n:"kilometre",s:"km",g:"length",t:"multiple",cv:["length","km"],
+ m:"kilo- comes from the Greek khilioi, “thousand”.",
+ h:"Part of the original 1795 decimal system. It became the standard for road distances across most of the world through the 19th and 20th centuries. The UK and US still sign roads in miles.",
+ oy:"1795",o:"1,000 metres, when the metre was still a fraction of the Earth’s meridian.",
+ dy:"1983",d:"Exactly 1,000 m, so it inherits the light-based metre.",
+ i:"1 km = 0.621371 mi = 1,093.61 yd = 3,280.84 ft"},
+{id:"centimetre",n:"centimetre",s:"cm",g:"length",t:"multiple",cv:["length","cm"],
+ m:"centi- from the Latin centum, “hundred”.",
+ h:"The centimetre was the length unit of the CGS (centimetre–gram–second) system, promoted by the British Association for the Advancement of Science in 1873–74, which ran physics for decades before the SI.",
+ oy:"1795",o:"One hundredth of a metre.",
+ dy:"1959",d:"Exactly 0.01 m. Since the 1959 international yard and pound agreement, one inch is defined as exactly 2.54 cm.",
+ i:"1 cm = 0.393701 in"},
+{id:"millimetre",n:"millimetre",s:"mm",g:"length",t:"multiple",cv:["length","mm"],
+ m:"milli- from the Latin mille, “thousand”.",
+ h:"Engineering drawings across most of the world are dimensioned in millimetres, and rainfall is reported in them too.",
+ oy:"1795",o:"One thousandth of a metre.",
+ dy:"1983",d:"Exactly 0.001 m.",
+ i:"1 mm = 0.0393701 in ≈ 39.37 thou"},
+{id:"micrometre",n:"micrometre (micron)",s:"µm",g:"length",t:"multiple",lk:1,cv:["length","um"],
+ m:"From the Greek mikros, “small”. For a century it was called the micron, symbol µ.",
+ h:"Used for cell sizes, fibre diameters, filter ratings and particulate pollution like PM2.5. The CGPM withdrew the name “micron” in 1967, though many industries still say it.",
+ oy:"19th c.",o:"The micron: one thousandth of a millimetre.",
+ dy:"1967",d:"Renamed micrometre: exactly 10⁻⁶ m.",
+ i:"1 µm = 0.03937 thou = 0.00003937 in. A human hair is roughly 50–100 µm wide."},
+{id:"nanometre",n:"nanometre",s:"nm",g:"length",t:"multiple",cv:["length","nm"],
+ m:"From the Greek nanos, “dwarf”.",
+ h:"Visible light spans roughly 380 to 750 nm. Chip makers name process generations in nanometres, though the names no longer match any physical feature size.",
+ oy:"1960",o:"The nano- prefix arrived with the SI in 1960: 10⁻⁹ of a metre.",
+ dy:"1983",d:"Exactly 10⁻⁹ m.",
+ i:"1 nm ≈ 3.937 × 10⁻⁸ in"},
+{id:"angstrom",n:"ångström",s:"Å",g:"length",t:"older",lk:1,cv:["length","A"],
+ m:"Named after the Swedish physicist Anders Jonas Ångström.",
+ h:"In 1868 Ångström published a map of the solar spectrum with wavelengths in units of 10⁻¹⁰ m. Crystallographers and chemists still love it because atoms and chemical bonds are about 1 to 3 Å across.",
+ oy:"1907",o:"The international ångström was set so that the red line of cadmium measured exactly 6,438.4696 Å.",
+ dy:"1960",d:"Exactly 10⁻¹⁰ m, or 0.1 nm. Not an SI unit, but widely used.",
+ i:"1 Å ≈ 3.937 × 10⁻⁹ in"},
+{id:"fermi",n:"fermi",s:"fm",g:"length",t:"older",lk:1,cv:["length","fm"],
+ m:"Named after Enrico Fermi, the Italian-American physicist who built the first nuclear reactor.",
+ h:"Nuclear physicists adopted the name for the femtometre, the natural scale of the atomic nucleus. A proton has a radius of about 0.84 fm.",
+ oy:"1950s",o:"An informal name for 10⁻¹⁵ m in nuclear physics.",
+ dy:"1964",d:"Identical to the femtometre (the femto- prefix was adopted in 1964): exactly 10⁻¹⁵ m.",
+ i:"1 fm ≈ 3.937 × 10⁻¹⁴ in"},
+{id:"astronomical-unit",n:"astronomical unit",s:"au",g:"length",t:"accepted",lk:1,cv:["length","au"],
+ m:"Originally the average distance between the Earth and the Sun.",
+ h:"Astronomers spent centuries pinning it down, sending expeditions around the world for the transits of Venus in 1761 and 1769, and later bouncing radar off planets.",
+ oy:"1976",o:"Defined through the Gaussian gravitational constant, making it roughly the mean Earth–Sun distance.",
+ dy:"2012",d:"Fixed by the International Astronomical Union at exactly 149,597,870,700 m. Accepted for use with the SI.",
+ i:"1 au ≈ 92.956 million mi"},
+
+/* MASS */
+{id:"kilogram",n:"kilogram",s:"kg",g:"mass",t:"base",cv:["mass","kg"],
+ m:"kilo-, “thousand”, plus gramme, from the Late Latin gramma, a small weight.",
+ h:"For 130 years the kilogram was a single object: Le Grand K, a platinum-iridium cylinder locked in a vault at Sèvres near Paris. Its official copies drifted by up to about 50 micrograms over a century, which pushed scientists to redefine it from a constant of nature. The change took effect on 20 May 2019.",
+ oy:"1799",o:"The mass of one cubic decimetre of water at its maximum density, made physical as the platinum Kilogramme des Archives. Replaced in 1889 by the International Prototype Kilogram.",
+ dy:"2019",d:"Defined by fixing the Planck constant at exactly 6.62607015 × 10⁻³⁴ J·s. Labs realise it with Kibble balances and by counting atoms in silicon spheres.",
+ i:"1 kg = 2.20462 lb = 35.274 oz"},
+{id:"gram",n:"gram",s:"g",g:"mass",t:"multiple",cv:["mass","g"],
+ m:"From the Late Latin gramma, from the Greek gramma, “a small weight”.",
+ h:"The gram was the original 1795 unit of mass, but a gram standard was too small to make and compare accurately, so the kilogram became the base unit instead. That is why the SI base unit is the only one with a prefix in its name.",
+ oy:"1795",o:"The weight of a cube of pure water one hundredth of a metre on each side, at the temperature of melting ice.",
+ dy:"2019",d:"Exactly 1/1000 of a kilogram.",
+ i:"1 g = 0.035274 oz = 15.4324 grains"},
+{id:"tonne",n:"tonne (metric ton)",s:"t",g:"mass",t:"accepted",cv:["mass","t"],
+ m:"From tun, a large wine cask, via the French tonne.",
+ h:"Shipping, mining, agriculture and carbon-emissions accounting use it worldwide. Spelling it “tonne” helps tell it apart from the US short ton and UK long ton.",
+ oy:"1795",o:"1,000 kilograms.",
+ dy:"2019",d:"Exactly 1,000 kg, the same as 1 megagram (Mg). Accepted for use with the SI.",
+ i:"1 t = 2,204.62 lb = 1.10231 US short tons = 0.984207 UK long tons"},
+{id:"quintal",n:"quintal",s:"q",g:"mass",t:"older",lk:1,cv:["mass","q"],
+ m:"From the Arabic qinṭār, through Medieval Latin, related to the Latin centenarius, “of a hundred”.",
+ h:"Older quintals were 100 local pounds, so they varied by region. The metric quintal of 100 kg is still used for grain and crop yields in France, Spain, Latin America and India.",
+ oy:"19th c.",o:"Set at 100 kg as countries adopted the metric system.",
+ dy:"today",d:"Exactly 100 kg. Not part of the SI.",
+ i:"1 q = 220.462 lb"},
+{id:"carat",n:"metric carat",s:"ct",g:"mass",t:"older",lk:1,cv:["mass","ct"],
+ m:"From the Greek keration, “carob seed”, once used as counterweights for gems.",
+ h:"Carat weights differed from city to city until the metric carat was proposed at the 4th CGPM in 1907. Not to be confused with karat, the measure of gold purity.",
+ oy:"1907",o:"200 milligrams.",
+ dy:"today",d:"Exactly 200 mg (0.2 g), used worldwide for gemstones and pearls.",
+ i:"1 ct = 3.08647 grains = 0.00705479 oz"},
+{id:"dalton",n:"dalton",s:"Da",g:"mass",t:"accepted",lk:1,cv:["mass","Da"],
+ m:"Named after John Dalton, the English chemist behind modern atomic theory.",
+ h:"Chemists and biologists give molecular masses in daltons; a 50 kDa protein weighs 50,000 Da. It is the same as the unified atomic mass unit (u).",
+ oy:"1961",o:"The unified atomic mass unit: one twelfth of the mass of a carbon-12 atom.",
+ dy:"2019",d:"Still one twelfth of the mass of a carbon-12 atom at rest, about 1.66054 × 10⁻²⁷ kg. Accepted for use with the SI.",
+ i:"1 Da ≈ 3.66 × 10⁻²⁷ lb"},
+
+/* TIME */
+{id:"second",n:"second",s:"s",g:"time",t:"base",
+ m:"From the Medieval Latin pars minuta secunda, the “second small part” of an hour.",
+ h:"The Earth’s spin slows and wobbles, so astronomical seconds were never perfectly steady. Louis Essen built the first practical caesium atomic clock at the UK’s National Physical Laboratory in 1955, and time has been atomic ever since.",
+ oy:"pre-1956",o:"1/86,400 of a mean solar day. From 1956 to 1967, a fraction of the tropical year 1900 (the ephemeris second).",
+ dy:"1967",d:"The duration of 9,192,631,770 periods of the radiation from the transition between two hyperfine levels of the caesium-133 atom’s ground state.",
+ i:"Identical in every system of units."},
+{id:"hertz",n:"hertz",s:"Hz",g:"time",t:"derived",cv:["frequency","Hz"],
+ m:"Named after Heinrich Hertz, the German physicist who proved electromagnetic waves exist in 1887.",
+ h:"It replaced “cycles per second”. The International Electrotechnical Commission adopted it in 1930 and the CGPM in 1960.",
+ oy:"1930",o:"One cycle per second.",
+ dy:"1960",d:"One per second (s⁻¹), for periodic events.",
+ i:"1 Hz = 60 cycles per minute (rpm)"},
+
+/* TEMPERATURE */
+{id:"kelvin",n:"kelvin",s:"K",g:"temperature",t:"base",cv:["temperature","K"],
+ m:"Named after William Thomson, Lord Kelvin, who proposed an absolute temperature scale in 1848.",
+ h:"Kelvin’s scale starts at absolute zero, where thermal motion is at its minimum, so there are no negative values. Since 1967 it has been “kelvin”, not “degree Kelvin”.",
+ oy:"1954",o:"1/273.16 of the thermodynamic temperature of the triple point of water.",
+ dy:"2019",d:"Defined by fixing the Boltzmann constant at exactly 1.380649 × 10⁻²³ J/K.",
+ i:"A change of 1 K equals a change of 1.8 °F. 0 K = −459.67 °F = 0 °R (Rankine)."},
+{id:"celsius",n:"degree Celsius",s:"°C",g:"temperature",t:"derived",cv:["temperature","C"],
+ m:"Named after Anders Celsius, the Swedish astronomer who proposed the scale.",
+ h:"Celsius’s 1742 scale ran upside down: 0 was boiling and 100 was freezing. It was flipped soon after his death in 1744. It was called “centigrade” until the CGPM renamed it in 1948.",
+ oy:"1742",o:"100 steps between the boiling and freezing points of water at standard pressure.",
+ dy:"1954",d:"Defined from the kelvin: °C = K − 273.15. Water’s boiling point is now a measured result (about 99.97 °C), not part of the definition.",
+ i:"°F = °C × 9/5 + 32. A 1 °C step is a 1.8 °F step."},
+
+/* AREA */
+{id:"square-metre",n:"square metre",s:"m²",g:"area",t:"derived",cv:["area","m2"],
+ m:"The area of a square one metre on each side.",
+ h:"In the original 1795 system it went by the name centiare, one hundredth of an are. Floor space and apartment sizes in most countries are quoted in square metres.",
+ oy:"1795",o:"The centiare: 1/100 of an are.",
+ dy:"1960",d:"The SI derived unit of area, m².",
+ i:"1 m² = 10.7639 ft² = 1.19599 yd²"},
+{id:"are",n:"are",s:"a",g:"area",t:"older",lk:1,cv:["area","a"],
+ m:"From the Latin area, “open space” or “courtyard”.",
+ h:"The 1795 base unit of land area. Rare on its own today, except in Russia and much of Eastern Europe, where garden plots are sold in sotki (hundredths of a hectare, which is one are each).",
+ oy:"1795",o:"A square 10 m on each side, one square decametre.",
+ dy:"today",d:"Exactly 100 m². Not an SI unit.",
+ i:"1 a = 1,076.39 ft² = 119.599 yd² ≈ 0.0247 acre"},
+{id:"hectare",n:"hectare",s:"ha",g:"area",t:"accepted",cv:["area","ha"],
+ m:"hecto- (Greek hekaton, “hundred”) plus are.",
+ h:"The world’s standard unit for farmland, forests and city planning. A full-size football pitch is about 0.7 ha.",
+ oy:"1795",o:"100 ares.",
+ dy:"today",d:"Exactly 10,000 m², a square 100 m on a side. Accepted for use with the SI.",
+ i:"1 ha = 2.47105 acres"},
+{id:"barn",n:"barn",s:"b",g:"area",t:"older",lk:1,cv:["area","b"],
+ m:"From the phrase “couldn’t hit the broad side of a barn”.",
+ h:"Coined in 1942 by Purdue physicists Marshall Holloway and Charles Baker on the Manhattan Project: for capturing neutrons, a uranium nucleus was “as big as a barn”. The odd name also worked as a code word. Its tiny cousin, the shed, is 10⁻²⁴ barn.",
+ oy:"1942",o:"10⁻²⁴ cm², roughly the cross-section of a uranium nucleus.",
+ dy:"today",d:"Exactly 10⁻²⁸ m², used for nuclear and particle-physics cross-sections. Not SI.",
+ i:"1 b ≈ 1.55 × 10⁻²⁵ in²"},
+
+/* VOLUME */
+{id:"litre",n:"litre",s:"L",g:"volume",t:"accepted",cv:["volume","L"],
+ m:"From the French litron, an old measure for grain.",
+ h:"From 1901 to 1964 the litre was defined as the volume of 1 kg of water, which made it 1.000028 dm³. That tiny mismatch caused confusion until it was returned to exactly 1 dm³. The capital L symbol was allowed in 1979 so nobody mistakes l for 1.",
+ oy:"1795",o:"One cubic decimetre.",
+ dy:"1964",d:"Exactly 1 dm³ = 0.001 m³. Accepted for use with the SI.",
+ i:"1 L = 0.264172 US gal = 0.219969 UK gal = 33.814 US fl oz = 1.75975 UK pints"},
+{id:"millilitre",n:"millilitre",s:"mL",g:"volume",t:"multiple",cv:["volume","mL"],
+ m:"One thousandth of a litre.",
+ h:"Identical to the cubic centimetre (cc), which is why doctors and engine builders use the two interchangeably.",
+ oy:"1795",o:"1/1000 of a litre.",
+ dy:"1964",d:"Exactly 1 cm³.",
+ i:"1 mL = 0.033814 US fl oz ≈ 0.203 US tsp"},
+{id:"cubic-metre",n:"cubic metre",s:"m³",g:"volume",t:"derived",cv:["volume","m3"],
+ m:"The volume of a cube one metre on each side.",
+ h:"Used for water and gas meters, concrete, timber and shipping. It holds exactly 1,000 litres.",
+ oy:"1795",o:"Called the stère when used for firewood.",
+ dy:"1960",d:"The SI derived unit of volume, m³.",
+ i:"1 m³ = 35.3147 ft³ = 1.30795 yd³ = 264.172 US gal"},
+{id:"stere",n:"stère",s:"st",g:"volume",t:"older",lk:1,cv:["volume","stere"],
+ m:"From the Greek stereos, “solid”.",
+ h:"Created in 1795 to sell firewood. A stère of stacked logs includes the air between them, so it holds less wood than a solid cubic metre. Firewood is still sold by the stère in France.",
+ oy:"1795",o:"One cubic metre of stacked firewood.",
+ dy:"today",d:"Equal to 1 m³. Not an SI unit.",
+ i:"1 st ≈ 35.31 ft³ ≈ 0.276 cord"},
+
+/* MECHANICS */
+{id:"newton",n:"newton",s:"N",g:"mechanics",t:"derived",cv:["force","N"],
+ m:"Named after Isaac Newton, whose second law defines force.",
+ h:"Named by the CGPM in 1948. Engineers had used the kilogram-force, which depends on gravity. A newton is roughly the weight of a small apple.",
+ oy:"1948",o:"The force that gives a mass of 1 kg an acceleration of 1 m/s².",
+ dy:"1960",d:"1 N = 1 kg·m/s².",
+ i:"1 N = 0.224809 lbf = 7.23301 poundals"},
+{id:"kilogram-force",n:"kilogram-force",s:"kgf",g:"mechanics",t:"older",lk:1,cv:["force","kgf"],
+ m:"The weight of one kilogram under standard gravity. Also called the kilopond.",
+ h:"The 3rd CGPM fixed standard gravity at 9.80665 m/s² in 1901, which pinned down this unit. Still seen on torque wrenches, pressure gauges (kgf/cm²) and some scales.",
+ oy:"1901",o:"The force exerted by 1 kg under standard gravity, 9.80665 m/s².",
+ dy:"today",d:"Exactly 9.80665 N. Not SI.",
+ i:"1 kgf = 2.20462 lbf"},
+{id:"dyne",n:"dyne",s:"dyn",g:"mechanics",t:"cgs",lk:1,cv:["force","dyn"],
+ m:"From the Greek dynamis, “power” or “force”.",
+ h:"The CGS unit of force, named in 1873. Surface tension is still often quoted in dynes per centimetre.",
+ oy:"1873",o:"The force that gives 1 gram an acceleration of 1 cm/s².",
+ dy:"today",d:"Exactly 10⁻⁵ N.",
+ i:"1 dyn ≈ 2.248 × 10⁻⁶ lbf"},
+{id:"joule",n:"joule",s:"J",g:"mechanics",t:"derived",cv:["energy","J"],
+ m:"Named after James Prescott Joule, the English brewer-physicist who measured how work turns into heat.",
+ h:"Proposed as a unit in 1882 and adopted by the CGPM in 1948. It unified mechanical, electrical and heat energy under one name.",
+ oy:"1882",o:"10⁷ ergs, the “practical” unit of work.",
+ dy:"1960",d:"The work done by a force of 1 N over 1 m: 1 J = 1 N·m = 1 W·s.",
+ i:"1 J = 0.737562 ft·lbf = 0.000947817 BTU"},
+{id:"erg",n:"erg",s:"erg",g:"mechanics",t:"cgs",lk:1,cv:["energy","erg"],
+ m:"From the Greek ergon, “work”.",
+ h:"The CGS unit of energy, named in 1873. Astrophysicists still quote luminosities in ergs per second.",
+ oy:"1873",o:"The work done by 1 dyne over 1 centimetre.",
+ dy:"today",d:"Exactly 10⁻⁷ J.",
+ i:"1 erg ≈ 7.376 × 10⁻⁸ ft·lbf"},
+{id:"calorie",n:"calorie",s:"cal",g:"mechanics",t:"older",lk:1,cv:["energy","cal"],
+ m:"From the Latin calor, “heat”.",
+ h:"Introduced by the French chemist Nicolas Clément in the 1820s as a unit of heat. Food labels use the kilocalorie, often written “Calorie” with a capital C.",
+ oy:"1820s",o:"The heat needed to raise 1 gram of water by 1 °C. The exact value depended on the starting temperature.",
+ dy:"today",d:"The thermochemical calorie is exactly 4.184 J. Not SI.",
+ i:"1 cal ≈ 0.00396567 BTU"},
+{id:"electronvolt",n:"electronvolt",s:"eV",g:"mechanics",t:"accepted",lk:1,cv:["energy","eV"],
+ m:"The energy an electron gains moving through a potential difference of one volt.",
+ h:"The natural unit of particle physics and chemistry. The Large Hadron Collider smashes protons at trillions of electronvolts (TeV).",
+ oy:"1930s",o:"The kinetic energy gained by one electron accelerated through 1 volt.",
+ dy:"2019",d:"Exactly 1.602176634 × 10⁻¹⁹ J, now that the elementary charge is fixed. Accepted for use with the SI.",
+ i:"1 eV ≈ 1.18 × 10⁻¹⁹ ft·lbf"},
+{id:"watt",n:"watt",s:"W",g:"mechanics",t:"derived",cv:["power","W"],
+ m:"Named after James Watt, the Scottish engineer who improved the steam engine.",
+ h:"Proposed by the engineer William Siemens in 1882 and adopted by the CGPM in 1948. Watt himself coined the horsepower, which the unit bearing his name later replaced.",
+ oy:"1882",o:"The power of one joule per second, then a “practical” electrical unit.",
+ dy:"1960",d:"1 W = 1 J/s.",
+ i:"1 W = 0.00134102 hp = 3.41214 BTU/h"},
+{id:"metric-horsepower",n:"metric horsepower",s:"PS",g:"mechanics",t:"older",lk:1,cv:["power","PS"],
+ m:"German Pferdestärke (PS), French cheval-vapeur (ch): “horse strength”.",
+ h:"Watt’s horsepower was 33,000 foot-pounds per minute. Continental Europe rounded it to a metric version. European and Japanese carmakers still often rate engines in PS.",
+ oy:"19th c.",o:"75 kilogram-force metres per second.",
+ dy:"today",d:"Exactly 735.49875 W. Not SI.",
+ i:"1 PS = 0.986320 hp"},
+{id:"pascal",n:"pascal",s:"Pa",g:"mechanics",t:"derived",cv:["pressure","Pa"],
+ m:"Named after Blaise Pascal, the French mathematician who studied air pressure and vacuums.",
+ h:"Adopted by the CGPM in 1971. Weather maps use hectopascals, which are equal to millibars. Sea-level air pressure is about 1,013 hPa.",
+ oy:"1971",o:"One newton per square metre.",
+ dy:"1971",d:"1 Pa = 1 N/m² = 1 kg/(m·s²).",
+ i:"1 Pa = 0.000145038 psi; 1 kPa = 0.145038 psi"},
+{id:"bar",n:"bar",s:"bar",g:"mechanics",t:"older",cv:["pressure","bar"],
+ m:"From the Greek baros, “weight”.",
+ h:"Introduced into meteorology by the Norwegian scientist Vilhelm Bjerknes in the early 1900s. Divers, tyre gauges, espresso machines and weather reports (as millibars) use it.",
+ oy:"1900s",o:"10⁶ dynes per square centimetre.",
+ dy:"today",d:"Exactly 100,000 Pa, very close to air pressure at sea level. Not SI.",
+ i:"1 bar = 14.5038 psi"},
+{id:"barye",n:"barye",s:"Ba",g:"mechanics",t:"cgs",lk:1,cv:["pressure","Ba"],
+ m:"From the Greek barys, “heavy”.",
+ h:"The CGS unit of pressure. Acousticians once used its alias, the microbar, for sound pressure, a frequent source of confusion with the much bigger bar.",
+ oy:"1900s",o:"One dyne per square centimetre.",
+ dy:"today",d:"Exactly 0.1 Pa.",
+ i:"1 Ba ≈ 1.450 × 10⁻⁵ psi"},
+{id:"poise",n:"poise",s:"P",g:"mechanics",t:"cgs",lk:1,cv:["viscosity","P"],
+ m:"Named after Jean Léonard Marie Poiseuille, the French physician who studied blood flow in narrow tubes.",
+ h:"Water at 20 °C has a viscosity of about 1 centipoise, which made the centipoise a handy everyday unit. Honey is several thousand cP.",
+ oy:"1913",o:"One dyne-second per square centimetre (CGS).",
+ dy:"today",d:"Exactly 0.1 Pa·s.",
+ i:"1 P ≈ 0.002089 lbf·s/ft²"},
+{id:"stokes",n:"stokes",s:"St",g:"mechanics",t:"cgs",lk:1,
+ m:"Named after George Gabriel Stokes, the Irish physicist behind the Navier–Stokes equations.",
+ h:"Measures kinematic viscosity: viscosity divided by density, or how fast a fluid flows under its own weight. Lubricant and fuel specs quote centistokes.",
+ oy:"1920s",o:"One square centimetre per second (CGS).",
+ dy:"today",d:"Exactly 10⁻⁴ m²/s. Water at 20 °C is about 1 cSt.",
+ i:"1 St ≈ 0.001076 ft²/s"},
+
+/* ELECTRIC */
+{id:"ampere",n:"ampere",s:"A",g:"electric",t:"base",
+ m:"Named after André-Marie Ampère, the French founder of electrodynamics.",
+ h:"The 1908 “international ampere” was defined by silver plating. The 1948 definition used the force between two wires, an ideal that could never be built exactly, which is why the 2019 revision switched to counting charge.",
+ oy:"1948",o:"The current that, flowing in two infinitely long parallel wires 1 m apart in vacuum, produces a force of 2 × 10⁻⁷ N per metre of length.",
+ dy:"2019",d:"Defined by fixing the elementary charge at exactly 1.602176634 × 10⁻¹⁹ C. One ampere is about 6.24 × 10¹⁸ electrons per second.",
+ i:"Identical in every system of units."},
+{id:"volt",n:"volt",s:"V",g:"electric",t:"derived",
+ m:"Named after Alessandro Volta, the Italian who built the first battery in 1800.",
+ h:"Adopted at the first International Electrical Congress in Paris in 1881. For decades it was kept with Weston cadmium cells; today labs use Josephson junctions.",
+ oy:"1881",o:"10⁸ CGS units of electromotive force. From 1908 tied to the Weston cell, about 1.0183 V.",
+ dy:"2019",d:"1 V = 1 W/A, realised through the Josephson effect, with the Planck constant and elementary charge fixed.",
+ i:"Identical in every system of units."},
+{id:"ohm",n:"ohm",s:"Ω",g:"electric",t:"derived",
+ m:"Named after Georg Simon Ohm, the German teacher who found the law V = IR.",
+ h:"The 1908 “international ohm” was a column of mercury 106.300 cm long with a mass of 14.4521 g at 0 °C. The symbol Ω was chosen partly because it sounds like “ohm”.",
+ oy:"1908",o:"The resistance of a specified column of mercury at the temperature of melting ice.",
+ dy:"2019",d:"1 Ω = 1 V/A, realised with the quantum Hall effect.",
+ i:"Identical in every system of units."},
+{id:"coulomb",n:"coulomb",s:"C",g:"electric",t:"derived",
+ m:"Named after Charles-Augustin de Coulomb, the French physicist who measured electric force.",
+ h:"Adopted in 1881. A typical lightning stroke moves about 15 coulombs.",
+ oy:"1881",o:"The quantity of electricity carried by one ampere in one second.",
+ dy:"2019",d:"1 C = 1 A·s, the charge of about 6.241509 × 10¹⁸ electrons.",
+ i:"Identical in every system of units."},
+{id:"farad",n:"farad",s:"F",g:"electric",t:"derived",
+ m:"Named after Michael Faraday, the English pioneer of electromagnetism.",
+ h:"Proposed by Latimer Clark and Charles Bright in 1861 and adopted in 1881. One farad is enormous, so most capacitors are rated in microfarads or picofarads.",
+ oy:"1881",o:"The capacitance that holds one coulomb at one volt.",
+ dy:"2019",d:"1 F = 1 C/V.",
+ i:"Identical in every system of units."},
+{id:"henry",n:"henry",s:"H",g:"electric",t:"derived",lk:1,
+ m:"Named after Joseph Henry, the American scientist who discovered self-inductance.",
+ h:"Adopted at the International Electrical Congress in Chicago in 1893. The plural is henries.",
+ oy:"1893",o:"The inductance that produces one volt when current changes at one ampere per second.",
+ dy:"2019",d:"1 H = 1 Wb/A = 1 V·s/A.",
+ i:"Identical in every system of units."},
+{id:"siemens",n:"siemens",s:"S",g:"electric",t:"derived",lk:1,
+ m:"Named after Werner von Siemens, the German inventor and industrialist.",
+ h:"Adopted in 1971, replacing the “mho”, which was “ohm” spelled backwards and written with an upside-down omega (℧).",
+ oy:"1971",o:"The reciprocal of the ohm.",
+ dy:"2019",d:"1 S = 1/Ω = 1 A/V.",
+ i:"Identical in every system of units."},
+{id:"weber",n:"weber",s:"Wb",g:"electric",t:"derived",lk:1,
+ m:"Named after Wilhelm Eduard Weber, the German physicist who worked with Gauss on magnetism.",
+ h:"The unit of magnetic flux, the total “amount” of magnetic field passing through a surface. Adopted by the CGPM in 1960.",
+ oy:"1935",o:"Adopted by the IEC as the practical unit of magnetic flux.",
+ dy:"2019",d:"1 Wb = 1 V·s.",
+ i:"1 Wb = 10⁸ maxwells (CGS)"},
+{id:"tesla",n:"tesla",s:"T",g:"electric",t:"derived",cv:["magnetic","T"],
+ m:"Named after Nikola Tesla, the Serbian-American inventor of AC motors.",
+ h:"Adopted in 1960. Hospital MRI scanners run at 1.5 to 3 T; the Earth’s field is only about 25 to 65 µT.",
+ oy:"1960",o:"One weber per square metre.",
+ dy:"2019",d:"1 T = 1 Wb/m² = 1 kg/(A·s²).",
+ i:"1 T = 10,000 gauss"},
+{id:"gauss",n:"gauss",s:"G",g:"electric",t:"cgs",lk:1,cv:["magnetic","G"],
+ m:"Named after Carl Friedrich Gauss, the German mathematician who first measured Earth’s magnetic field in absolute units.",
+ h:"The CGS unit of magnetic flux density, still common for magnets and geophysics. A fridge magnet is about 50 G.",
+ oy:"1900",o:"One maxwell per square centimetre.",
+ dy:"today",d:"Exactly 10⁻⁴ T.",
+ i:"Earth’s field ≈ 0.25–0.65 G"},
+{id:"maxwell",n:"maxwell",s:"Mx",g:"electric",t:"cgs",lk:1,
+ m:"Named after James Clerk Maxwell, who unified electricity, magnetism and light.",
+ h:"The CGS unit of magnetic flux, the counterpart of the weber. Rarely seen outside older textbooks and magnet datasheets.",
+ oy:"1900",o:"One gauss times one square centimetre.",
+ dy:"today",d:"Exactly 10⁻⁸ Wb.",
+ i:"No imperial counterpart."},
+
+/* LIGHT */
+{id:"candela",n:"candela",s:"cd",g:"light",t:"base",
+ m:"Latin candela, “candle”.",
+ h:"Before 1948 countries used “candlepower”, based on standard candles of spermaceti burning at a set rate, or on flame lamps. An ordinary wax candle still gives roughly 1 cd.",
+ oy:"1948",o:"1/60 of the luminous intensity of one square centimetre of a blackbody at the freezing point of platinum.",
+ dy:"1979",d:"The luminous intensity of a source emitting green light at 540 × 10¹² Hz with a radiant intensity of 1/683 watt per steradian. Since 2019 written as fixing the luminous efficacy at 683 lm/W.",
+ i:"No imperial unit. Old “candlepower” ≈ 0.98 cd."},
+{id:"lumen",n:"lumen",s:"lm",g:"light",t:"derived",
+ m:"Latin lumen, “light”.",
+ h:"Bulbs are now sold by lumens rather than watts. A traditional 60 W incandescent bulb gives about 800 lm.",
+ oy:"1948",o:"The light emitted into one steradian by a source of one candle.",
+ dy:"1979",d:"1 lm = 1 cd·sr.",
+ i:"No imperial unit."},
+{id:"lux",n:"lux",s:"lx",g:"light",t:"derived",cv:["illuminance","lx"],
+ m:"Latin lux, “light”.",
+ h:"Office lighting is typically 300 to 500 lx. Full sunlight reaches about 100,000 lx.",
+ oy:"1948",o:"One lumen spread over one square metre.",
+ dy:"1979",d:"1 lx = 1 lm/m².",
+ i:"1 lx = 0.0929 foot-candles"},
+{id:"phot",n:"phot",s:"ph",g:"light",t:"cgs",lk:1,cv:["illuminance","ph"],
+ m:"From the Greek phōs, “light”.",
+ h:"The CGS unit of illuminance. It is so large that it barely survived; you will meet it mostly in older optics books.",
+ oy:"1900s",o:"One lumen per square centimetre.",
+ dy:"today",d:"Exactly 10,000 lx.",
+ i:"1 ph ≈ 929 foot-candles"},
+{id:"stilb",n:"stilb",s:"sb",g:"light",t:"cgs",lk:1,
+ m:"From the Greek stilbein, “to glitter”.",
+ h:"The CGS unit of luminance, how bright a surface looks. Its SI counterpart is the candela per square metre, informally called the nit.",
+ oy:"1900s",o:"One candela per square centimetre.",
+ dy:"today",d:"Exactly 10,000 cd/m².",
+ i:"1 sb ≈ 2,919 foot-lamberts"},
+
+/* CHEMISTRY */
+{id:"mole",n:"mole",s:"mol",g:"chemistry",t:"base",cv:["amount","mol"],
+ m:"From the German Mol, coined by Wilhelm Ostwald around 1894 as short for Molekül.",
+ h:"Became the seventh and newest SI base unit in 1971. One mole of water is about 18 grams, a little over a tablespoon.",
+ oy:"1971",o:"The amount of substance with as many entities as there are atoms in 0.012 kg of carbon-12.",
+ dy:"2019",d:"Exactly 6.02214076 × 10²³ specified entities (the Avogadro number).",
+ i:"US chemical engineers use the pound-mole: 1 lb-mol = 453.59237 mol."},
+{id:"katal",n:"katal",s:"kat",g:"chemistry",t:"derived",lk:1,
+ m:"From the Greek katalysis, “dissolution”, the root of catalysis.",
+ h:"Adopted by the 21st CGPM in 1999 for catalytic activity, mainly enzymes in clinical chemistry. Labs still often use the older enzyme unit, where 1 U is about 16.67 nanokatal.",
+ oy:"1999",o:"The catalytic activity that converts one mole of substrate per second.",
+ dy:"2019",d:"1 kat = 1 mol/s.",
+ i:"No imperial counterpart."},
+
+/* RADIATION */
+{id:"becquerel",n:"becquerel",s:"Bq",g:"radiation",t:"derived",cv:["activity","Bq"],
+ m:"Named after Henri Becquerel, who discovered radioactivity in 1896.",
+ h:"Adopted in 1975. A banana contains about 15 Bq of natural potassium-40.",
+ oy:"1975",o:"One radioactive decay per second.",
+ dy:"1975",d:"1 Bq = 1 s⁻¹ for radioactive decay.",
+ i:"1 Bq = 27.027 picocuries"},
+{id:"curie",n:"curie",s:"Ci",g:"radiation",t:"older",lk:1,cv:["activity","Ci"],
+ m:"Named after Marie and Pierre Curie, pioneers of radioactivity research.",
+ h:"Agreed at the 1910 Radiology Congress in Brussels. Still widely used in the United States.",
+ oy:"1910",o:"The activity of one gram of radium-226.",
+ dy:"1964",d:"Exactly 3.7 × 10¹⁰ Bq. Not SI.",
+ i:"1 Ci = 37 GBq"},
+{id:"gray",n:"gray",s:"Gy",g:"radiation",t:"derived",cv:["dose","Gy"],
+ m:"Named after Louis Harold Gray, the British physicist who founded radiobiology.",
+ h:"Adopted in 1975 for absorbed dose, the raw energy radiation deposits in matter. Radiotherapy plans are written in grays.",
+ oy:"1975",o:"One joule of radiation energy absorbed per kilogram.",
+ dy:"1975",d:"1 Gy = 1 J/kg (absorbed).",
+ i:"1 Gy = 100 rad"},
+{id:"rad",n:"rad",s:"rad",g:"radiation",t:"cgs",lk:1,cv:["dose","rad"],
+ m:"Originally “radiation absorbed dose”.",
+ h:"Introduced in 1953 and replaced by the gray, but still seen in US documents. Not to be confused with the radian.",
+ oy:"1953",o:"100 ergs absorbed per gram.",
+ dy:"today",d:"Exactly 0.01 Gy.",
+ i:"No imperial counterpart."},
+{id:"sievert",n:"sievert",s:"Sv",g:"radiation",t:"derived",cv:["equiv","Sv"],
+ m:"Named after Rolf Sievert, the Swedish medical physicist who studied radiation risk.",
+ h:"Adopted in 1979. Weights absorbed dose by radiation type and tissue sensitivity to estimate harm. The world-average natural background is about 2.4 mSv a year; a chest X-ray is about 0.1 mSv.",
+ oy:"1979",o:"Equivalent dose of one joule per kilogram, weighted for biological effect.",
+ dy:"1979",d:"1 Sv = 1 J/kg, multiplied by radiation and tissue weighting factors.",
+ i:"1 Sv = 100 rem"},
+{id:"rem",n:"rem",s:"rem",g:"radiation",t:"older",lk:1,cv:["equiv","rem"],
+ m:"Short for “roentgen equivalent man”.",
+ h:"The pre-SI unit of equivalent dose, still used in US regulation, where workers’ limits are written as 5 rem a year.",
+ oy:"1950s",o:"The dose giving the same biological effect as one rad of X-rays.",
+ dy:"today",d:"Exactly 0.01 Sv.",
+ i:"No imperial counterpart."},
+
+/* ANGLE */
+{id:"radian",n:"radian",s:"rad",g:"angle",t:"derived",cv:["angle","rad"],
+ m:"From radius: the angle where the arc equals the radius.",
+ h:"The term first appeared in print in 1873, in exam questions set by James Thomson, Lord Kelvin’s brother. It was an SI “supplementary unit” from 1960 and became a derived unit in 1995.",
+ oy:"1873",o:"The angle at the centre of a circle cut off by an arc equal in length to the radius.",
+ dy:"1995",d:"1 rad = 1 m/m. A full circle is 2π rad.",
+ i:"1 rad = 57.2958°"},
+{id:"steradian",n:"steradian",s:"sr",g:"angle",t:"derived",lk:1,
+ m:"From the Greek stereos, “solid”, plus radian.",
+ h:"Measures solid angle, a 3D cone of view. A full sphere is 4π, about 12.57 sr. It links the candela to the lumen.",
+ oy:"1960",o:"SI supplementary unit for solid angle.",
+ dy:"1995",d:"The solid angle that cuts an area r² from a sphere of radius r.",
+ i:"1 sr ≈ 3,282.8 square degrees"},
+{id:"gon",n:"gon (grad)",s:"gon",g:"angle",t:"older",lk:1,cv:["angle","gon"],
+ m:"From the Greek gōnia, “angle”. Also called the grad or gradian.",
+ h:"Introduced with the metric system in 1790s France so a right angle had 100 parts. European surveyors still use it, and many calculators have a GRAD mode.",
+ oy:"1790s",o:"One hundredth of a right angle.",
+ dy:"today",d:"π/200 rad; 400 gon in a full circle. Not SI.",
+ i:"1 gon = 0.9°"}
+];
+
+const T = {base:"SI base",derived:"SI derived",multiple:"SI multiple",accepted:"Accepted",cgs:"CGS",older:"Older metric"};
+const PREFIX = [
+ ["q","quecto",-30,1],["r","ronto",-27,1],["y","yocto",-24],["z","zepto",-21],["a","atto",-18],["f","femto",-15],["p","pico",-12],["n","nano",-9],
+ ["µ","micro",-6],["m","milli",-3],["c","centi",-2],["d","deci",-1],["da","deca",1],["h","hecto",2],["k","kilo",3],["M","mega",6],
+ ["G","giga",9],["T","tera",12],["P","peta",15],["E","exa",18],["Z","zetta",21],["Y","yotta",24],["R","ronna",27,1],["Q","quetta",30,1]];
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const gById = Object.fromEntries(G.map(g=>[g.id,g]));
+const gColor = g => `hsl(${g.h} 62% 48%)`;
+const SUP = {"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function fmt(x){
+  if(!isFinite(x)) return "–";
+  if(x===0) return "0";
+  const a=Math.abs(x);
+  if(a>=1e-4 && a<1e10){
+    return x.toLocaleString("en-US",{maximumSignificantDigits:7});
+  }
+  const [m,e]=x.toExponential(5).split("e");
+  const mant=parseFloat(m).toString();
+  return mant+" × 10"+String(parseInt(e,10)).split("").map(c=>SUP[c]).join("");
+}
+function unitOf(q,k){return Q[q].u.find(u=>u[0]===k)}
+function toBase(q,k,v){
+  if(Q[q].temp){ if(k==="K")return v; if(k==="C")return v+273.15; if(k==="F")return (v+459.67)*5/9; if(k==="R")return v*5/9; }
+  return v*unitOf(q,k)[3];
+}
+function fromBase(q,k,v){
+  if(Q[q].temp){ if(k==="K")return v; if(k==="C")return v-273.15; if(k==="F")return v*9/5-459.67; if(k==="R")return v*9/5; }
+  return v/unitOf(q,k)[3];
+}
+const convert=(q,a,b,v)=>fromBase(q,b,toBase(q,a,v));
+const parseNum = s => { const n=parseFloat(String(s).replace(/,/g,"").replace(/\s/g,"")); return isNaN(n)?NaN:n; };
+
+/* ---------- Converter ---------- */
+const DEFAULTS = {length:["m","ft"],mass:["kg","lb"],temperature:["C","F"],area:["ha","ac"],volume:["L","usgal"],speed:["kmh","mph"],force:["N","lbf"],energy:["kWh","BTU"],power:["kW","hp"],pressure:["bar","psi"],viscosity:["cP","Pas"],frequency:["Hz","rpm"],magnetic:["T","G"],illuminance:["lx","fc"],angle:["rad","deg"],amount:["mol","lbmol"],activity:["Bq","Ci"],dose:["Gy","rad"],equiv:["mSv","mrem"]};
+let cq="length";
+function buildSelect(sel,q,val){
+  const um=Q[q].u.filter(u=>u[4]==="m"), ui=Q[q].u.filter(u=>u[4]==="i");
+  const og=(lab,arr)=>arr.length?`<optgroup label="${lab}">${arr.map(u=>`<option value="${u[0]}">${esc(u[1])} (${esc(u[2])})</option>`).join("")}</optgroup>`:"";
+  sel.innerHTML=og("Metric",um)+og(q==="angle"?"Other":"Imperial, US & other",ui);
+  sel.value=val;
+}
+function setQuantity(q,from,to){
+  cq=q;
+  document.querySelectorAll(".qtab").forEach(b=>b.setAttribute("aria-pressed",b.dataset.q===q?"true":"false"));
+  const [d1,d2]=DEFAULTS[q];
+  buildSelect($("#cvFrom"),q,from||d1);
+  buildSelect($("#cvTo"),q,to||d2);
+  $("#qsel").value=q;
+  runConvert();
+}
+function runConvert(){
+  const v=parseNum($("#cvVal").value), a=$("#cvFrom").value, b=$("#cvTo").value;
+  const ua=unitOf(cq,a), ub=unitOf(cq,b);
+  if(isNaN(v)){ $("#cvOut").textContent="Enter a number"; $("#cvEq").textContent=""; $("#cvAll").innerHTML=""; return; }
+  const r=convert(cq,a,b,v);
+  $("#cvOut").textContent=`${fmt(r)} ${ub[2]}`;
+  $("#cvEq").textContent=Q[cq].temp ? `${fmt(v)} ${ua[2]} = ${fmt(r)} ${ub[2]}` : `1 ${ua[2]} = ${fmt(convert(cq,a,b,1))} ${ub[2]}`;
+  const col=(lab,arr)=>`<div><h4>${lab}</h4>${arr.map(u=>`<div class="av"><button type="button" data-to="${u[0]}">${esc(u[1])}</button><span>${fmt(convert(cq,a,u[0],v))} ${esc(u[2])}</span></div>`).join("")}</div>`;
+  const um=Q[cq].u.filter(u=>u[4]==="m"), ui=Q[cq].u.filter(u=>u[4]==="i");
+  $("#cvAll").innerHTML=col("Metric",um)+(ui.length?col(cq==="angle"?"Other":"Imperial, US & other",ui):"");
+}
+$("#qtabs").innerHTML=Object.entries(Q).map(([k,v])=>`<button type="button" class="qtab" data-q="${k}" aria-pressed="false">${v.l}</button>`).join("");
+$("#qsel").innerHTML=Object.entries(Q).map(([k,v])=>`<option value="${k}">${v.l}</option>`).join("");
+$("#qsel").addEventListener("change",e=>setQuantity(e.target.value));
+$("#qtabs").addEventListener("click",e=>{const b=e.target.closest(".qtab"); if(b) setQuantity(b.dataset.q);});
+$("#cvVal").addEventListener("input",runConvert);
+$("#cvFrom").addEventListener("change",runConvert);
+$("#cvTo").addEventListener("change",runConvert);
+$("#cvSwap").addEventListener("click",()=>{const a=$("#cvFrom").value; $("#cvFrom").value=$("#cvTo").value; $("#cvTo").value=a; runConvert();});
+$("#cvAll").addEventListener("click",e=>{const b=e.target.closest("button[data-to]"); if(b){$("#cvTo").value=b.dataset.to; runConvert();}});
+
+/* ---------- Unit browser ---------- */
+function cardHTML(u){
+  const g=gById[u.g];
+  return `<button class="card" type="button" data-id="${u.id}" style="--g:${gColor(g)}" aria-label="${esc(u.n)}, ${esc(T[u.t])}">
+    <div class="ctop"><span class="sym">${esc(u.s)}</span><span class="badges"><span class="badge ${u.t==="base"?"base":""}">${T[u.t]}</span>${u.lk?'<span class="badge lk">Lesser-known</span>':""}</span></div>
+    <div class="cname">${esc(u.n)}</div>
+    <div class="cmean">${esc(u.m)}</div>
+    <div class="ceq">${esc(u.i)}</div>
+  </button>`;
+}
+function renderGroups(){
+  const term=$("#q").value.trim().toLowerCase(), lk=$("#lkOnly").checked;
+  const match=u=>(!lk||u.lk)&&(!term||[u.n,u.s,u.m,u.h,u.i,T[u.t],gById[u.g].n].join(" ").toLowerCase().includes(term));
+  let total=0, idx=0;
+  const html=G.map(g=>{
+    const list=U.filter(u=>u.g===g.id&&match(u));
+    if(!list.length) return "";
+    idx++; total+=list.length;
+    return `<section class="group" id="group-${g.id}" style="--g:${gColor(g)}" aria-labelledby="gh-${g.id}">
+      <div class="ghead"><span class="gidx">${String(idx).padStart(2,"0")}</span><h2 id="gh-${g.id}">${g.n}</h2><span class="gcount">${list.length} unit${list.length>1?"s":""}</span><p>${esc(g.p)}</p></div>
+      <div class="grid">${list.map(cardHTML).join("")}</div></section>`;
+  }).join("");
+  $("#groups").innerHTML=html;
+  $("#empty").style.display=total?"none":"block";
+  $("#jump").innerHTML='<option value="">Jump to group…</option>'+G.map(g=>{const n=U.filter(u=>u.g===g.id&&match(u)).length; return n?`<option value="${g.id}">${g.n} (${n})</option>`:"";}).join("");
+  $("#chips").innerHTML=G.map(g=>{const n=U.filter(u=>u.g===g.id&&match(u)).length; return n?`<a class="chip" href="#group-${g.id}" data-g="${g.id}" style="--g:${gColor(g)}"><i></i>${g.n}<em>${n}</em></a>`:"";}).join("");
+}
+$("#q").addEventListener("input",renderGroups);
+$("#lkOnly").addEventListener("change",renderGroups);
+$("#chips").addEventListener("click",e=>{const a=e.target.closest("a[data-g]"); if(!a)return; e.preventDefault(); document.getElementById("group-"+a.dataset.g)?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});});
+$("#jump").addEventListener("change",e=>{const id=e.target.value; if(!id)return; document.getElementById("group-"+id)?.scrollIntoView(); e.target.value="";});
+$("#groups").addEventListener("click",e=>{const c=e.target.closest(".card"); if(c) location.hash=c.dataset.id;});
+
+/* ---------- Drawer ---------- */
+const drawer=$("#drawer");
+function openUnit(id){
+  const u=U.find(x=>x.id===id); if(!u) return;
+  const g=gById[u.g];
+  drawer.style.setProperty("--g",gColor(g));
+  $("#dGroup").textContent=g.n;
+  $("#dSym").textContent=u.s;
+  $("#dName").textContent=u.n;
+  $("#dBadges").innerHTML=`<span class="badge ${u.t==="base"?"base":""}">${T[u.t]}</span>${u.lk?'<span class="badge lk">Lesser-known</span>':""}`;
+  let mini="";
+  if(u.cv){
+    const [q,k]=u.cv, unit=unitOf(q,k);
+    mini=`<section class="sec"><h3>Quick convert</h3>
+      <div class="mini"><input id="miniVal" type="text" inputmode="decimal" value="1" aria-label="Value in ${esc(u.n)}"><span>${esc(unit[2])} equals</span></div>
+      <div class="minilist" id="miniList"></div>
+      <button class="btn" type="button" id="miniOpen">Open in converter →</button></section>`;
+  }
+  $("#dBody").innerHTML=`
+    <section class="sec"><h3>What the name means</h3><p>${esc(u.m)}</p></section>
+    <section class="sec"><h3>History</h3><p>${esc(u.h)}</p></section>
+    <section class="sec"><h3>Definition, then and now</h3>
+      <div class="tl">
+        <div class="tli"><div class="yr">${esc(u.oy)}</div><div class="tx"><div class="lab">Originally</div><p>${esc(u.o)}</p></div></div>
+        <div class="tli now"><div class="yr">${esc(u.dy)}</div><div class="tx"><div class="lab">Defined today</div><p>${esc(u.d)}</p></div></div>
+      </div></section>
+    <section class="sec"><h3>Imperial equivalent</h3><div class="imp">${esc(u.i)}</div></section>
+    ${mini}`;
+  if(u.cv){
+    const [q,k]=u.cv;
+    const draw=()=>{
+      const v=parseNum($("#miniVal").value);
+      const others=Q[q].u.filter(x=>x[0]!==k);
+      const pick=[...others.filter(x=>x[4]==="i"),...others.filter(x=>x[4]==="m")].slice(0,10);
+      $("#miniList").innerHTML=isNaN(v)?'<p style="color:var(--muted)">Enter a number.</p>':pick.map(x=>`<div class="av"><span>${esc(x[1])}</span><span>${fmt(convert(q,k,x[0],v))} ${esc(x[2])}</span></div>`).join("");
+    };
+    $("#miniVal").addEventListener("input",draw); draw();
+    $("#miniOpen").addEventListener("click",()=>{
+      const v=$("#miniVal").value;
+      closeDrawer();
+      const d=DEFAULTS[q], to=d[0]===k?d[1]:(unitOf(q,d[1])[4]==="i"?d[1]:d[0]);
+      setQuantity(q,k,to===k?d[1]:to);
+      $("#cvVal").value=v; runConvert();
+      $("#converter").scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  }
+  if(!drawer.open) drawer.showModal();
+  drawer.scrollTop=0;
+}
+function closeDrawer(){
+  if(drawer.open) drawer.close();
+}
+drawer.addEventListener("close",()=>{ if(location.hash && U.some(u=>"#"+u.id===location.hash)) history.replaceState(null,"",location.pathname+location.search); });
+$("#dClose").addEventListener("click",closeDrawer);
+drawer.addEventListener("click",e=>{ if(e.target===drawer) closeDrawer(); });
+function route(){ const id=location.hash.slice(1); if(U.some(u=>u.id===id)) openUnit(id); else closeDrawer(); }
+window.addEventListener("hashchange",route);
+
+/* ---------- Prefixes ---------- */
+$("#ptrack").innerHTML=PREFIX.map(p=>`<div class="pf${p[3]?" new":""}"><div class="ps">${p[0]}</div><div class="pn">${p[1]}</div><div class="pe">10${String(p[2]).split("").map(c=>SUP[c]).join("")}</div></div>`).join("");
+
+/* ---------- Boot ---------- */
+$("#statUnits").textContent=U.length;
+$("#statGroups").textContent=G.length;
+renderGroups();
+setQuantity("length");
+route();
+</script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voting Methods Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a civic laboratory. The election simulator is the hero; below it a ballot bench, a field guide of methods filed by ballot type, and a criteria ledger. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+
+/* site nav */
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+
+/* ballot rule: a row of ballot check boxes */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 6px,var(--ink) 6px 7px,transparent 7px 17px,var(--ink) 17px 18px,transparent 18px 24px) center/100% 1px no-repeat,
+ repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 24px) center/100% 12px no-repeat}
+
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+
+/* Hero */
+.hero{padding:clamp(24px,4vw,44px) 0 10px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:14ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:62ch;color:var(--muted);font-size:17px;margin:0}
+
+/* Simulator */
+.sim{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(16px,3vw,32px);margin-top:24px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.canvas-wrap{position:relative;aspect-ratio:1/1;width:100%;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+canvas#map{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+canvas#map.dragging{cursor:grabbing}
+.maphint{font-size:13px;color:var(--muted);margin:10px 0 0}
+.ctrls{display:grid;gap:12px;margin-top:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.sliders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
+.sl label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:2px}
+.sl label span{font-family:var(--mono);color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+
+/* Results */
+.sum{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--accent);color:var(--accent-ink);margin-bottom:12px}
+.sum b{font-family:var(--display);font-size:20px;display:block;line-height:1.15}
+.sum small{opacity:.88;font-size:13px}
+.tallies{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tally{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border-radius:999px;padding:2px 9px 2px 3px;font-family:var(--mono);font-size:12px}
+.dot{width:20px;height:20px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-weight:700;font-size:11px;font-family:var(--mono);flex:none;background:var(--c)}
+.methods{display:grid;gap:8px}
+.m{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:12px;align-items:center;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.m .mn{font-weight:600;font-size:14px;line-height:1.2}
+.m .mf{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.m .win{justify-self:end}
+.m .win .dot{width:30px;height:30px;font-size:14px}
+.bars{display:grid;gap:3px}
+.bar{display:grid;grid-template-columns:14px minmax(0,1fr) 54px;gap:6px;align-items:center;font-size:11px;font-family:var(--mono)}
+.bar .k{color:var(--muted)}
+.bar .t{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--c);border-radius:4px}
+.bar .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--muted);margin-top:4px}
+.mj{display:grid;gap:4px}
+.mjr{display:grid;grid-template-columns:14px minmax(0,1fr) 70px;gap:6px;align-items:center;font-size:11px;font-family:var(--mono)}
+.mjb{position:relative;display:flex;height:10px;border-radius:3px;overflow:hidden}
+.mjb i{display:block;height:100%}
+.mjb::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:4px}
+.legend span{display:inline-flex;gap:4px;align-items:center}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+/* Sections */
+section.block{padding-top:clamp(44px,6vw,72px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:18px;max-width:72ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+
+/* Ballot bench */
+.bench{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.story{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:12px}
+.story b{display:block;margin-bottom:2px}
+.groups{display:grid;gap:8px}
+.grp{display:grid;grid-template-columns:minmax(0,1fr) 110px 32px;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--paper)}
+.grp select{width:100%;min-width:0;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 8px;min-height:38px;font-size:14px}
+.grp .share{display:grid;gap:0}
+.grp .share span{font-family:var(--mono);font-size:12px;text-align:right}
+.x{border:1px solid var(--line);background:var(--card);border-radius:8px;width:32px;height:32px;cursor:pointer}
+.x:hover{border-color:var(--bad);color:var(--bad)}
+.total{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+.out{display:grid;gap:10px}
+.oc{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+.oc h3{font-family:var(--body);font-size:14px;font-weight:600;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.oc h3 .res{font-family:var(--mono);font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.rounds{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;margin-top:6px}
+.rounds th,.rounds td{border-bottom:1px solid var(--line);padding:4px 6px;text-align:right}
+.rounds th:first-child,.rounds td:first-child{text-align:left}
+.rounds td.out-c{color:var(--muted);text-decoration:line-through}
+.tblwrap{overflow-x:auto}
+
+/* Field guide */
+.fam{margin-top:26px}
+.fam h3{font-size:22px;font-weight:700;display:flex;gap:10px;align-items:baseline;margin-bottom:12px}
+.fam h3 small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px}
+details.mc{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.mc[open]{border-color:var(--ink)}
+details.mc summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:start}
+details.mc summary::-webkit-details-marker{display:none}
+.mc .t{font-family:var(--display);font-size:20px;font-weight:700;line-height:1.15}
+.mc .aka{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.mc .one{grid-column:1/3;font-size:14px;color:var(--muted);margin-top:4px}
+.mc .chev{font-family:var(--mono);color:var(--muted);transition:transform .2s;font-size:18px}
+details.mc[open] .chev{transform:rotate(45deg)}
+.mc .body{padding:0 16px 16px;display:grid;gap:12px}
+.ballot{border:1px dashed var(--muted);border-radius:8px;padding:10px 12px;background:var(--paper);font-size:13px}
+.ballot .bh{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ballot .bl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center}
+.ballot .mk{font-family:var(--mono);font-weight:600;min-width:22px;text-align:center;border:1px solid var(--ink);border-radius:4px;padding:0 4px;font-size:12px}
+.ballot .mk.off{opacity:.35}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc h4{margin:0 0 4px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.pc .pro h4{color:var(--good)} .pc .con h4{color:var(--bad)}
+.pc ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:3px}
+.used{font-size:13px;border-top:1px solid var(--line);padding-top:10px}
+.used b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
+.how{font-size:14px;margin:0}
+
+/* Criteria */
+.ledger{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:720px}
+.ledger th,.ledger td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.ledger thead th{font-weight:600;font-size:12px;line-height:1.3;background:var(--paper)}
+.ledger th[scope=row]{text-align:left;font-weight:600;white-space:nowrap}
+.ledger tr:last-child td,.ledger tr:last-child th{border-bottom:0}
+.y,.n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:13px}
+.y{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.n{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.foot{font-size:13px;color:var(--muted);margin-top:10px;max-width:80ch}
+
+/* Ideas */
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:12px}
+.idea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.idea .yr{font-family:var(--mono);font-size:11px;color:var(--accent)}
+.idea h3{font-family:var(--body);font-size:17px;font-weight:600;margin:2px 0 6px}
+.idea p{margin:0;font-size:14px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+
+@media (max-width:960px){
+  .sim,.bench{grid-template-columns:1fr}
+  .sim .panel:first-child{max-width:560px}
+}
+@media (max-width:560px){
+  .m{grid-template-columns:minmax(0,1fr) 36px}
+  .m .bars,.m .mj{grid-column:1/3;grid-row:2}
+  .m .win .dot{width:26px;height:26px}
+  .sliders{grid-template-columns:1fr}
+  .pc{grid-template-columns:1fr}
+  .grp{grid-template-columns:minmax(0,1fr) 32px}
+  .grp .share{grid-column:1/2;grid-row:2}
+  .site .wrap{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Concept Atlas</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html" aria-current="page">Voting</a>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Voting methods</b> · interactive</div>
+    <h1>Same voters. <em>Different winners.</em></h1>
+    <p class="lede">The rules for counting votes can decide an election as much as the votes do. Drag the candidates and voter groups below and watch nine counting methods disagree about who won.</p>
+  </header>
+
+  <section class="sim" id="simulator" aria-label="Election simulator">
+    <div class="panel">
+      <div class="canvas-wrap"><canvas id="map" role="img" aria-label="Map of voters and candidates. Voters are colored by their favorite candidate."></canvas></div>
+      <p class="maphint">Each dot is a voter, colored by the candidate closest to them. Voters prefer nearer candidates. Drag a lettered circle to move a candidate, or a numbered ring to move a voter group.</p>
+      <div class="ctrls">
+        <div>
+          <div class="lbl" style="margin-bottom:6px">Scenario</div>
+          <div class="seg" id="simPresets" role="group" aria-label="Scenario"></div>
+        </div>
+        <div class="row">
+          <button class="btn" type="button" id="addC">+ Candidate</button>
+          <button class="btn" type="button" id="remC">− Candidate</button>
+        </div>
+        <div class="sliders" id="blobSliders"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sum" id="summary" aria-live="polite"></div>
+      <div class="methods" id="methods"></div>
+    </div>
+  </section>
+
+  <section class="block" id="bench" aria-labelledby="benchH">
+    <div class="shead">
+      <span class="eyebrow">Ballot bench</span>
+      <h2 id="benchH">Count real ranked ballots by hand</h2>
+      <p>Pick a classic paradox, or build your own electorate from groups of ranked ballots. Change a group’s size or its ranking and every count updates.</p>
+    </div>
+    <div class="bench">
+      <div class="panel">
+        <div class="presets" id="benchPresets" role="group" aria-label="Paradox presets"></div>
+        <div class="story" id="story"></div>
+        <div id="variantRow" class="row" style="margin-bottom:12px"></div>
+        <div class="groups" id="groups"></div>
+        <div class="row" style="margin-top:10px;justify-content:space-between">
+          <button class="btn" type="button" id="addG">+ Ballot group</button>
+          <span class="total" id="total"></span>
+        </div>
+      </div>
+      <div class="out" id="benchOut" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="block" id="guide" aria-labelledby="guideH">
+    <div class="shead">
+      <span class="eyebrow">Field guide</span>
+      <h2 id="guideH">Twelve ways to count a vote</h2>
+      <p>Filed by what the ballot asks you to do: choose one, rank, or rate. The last group fills many seats at once so that parliaments mirror the vote. Tap a method to open it.</p>
+    </div>
+    <div id="families"></div>
+  </section>
+
+  <section class="block" id="criteria" aria-labelledby="critH">
+    <div class="shead">
+      <span class="eyebrow">Fairness ledger</span>
+      <h2 id="critH">Which promises each method keeps</h2>
+      <p>Mathematicians test single-winner methods against fairness criteria. No method passes them all; Arrow and Gibbard proved none can. Each method chooses which flaw to live with.</p>
+    </div>
+    <div class="tblwrap">
+      <table class="ledger">
+        <thead><tr>
+          <th scope="col">Method</th>
+          <th scope="col">Elects the Condorcet winner when there is one</th>
+          <th scope="col">A first-choice majority always wins</th>
+          <th scope="col">More support never hurts (monotonic)</th>
+          <th scope="col">Ranking a backup can’t hurt your favorite</th>
+          <th scope="col">Similar candidates don’t split the vote</th>
+          <th scope="col">Ballot</th>
+        </tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+    <p class="foot">Condorcet row assumes a modern Condorcet method such as Ranked Pairs or Schulze. Approval, score and majority judgment pass the split-vote test as long as voters grade each candidate on its own merits. Criteria definitions follow the standard social-choice literature.</p>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead">
+      <span class="eyebrow">Key ideas</span>
+      <h2 id="ideasH">The vocabulary of vote counting</h2>
+    </div>
+    <div class="ideas" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>François L. Girard, “The fairest way to elect a president, according to mathematics,” <i>The Polymathy’s Path</i> (Medium), April 2025. Source of the France 2002 and 1992 framing, the monotonicity and squeezed-favorite scenarios, and the majority judgment explanation. It draws on David Louapre (<i>Science étonnante</i>) and Rida Laraki.</li>
+    <li><a href="https://www.ncsl.org/elections-and-campaigns/ranked-choice-voting">NCSL: Use of Ranked Choice Voting</a> (state use and prohibitions)</li>
+    <li><a href="https://ballotpedia.org/Approval_voting">Ballotpedia: Approval voting</a> (St. Louis and Fargo)</li>
+    <li><a href="https://www.adn.com/politics/2026/11/03/alaska-on-track-to-keep-its-election-system-early-results-show/">Anchorage Daily News: Alaska’s 2026 Ballot Measure 2</a> (unofficial results)</li>
+    <li><a href="https://www.klcc.org/politics-government/2024-04-23/eugene-could-adopt-star-voting-for-city-elections-how-would-this-work">KLCC: STAR voting in Oregon</a></li>
+  </ul>
+  <p>The simulator models voters who vote honestly by distance. Real elections involve strategy, turnout and much more. This page explains methods and doesn’t recommend one.</p>
+</footer>
+
+<script>
+/* ================= shared ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COL=["#E4572E","#2E86DE","#17A673","#D99A0B","#8E44AD"];
+const LET=["A","B","C","D","E"];
+const GRADES=["Reject","Poor","Fair","Good","Very good","Excellent"];
+const GCOL=["#9B2C3B","#D9644A","#E6B450","#9CC27A","#3FA06B","#1E7A55"];
+const pct=x=>(x*100).toFixed(x>=0.995||x<0.005?0:1)+"%";
+const dot=(i,name)=>`<span class="dot" style="--c:${COL[i]}" title="${esc(name||"Candidate "+LET[i])}">${LET[i]}</span>`;
+const argmax=a=>a.reduce((b,v,i)=>v>a[b]?i:b,0);
+
+/* ================= Simulator ================= */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd=mulberry(20261106);
+const OFF=[0,1,2].map(()=>Array.from({length:320},()=>{const u=Math.max(1e-9,rnd()),v=rnd();const r=Math.sqrt(-2*Math.log(u));return[r*Math.cos(2*Math.PI*v),r*Math.sin(2*Math.PI*v)]}));
+
+const PRESETS={
+  squeeze:{l:"Center squeeze",spread:.085,blobs:[[.2,.5,170],[.5,.53,120],[.8,.5,160]],cands:[[.2,.44],[.5,.45],[.8,.44]]},
+  spoiler:{l:"Spoiler",spread:.09,blobs:[[.33,.5,230],[.7,.5,200],[.5,.2,0]],cands:[[.3,.48],[.39,.56],[.7,.5]]},
+  consensus:{l:"Broad consensus",spread:.11,blobs:[[.3,.55,150],[.7,.55,150],[.5,.3,130]],cands:[[.28,.6],[.5,.48],[.73,.6],[.5,.18]]},
+  polarized:{l:"Polarized",spread:.07,blobs:[[.22,.5,200],[.78,.5,190],[.5,.8,40]],cands:[[.22,.48],[.5,.52],[.78,.5],[.5,.2]]}
+};
+let S={};
+function loadPreset(k){
+  const p=PRESETS[k];
+  S={preset:k,spread:p.spread,blobs:p.blobs.map(b=>({x:b[0],y:b[1],n:b[2]})),cands:p.cands.map(c=>({x:c[0],y:c[1]}))};
+  document.querySelectorAll("#simPresets .pill").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false"));
+  buildSliders(); update();
+}
+$("#simPresets").innerHTML=Object.entries(PRESETS).map(([k,p])=>`<button type="button" class="pill" data-k="${k}" aria-pressed="false">${p.l}</button>`).join("");
+$("#simPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(b)loadPreset(b.dataset.k)});
+
+function buildSliders(){
+  $("#blobSliders").innerHTML=S.blobs.map((b,i)=>`<div class="sl"><label for="bs${i}">Voter group ${i+1}<span id="bsv${i}">${b.n}</span></label><input type="range" id="bs${i}" min="0" max="300" step="10" value="${b.n}" data-i="${i}"></div>`).join("")+
+   `<div class="sl"><label for="spread">How spread out groups are<span id="spv">${Math.round(S.spread*100)}</span></label><input type="range" id="spread" min="3" max="20" step="1" value="${Math.round(S.spread*100)}"></div>`;
+}
+$("#blobSliders").addEventListener("input",e=>{
+  const t=e.target;
+  if(t.id==="spread"){S.spread=t.value/100;$("#spv").textContent=t.value}
+  else if(t.dataset.i){S.blobs[t.dataset.i].n=+t.value;$("#bsv"+t.dataset.i).textContent=t.value}
+  markCustom(); update();
+});
+function markCustom(){document.querySelectorAll("#simPresets .pill").forEach(b=>b.setAttribute("aria-pressed","false"))}
+$("#addC").addEventListener("click",()=>{if(S.cands.length<5){const spots=[[.5,.85],[.15,.2],[.85,.2],[.5,.15],[.85,.85]];S.cands.push({x:spots[S.cands.length][0],y:spots[S.cands.length][1]});markCustom();update()}});
+$("#remC").addEventListener("click",()=>{if(S.cands.length>2){S.cands.pop();markCustom();update()}});
+
+function voters(){
+  const V=[];
+  S.blobs.forEach((b,bi)=>{for(let i=0;i<b.n;i++){const o=OFF[bi][i];V.push({x:Math.min(1,Math.max(0,b.x+o[0]*S.spread)),y:Math.min(1,Math.max(0,b.y+o[1]*S.spread))})}});
+  return V;
+}
+
+function elect(){
+  const V=voters(),C=S.cands.length,N=V.length;
+  if(!N) return null;
+  const D=V.map(v=>S.cands.map(c=>Math.hypot(v.x-c.x,v.y-c.y)));
+  const R=D.map(d=>[...d.keys()].sort((a,b)=>d[a]-d[b]));
+  const res=[];
+  // plurality
+  const first=Array(C).fill(0);R.forEach(r=>first[r[0]]++);
+  const pw=argmax(first);
+  res.push({k:"plu",n:"Plurality",f:"Choose one",w:pw,bars:first.map(v=>({v:v/N,l:pct(v/N)}))});
+  // two-round
+  const ord=[...first.keys()].sort((a,b)=>first[b]-first[a]);const[a,b]=ord;
+  let ha=0,hb=0;D.forEach(d=>{if(d[a]<d[b])ha++;else if(d[b]<d[a])hb++});
+  const trw=first[a]/N>0.5?a:(ha>=hb?a:b);
+  res.push({k:"tr",n:"Two-round runoff",f:"Choose one",w:trw,bars:first.map(v=>({v:v/N,l:pct(v/N)})),note:first[a]/N>0.5?`${LET[a]} wins outright with a majority.`:`Runoff: ${LET[a]} ${pct(ha/(ha+hb))} vs ${LET[b]} ${pct(hb/(ha+hb))}`});
+  // IRV
+  let act=new Set([...Array(C).keys()]),rounds=[],iw=null,elim=[];
+  while(act.size>0){
+    const t=Array(C).fill(0);R.forEach(r=>{const f=r.find(x=>act.has(x));t[f]++});
+    rounds.push(t.slice());
+    const al=[...act];const top=al.reduce((p,x)=>t[x]>t[p]?x:p,al[0]);
+    if(t[top]>N/2||act.size===1){iw=top;break}
+    const lo=al.reduce((p,x)=>t[x]<t[p]?x:p,al[0]);act.delete(lo);elim.push(lo);
+  }
+  const fin=rounds[rounds.length-1];
+  res.push({k:"irv",n:"Ranked-choice (IRV)",f:"Rank",w:iw,bars:fin.map(v=>({v:v/N,l:v?pct(v/N):"out"})),note:`${rounds.length} round${rounds.length>1?"s":""}. ${elim.length?"Eliminated in order: "+elim.map(x=>LET[x]).join(", ")+".":"Majority in round one."}`});
+  // Borda
+  const bo=Array(C).fill(0);R.forEach(r=>r.forEach((c,i)=>bo[c]+=C-1-i));
+  const bmax=N*(C-1);
+  res.push({k:"borda",n:"Borda count",f:"Rank",w:argmax(bo),bars:bo.map(v=>({v:v/bmax,l:(v/N).toFixed(2)+" pt"})),note:"Average points per voter."});
+  // Condorcet
+  const P=[...Array(C)].map(()=>Array(C).fill(0));
+  D.forEach(d=>{for(let i=0;i<C;i++)for(let j=0;j<C;j++)if(i!==j&&d[i]<d[j])P[i][j]++});
+  const wins=[...Array(C).keys()].map(i=>[...Array(C).keys()].filter(j=>j!==i&&P[i][j]>P[j][i]).length);
+  let cw=wins.findIndex(w=>w===C-1),cnote;
+  if(cw>=0) cnote=`${LET[cw]} beats every rival head-to-head.`;
+  else{const worst=[...Array(C).keys()].map(i=>Math.max(...[...Array(C).keys()].filter(j=>j!==i).map(j=>P[j][i]-P[i][j])));cw=worst.indexOf(Math.min(...worst));cnote=`No candidate beats everyone (a cycle). Minimax picks ${LET[cw]}.`}
+  res.push({k:"cond",n:"Condorcet",f:"Rank",w:cw,bars:wins.map(w=>({v:w/(C-1),l:`${w}/${C-1} wins`})),note:cnote});
+  // Approval
+  const ap=Array(C).fill(0);D.forEach((d,vi)=>{const m=d.reduce((s,x)=>s+x,0)/C;d.forEach((x,c)=>{if(x<m||c===R[vi][0])ap[c]++})});
+  res.push({k:"app",n:"Approval",f:"Rate",w:argmax(ap),bars:ap.map(v=>({v:v/N,l:pct(v/N)})),note:"Each voter approves every candidate closer than their average."});
+  // Score + STAR
+  const sc=Array(C).fill(0),SV=D.map(d=>{const mn=Math.min(...d),mx=Math.max(...d);return d.map(x=>mx>mn?Math.round(5*(mx-x)/(mx-mn)):5)});
+  SV.forEach(s=>s.forEach((x,c)=>sc[c]+=x));
+  res.push({k:"score",n:"Score (0–5)",f:"Rate",w:argmax(sc),bars:sc.map(v=>({v:v/(5*N),l:(v/N).toFixed(2)+" ★"})),note:"Average stars per voter."});
+  const so=[...sc.keys()].sort((x,y)=>sc[y]-sc[x]);const[s1,s2]=so;let p1=0,p2=0;SV.forEach(s=>{if(s[s1]>s[s2])p1++;else if(s[s2]>s[s1])p2++});
+  res.push({k:"star",n:"STAR",f:"Rate",w:p1>=p2?s1:s2,bars:sc.map(v=>({v:v/(5*N),l:(v/N).toFixed(2)+" ★"})),note:`Automatic runoff: ${LET[s1]} preferred by ${p1}, ${LET[s2]} by ${p2}.`});
+  // Majority judgment
+  const G=D.map(d=>d.map(x=>Math.max(0,Math.min(5,5-Math.floor(x/0.11)))));
+  const mj=[...Array(C).keys()].map(c=>{const g=G.map(r=>r[c]).sort((x,y)=>x-y);const med=g[Math.floor((N-1)/2)];const p=g.filter(x=>x>med).length/N,q=g.filter(x=>x<med).length/N;const dist=Array(6).fill(0);g.forEach(x=>dist[x]++);return{med,val:med+(p>q?p:-q),dist:dist.map(x=>x/N)}});
+  const mjw=argmax(mj.map(m=>m.val));
+  res.push({k:"mj",n:"Majority judgment",f:"Rate",w:mjw,mj,note:`${LET[mjw]} has the best median grade: ${GRADES[mj[mjw].med]}.`});
+  // utility reference
+  const avg=[...Array(C).keys()].map(c=>D.reduce((s,d)=>s+d[c],0)/N);
+  return {res,N,util:avg.indexOf(Math.min(...avg)),R};
+}
+
+/* canvas */
+const cv=$("#map"),ctx=cv.getContext("2d");
+let W=400,dpr=1,last=null;
+function resize(){const r=cv.getBoundingClientRect();dpr=window.devicePixelRatio||1;W=r.width;cv.width=W*dpr;cv.height=W*dpr;draw()}
+new ResizeObserver(resize).observe(cv);
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function draw(){
+  if(!S.cands)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,W);
+  const line=css("--line"),ink=css("--ink"),muted=css("--muted"),card=css("--card");
+  ctx.strokeStyle=line;ctx.lineWidth=1;
+  for(let i=1;i<10;i++){const p=i*W/10;ctx.beginPath();ctx.moveTo(p,0);ctx.lineTo(p,W);ctx.moveTo(0,p);ctx.lineTo(W,p);ctx.stroke()}
+  ctx.fillStyle=muted;ctx.font="11px 'IBM Plex Mono', monospace";
+  ctx.fillText("Issue 1 →",W-70,W-8);ctx.save();ctx.translate(12,70);ctx.rotate(-Math.PI/2);ctx.fillText("Issue 2 →",0,0);ctx.restore();
+  // voters
+  const V=voters();
+  V.forEach(v=>{let best=0,bd=9;S.cands.forEach((c,i)=>{const d=Math.hypot(v.x-c.x,v.y-c.y);if(d<bd){bd=d;best=i}});ctx.fillStyle=COL[best];ctx.globalAlpha=.7;ctx.beginPath();ctx.arc(v.x*W,v.y*W,2.3,0,7);ctx.fill()});
+  ctx.globalAlpha=1;
+  // blob handles
+  S.blobs.forEach((b,i)=>{if(!b.n)return;ctx.setLineDash([4,4]);ctx.strokeStyle=ink;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(b.x*W,b.y*W,16,0,7);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=card;ctx.beginPath();ctx.arc(b.x*W,b.y*W,9,0,7);ctx.fill();ctx.fillStyle=ink;ctx.font="600 11px 'IBM Plex Mono', monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(i+1,b.x*W,b.y*W+.5)});
+  // candidates
+  S.cands.forEach((c,i)=>{const r=drag&&drag.t==="c"&&drag.i===i?19:16;ctx.fillStyle=COL[i];ctx.strokeStyle=card;ctx.lineWidth=3;ctx.beginPath();ctx.arc(c.x*W,c.y*W,r,0,7);ctx.fill();ctx.stroke();ctx.strokeStyle=ink;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle="#fff";ctx.font="700 14px 'IBM Plex Mono', monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(LET[i],c.x*W,c.y*W+1)});
+  ctx.textAlign="start";ctx.textBaseline="alphabetic";
+}
+let drag=null;
+function pos(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height}}
+cv.addEventListener("pointerdown",e=>{
+  const p=pos(e);let hit=null,bd=24;
+  S.cands.forEach((c,i)=>{const d=Math.hypot((c.x-p.x)*W,(c.y-p.y)*W);if(d<bd){bd=d;hit={t:"c",i}}});
+  S.blobs.forEach((b,i)=>{const d=Math.hypot((b.x-p.x)*W,(b.y-p.y)*W);if(b.n&&d<bd-6){bd=d;hit={t:"b",i}}});
+  if(hit){drag=hit;cv.setPointerCapture(e.pointerId);cv.classList.add("dragging");markCustom();e.preventDefault()}
+});
+cv.addEventListener("pointermove",e=>{if(!drag)return;const p=pos(e);const o=drag.t==="c"?S.cands[drag.i]:S.blobs[drag.i];o.x=Math.min(.98,Math.max(.02,p.x));o.y=Math.min(.98,Math.max(.02,p.y));schedule()});
+const end=()=>{drag=null;cv.classList.remove("dragging");draw()};
+cv.addEventListener("pointerup",end);cv.addEventListener("pointercancel",end);
+let raf=0;function schedule(){if(!raf)raf=requestAnimationFrame(()=>{raf=0;update()})}
+
+function update(){
+  draw();
+  $("#addC").disabled=S.cands.length>=5;$("#remC").disabled=S.cands.length<=2;
+  const E=elect();
+  if(!E){$("#summary").innerHTML="<div><b>No voters</b><small>Raise a voter group’s size.</small></div>";$("#methods").innerHTML="";return}
+  const cnt=Array(S.cands.length).fill(0);E.res.forEach(r=>cnt[r.w]++);
+  const distinct=cnt.filter(x=>x).length;
+  const order=[...cnt.keys()].filter(i=>cnt[i]).sort((a,b)=>cnt[b]-cnt[a]);
+  $("#summary").innerHTML=`<div style="min-width:0"><b>${distinct===1?`Every method picks ${LET[order[0]]}`:`${distinct} different winners from the same ballots`}</b>
+    <small>${E.N} voters. Closest to the average voter: candidate ${LET[E.util]}.</small>
+    <div class="tallies">${order.map(i=>`<span class="tally">${dot(i)}${cnt[i]} of ${E.res.length}</span>`).join("")}</div></div>`;
+  $("#methods").innerHTML=E.res.map(r=>{
+    let inner;
+    if(r.k==="mj"){
+      inner=`<div class="mj">${r.mj.map((m,i)=>`<div class="mjr"><span style="color:${COL[i]};font-weight:700">${LET[i]}</span><span class="mjb">${m.dist.map((x,g)=>`<i style="width:${x*100}%;background:${GCOL[g]}"></i>`).join("")}</span><span style="color:var(--muted)">${GRADES[m.med]}</span></div>`).join("")}
+      <div class="note">${esc(r.note)} The line marks 50%.</div></div>`;
+    } else {
+      inner=`<div class="bars">${r.bars.map((b,i)=>`<div class="bar"><span class="k" style="color:${COL[i]};font-weight:700">${LET[i]}</span><span class="t"><i style="width:${Math.max(0,b.v*100)}%;--c:${COL[i]}"></i></span><span class="v">${b.l}</span></div>`).join("")}${r.note?`<div class="note">${esc(r.note)}</div>`:""}</div>`;
+    }
+    return `<div class="m"><div><div class="mn">${r.n}</div><div class="mf">${r.f}</div></div>${inner}<div class="win">${dot(r.w)}</div></div>`;
+  }).join("");
+}
+
+/* ================= Ballot bench ================= */
+const BP={
+  mono:{l:"More votes, then a loss",cands:[["Red","#E4572E"],["Sky","#4FB3E8"],["Navy","#2B3F8C"]],
+    story:"<b>Monotonicity failure (from Girard’s article)</b>Before: Red wins ranked-choice. After: three points of Navy’s first-choice voters switch to Red, and Red loses. Gaining support costs Red the election, because it changes who is eliminated first.",
+    variants:[["Before",[[[0,1,2],34],[[1,0,2],32],[[2,1,0],34]]],["After 3-point shift to Red",[[[0,1,2],37],[[1,0,2],32],[[2,1,0],31]]]]},
+  squeeze:{l:"Squeezed favorite",cands:[["Red","#E4572E"],["Green","#17A673"],["Blue","#2E86DE"]],
+    story:"<b>The candidate everyone can live with</b>Green is every voter’s first or second choice and beats each rival head-to-head, yet comes last in first choices. Adapted from Girard’s article; we nudged its 40/40 split to 41/39 to avoid a tie.",
+    variants:[["Default",[[[0,1,2],41],[[2,1,0],39],[[1,0,2],10],[[1,2,0],10]]]]},
+  cycle:{l:"Condorcet’s paradox",cands:[["A","#E4572E"],["B","#2E86DE"],["C","#17A673"]],
+    story:"<b>Majorities that go in circles (Condorcet, 1785)</b>A beats B, B beats C, and C beats A, each by about two to one. Whoever wins, a majority prefers someone else.",
+    variants:[["Default",[[[0,1,2],34],[[1,2,0],33],[[2,0,1],33]]]]}
+};
+let B={};
+const perms3=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+function loadBench(k,v=0){
+  const p=BP[k];B={k,v,cands:p.cands,groups:p.variants[v][1].map(g=>({o:g[0].slice(),s:g[1]}))};
+  document.querySelectorAll("#benchPresets .pill").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false"));
+  $("#story").innerHTML=p.story;
+  $("#variantRow").innerHTML=p.variants.length>1?`<span class="lbl">Show</span><div class="seg">${p.variants.map((x,i)=>`<button type="button" class="pill" data-v="${i}" aria-pressed="${i===v}">${esc(x[0])}</button>`).join("")}</div>`:"";
+  $("#variantRow").style.display=p.variants.length>1?"flex":"none";
+  renderGroups();benchCount();
+}
+$("#benchPresets").innerHTML=Object.entries(BP).map(([k,p])=>`<button type="button" class="pill" data-k="${k}" aria-pressed="false">${p.l}</button>`).join("");
+$("#benchPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(b)loadBench(b.dataset.k)});
+$("#variantRow").addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(b)loadBench(B.k,+b.dataset.v)});
+const cn=i=>B.cands[i][0];
+function cdot(i){return `<span class="dot" style="--c:${B.cands[i][1]}">${esc(cn(i)[0])}</span>`}
+function renderGroups(){
+  $("#groups").innerHTML=B.groups.map((g,gi)=>`<div class="grp">
+    <select data-g="${gi}" aria-label="Ranking for ballot group ${gi+1}">${perms3.map(p=>`<option value="${p.join("")}" ${p.join("")===g.o.join("")?"selected":""}>${p.map(cn).join(" › ")}</option>`).join("")}</select>
+    <div class="share"><input type="range" min="0" max="60" value="${g.s}" data-s="${gi}" aria-label="Share of voters in group ${gi+1}"><span id="sv${gi}">${g.s}</span></div>
+    <button class="x" type="button" data-x="${gi}" aria-label="Remove group ${gi+1}" ${B.groups.length<=2?"disabled":""}>×</button></div>`).join("");
+  $("#addG").disabled=B.groups.length>=6;
+}
+$("#groups").addEventListener("input",e=>{const t=e.target;if(t.dataset.s){B.groups[t.dataset.s].s=+t.value;$("#sv"+t.dataset.s).textContent=t.value;benchCount()}});
+$("#groups").addEventListener("change",e=>{const t=e.target;if(t.dataset.g){B.groups[t.dataset.g].o=t.value.split("").map(Number);benchCount()}});
+$("#groups").addEventListener("click",e=>{const t=e.target.closest("[data-x]");if(t&&B.groups.length>2){B.groups.splice(+t.dataset.x,1);renderGroups();benchCount()}});
+$("#addG").addEventListener("click",()=>{if(B.groups.length<6){B.groups.push({o:[0,2,1],s:10});renderGroups();benchCount()}});
+
+function benchCount(){
+  const tot=B.groups.reduce((s,g)=>s+g.s,0);
+  $("#total").textContent=`Total ${tot} voters · shares shown as % of total`;
+  if(!tot){$("#benchOut").innerHTML='<div class="oc">Give at least one group some voters.</div>';return}
+  const G=B.groups.map(g=>({o:g.o,w:g.s/tot})),C=3,E=1e-9;
+  const winTxt=(arr,hi=true)=>{const m=hi?Math.max(...arr):Math.min(...arr);const t=[...arr.keys()].filter(i=>Math.abs(arr[i]-m)<E);return t};
+  const show=ids=>ids.length>1?`Tie ${ids.map(cdot).join("")}`:`${cdot(ids[0])} ${esc(cn(ids[0]))}`;
+  const row=(lab,arr,fmt)=>arr.map((v,i)=>`<td>${fmt(v)}</td>`).join("");
+  // plurality
+  const f=Array(C).fill(0);G.forEach(g=>f[g.o[0]]+=g.w);
+  const pw=winTxt(f);
+  // runoff
+  const ord=[0,1,2].sort((a,b)=>f[b]-f[a]);const[a,b]=ord;
+  const h=(x,y)=>G.reduce((s,g)=>s+(g.o.indexOf(x)<g.o.indexOf(y)?g.w:0),0);
+  let rw,rnote;
+  if(f[a]>0.5+E){rw=[a];rnote=`${cn(a)} has a first-round majority.`}
+  else{const ha=h(a,b),hb=h(b,a);rw=Math.abs(ha-hb)<E?[a,b]:[ha>hb?a:b];rnote=`${Math.abs(f[b]-f[ord[2]])<E?"Tie for second place in round one. ":""}Runoff ${cn(a)} ${pct(ha)} vs ${cn(b)} ${pct(hb)}.`}
+  // IRV
+  let act=[0,1,2],rounds=[],iw=null,inote="";
+  while(true){
+    const t=Array(C).fill(0);G.forEach(g=>{const x=g.o.find(c=>act.includes(c));t[x]+=g.w});
+    rounds.push({t:t.slice(),act:act.slice()});
+    const mx=Math.max(...act.map(c=>t[c]));
+    if(mx>0.5+E||act.length===1){iw=act.filter(c=>Math.abs(t[c]-mx)<E);break}
+    if(act.length===2){iw=act;break}
+    const mn=Math.min(...act.map(c=>t[c]));const lows=act.filter(c=>Math.abs(t[c]-mn)<E);
+    if(lows.length>1)inote="Tie for last place; this count drops the last-listed one. Real rules break ties by lot or earlier rounds.";
+    act=act.filter(c=>c!==lows[lows.length-1]);
+  }
+  const irvT=`<table class="rounds"><thead><tr><th>Round</th>${[0,1,2].map(i=>`<th>${esc(cn(i))}</th>`).join("")}</tr></thead><tbody>${rounds.map((r,ri)=>`<tr><td>${ri+1}</td>${r.t.map((v,i)=>r.act.includes(i)?`<td>${pct(v)}</td>`:`<td class="out-c">out</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  // Borda
+  const bo=Array(C).fill(0);G.forEach(g=>g.o.forEach((c,i)=>bo[c]+=g.w*(C-1-i)));
+  const bw=winTxt(bo);
+  // Condorcet
+  const P=[0,1,2].map(x=>[0,1,2].map(y=>x===y?null:h(x,y)));
+  const beatsAll=[0,1,2].filter(x=>[0,1,2].every(y=>y===x||P[x][y]>P[y][x]+E));
+  const cyc=!beatsAll.length;
+  const pt=`<table class="rounds"><thead><tr><th>vs</th>${[0,1,2].map(i=>`<th>${esc(cn(i))}</th>`).join("")}</tr></thead><tbody>${[0,1,2].map(x=>`<tr><td>${esc(cn(x))}</td>${[0,1,2].map(y=>x===y?"<td>–</td>":`<td style="color:${P[x][y]>P[y][x]+E?"var(--good)":P[y][x]>P[x][y]+E?"var(--bad)":"inherit"}">${pct(P[x][y])}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const ws=new Set([pw,rw,iw,bw,beatsAll.length?beatsAll:[]].map(x=>x.join(",")));
+  $("#benchOut").innerHTML=`
+   <div class="oc"><h3>Plurality <span class="res">${show(pw)}</span></h3><div class="note">First choices: ${[0,1,2].map(i=>`${esc(cn(i))} ${pct(f[i])}`).join(" · ")}</div></div>
+   <div class="oc"><h3>Two-round runoff <span class="res">${show(rw)}</span></h3><div class="note">${esc(rnote)}</div></div>
+   <div class="oc"><h3>Ranked-choice (IRV) <span class="res">${show(iw)}</span></h3>${irvT}${inote?`<div class="note">${inote}</div>`:""}</div>
+   <div class="oc"><h3>Borda count <span class="res">${show(bw)}</span></h3><div class="note">Points per voter (2 for first, 1 for second): ${[0,1,2].map(i=>`${esc(cn(i))} ${bo[i].toFixed(2)}`).join(" · ")}</div></div>
+   <div class="oc"><h3>Condorcet <span class="res">${cyc?"No winner: a cycle":show(beatsAll)}</span></h3><div class="tblwrap">${pt}</div><div class="note">Read across: the share preferring the row candidate over the column candidate. Green wins the matchup, red loses it.</div></div>
+   <div class="note" style="padding:0 4px">${ws.size>1?`These ballots produce ${ws.size} different outcomes depending on the count.`:"Every ranked method agrees on these ballots."} Approval, score and majority judgment need graded ballots, so they live in the simulator above.</div>`;
+}
+
+/* ================= Field guide ================= */
+const FAM=[
+ {n:"Choose one",s:"Mark a single candidate",m:[
+  {t:"Plurality",aka:"First-past-the-post",one:"Most votes wins, majority or not.",
+   ballot:{h:"Mark one",rows:[["✕","Candidate A"],["","Candidate B"],["","Candidate C"]]},
+   how:"Count each ballot’s single mark. The candidate with the most marks wins, even with well under half the vote.",
+   pro:["Simplest ballot and fastest count","Links one representative to one district","Usually produces clear winners and stable two-party governments"],
+   con:["Similar candidates split the vote (the spoiler effect)","Winners can be opposed by most voters","Pushes voters to abandon favorites for “electable” picks, and tends toward two parties (Duverger’s law)"],
+   used:"US House and most US elections, UK House of Commons, Canada, India."},
+  {t:"Two-round runoff",aka:"Two-round system",one:"If nobody tops 50%, the top two meet again.",
+   ballot:{h:"Round 1: mark one",rows:[["✕","Candidate A"],["","Candidate B"],["","Candidate C"]]},
+   how:"Round one is plurality. If no one has a majority, the top two face off in a second election weeks later.",
+   pro:["Winner has a majority of the final round","Voters can back a favorite in round one","Familiar and easy to explain"],
+   con:["Vote-splitting in round one can knock out a broadly popular candidate","Costs a second election, and turnout often drops","More support can backfire (fails monotonicity)"],
+   used:"French and Brazilian presidential elections; primary runoffs in several US states such as Georgia. In France in 2002, the left’s vote split among many candidates and Lionel Jospin (16.2%) missed the runoff behind Jean-Marie Le Pen (16.9%)."}
+ ]},
+ {n:"Rank",s:"Order candidates by preference",m:[
+  {t:"Ranked-choice voting",aka:"Instant-runoff (IRV) · Alternative vote",one:"Eliminate the last-place candidate and transfer their ballots, round by round.",
+   ballot:{h:"Rank in order",rows:[["1","Candidate B"],["2","Candidate A"],["3","Candidate C"]]},
+   how:"Count first choices. If no one has a majority, drop the last-place candidate and move each of their ballots to its next choice. Repeat until someone has a majority of the remaining ballots.",
+   pro:["Reduces spoilers: backing a long shot first doesn’t waste your vote","Final winner has a majority of continuing ballots","Ranking a backup never hurts your favorite (later-no-harm)"],
+   con:["Can eliminate a broadly liked centrist early (center squeeze)","More support can cause a loss (see the bench above)","Counting needs central tabulation and can take days; ballots that rank no finalist drop out"],
+   used:"Australian House of Representatives (since 1918), Ireland’s president, and statewide in Alaska and Maine. NCSL counts 19 US states that prohibit it. In unofficial November 2026 results, Alaska voters were narrowly rejecting a second repeal attempt."},
+  {t:"Borda count",aka:"Positional points",one:"Points for every rank, highest total wins.",
+   ballot:{h:"Rank in order",rows:[["2 pt","Candidate B"],["1 pt","Candidate A"],["0 pt","Candidate C"]]},
+   how:"With n candidates, a first choice earns n−1 points, a second n−2, and so on. Add up the points. Proposed by Jean-Charles de Borda in 1770.",
+   pro:["Uses the whole ballot","Rewards broadly acceptable candidates","Simple to add up"],
+   con:["Very sensitive to strategy, like burying a rival in last place","Adding a minor candidate can change the winner","Can beat a candidate an outright majority ranked first"],
+   used:"Nauru’s parliament (a variant), Slovenia’s two minority seats, and many awards such as the Heisman Trophy’s 3-2-1 points."},
+  {t:"Condorcet methods",aka:"Ranked Pairs · Schulze · Copeland",one:"Elect whoever beats every rival head-to-head.",
+   ballot:{h:"Rank in order",rows:[["1","Candidate C"],["2","Candidate B"],["3","Candidate A"]]},
+   how:"Use the rankings to run every one-on-one matchup. A candidate who wins them all is the Condorcet winner. When majorities cycle, rules like Ranked Pairs or Schulze settle it. Named for the Marquis de Condorcet (1785).",
+   pro:["Picks the candidate a majority prefers to each alternative","Resists spoilers and center squeeze","Strong mathematical pedigree"],
+   con:["Cycles need a tie-breaking rule that is hard to explain","Counting is opaque to most voters","Ranking a backup can hurt your favorite"],
+   used:"Debian project leader elections, many open-source and professional organizations. Rare for public office."}
+ ]},
+ {n:"Rate",s:"Judge each candidate on its own",m:[
+  {t:"Approval voting",aka:"Vote for any number",one:"Mark every candidate you find acceptable.",
+   ballot:{h:"Mark all you approve",rows:[["✕","Candidate A"],["✕","Candidate B"],["","Candidate C"]]},
+   how:"Each approval is one vote. The candidate approved by the most voters wins.",
+   pro:["As simple to count as plurality, on the same equipment","Never hurts to also approve your favorite","Similar candidates don’t split support"],
+   con:["No way to show how much you prefer one approved candidate","Deciding where to draw the approval line is itself strategic","Can elect a candidate a majority ranked second over their favorite"],
+   used:"St. Louis city primaries since 2021 (the top two advance); Fargo, ND from 2020 to 2024, before a state ban; several scientific societies."},
+  {t:"Score voting",aka:"Range voting",one:"Rate every candidate on a scale, highest total wins.",
+   ballot:{h:"Rate 0 to 5",rows:[["5","Candidate A"],["3","Candidate B"],["0","Candidate C"]]},
+   how:"Give each candidate a number, say 0–5. Add or average the scores. Highest wins.",
+   pro:["Expresses strength of preference","Simple sums, precinct by precinct","Similar candidates don’t split the vote"],
+   con:["Strategic voters exaggerate to all-or-nothing scores","A 3 means different things to different people","Rarely tried for public office"],
+   used:"Judged sports and online ratings; almost never public elections."},
+  {t:"STAR voting",aka:"Score Then Automatic Runoff",one:"Score candidates 0–5, then the top two meet in an instant runoff.",
+   ballot:{h:"Rate 0 to 5 stars",rows:[["5","Candidate A"],["4","Candidate B"],["0","Candidate C"]]},
+   how:"Add up the stars. The two highest-scoring candidates advance. The finalist that more voters scored higher wins.",
+   pro:["Expressive ballot plus a majority check","The runoff blunts score exaggeration","Counts with simple addition"],
+   con:["Two-step count is harder to explain than plurality","Similar candidates can affect who reaches the runoff","Little track record in public elections"],
+   used:"Invented in Oregon around 2014. Used in Oregon party elections and the Independent Party of Oregon’s 2020 primary. Eugene voters rejected it for city elections in 2024."},
+  {t:"Majority judgment",aka:"Median grade",one:"Grade each candidate in words; best median grade wins.",
+   ballot:{h:"Grade each",rows:[["Excellent","Candidate A"],["Fair","Candidate B"],["Reject","Candidate C"]]},
+   how:"Voters grade every candidate from Excellent to Reject. A candidate’s majority grade is the median: the best grade at least half of voters give or exceed. The highest majority grade wins, with a defined tie-break. Proposed by Michel Balinski and Rida Laraki (2007).",
+   pro:["Each candidate is judged independently of the others","Exaggerating a grade rarely changes the median","If every candidate rates poorly, the result says so"],
+   con:["Needs a shared meaning for the grades","Tie-breaking rules are unfamiliar","Strategic voting is reduced, not eliminated: no method escapes Gibbard’s theorem"],
+   used:"France’s citizen-run 2022 “Primaire populaire”, and some associations and party primaries."}
+ ]},
+ {n:"Proportional",s:"Fill many seats so they mirror the vote",m:[
+  {t:"Single transferable vote",aka:"STV",one:"Ranked ballots in multi-seat districts; surpluses and losers transfer.",
+   ballot:{h:"Rank as many as you like",rows:[["1","Candidate A (Party X)"],["2","Candidate D (Party Y)"],["3","Candidate B (Party X)"]]},
+   how:"A candidate who reaches the quota of votes is elected. Their surplus votes, and the votes of eliminated candidates, transfer to next choices until all seats are filled.",
+   pro:["Proportional without needing party lists","Voters choose between candidates of the same party","Few wasted votes"],
+   con:["Long ballots and complex counts","Larger districts weaken the local link","Results can take days to finalize"],
+   used:"Ireland’s Dáil, Malta, the Australian Senate, Northern Ireland Assembly, Scottish local councils, and Cambridge, Massachusetts."},
+  {t:"Party-list PR",aka:"Open or closed lists",one:"Parties win seats in proportion to their vote share.",
+   ballot:{h:"Mark one party",rows:[["✕","Party X"],["","Party Y"],["","Party Z"]]},
+   how:"Seats are shared out using a formula such as D’Hondt or Sainte-Laguë, often above a minimum threshold. Seats go to candidates in list order, or by voters’ personal votes on open lists.",
+   pro:["Seat shares closely match vote shares","Smaller parties and viewpoints get represented","Simple ballot"],
+   con:["Weak or no link to a local representative","Closed lists give party leaders power over who sits","Usually needs coalitions to govern"],
+   used:"Netherlands, Israel, Spain, Sweden, and most of Europe and Latin America."},
+  {t:"Mixed-member proportional",aka:"MMP · additional member system",one:"Local district seats plus top-up list seats to make totals proportional.",
+   ballot:{h:"Two votes",rows:[["✕","District: Candidate A"],["✕","Party: Party Y"]]},
+   how:"Voters elect a local representative by plurality and also vote for a party. List seats are added so each party’s total matches its party-vote share.",
+   pro:["Keeps local representatives","Overall result is proportional","Familiar plurality race at the district level"],
+   con:["Two kinds of members can feel unequal","Parties can game it with decoy lists","Parliament size can vary (overhang seats)"],
+   used:"Germany, New Zealand (since 1996), and the Scottish Parliament."}
+ ]}
+];
+$("#families").innerHTML=FAM.map(f=>`<div class="fam"><h3>${f.n} <small>${f.s}</small></h3><div class="cards">${f.m.map(m=>`
+  <details class="mc"><summary><div><div class="t">${m.t}</div><div class="aka">${esc(m.aka)}</div></div><span class="chev" aria-hidden="true">+</span><div class="one">${esc(m.one)}</div></summary>
+  <div class="body">
+    <div class="ballot"><div class="bh">Sample ballot · ${esc(m.ballot.h)}</div><div class="bl">${m.ballot.rows.map(r=>`<span class="mk ${r[0]?"":"off"}">${r[0]||"&nbsp;"}</span><span>${esc(r[1])}</span>`).join("")}</div></div>
+    <p class="how">${esc(m.how)}</p>
+    <div class="pc"><div class="pro"><h4>Benefits</h4><ul>${m.pro.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div><div class="con"><h4>Limitations</h4><ul>${m.con.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
+    <div class="used"><b>Where it’s used</b>${esc(m.used)}</div>
+  </div></details>`).join("")}</div></div>`).join("");
+
+/* ================= Ledger ================= */
+const L=[["Plurality",[0,1,1,1,0],"Choose one"],["Two-round runoff",[0,1,0,1,0],"Choose one ×2"],["Ranked-choice (IRV)",[0,1,0,1,1],"Rank"],["Borda count",[0,0,1,0,0],"Rank"],["Condorcet",[1,1,1,0,1],"Rank"],["Approval",[0,0,1,0,1],"Approve"],["Score",[0,0,1,0,1],"Rate"],["STAR",[0,0,1,0,0],"Rate"],["Majority judgment",[0,0,1,0,1],"Grade"]];
+$("#ledger").innerHTML=L.map(r=>`<tr><th scope="row">${r[0]}</th>${r[1].map(v=>`<td>${v?'<span class="y" aria-label="Yes">✓</span>':'<span class="n" aria-label="No">✕</span>'}</td>`).join("")}<td class="mono" style="font-size:12px">${r[2]}</td></tr>`).join("");
+
+/* ================= Ideas ================= */
+const IDEAS=[
+ ["Spoiler effect","","A candidate who can’t win changes who does by drawing votes from a similar rival. Analysts still debate specific cases, such as Ross Perot in 1992, because exit polls suggested his voters split between the major candidates."],
+ ["Condorcet winner","1785","The candidate who would beat every rival in a one-on-one race. Condorcet showed that one doesn’t always exist: majorities can cycle, as on the bench above."],
+ ["Monotonicity","","More support should never make a candidate lose. Two-round runoff, IRV and STV can fail this, which is the paradox in the bench’s first preset."],
+ ["Arrow’s impossibility theorem","1951","Kenneth Arrow proved that no ranked method with three or more candidates meets a short list of fairness conditions at once. He shared the 1972 Nobel prize in economics."],
+ ["Gibbard’s theorem","1973","Rated ballots sidestep Arrow, but not strategy: Allan Gibbard (with Satterthwaite in 1975) showed every deterministic method with three or more options can reward voting insincerely."],
+ ["Duverger’s law","1950s","Maurice Duverger observed that plurality elections in single-seat districts tend to produce two dominant parties, because votes for third parties feel wasted."],
+ ["Later-no-harm","","Adding a backup choice should never hurt your first choice. IRV satisfies it; Condorcet, Borda and rated methods don’t. It trades off against electing the consensus candidate."],
+ ["Tactical voting","","Voting for someone other than your sincere favorite to get a better result, like France’s “vote utile.” Every method allows some of it; they differ in how often it pays."],
+ ["Center squeeze","","A centrist who is everyone’s second choice gets eliminated for lack of first choices. Try the simulator’s first scenario: IRV and plurality miss the candidate closest to the average voter."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<div class="idea">${i[1]?`<div class="yr">${i[1]}</div>`:""}<h3>${esc(i[0])}</h3><p>${esc(i[2])}</p></div>`).join("");
+
+/* boot */
+loadPreset("squeeze");
+loadBench("mono");
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",draw);
+new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+</script>
+</body>
+</html>
