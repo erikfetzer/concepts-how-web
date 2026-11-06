@@ -15,6 +15,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Dimensions & perception | `dimensions.html` | Rotating tesseract, Flatland slicer, 4D visitor in a sealed room, orbits by dimension, Koch fractal, perception lab |
 | The universe | `universe.html` | Powers-of-ten zoom, cosmic calendar, black-hole size calculator, expanding-space demo, bestiary of weird objects, big open questions |
 | Game theory | `gametheory.html` | Play the prisoner’s dilemma, Axelrod tournament with evolution, Nowak–May spatial game, Nash equilibrium explorer, guess ⅔ of the average |
+| Logic | `logic.html` | Operators with Venn diagrams, truth table builder, argument validity checker, five proofs with a picture proof, full-adder logic gates, knights and knaves, 28 fallacies with a quiz |
 
 ## Spanish
 

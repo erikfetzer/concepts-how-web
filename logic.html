@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logic · concepts.how</title>
+<meta name="description" content="Flip logical operators, build truth tables, test arguments for validity, step through proofs, add with logic gates, solve knights-and-knaves puzzles and learn the common fallacies.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/logic">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/logic">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Logic · concepts.how">
+<meta property="og:description" content="Flip logical operators, build truth tables, test arguments for validity, step through proofs, add with logic gates, solve knights-and-knaves puzzles and learn the common fallacies.">
+<meta property="og:url" content="https://concepts.how/logic">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Logic · concepts.how">
+<meta name="twitter:description" content="Flip logical operators, build truth tables, test arguments for validity, step through proofs, add with logic gates, solve knights-and-knaves puzzles and learn the common fallacies.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a logic workbook. Switches and diagrams first, then tables, arguments, proofs, circuits, puzzles and a field guide to fallacies. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+</style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html" aria-current="page">Logic</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="logic.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/logic.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Logic</b> · operators, proofs, fallacies</div>
+    <h1>If this is true, <em>what else must be?</em></h1>
+    <p class="lede">Logic is the study of which conclusions actually follow from what you already accept. It runs every computer chip, underpins every mathematical proof and is the best defence against a bad argument. Flip the switches, build truth tables, test arguments, step through proofs, and learn to name the tricks people use when the logic doesn’t hold.</p>
+    <nav class="jump" aria-label="On this page"><a href="#operators">Operators</a><a href="#truth">Truth tables</a><a href="#arguments">Valid arguments</a><a href="#proofs">Proofs</a><a href="#gates">Logic gates</a><a href="#puzzles">Knights &amp; knaves</a><a href="#fallacies">Fallacies</a><a href="#history">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. operators ============ -->
+  <section class="block" id="operators" aria-labelledby="oH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · the building blocks</span>
+      <h2 id="oH">Logical operators</h2>
+      <p>Every statement is either true or false. Operators combine simple statements into compound ones, and each has an exact rule for when the result is true. Pick an operator, flip P and Q, and watch the diagram: the shaded area is everywhere the result is true.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="opgrid" id="opPick"></div>
+        <canvas class="cv" id="vCv" height="240" aria-label="Venn diagram of the selected operator"></canvas>
+        <div class="row">
+          <button class="tog" id="tP" aria-pressed="true"><b>P</b><span>TRUE</span></button>
+          <button class="tog" id="tQ" aria-pressed="false"><b>Q</b><span>FALSE</span></button>
+        </div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Result</span><div class="big" id="opRes"></div></div>
+        <div class="ro"><div class="k">Read it as</div><div id="opRead" style="font-size:16px;font-weight:600"></div></div>
+        <p id="opDesc" style="margin:0;font-size:14.5px"></p>
+        <p id="opEx" style="margin:0;font-size:14.5px;color:var(--muted);font-style:italic"></p>
+        <table class="mini" id="opTbl"></table>
+        <div class="callout"><b>“If… then” surprises everyone</b>P → Q is only false when P is true and Q is false. “If it rains, the street is wet” isn’t broken by a dry sunny day, or by a wet street on a sunny day. A false premise makes the whole “if” true. Logicians call that vacuous truth.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. truth tables ============ -->
+  <section class="block" id="truth" aria-labelledby="ttH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · build</span>
+      <h2 id="ttH">Truth table builder</h2>
+      <p>Type any statement using up to five letters and the operators below. The table lists every possible combination of true and false, works out each part step by step, and tells you whether the statement is always true (a tautology), never true (a contradiction) or depends on the facts.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <label class="lbl" for="ttIn">Statement</label>
+        <input class="inp" id="ttIn" value="¬(P ∧ Q) ↔ (¬P ∨ ¬Q)" autocomplete="off" spellcheck="false">
+        <div class="keys" id="ttKeys"></div>
+        <div class="scrollx"><table class="tt" id="ttTbl"></table></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Verdict</span><div class="verdict" id="ttVer"></div></div>
+        <p id="ttWhy" style="margin:0;font-size:14.5px"></p>
+        <span class="lbl">Try a famous law</span>
+        <div class="seg" id="ttPre"></div>
+        <p style="margin:0;font-size:13px;color:var(--muted)">You can also type <span class="mono">not, and, or, xor, implies, iff</span> or <span class="mono">! &amp; | ^ -&gt; &lt;-&gt;</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. arguments ============ -->
+  <section class="block" id="arguments" aria-labelledby="aH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · test</span>
+      <h2 id="aH">Is the argument valid?</h2>
+      <p>An argument is valid when the conclusion can’t be false while all the premises are true. Validity is about form, not facts: a valid argument with a false premise can still reach a false conclusion. The checker hunts through every row for a counterexample.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <div class="seg" id="aPre"></div>
+        <label class="lbl" for="aPrem">Premises, one per line</label>
+        <textarea class="inp" id="aPrem" spellcheck="false"></textarea>
+        <label class="lbl" for="aConc">Conclusion</label>
+        <input class="inp" id="aConc" autocomplete="off" spellcheck="false">
+        <div class="scrollx"><table class="tt" id="aTbl"></table></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Verdict</span><div class="verdict" id="aVer"></div></div>
+        <p id="aWhy" style="margin:0;font-size:14.5px"></p>
+        <div class="ro"><div class="k">In plain words</div><div id="aPlain" style="font-size:15px"></div></div>
+        <div class="callout"><b>Valid is not the same as true</b>“All cats can fly. Tom is a cat. So Tom can fly” is perfectly valid and completely false. An argument that is valid <i>and</i> has true premises is called sound. Only sound arguments guarantee a true conclusion.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. proofs ============ -->
+  <section class="block" id="proofs" aria-labelledby="pH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · prove</span>
+      <h2 id="pH">How proofs work</h2>
+      <p>A proof is a chain of steps, each one following from the last by a rule everyone accepts. Mathematicians use a handful of strategies over and over. Step through five classics.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="prPick"></div>
+        <div class="ro"><div class="k">Method</div><div id="prMeth" style="font-size:15px;font-weight:600"></div></div>
+        <div><span class="lbl">Claim</span><div id="prClaim" style="font-size:18px;font-weight:600;margin-top:2px"></div></div>
+        <ol class="steps" id="prSteps"></ol>
+        <div class="row"><button class="btn ghost" id="prBack">Back</button><button class="btn" id="prNext">Next step</button></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">A proof without words</span>
+        <canvas class="cv" id="stCv" height="280" aria-label="Two staircases forming a rectangle"></canvas>
+        <div class="sl"><label for="stN">n <span id="stNV">6</span></label><input type="range" id="stN" min="1" max="14" value="6"></div>
+        <p id="stTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>The toolkit</b><i>Direct proof</i> goes straight from what you know. <i>Contrapositive</i> proves “not Q → not P” instead of “P → Q” (they are equivalent). <i>Contradiction</i> assumes the opposite and derives nonsense. <i>Induction</i> proves a first case, then shows each case implies the next, like dominoes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. gates ============ -->
+  <section class="block" id="gates" aria-labelledby="gH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · logic in silicon</span>
+      <h2 id="gH">Logic gates: a computer that adds</h2>
+      <p>In 1937 Claude Shannon showed that switching circuits obey George Boole’s algebra of logic. Every chip is built from gates that compute AND, OR, NOT and XOR on 1s and 0s. Five gates make a full adder: tap the inputs and watch it add three bits.</p>
+    </div>
+    <div class="demo">
+      <div class="panel gate"><div id="gSvg"></div></div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Inputs A + B + Carry in</div><div class="v" id="gIn">0 + 0 + 0</div></div>
+          <div class="ro"><div class="k">Output (Carry out, Sum)</div><div class="v" id="gOut" style="color:var(--accent)">00 = 0</div></div>
+        </div>
+        <p style="margin:0;font-size:14.5px">The <b>Sum</b> bit is 1 when an odd number of inputs are 1 (two XOR gates). The <b>Carry</b> bit is 1 when at least two are (two ANDs and an OR). Chain 64 of these and you can add 64-bit numbers; real processors use faster designs built from the same gates.</p>
+        <div class="callout"><b>One gate to rule them all</b>NAND (“not both”) is universal: you can build NOT, AND, OR, XOR and therefore any digital circuit using only NAND gates. NOR is universal too.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. puzzles ============ -->
+  <section class="block" id="puzzles" aria-labelledby="kH">
+    <div class="shead">
+      <span class="eyebrow">Demo 6 · puzzle</span>
+      <h2 id="kH">Knights and knaves</h2>
+      <p>On Raymond Smullyan’s island, knights always tell the truth and knaves always lie. Tap each islander to call them a knight or a knave. Each statement shows whether your guess makes it consistent: a knight’s words must be true, a knave’s false.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="kPick"></div>
+        <div class="people" id="kPeople"></div>
+        <div class="stack" style="gap:6px" id="kSays"></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Status</span><div class="verdict" id="kVer"></div></div>
+        <p id="kMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <div class="row"><button class="btn ghost" id="kHint">Show answer</button><button class="btn ghost" id="kClear">Clear</button></div>
+        <div class="callout"><b>The trick</b>Try one possibility and follow it through. If it leads to a knight lying or a knave telling the truth, it’s impossible, so the other possibility must hold. That is proof by contradiction, done in your head.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. fallacies ============ -->
+  <section class="block" id="fallacies" aria-labelledby="fH">
+    <div class="shead">
+      <span class="eyebrow">Field guide</span>
+      <h2 id="fH">Logical fallacies</h2>
+      <p>A fallacy is a flaw in reasoning that makes an argument seem stronger than it is. <i>Formal</i> fallacies break the rules of logic itself. <i>Informal</i> ones use valid-looking structure but rely on irrelevance, hidden assumptions or slippery words. Spotting the fallacy doesn’t prove the conclusion false, only that this argument doesn’t support it.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <span class="lbl">Spot the fallacy</span>
+        <p class="qtext" id="qText"></p>
+        <div class="qopt" id="qOpts"></div>
+        <p id="qMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <div class="row" style="justify-content:space-between"><button class="btn" id="qNext">Next example</button><span class="lbl" id="qScore">Score 0 / 0</span></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Filter</span>
+        <div class="seg" id="fCats"></div>
+        <input class="search" id="fSearch" type="search" placeholder="Search fallacies" aria-label="Search fallacies">
+        <p style="margin:0;font-size:14px;color:var(--muted)" id="fCount"></p>
+        <div class="callout"><b>The fallacy fallacy</b>Concluding that a claim is false just because someone argued for it badly is itself a fallacy. A true conclusion can be defended with a terrible argument.</div>
+      </div>
+    </div>
+    <div class="fl" id="fList"></div>
+  </section>
+
+  <!-- ============ history ============ -->
+  <section class="block" id="history" aria-labelledby="hH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="hH">From Aristotle to the limits of proof</h2>
+    </div>
+    <div class="cards" id="histGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>George Boole, <i>An Investigation of the Laws of Thought</i> (1854)</li>
+    <li>Claude Shannon, “A Symbolic Analysis of Relay and Switching Circuits” (1938)</li>
+    <li>Raymond Smullyan, <i>What Is the Name of This Book?</i> (1978)</li>
+    <li>Stanford Encyclopedia of Philosophy: “Fallacies”, “Classical Logic”, “Gödel’s Incompleteness Theorems”</li>
+  </ul>
+  <p>The truth tables use classical two-valued logic. Fallacy names vary between textbooks; the ones here are the most common.</p>
+<div class="sitefoot"><span>concepts.how · more concepts to come.</span><span>by <b>Erik</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+const TV="T",FV="F",TRUE="TRUE",FALSE="FALSE";
+const tf=v=>`<span class="tf ${v?"t":"f"}">${v?TV:FV}</span>`;
+
+/* ================= parser ================= */
+const SYM={not:"¬",and:"∧",or:"∨",xor:"⊕",imp:"→",iff:"↔",nand:"↑",nor:"↓"};
+const WORD={"¬":"not","~":"not","!":"not","not":"not","∧":"and","&":"and","&&":"and","and":"and","∨":"or","|":"or","||":"or","or":"or","⊕":"xor","^":"xor","xor":"xor","→":"imp","->":"imp","=>":"imp","implies":"imp","↔":"iff","<->":"iff","<=>":"iff","iff":"iff","↑":"nand","nand":"nand","↓":"nor","nor":"nor"};
+function tokenize(s){const re=/\s*(<->|<=>|->|=>|&&|\|\||nand\b|nor\b|not\b|and\b|or\b|xor\b|implies\b|iff\b|[¬~!∧&∨|⊕^→↔↑↓()]|[A-Za-z])/iy;const out=[];re.lastIndex=0;s=s.replace(/\s+$/,"");
+  while(re.lastIndex<s.length){const i=re.lastIndex;const m=re.exec(s);if(!m)throw new Error(`Can’t read “${s.slice(i).trim().slice(0,8)}”`);const t=m[1],lt=t.toLowerCase();
+    if(t==="("||t===")")out.push({k:t});else if(WORD[lt]&&(t.length>1||!/[A-Za-z]/.test(t)))out.push({k:"op",op:WORD[lt]});else out.push({k:"var",v:t.toUpperCase()})}return out}
+function parse(s){const tk=tokenize(s);let i=0;const peek=()=>tk[i],isop=o=>tk[i]&&tk[i].k==="op"&&o.includes(tk[i].op);
+  function iff(){let l=imp();while(isop(["iff"])){i++;l={op:"iff",a:l,b:imp()}}return l}
+  function imp(){const l=or();if(isop(["imp"])){i++;return{op:"imp",a:l,b:imp()}}return l}
+  function or(){let l=and();while(isop(["or","xor","nor"])){const o=tk[i++].op;l={op:o,a:l,b:and()}}return l}
+  function and(){let l=not();while(isop(["and","nand"])){const o=tk[i++].op;l={op:o,a:l,b:not()}}return l}
+  function not(){if(isop(["not"])){i++;return{op:"not",a:not()}}return atom()}
+  function atom(){const t=peek();if(!t)throw new Error("The statement ends too soon");if(t.k==="var"){i++;return{v:t.v}}if(t.k==="("){i++;const e=iff();if(!peek()||peek().k!==")")throw new Error("A bracket is missing");i++;return e}throw new Error("Something is missing before an operator")}
+  if(!tk.length)throw new Error("Type a statement");const e=iff();if(i<tk.length)throw new Error("Something is missing between two parts");return e}
+function str(n,top=true){if(n.v)return n.v;if(n.op==="not")return"¬"+str(n.a,false);const s=str(n.a,false)+" "+SYM[n.op]+" "+str(n.b,false);return top?s:"("+s+")"}
+function ev(n,e){if(n.v)return e[n.v];const a=ev(n.a,e);if(n.op==="not")return!a;const b=ev(n.b,e);switch(n.op){case"and":return a&&b;case"or":return a||b;case"xor":return a!==b;case"imp":return!a||b;case"iff":return a===b;case"nand":return!(a&&b);case"nor":return!(a||b)}}
+function vars(n,set=new Set()){if(n.v)set.add(n.v);else{vars(n.a,set);if(n.b)vars(n.b,set)}return set}
+function subs(n,out=[],seen=new Set()){if(n.v)return out;subs(n.a,out,seen);if(n.b)subs(n.b,out,seen);const k=str(n);if(!seen.has(k)){seen.add(k);out.push(n)}return out}
+function rows(vs){const n=vs.length,R=[];for(let i=0;i<1<<n;i++){const e={};vs.forEach((v,k)=>e[v]=!((i>>(n-1-k))&1));R.push(e)}return R}
+
+/* ================= 1. operators ================= */
+const OPS=[
+ ["not","¬","NOT","not P","Negation flips the truth value. If P is true, ¬P is false, and the other way round.","“It is not raining.”",(p,q)=>!p,1],
+ ["and","∧","AND","P and Q","Conjunction is true only when both parts are true.","“I’ll go if it’s sunny and I’m free.” Needs both.",(p,q)=>p&&q],
+ ["or","∨","OR","P or Q (or both)","Disjunction is true when at least one part is true. In logic, “or” includes the case where both are true.","“You can pay by card or cash.” Either works.",(p,q)=>p||q],
+ ["xor","⊕","XOR","P or Q, but not both","Exclusive or is true when exactly one part is true. It’s the “or” of a menu: soup or salad.","“The light is either on or off.”",(p,q)=>p!==q],
+ ["imp","→","IF…THEN","if P then Q","The conditional is false only when P is true and Q is false. P is the antecedent, Q the consequent.","“If you score 90, you get an A.”",(p,q)=>!p||q],
+ ["iff","↔","IFF","P if and only if Q","The biconditional is true when both parts have the same truth value.","“A number is even iff it’s divisible by 2.”",(p,q)=>p===q],
+ ["nand","↑","NAND","not both P and Q","The opposite of AND. It is false only when both are true. Every other operator can be built from it.","“You can’t have both cake and ice cream.”",(p,q)=>!(p&&q)],
+ ["nor","↓","NOR","neither P nor Q","The opposite of OR. It is true only when both are false.","“Neither rain nor snow stopped the post.”",(p,q)=>!(p||q)]
+];
+const OP={i:4,p:true,q:false};
+$("#opPick").innerHTML=OPS.map((o,i)=>`<button class="opb" data-i="${i}" aria-pressed="${i===OP.i}"><b>${o[1]}</b><small>${o[2]}</small></button>`).join("");
+document.querySelectorAll("#opPick .opb").forEach(b=>b.onclick=()=>{OP.i=+b.dataset.i;document.querySelectorAll("#opPick .opb").forEach(x=>x.setAttribute("aria-pressed",x===b));renderOp()});
+function setTog(id,v){const b=$(id);b.setAttribute("aria-pressed",v);b.querySelector("span").textContent=v?TRUE:FALSE}
+$("#tP").onclick=()=>{OP.p=!OP.p;renderOp()};$("#tQ").onclick=()=>{OP.q=!OP.q;renderOp()};
+function renderOp(){const o=OPS[OP.i],f=o[6],un=o[7];setTog("#tP",OP.p);setTog("#tQ",OP.q);$("#tQ").style.opacity=un?.4:1;
+  const r=f(OP.p,OP.q);$("#opRes").innerHTML=`<span class="mono" style="font-size:.7em">${un?"¬P":"P "+o[1]+" Q"} =</span> ${tf(r)}`;
+  $("#opRead").textContent=o[3];$("#opDesc").textContent=o[4];$("#opEx").textContent=o[5];
+  const combos=un?[[true],[false]]:[[true,true],[true,false],[false,true],[false,false]];
+  $("#opTbl").innerHTML=`<tr><th>P</th>${un?"":"<th>Q</th>"}<th>${un?"¬P":"P "+o[1]+" Q"}</th></tr>`+combos.map(([p,q])=>`<tr class="${p===OP.p&&(un||q===OP.q)?"on":""}"><td>${tf(p)}</td>${un?"":`<td>${tf(q)}</td>`}<td>${tf(f(p,q))}</td></tr>`).join("");
+  drawVenn()}
+function drawVenn(){const{c,W,H}=setupCanvas($("#vCv"));const o=OPS[OP.i],f=o[6];const acc=css("--accent"),ink=css("--ink"),muted=css("--muted"),hot=css("--hot");
+  const r=Math.min(H*.36,W*.22),cx=W/2,cy=H/2+4,d=r*.62;const P=[cx-d,cy],Q=[cx+d,cy];const pad=8;
+  const circ=(p,path)=>{path.moveTo(p[0]+r,p[1]);path.arc(p[0],p[1],r,0,Math.PI*2)};
+  const rect=new Path2D();rect.rect(pad,pad,W-2*pad,H-2*pad);
+  const region=(inP,inQ)=>{c.save();
+    const cp=new Path2D();circ(P,cp);const cq=new Path2D();circ(Q,cq);
+    if(inP)c.clip(cp);else{const x=new Path2D();x.addPath(rect);circ(P,x);c.clip(x,"evenodd")}
+    if(inQ)c.clip(cq);else{const x=new Path2D();x.addPath(rect);circ(Q,x);c.clip(x,"evenodd")}
+    c.fillStyle=acc;c.globalAlpha=.55;c.fillRect(0,0,W,H);c.restore()};
+  [[1,1],[1,0],[0,1],[0,0]].forEach(([a,b])=>{if(f(!!a,!!b))region(a,b)});
+  c.strokeStyle=ink;c.lineWidth=2;c.strokeRect(pad,pad,W-2*pad,H-2*pad);c.beginPath();circ(P,c);c.stroke();c.beginPath();circ(Q,c);c.stroke();
+  c.fillStyle=ink;c.font="700 18px "+css("--mono");c.textAlign="center";c.textBaseline="middle";c.fillText("P",P[0]-r*.45,cy);c.fillText("Q",Q[0]+r*.45,cy);
+  // current point
+  const pt=OP.p&&OP.q?[cx,cy]:OP.p?[P[0]-r*.5,cy+r*.45]:OP.q?[Q[0]+r*.5,cy+r*.45]:[pad+22,pad+22];
+  c.fillStyle=hot;c.strokeStyle=css("--card");c.lineWidth=3;c.beginPath();c.arc(pt[0],pt[1],8,0,7);c.fill();c.stroke();c.lineWidth=1}
+
+/* ================= 2. truth tables ================= */
+const KEYS=["¬","∧","∨","⊕","→","↔","(",")","P","Q","R"];
+$("#ttKeys").innerHTML=KEYS.map(k=>`<button type="button" aria-label="Insert ${k}">${k}</button>`).join("")+`<button type="button" data-clear="1" style="font-size:13px;padding:0 10px">⌫</button>`;
+document.querySelectorAll("#ttKeys button").forEach(b=>b.onclick=()=>{const inp=$("#ttIn");const s=inp.selectionStart??inp.value.length,e=inp.selectionEnd??inp.value.length;
+  if(b.dataset.clear){if(s===e&&s>0){inp.value=inp.value.slice(0,s-1)+inp.value.slice(e);inp.setSelectionRange(s-1,s-1)}else{inp.value=inp.value.slice(0,s)+inp.value.slice(e);inp.setSelectionRange(s,s)}}
+  else{const k=b.textContent,ins=/[A-Z()¬]/.test(k)?k:" "+k+" ";inp.value=inp.value.slice(0,s)+ins+inp.value.slice(e);inp.setSelectionRange(s+ins.length,s+ins.length)}
+  inp.focus({preventScroll:true});buildTT()});
+const LAWS=[["De Morgan’s law","¬(P ∧ Q) ↔ (¬P ∨ ¬Q)"],["Contrapositive","(P → Q) ↔ (¬Q → ¬P)"],["Excluded middle","P ∨ ¬P"],["Contradiction","P ∧ ¬P"],["Modus ponens","((P → Q) ∧ P) → Q"],["Distributive","P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R)"],["Converse trap","(P → Q) ↔ (Q → P)"],["Majority vote","(P ∧ Q) ∨ (P ∧ R) ∨ (Q ∧ R)"]];
+$("#ttPre").innerHTML=LAWS.map((l,i)=>`<button class="pill" data-i="${i}">${l[0]}</button>`).join("");
+document.querySelectorAll("#ttPre .pill").forEach(b=>b.onclick=()=>{$("#ttIn").value=LAWS[+b.dataset.i][1];buildTT()});
+$("#ttIn").oninput=buildTT;
+function buildTT(){const inp=$("#ttIn");let e;try{e=parse(inp.value)}catch(err){inp.classList.add("err");$("#ttVer").textContent="…";$("#ttVer").className="verdict";$("#ttWhy").textContent=err.message;return}
+  const vs=[...vars(e)].sort();if(vs.length>5){inp.classList.add("err");$("#ttWhy").textContent="Use five letters or fewer.";return}inp.classList.remove("err");
+  const S=subs(e),R=rows(vs);let nt=0;
+  let h=`<tr>${vs.map(v=>`<th class="v">${v}</th>`).join("")}${S.map((s,i)=>`<th class="${i===S.length-1?"res":""}">${esc(str(s))}</th>`).join("")}</tr>`;
+  R.forEach(env=>{const res=ev(e,env);if(res)nt++;h+=`<tr>${vs.map(v=>`<td class="v">${tf(env[v])}</td>`).join("")}${S.map((s,i)=>`<td class="${i===S.length-1?"res":""}">${tf(ev(s,env))}</td>`).join("")}</tr>`});
+  $("#ttTbl").innerHTML=h;const v=$("#ttVer");
+  if(nt===R.length){v.textContent="Tautology";v.className="verdict ok";$("#ttWhy").textContent=`True in all ${R.length} rows, whatever the facts. Laws of logic are tautologies.`}
+  else if(!nt){v.textContent="Contradiction";v.className="verdict no";$("#ttWhy").textContent=`False in all ${R.length} rows. No possible world makes it true.`}
+  else{v.textContent="Contingent";v.className="verdict";$("#ttWhy").textContent=`True in ${nt} of ${R.length} rows. Whether it holds depends on the facts.`}}
+
+/* ================= 3. arguments ================= */
+const ARGS=[
+ ["Modus ponens","P → Q\nP","Q","If it rains, the ground gets wet. It rains. So the ground gets wet."],
+ ["Modus tollens","P → Q\n¬Q","¬P","If it rained, the ground is wet. The ground isn’t wet. So it didn’t rain."],
+ ["Hypothetical syllogism","P → Q\nQ → R","P → R","If I study, I pass. If I pass, I graduate. So if I study, I graduate."],
+ ["Disjunctive syllogism","P ∨ Q\n¬P","Q","It’s in my bag or my coat. It’s not in my bag. So it’s in my coat."],
+ ["Affirming the consequent","P → Q\nQ","P","If it rained, the ground is wet. The ground is wet. So it rained. (A sprinkler would do it too.)"],
+ ["Denying the antecedent","P → Q\n¬P","¬Q","If it rained, the ground is wet. It didn’t rain. So the ground isn’t wet. (Sprinklers again.)"],
+ ["Affirming a disjunct","P ∨ Q\nP","¬Q","It’s sunny or warm. It’s sunny. So it isn’t warm. (It could be both.)"],
+ ["Constructive dilemma","(P → Q) ∧ (R → S)\nP ∨ R","Q ∨ S","If I take the bus I’m late; if I walk I’m tired. I’ll bus or walk. So I’ll be late or tired."]
+];
+$("#aPre").innerHTML=ARGS.map((a,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${a[0]}</button>`).join("");
+let argPlain=ARGS[0][3];
+function loadArg(i){const a=ARGS[i];$("#aPrem").value=a[1];$("#aConc").value=a[2];argPlain=a[3];document.querySelectorAll("#aPre .pill").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.i===i));checkArg()}
+document.querySelectorAll("#aPre .pill").forEach(b=>b.onclick=()=>loadArg(+b.dataset.i));
+$("#aPrem").oninput=$("#aConc").oninput=()=>{argPlain="";document.querySelectorAll("#aPre .pill").forEach(x=>x.setAttribute("aria-pressed","false"));checkArg()};
+function checkArg(){let P,C;const lines=$("#aPrem").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  try{P=lines.map(parse);$("#aPrem").classList.remove("err")}catch(e){$("#aPrem").classList.add("err");$("#aWhy").textContent=e.message;$("#aVer").textContent="…";$("#aVer").className="verdict";return}
+  try{C=parse($("#aConc").value);$("#aConc").classList.remove("err")}catch(e){$("#aConc").classList.add("err");$("#aWhy").textContent=e.message;$("#aVer").textContent="…";$("#aVer").className="verdict";return}
+  const vs=new Set();P.forEach(p=>vars(p,vs));vars(C,vs);const V=[...vs].sort();if(V.length>5){$("#aWhy").textContent="Use five letters or fewer.";return}
+  const R=rows(V);let bad=null,nGood=0;
+  let h=`<tr>${V.map(v=>`<th class="v">${v}</th>`).join("")}${P.map(p=>`<th>${esc(str(p))}</th>`).join("")}<th class="res">∴ ${esc(str(C))}</th></tr>`;
+  R.forEach(env=>{const pv=P.map(p=>ev(p,env)),all=pv.every(Boolean),cv=ev(C,env);const cls=all?(cv?"good":"bad"):"";if(all&&cv)nGood++;if(all&&!cv&&!bad)bad=env;
+    h+=`<tr class="${cls}">${V.map(v=>`<td class="v">${tf(env[v])}</td>`).join("")}${pv.map(x=>`<td>${tf(x)}</td>`).join("")}<td class="res">${tf(cv)}</td></tr>`});
+  $("#aTbl").innerHTML=h;const v=$("#aVer");
+  if(bad){v.textContent="Invalid";v.className="verdict no";$("#aWhy").innerHTML=`Counterexample (red row): ${V.map(x=>`${x} = ${tf(bad[x])}`).join(", ")}. Every premise is true there, yet the conclusion is false.`}
+  else{v.textContent="Valid";v.className="verdict ok";$("#aWhy").textContent=nGood?`In every row where all the premises are true (green), the conclusion is true too.`:`The premises can never all be true at once, so the argument is valid in an empty way.`}
+  $("#aPlain").textContent=argPlain||"Your own argument.";}
+
+/* ================= 4. proofs ================= */
+const PROOFS=[
+ ["Direct","Sum of two odds","Direct proof","The sum of two odd numbers is even.",[
+  "Take any two odd numbers. Every odd number is one more than an even number, so write them as 2a + 1 and 2b + 1 for some whole numbers a and b.",
+  "Add them: (2a + 1) + (2b + 1) = 2a + 2b + 2.",
+  "Factor out 2: 2a + 2b + 2 = 2(a + b + 1).",
+  "Anything of the form 2 × (whole number) is even. So the sum is even. ∎"]],
+ ["Contrapositive","n² even → n even","Proof by contrapositive","If n² is even, then n is even.",[
+  "Instead prove the contrapositive: if n is odd, then n² is odd. The two statements are logically equivalent (check it in the truth table builder).",
+  "Suppose n is odd, so n = 2k + 1.",
+  "Then n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1, which is one more than an even number.",
+  "So n² is odd. The contrapositive holds, so the original statement holds. ∎"]],
+ ["Contradiction","√2 is irrational","Proof by contradiction","√2 can’t be written as a fraction.",[
+  "Assume the opposite: √2 = a/b, a fraction in lowest terms (a and b share no common factor).",
+  "Square both sides: 2 = a²/b², so a² = 2b². That makes a² even.",
+  "If a² is even, a is even (the previous proof). So write a = 2c.",
+  "Then 4c² = 2b², so b² = 2c². That makes b² even, so b is even too.",
+  "But then a and b are both even, sharing a factor of 2. That contradicts “lowest terms”.",
+  "The assumption led to a contradiction, so it must be false: √2 is irrational. ∎"]],
+ ["Contradiction","Infinitely many primes","Euclid’s proof (about 300 BCE)","There is no largest prime number.",[
+  "Suppose there are only finitely many primes: p₁, p₂, …, pₙ.",
+  "Multiply them all together and add 1: N = p₁ × p₂ × … × pₙ + 1.",
+  "Dividing N by any prime on the list leaves remainder 1, so none of them divides N.",
+  "But every whole number above 1 has at least one prime factor. N’s prime factor isn’t on the list.",
+  "So the list wasn’t complete after all. However many primes you list, there is always another. ∎"]],
+ ["Induction","1 + 2 + … + n","Proof by induction","1 + 2 + 3 + … + n = n(n + 1) / 2 for every n.",[
+  "Base case: for n = 1, the left side is 1 and the right side is 1 × 2 / 2 = 1. True.",
+  "Inductive step: assume it is true for some n, so 1 + … + n = n(n + 1)/2.",
+  "Add the next number, n + 1, to both sides: 1 + … + n + (n + 1) = n(n + 1)/2 + (n + 1).",
+  "Simplify the right side: (n + 1)(n/2 + 1) = (n + 1)(n + 2)/2. That is exactly the formula for n + 1.",
+  "True for 1, and each case implies the next, so it is true for every n, like an endless row of falling dominoes. The picture on the right shows why the formula works. ∎"]]
+];
+const PR={i:0,k:1};
+$("#prPick").innerHTML=PROOFS.map((p,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${p[1]}</button>`).join("");
+document.querySelectorAll("#prPick .pill").forEach(b=>b.onclick=()=>{PR.i=+b.dataset.i;PR.k=1;document.querySelectorAll("#prPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));renderPr()});
+$("#prNext").onclick=()=>{if(PR.k<PROOFS[PR.i][4].length){PR.k++;renderPr(true)}};$("#prBack").onclick=()=>{if(PR.k>1){PR.k--;renderPr()}};
+function renderPr(add){const p=PROOFS[PR.i],st=p[4];$("#prMeth").textContent=p[2];$("#prClaim").textContent=p[3];
+  const ol=$("#prSteps");if(add){const li=document.createElement("li");li.textContent=st[PR.k-1];if(PR.k===st.length)li.className="qed";ol.appendChild(li)}
+  else ol.innerHTML=st.slice(0,PR.k).map((s,i)=>`<li${i===st.length-1?' class="qed"':""} style="animation:none">${esc(s)}</li>`).join("");
+  const done=PR.k>=st.length;$("#prNext").disabled=done;$("#prNext").style.opacity=done?.4:1;$("#prNext").textContent=done?"Proved":"Next step";$("#prBack").disabled=PR.k<=1}
+function drawStairs(){const n=+$("#stN").value;$("#stNV").textContent=n;const{c,W,H}=setupCanvas($("#stCv"));const acc=css("--accent"),hot=css("--hot"),card=css("--card"),ink=css("--ink");
+  const cs=Math.min((W-40)/(n+1),(H-40)/n),ox=(W-cs*(n+1))/2,oy=(H-cs*n)/2;
+  for(let col=0;col<n;col++){for(let row=0;row<n+1;row++){const blue=row<col+1;const x=ox+row*cs,y=oy+col*cs;c.fillStyle=blue?acc:hot;c.globalAlpha=blue?.9:.75;c.fillRect(x+1,y+1,cs-2,cs-2)}}
+  c.globalAlpha=1;c.strokeStyle=ink;c.lineWidth=1.5;c.strokeRect(ox,oy,cs*(n+1),cs*n);
+  c.fillStyle=ink;c.font="12px "+css("--mono");c.textAlign="center";c.fillText(`${n+1}`,ox+cs*(n+1)/2,oy-8);c.save();c.translate(ox-10,oy+cs*n/2);c.rotate(-Math.PI/2);c.fillText(`${n}`,0,0);c.restore();
+  const s=n*(n+1)/2;$("#stTxt").innerHTML=`The <span class="you">blue staircase</span> has 1 + 2 + … + ${n} = <b>${s}</b> squares. A copy turned around (<span class="them">red</span>) fills the rest of a ${n} × ${n+1} rectangle of ${n*(n+1)} squares. So each staircase is half: ${n} × ${n+1} / 2 = ${s}.`}
+$("#stN").oninput=drawStairs;
+
+/* ================= 5. gates ================= */
+const GT={A:1,B:0,C:1};
+function gateSvg(){const {A,B,C}=GT;const s1=A^B,sum=s1^C,a1=A&B,a2=s1&C,co=a1|a2;
+  const on=css("--accent"),off=css("--line"),ink=css("--ink"),muted=css("--muted"),card=css("--card"),hot=css("--hot");
+  const w=(v,pts)=>`<polyline points="${pts}" fill="none" stroke="${v?on:off}" stroke-width="${v?4:3}" stroke-linejoin="round"/>`;
+  const gate=(x,y,lab,v)=>`<g><rect x="${x-34}" y="${y-22}" width="68" height="44" rx="${lab==="OR"?22:8}" fill="${card}" stroke="${v?on:muted}" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="17" font-weight="600" fill="${ink}">${lab}</text></g>`;
+  const inp=(x,y,k,v)=>`<g class="gin" data-k="${k}" style="cursor:pointer" role="button" tabindex="0" aria-label="Input ${k==="C"?"carry in":k}: ${v}"><circle cx="${x}" cy="${y}" r="22" fill="${v?on:card}" stroke="${v?on:muted}" stroke-width="2"/><text x="${x}" y="${y+6}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="20" font-weight="700" fill="${v?css("--accent-ink"):ink}">${v}</text><text x="${x}" y="${y-28}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="15" fill="${muted}">${k==="C"?"Cin":k}</text></g>`;
+  const out=(x,y,lab,v)=>`<g><rect x="${x-22}" y="${y-20}" width="44" height="40" rx="8" fill="${v?hot:card}" stroke="${v?hot:muted}" stroke-width="2"/><text x="${x}" y="${y+6}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="20" font-weight="700" fill="${v?"#fff":ink}">${v}</text><text x="${x}" y="${y-28}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="15" fill="${muted}">${lab}</text></g>`;
+  const dot=(x,y,v)=>`<circle cx="${x}" cy="${y}" r="5" fill="${v?on:off}"/>`;
+  return `<svg viewBox="0 0 640 330" role="img" aria-label="Full adder circuit">
+  ${w(A,"60,70 120,70 120,80 196,80")}${w(A,"120,70 120,170 196,170")}${dot(120,70,A)}
+  ${w(B,"60,140 140,140 140,100 196,100")}${w(B,"140,140 140,190 196,190")}${dot(140,140,B)}
+  ${w(s1,"264,90 320,90 320,110 366,110")}${w(s1,"320,90 320,230 366,230")}${dot(320,90,s1)}
+  ${w(C,"60,270 300,270 300,130 366,130")}${w(C,"300,270 300,250 366,250")}${dot(300,250,C)}
+  ${w(sum,"434,120 578,120")}
+  ${w(a1,"264,180 470,180 470,270 486,270")}
+  ${w(a2,"434,240 450,240 450,290 486,290")}
+  ${w(co,"554,280 578,280")}
+  ${gate(230,90,"XOR",s1)}${gate(230,180,"AND",a1)}${gate(400,120,"XOR",sum)}${gate(400,240,"AND",a2)}${gate(520,280,"OR",co)}
+  ${inp(40,70,"A",A)}${inp(40,140,"B",B)}${inp(40,270,"C",C)}
+  ${out(600,120,"Sum",sum)}${out(600,280,"Carry",co)}
+  </svg>`}
+function renderGate(){$("#gSvg").innerHTML=gateSvg();const{A,B,C}=GT;const s=A+B+C;$("#gIn").textContent=`${A} + ${B} + ${C}`;$("#gOut").textContent=`${s>>1}${s&1} = ${s}`;
+  document.querySelectorAll("#gSvg .gin").forEach(g=>{const t=()=>{GT[g.dataset.k]^=1;renderGate();const n=document.querySelector(`#gSvg .gin[data-k="${g.dataset.k}"]`);n&&n.focus()};g.onclick=t;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();t()}}})}
+
+/* ================= 6. knights ================= */
+const PUZ=[
+ {n:"Puzzle 1",p:["A","B"],s:[["A","“We are both knaves.”",x=>!x[0]&&!x[1]]],note:"B says nothing."},
+ {n:"Puzzle 2",p:["A","B"],s:[["A","“At least one of us is a knave.”",x=>!x[0]||!x[1]]],note:"B says nothing."},
+ {n:"Puzzle 3",p:["A","B","C"],s:[["A","“All of us are knaves.”",x=>!x[0]&&!x[1]&&!x[2]],["B","“Exactly one of us is a knight.”",x=>x.filter(Boolean).length===1]],note:"C says nothing."},
+ {n:"Puzzle 4",p:["A","B","C"],s:[["A","“B is a knave.”",x=>!x[1]],["B","“A and C are the same kind.”",x=>x[0]===x[2]],["C","“B is a knight.”",x=>x[1]]],note:""}
+];
+const KN={i:0,g:[null,null]};
+function solve(pz){const n=pz.p.length,sol=[];for(let m=0;m<1<<n;m++){const x=pz.p.map((_,k)=>!!((m>>k)&1));if(pz.s.every(([who,,f])=>f(x)===x[pz.p.indexOf(who)]))sol.push(x)}return sol}
+$("#kPick").innerHTML=PUZ.map((p,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${p.n}</button>`).join("");
+document.querySelectorAll("#kPick .pill").forEach(b=>b.onclick=()=>{KN.i=+b.dataset.i;KN.g=PUZ[KN.i].p.map(()=>null);document.querySelectorAll("#kPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));renderKn()});
+$("#kClear").onclick=()=>{KN.g=PUZ[KN.i].p.map(()=>null);renderKn()};
+$("#kHint").onclick=()=>{const s=solve(PUZ[KN.i]);if(s.length===1){KN.g=s[0].slice();renderKn()}};
+function renderKn(){const pz=PUZ[KN.i];
+  $("#kPeople").innerHTML=pz.p.map((p,k)=>{const g=KN.g[k];return `<button class="who ${g===true?"k":g===false?"v":""}" data-k="${k}"><span class="face">${p}</span><small>${g===true?"Knight":g===false?"Knave":"Tap to guess"}</small></button>`}).join("");
+  document.querySelectorAll("#kPeople .who").forEach(b=>b.onclick=()=>{const k=+b.dataset.k,g=KN.g[k];KN.g[k]=g===null?true:g===true?false:null;renderKn()});
+  const full=KN.g.every(v=>v!==null);let ok=true;
+  $("#kSays").innerHTML=pz.s.map(([who,txt,f])=>{const k=pz.p.indexOf(who),g=KN.g[k];let ck="";
+    if(full){const t=f(KN.g),fine=t===g;if(!fine)ok=false;ck=`<span class="ck" style="color:${fine?"var(--good)":"var(--hot)"}">${t?"TRUE":"FALSE"} · ${fine?"consistent":g?"a knight can’t lie":"a knave can’t tell the truth"}</span>`}
+    else ck=`<span class="ck" style="color:var(--muted)">?</span>`;return `<div class="say"><span class="sp">${who}</span><span>${txt}</span>${ck}</div>`}).join("")+(pz.note?`<div style="font-size:13px;color:var(--muted)">${pz.note}</div>`:"");
+  const v=$("#kVer");
+  if(!full){v.textContent="Thinking…";v.className="verdict";$("#kMsg").textContent="Decide who is a knight and who is a knave."}
+  else if(ok){v.textContent="Solved";v.className="verdict ok";const n=solve(pz).length;$("#kMsg").textContent=n===1?"Every statement fits. This is the only consistent answer.":"Every statement fits."}
+  else{v.textContent="Contradiction";v.className="verdict no";$("#kMsg").textContent="At least one islander breaks the rules. Try switching someone."}}
+
+/* ================= 7. fallacies ================= */
+const CATS={formal:["Formal","--hot"],rel:["Relevance","--accent"],pres:["Presumption","--gold"],amb:["Ambiguity","--good"]};
+const FAL=[
+ ["formal","Affirming the consequent","Treating “if P then Q” as if it also meant “if Q then P”.","“If he’s a burglar, he wears gloves. He’s wearing gloves, so he must be a burglar.”","“Every good investment goes up in value. My house went up in value, so it was a good investment.”"],
+ ["formal","Denying the antecedent","Concluding that because the “if” part is false, the “then” part must be false too.","“If you study medicine, you’ll be rich. You didn’t study medicine, so you won’t be rich.”","“If it’s a dog, it has four legs. My cat isn’t a dog, so it doesn’t have four legs.”"],
+ ["formal","Undistributed middle","Assuming two things are the same because they share a property.","“All dogs are mammals. All cats are mammals. So all dogs are cats.”","“Successful founders wake up early. I wake up early, so I’ll be a successful founder.”"],
+ ["rel","Ad hominem","Attacking the person making the argument instead of the argument.","“Why listen to her views on the budget? She failed algebra in high school.”","“You can’t trust his climate research, he drives an SUV.”"],
+ ["rel","Straw man","Misrepresenting someone’s position to make it easier to knock down.","“She wants stricter speed limits.” “So she wants to ban cars completely?”","“My opponent wants to cut the defence budget. Why does he want us defenceless?”"],
+ ["rel","Red herring","Changing the subject to something that distracts from the question.","“Why did the project run late?” “Let’s not forget how hard the team worked.”","“Is the new phone’s battery any good?” “Look how thin it is!”"],
+ ["rel","Appeal to authority","Claiming something is true because a person with status says so, especially outside their expertise.","“A famous actor says this diet cures headaches, so it must work.”","“My favourite footballer says this crypto coin can’t lose.”"],
+ ["rel","Appeal to emotion","Using fear, pity or anger in place of evidence.","“If you really cared about your family, you’d buy this alarm system.”","“Think of the poor puppies. You have to vote for my parking proposal.”"],
+ ["rel","Bandwagon","Arguing something is true or good because many people believe or do it.","“Millions of people use this supplement. It must be effective.”","“Everyone at school has this phone, so it must be the best one.”"],
+ ["rel","Tu quoque","Dismissing criticism by pointing out the critic does the same thing.","“You say I shouldn’t smoke, but you smoked when you were young.”","“How can you tell me to save money? You bought a new car last year.”"],
+ ["rel","Appeal to tradition","Assuming something is right because it has always been done that way.","“We’ve always printed every email. Why change now?”","“Our family has always voted this way, so it’s the right choice.”"],
+ ["rel","Appeal to nature","Assuming natural means good, or unnatural means bad.","“It’s herbal, so it can’t have side effects.”","“These berries grow wild in the forest, so they must be safe to eat.”"],
+ ["rel","Genetic fallacy","Judging a claim by where it came from rather than by its merits.","“That idea came from a tabloid, so it’s false.”","“The theory was first proposed by a teenager, so it can’t be serious.”"],
+ ["pres","False dilemma","Presenting only two options when more exist.","“Either you’re with us or you’re against us.”","“We either ban phones in school or accept that students will never learn again.”"],
+ ["pres","Slippery slope","Claiming one step will inevitably lead to an extreme outcome, without showing why.","“If we let students redo one test, soon nobody will study at all.”","“Allow one food truck downtown and soon there will be no restaurants left.”"],
+ ["pres","Circular reasoning","Using the conclusion as one of the premises; also called begging the question.","“This book is trustworthy because the book itself says it’s true.”","“He’s the best candidate because nobody is better than him.”"],
+ ["pres","Hasty generalization","Drawing a broad conclusion from too few examples.","“I met two rude people from that city. Everyone there must be rude.”","“My grandfather smoked and lived to 95, so smoking can’t be that bad.”"],
+ ["pres","Post hoc","Assuming that because B followed A, A caused B.","“I wore my lucky socks and we won. The socks work.”","“The rooster crows, then the sun rises, so the rooster makes the sun rise.”"],
+ ["pres","Loaded question","Asking a question that builds in an unproven assumption.","“Have you stopped cheating on your homework?”","“Why do you always ignore my messages?”"],
+ ["pres","No true Scotsman","Redefining a group to exclude counterexamples.","“No Scotsman puts sugar on porridge.” “My uncle Angus does.” “Then he’s no true Scotsman.”","“Real gamers never use easy mode. Oh, she does? Then she’s not a real gamer.”"],
+ ["pres","Burden of proof","Insisting others disprove your claim rather than supporting it yourself.","“Prove that ghosts don’t exist. You can’t? Then they do.”","“Nobody has shown my invention doesn’t work, so it works.”"],
+ ["pres","Sunk cost","Continuing something because of what you’ve already invested, not because of what lies ahead.","“The film is awful, but we paid for tickets, so we have to stay.”","“I’ve already spent three years on this degree I hate, so I can’t switch now.”"],
+ ["pres","Gambler’s fallacy","Believing past random events change the odds of independent future ones.","“Red came up five times in a row. Black is due.”","“We’ve had three boys, so the next baby is almost certainly a girl.”"],
+ ["pres","Texas sharpshooter","Picking out a pattern after the fact and ignoring the data that doesn’t fit; like painting a target around bullet holes.","“Look, these three lottery winners all had a ‘7’ in their birthday. Sevens are lucky!”","“Nostradamus predicted this. One of his thousands of vague lines sort of matches.”"],
+ ["pres","Cherry picking","Selecting only the evidence that supports your view.","“This study shows chocolate helps you lose weight.” (Ignoring the twenty that show it doesn’t.)","“Our app has five-star reviews!” (Showing three of three hundred.)"],
+ ["amb","Equivocation","Switching between different meanings of the same word.","“A feather is light. What is light cannot be dark. So a feather cannot be dark.”","“The sign said ‘fine for parking here’, so I parked. It’s fine!”"],
+ ["amb","Composition","Assuming what’s true of the parts is true of the whole.","“Every player on the team is excellent, so the team must be excellent.”","“Each brick is light, so the whole wall must be light.”"],
+ ["amb","Division","Assuming what’s true of the whole is true of each part.","“The company is rich, so every employee must be rich.”","“The orchestra is brilliant, so the triangle player must be brilliant.”"]
+];
+const FC={cat:"all",q:""};
+$("#fCats").innerHTML=`<button class="pill" data-c="all" aria-pressed="true">All</button>`+Object.entries(CATS).map(([k,v])=>`<button class="pill" data-c="${k}" aria-pressed="false">${v[0]}</button>`).join("");
+document.querySelectorAll("#fCats .pill").forEach(b=>b.onclick=()=>{FC.cat=b.dataset.c;document.querySelectorAll("#fCats .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));renderF()});
+$("#fSearch").oninput=e=>{FC.q=e.target.value.toLowerCase();renderF()};
+function renderF(){const L=FAL.filter(f=>(FC.cat==="all"||f[0]===FC.cat)&&(!FC.q||(f[1]+" "+f[2]+" "+f[3]).toLowerCase().includes(FC.q)));
+  $("#fList").innerHTML=L.map(f=>`<article class="fc"><div class="top"><h3>${f[1]}</h3><span class="cat" style="color:var(${CATS[f[0]][1]})">${CATS[f[0]][0]}</span></div><p>${f[2]}</p><p class="ex">${f[3]}</p></article>`).join("");
+  $("#fCount").textContent=`Showing ${L.length} of ${FAL.length} fallacies.`}
+const QZ={i:-1,right:0,tot:0,done:false,order:[]};
+function nextQ(){if(!QZ.order.length)QZ.order=FAL.map((_,i)=>i).sort(()=>Math.random()-.5);QZ.i=QZ.order.pop();QZ.done=false;const f=FAL[QZ.i];
+  const others=FAL.map((_,i)=>i).filter(i=>i!==QZ.i).sort(()=>Math.random()-.5).slice(0,3);const opts=others.concat(QZ.i).sort(()=>Math.random()-.5);
+  $("#qText").textContent=f[4];$("#qMsg").textContent="";
+  $("#qOpts").innerHTML=opts.map(i=>`<button data-i="${i}">${FAL[i][1]}</button>`).join("");
+  document.querySelectorAll("#qOpts button").forEach(b=>b.onclick=()=>{if(QZ.done)return;QZ.done=true;QZ.tot++;const ok=+b.dataset.i===QZ.i;if(ok)QZ.right++;
+    document.querySelectorAll("#qOpts button").forEach(x=>{if(+x.dataset.i===QZ.i)x.classList.add("right");else if(x===b)x.classList.add("wrong")});
+    $("#qMsg").innerHTML=`${ok?"<b>Right.</b> ":"<b>Not quite.</b> "}It’s <b>${f[1]}</b>: ${f[2]}`;$("#qScore").textContent=`Score ${QZ.right} / ${QZ.tot}`})}
+$("#qNext").onclick=nextQ;
+
+/* ================= history ================= */
+const HIST=[
+ ["Aristotle’s syllogisms","c. 350 BCE","“All humans are mortal. Socrates is human. So Socrates is mortal.” Aristotle catalogued which three-line arguments of this kind are valid. His system dominated logic for two thousand years."],
+ ["The liar paradox","c. 400 BCE","“This sentence is false.” If it’s true, it’s false; if it’s false, it’s true. Versions of it, credited to Eubulides, still drive research on truth and self-reference."],
+ ["Boole’s algebra of thought","1854","George Boole showed that reasoning could be written as algebra with just two values, 1 and 0. A century later his “Boolean algebra” became the language of computer circuits."],
+ ["Frege’s new logic","1879","Gottlob Frege’s Begriffsschrift introduced quantifiers: “for all” (∀) and “there exists” (∃). Modern logic, mathematics and programming languages all build on it."],
+ ["Russell’s paradox","1901","Consider the set of all sets that don’t contain themselves. Does it contain itself? Either answer contradicts itself. Bertrand Russell’s discovery forced mathematicians to rebuild set theory on safer foundations."],
+ ["Gödel’s incompleteness","1931","Kurt Gödel proved that any consistent system rich enough to do arithmetic contains true statements it can’t prove, and can’t prove its own consistency. Mathematics can never be fully captured by one set of rules."],
+ ["Turing and the halting problem","1936","Alan Turing showed no program can decide, for every program and input, whether it will eventually stop. Some questions are undecidable by any computer, however powerful."],
+ ["Shannon’s circuits","1937","In his master’s thesis, Claude Shannon showed that relay switches could carry out Boolean logic. It has been called the most important master’s thesis of the century: it made digital circuit design possible."]
+];
+$("#histGrid").innerHTML=HIST.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3><span class="yr">${a[1]}</span></div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+renderOp();buildTT();loadArg(0);renderPr();drawStairs();renderGate();renderKn();renderF();nextQ();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawVenn();drawStairs()},120)});
+addEventListener("themechange",()=>{drawVenn();drawStairs();renderGate()});
+</script>
+</body>
+</html>
