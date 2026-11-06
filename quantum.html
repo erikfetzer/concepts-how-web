@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Mechanics · concepts.how</title>
+<meta name="description" content="The double-slit experiment, a qubit on the Bloch sphere, a Bell test and Grover’s search: quantum mechanics and computing, interactive.">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Quantum Mechanics · concepts.how">
+<meta property="og:description" content="The double-slit experiment, a qubit on the Bloch sphere, a Bell test and Grover’s search: quantum mechanics and computing, interactive.">
+<meta property="og:url" content="https://concepts.how/quantum">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quantum Mechanics · concepts.how">
+<meta name="twitter:description" content="The double-slit experiment, a qubit on the Bloch sphere, a Bell test and Grover’s search: quantum mechanics and computing, interactive.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: an optics bench. The double-slit experiment is the hero; then a qubit you can rotate, a Bell test, and Grover's search, each beside its explanation. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --q:#7B3FE4; --cl:#E4572E; --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --q:#B48CFF; --cl:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --q:#B48CFF; --cl:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* wave rule: an interference pattern of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 6px,var(--ink) 6px 7px,transparent 7px 14px,var(--ink) 14px 15px,transparent 15px 30px) bottom/100% 7px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.gate{font-family:var(--mono);font-weight:600;min-width:46px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:16px}
+.gate:hover{border-color:var(--q);color:var(--q)}
+.gate.meas{background:var(--ink);color:var(--paper);border-color:var(--ink);font-size:14px;padding:0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.toggle{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+.toggle input{appearance:none;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;transition:background .2s}
+.toggle input::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--card);transition:transform .2s}
+.toggle input:checked{background:var(--cl)}
+.toggle input:checked::after{transform:translateX(18px)}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pbar{display:grid;grid-template-columns:44px minmax(0,1fr) 56px;gap:8px;align-items:center;font-family:var(--mono);font-size:12px}
+.pbar .t{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.pbar .t i{display:block;height:100%;background:var(--c);transition:width .25s}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc p{margin:0;font-size:14.5px}
+.pc .res{border-top:1px dashed var(--line);padding-top:10px;font-size:14px;color:var(--muted)}
+.pc .res b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-right:6px}
+.interp{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:720px}
+.interp th,.interp td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.interp thead th{font-size:12px;background:var(--paper)}
+.interp tr:last-child td,.interp tr:last-child th{border-bottom:0}
+.tblwrap{overflow-x:auto;margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html" aria-current="page">Quantum</a>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Quantum mechanics</b> · and quantum computing</div>
+    <h1>Everything is a wave, <em>until you look.</em></h1>
+    <p class="lede">Quantum mechanics is the most precisely tested theory in science, and also the strangest. Particles spread out like waves, distant particles share outcomes, and looking changes the result. Quantum computers turn that strangeness into a new kind of computation.</p>
+    <nav class="jump" aria-label="On this page"><a href="#slits">Double slit</a><a href="#qubit">A qubit</a><a href="#bell">Entanglement</a><a href="#grover">Grover’s search</a><a href="#ideas">Key ideas</a><a href="#computing">Quantum computing</a></nav>
+  </header>
+
+  <section class="demo" id="slits" aria-labelledby="slitH" style="scroll-margin-top:20px">
+    <div class="panel">
+      <canvas id="dsCv" class="cv" height="360" aria-label="Particles passing through two slits and landing on a screen"></canvas>
+      <div class="row" style="margin-top:10px"><button class="btn" type="button" id="dsFire">Pause</button><button class="btn ghost" type="button" id="dsClear">Clear screen</button><span class="lbl" id="dsCount" aria-live="polite"></span></div>
+    </div>
+    <div class="stack">
+      <div>
+        <span class="eyebrow">Demo 1 · wave–particle duality</span>
+        <h2 id="slitH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">The double-slit experiment</h2>
+        <p style="margin:8px 0 0;color:var(--muted)">Fire particles one at a time at two slits. Each lands as a single dot, yet together the dots build stripes: an interference pattern, as if each particle went through both slits as a wave. Richard Feynman called it the only mystery of quantum mechanics.</p>
+      </div>
+      <label class="toggle" for="dsDet"><input type="checkbox" id="dsDet"> Watch which slit each particle uses</label>
+      <div class="sl"><label for="dsD">Slit separation<span id="dsDv"></span></label><input type="range" id="dsD" min="0.5" max="1.6" step="0.05" value="1"></div>
+      <div class="sl"><label for="dsL">Wavelength<span id="dsLv"></span></label><input type="range" id="dsL" min="400" max="700" step="10" value="520"></div>
+      <div class="callout" id="dsMsg"></div>
+    </div>
+  </section>
+
+  <section class="block" id="qubit" aria-labelledby="qubitH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · superposition</span>
+      <h2 id="qubitH">A qubit you can rotate</h2>
+      <p>A classical bit is 0 or 1. A qubit can be any point on a sphere: the north pole is |0⟩, the south pole is |1⟩, and everywhere else is a superposition. Gates rotate the arrow; measuring snaps it to a pole at random, weighted by how close it was.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="blCv" class="cv" height="380" aria-label="Bloch sphere showing the qubit state as an arrow" style="cursor:grab;touch-action:none"></canvas>
+        <p class="lbl" style="margin:8px 0 0">Drag the sphere to turn it</p>
+      </div>
+      <div class="stack">
+        <div><div class="lbl" style="margin-bottom:6px">Apply a gate</div>
+          <div class="row" id="gates">
+            <button class="gate" type="button" data-g="H" title="Hadamard: makes an equal superposition">H</button>
+            <button class="gate" type="button" data-g="X" title="NOT: flips 0 and 1">X</button>
+            <button class="gate" type="button" data-g="Y">Y</button>
+            <button class="gate" type="button" data-g="Z" title="Phase flip">Z</button>
+            <button class="gate" type="button" data-g="S" title="Quarter-turn phase">S</button>
+            <button class="gate" type="button" data-g="T" title="Eighth-turn phase">T</button>
+            <button class="gate meas" type="button" id="measure">Measure</button>
+            <button class="btn ghost" type="button" id="qReset">Reset to |0⟩</button>
+          </div></div>
+        <div class="ro"><div class="k">State</div><div class="v" id="qState" style="font-size:16px"></div></div>
+        <div class="pbar"><span>P(0)</span><span class="t"><i id="p0" style="--c:var(--accent)"></i></span><span id="p0v"></span></div>
+        <div class="pbar"><span>P(1)</span><span class="t"><i id="p1" style="--c:var(--q)"></i></span><span id="p1v"></span></div>
+        <div class="ro"><div class="k">Measurements so far</div><div class="v" id="qTally">none yet</div></div>
+        <div class="callout"><b>Try this</b>Press H, then Measure over and over: about half 0s and half 1s. Now press H, Z, H: the arrow ends on |1⟩ every time. Phase, invisible to a single measurement, steered the result. Quantum algorithms are built from that kind of interference.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="bell" aria-labelledby="bellH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · entanglement</span>
+      <h2 id="bellH">Spooky action: the Bell test</h2>
+      <p>Einstein hoped entangled particles carried hidden instructions from the start. In 1964 John Bell found a way to test that: any “hidden instructions” theory gives correlations of at most 2 in the CHSH test, while quantum mechanics predicts about 2.83. Experiments side with quantum mechanics, which won Aspect, Clauser and Zeilinger the 2022 Nobel Prize.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="bCv" class="cv" height="300" aria-label="Correlation between Alice's and Bob's results versus the angle between their detectors"></canvas>
+        <div class="row" style="margin-top:10px;gap:16px;font-size:12px;color:var(--muted)">
+          <span><i style="display:inline-block;width:16px;height:3px;background:var(--q);vertical-align:middle"></i> quantum prediction</span>
+          <span><i style="display:inline-block;width:16px;height:3px;background:var(--cl);vertical-align:middle"></i> best hidden-instructions model</span>
+          <span><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ink);vertical-align:middle"></i> your measured pairs</span>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="sl"><label for="bA">Alice’s detector angle<span id="bAv"></span></label><input type="range" id="bA" min="0" max="180" step="5" value="0"></div>
+        <div class="sl"><label for="bB">Bob’s detector angle<span id="bBv"></span></label><input type="range" id="bB" min="0" max="180" step="5" value="45"></div>
+        <div class="row"><button class="btn" type="button" id="bSend">Send 500 entangled pairs</button><span class="lbl" id="bOut" aria-live="polite"></span></div>
+        <button class="btn ghost" type="button" id="bChsh" style="justify-self:start">Run the full CHSH test</button>
+        <div class="callout" id="bRes"><b>How to read it</b>Each pair is measured by Alice and Bob far apart. Correlation −1 means they always disagree; 0 means no relation. The curves differ most around 45° and 135°, which is exactly where Bell’s test looks.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="grover" aria-labelledby="grovH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · quantum computing</span>
+      <h2 id="grovH">Grover’s search: finding a needle faster</h2>
+      <p>Find one marked item among 16 by looking at them one at a time and you need 8 tries on average. Lov Grover’s 1996 algorithm needs about 3. It starts with every item equally likely, then repeats two steps that pump probability into the right answer.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="gCv" class="cv" height="300" aria-label="Bar chart of the amplitude of each of 16 items" style="cursor:pointer"></canvas>
+        <p class="lbl" style="margin:8px 0 0">Tap a bar to choose which item is marked</p>
+      </div>
+      <div class="stack">
+        <div class="row">
+          <button class="btn ghost" type="button" id="gOr">1 · Oracle: flip the marked item</button>
+          <button class="btn ghost" type="button" id="gDi">2 · Diffuse: reflect around the average</button>
+        </div>
+        <div class="row"><button class="btn" type="button" id="gStep">Do one full Grover step</button><button class="btn ghost" type="button" id="gReset">Reset</button></div>
+        <div class="readout">
+          <div class="ro"><div class="k">Grover steps</div><div class="v" id="gIt">0</div></div>
+          <div class="ro"><div class="k">Chance of finding it</div><div class="v" id="gP"></div></div>
+        </div>
+        <div class="callout" id="gMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead"><span class="eyebrow">Key ideas</span><h2 id="ideasH">The strange rules, one by one</h2></div>
+    <div class="cards" id="ideaGrid"></div>
+    <div class="tblwrap">
+      <table class="interp">
+        <thead><tr><th>Interpretation</th><th>What happens when you measure?</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Copenhagen (Bohr, Heisenberg, 1920s)</th><td>The wavefunction “collapses” to one outcome. Don’t ask what happens in between.</td><td>Never says what counts as a measurement</td></tr>
+          <tr><th scope="row">Many-worlds (Everett, 1957)</th><td>Nothing collapses. Every outcome happens, each in its own branch of reality.</td><td>An unimaginable number of unseen worlds; probability is hard to explain</td></tr>
+          <tr><th scope="row">Pilot wave (de Broglie 1927, Bohm 1952)</th><td>Particles always have positions, guided by a real wave. Fully deterministic.</td><td>Instantaneous influences across space; hard to square with relativity</td></tr>
+          <tr><th scope="row">Objective collapse (GRW, 1986)</th><td>Collapse is a real, random physical process that big objects trigger quickly.</td><td>Changes the theory slightly; experiments are hunting for it</td></tr>
+          <tr><th scope="row">QBism and relational views</th><td>The wavefunction is information or belief, not a physical thing.</td><td>Leaves open what the world is like underneath</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="computing" aria-labelledby="compH">
+    <div class="shead">
+      <span class="eyebrow">Quantum computing</span>
+      <h2 id="compH">From strange physics to a new kind of computer</h2>
+      <p>A quantum computer isn’t a faster ordinary computer. It is a machine for steering interference. For a few problems that is dramatically better; for most everyday tasks it offers nothing.</p>
+    </div>
+    <div class="cards" id="compGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Further reading</b>
+  <ul>
+    <li>Richard Feynman, <i>The Feynman Lectures on Physics</i>, Vol. III, ch. 1 (the double slit)</li>
+    <li>Nielsen and Chuang, <i>Quantum Computation and Quantum Information</i></li>
+    <li><a href="https://csrc.nist.gov/Projects/Post-Quantum-Cryptography/Post-Quantum-Cryptography-Standardization">NIST: Post-Quantum Cryptography Standardization</a></li>
+  </ul>
+  <p>Demos use exact textbook formulas: two-slit intensity, single-qubit gates on the Bloch sphere, singlet-state correlations for the Bell test, and Grover’s amplitudes. Random sampling stands in for nature’s randomness.</p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const visible=new Map();const io=new IntersectionObserver(es=>es.forEach(e=>{visible.set(e.target.id,e.isIntersecting);if(e.isIntersecting&&e.target.id==="dsCv")dsKick()}));
+
+/* ================= DOUBLE SLIT ================= */
+const DS={d:1,lam:520,det:false,running:!reduce,hits:[],bins:new Array(140).fill(0),flying:[],raf:0};
+function wlColor(nm){let r=0,g=0,b=0;if(nm<440){r=-(nm-440)/40;b=1}else if(nm<490){g=(nm-440)/50;b=1}else if(nm<510){g=1;b=-(nm-510)/20}else if(nm<580){r=(nm-510)/70;g=1}else if(nm<645){r=1;g=-(nm-645)/65}else{r=1}return`rgb(${Math.round(r*235)},${Math.round(g*220)},${Math.round(b*255)})`}
+function intensity(u){const B=4.2,A=22*DS.d*(550/DS.lam);const env=u===0?1:Math.pow(Math.sin(B*u)/(B*u),2);return DS.det?env:env*Math.pow(Math.cos(A*u),2)}
+function sampleU(){for(let k=0;k<200;k++){const u=Math.random()*2-1;if(Math.random()<intensity(u))return u}return 0}
+function dsMsg(){
+  $("#dsDv").textContent=DS.d.toFixed(2)+"×";$("#dsLv").textContent=DS.lam+" nm";
+  $("#dsMsg").innerHTML=DS.det?"<b>Watching destroys the stripes</b>Once a detector records which slit each particle went through, the interference vanishes and you get one broad band. Any record of the path, even one nobody reads, is enough.":"<b>Nobody is watching</b>Each particle’s wave passes through both slits and interferes with itself. Where crests meet crests you get bright stripes; where crests meet troughs, dark gaps. Try a wider slit gap or shorter wavelength: the stripes crowd together.";
+}
+function drawDS(){
+  const{c,W,H}=setupCanvas($("#dsCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line");const col=wlColor(DS.lam);
+  const sx=28,bx=Math.round(W*0.36),scrX=Math.round(W*0.68),cy=H/2,gap=34*DS.d,sw=10;
+  // source
+  c.fillStyle=ink;c.beginPath();c.arc(sx,cy,7,0,7);c.fill();c.fillStyle=muted;c.font="10px 'IBM Plex Mono', monospace";c.textAlign="center";c.fillText("source",sx+6,cy+24);
+  // waves (decorative, static)
+  if(!DS.det){c.strokeStyle=col;c.globalAlpha=.18;c.lineWidth=1.2;for(let r=16;r<bx-sx;r+=14){c.beginPath();c.arc(sx,cy,r,-0.5,0.5);c.stroke()}
+    [-gap/2,gap/2].forEach(o=>{for(let r=12;r<scrX-bx;r+=14){c.beginPath();c.arc(bx,cy+o,r,-1.1,1.1);c.stroke()}});c.globalAlpha=1}
+  // barrier
+  c.fillStyle=ink;c.fillRect(bx-3,12,6,cy-gap/2-sw/2-12);c.fillRect(bx-3,cy-gap/2+sw/2,6,gap-sw);c.fillRect(bx-3,cy+gap/2+sw/2,6,H-12-(cy+gap/2+sw/2));
+  if(DS.det){c.fillStyle=css("--cl");[-gap/2,gap/2].forEach(o=>{c.beginPath();c.arc(bx+14,cy+o,5,0,7);c.fill()});c.fillStyle=css("--cl");c.fillText("detectors",bx+16,cy+gap/2+26)}
+  // screen
+  c.fillStyle=line;c.fillRect(scrX-2,12,4,H-24);
+  const half=(H-24)/2,uy=u=>cy+u*half;
+  c.fillStyle=col;c.globalAlpha=.85;for(const h of DS.hits){c.fillRect(scrX+4+h.j*26,uy(h.u)-1,2,2)}c.globalAlpha=1;
+  // histogram
+  const hx=scrX+38,hw=W-hx-8,max=Math.max(4,...DS.bins);c.fillStyle=col;
+  DS.bins.forEach((n,i)=>{const y=12+i/DS.bins.length*(H-24);c.fillRect(hx,y,n/max*hw,(H-24)/DS.bins.length+0.5)});
+  c.strokeStyle=muted;c.globalAlpha=.6;c.beginPath();for(let i=0;i<=200;i++){const u=-1+i/100;const x=hx+intensity(u)*hw*0.98,y=uy(u);i?c.lineTo(x,y):c.moveTo(x,y)}c.stroke();c.globalAlpha=1;
+  c.fillStyle=muted;c.textAlign="left";c.fillText("hits",hx,10);
+  // flying particles
+  c.fillStyle=col;for(const f of DS.flying){c.beginPath();c.arc(f.x,f.y,3,0,7);c.fill()}
+  $("#dsCount").textContent=DS.hits.length.toLocaleString()+" particles";
+  DS.geom={sx,bx,scrX,cy,gap,half};
+}
+function dsTick(){
+  DS.raf=0;if(!visible.get("dsCv"))return;
+  if(DS.running){
+    const g=DS.geom;if(g){
+      if(Math.random()<0.5){const slit=Math.random()<.5?-1:1;DS.flying.push({x:g.sx,y:g.cy,slit,phase:0,u:sampleU()})}
+      for(const f of DS.flying){f.phase+=0.06;const p=f.phase;
+        if(p<1){f.x=g.sx+(g.bx-g.sx)*p;f.y=g.cy+(f.slit*g.gap/2)*p}
+        else{const q=p-1;f.x=g.bx+(g.scrX-g.bx)*q;f.y=g.cy+f.slit*g.gap/2+(g.cy+f.u*g.half-(g.cy+f.slit*g.gap/2))*q}
+        if(p>=2){f.done=true;DS.hits.push({u:f.u,j:Math.random()});const bi=Math.min(DS.bins.length-1,Math.floor((f.u+1)/2*DS.bins.length));DS.bins[bi]++}}
+      DS.flying=DS.flying.filter(f=>!f.done);
+      for(let k=0;k<6;k++){const u=sampleU();DS.hits.push({u,j:Math.random()});DS.bins[Math.min(DS.bins.length-1,Math.floor((u+1)/2*DS.bins.length))]++}
+      if(DS.hits.length>6000){DS.hits.splice(0,DS.hits.length-6000)}
+    }
+    drawDS();
+  }
+  if(DS.running)DS.raf=requestAnimationFrame(dsTick);
+}
+function dsKick(){if(!DS.raf&&DS.running)DS.raf=requestAnimationFrame(dsTick)}
+function dsReset(){DS.hits=[];DS.bins.fill(0);DS.flying=[];drawDS()}
+$("#dsFire").addEventListener("click",()=>{DS.running=!DS.running;$("#dsFire").textContent=DS.running?"Pause":"Fire particles";dsKick()});
+$("#dsClear").addEventListener("click",dsReset);
+$("#dsDet").addEventListener("change",e=>{DS.det=e.target.checked;dsMsg();dsReset()});
+$("#dsD").addEventListener("input",e=>{DS.d=+e.target.value;dsMsg();dsReset()});
+$("#dsL").addEventListener("input",e=>{DS.lam=+e.target.value;dsMsg();dsReset()});
+
+/* ================= QUBIT / BLOCH ================= */
+// complex helpers
+const C=(re,im=0)=>({re,im}),add=(a,b)=>C(a.re+b.re,a.im+b.im),mul=(a,b)=>C(a.re*b.re-a.im*b.im,a.re*b.im+a.im*b.re),conj=a=>C(a.re,-a.im),abs2=a=>a.re*a.re+a.im*a.im;
+const r2=Math.SQRT1_2;
+const GATES={X:[[C(0),C(1)],[C(1),C(0)]],Y:[[C(0),C(0,-1)],[C(0,1),C(0)]],Z:[[C(1),C(0)],[C(0),C(-1)]],H:[[C(r2),C(r2)],[C(r2),C(-r2)]],S:[[C(1),C(0)],[C(0),C(0,1)]],T:[[C(1),C(0)],[C(0),C(r2,r2)]]};
+const AXES={X:[[1,0,0],Math.PI],Y:[[0,1,0],Math.PI],Z:[[0,0,1],Math.PI],H:[[r2,0,r2],Math.PI],S:[[0,0,1],Math.PI/2],T:[[0,0,1],Math.PI/4]};
+const Q={a:C(1),b:C(0),tally:[0,0],yaw:-0.6,pitch:0.32,anim:null};
+function bloch(){const ab=mul(conj(Q.a),Q.b);return[2*ab.re,2*ab.im,abs2(Q.a)-abs2(Q.b)]}
+function rot(v,k,t){const[x,y,z]=v,[kx,ky,kz]=k,c=Math.cos(t),s=Math.sin(t),d=kx*x+ky*y+kz*z;return[x*c+(ky*z-kz*y)*s+kx*d*(1-c),y*c+(kz*x-kx*z)*s+ky*d*(1-c),z*c+(kx*y-ky*x)*s+kz*d*(1-c)]}
+function fmtC(z){const re=Math.abs(z.re)<5e-4?0:z.re,im=Math.abs(z.im)<5e-4?0:z.im;if(!im)return re.toFixed(3);if(!re)return(im<0?"−":"")+Math.abs(im).toFixed(3)+"i";return`(${re.toFixed(3)} ${im<0?"−":"+"} ${Math.abs(im).toFixed(3)}i)`}
+function qText(){
+  const p0=abs2(Q.a),p1=abs2(Q.b);$("#qState").textContent=`${fmtC(Q.a)} |0⟩ + ${fmtC(Q.b)} |1⟩`;
+  $("#p0").style.width=(p0*100)+"%";$("#p1").style.width=(p1*100)+"%";$("#p0v").textContent=(p0*100).toFixed(1)+"%";$("#p1v").textContent=(p1*100).toFixed(1)+"%";
+  const n=Q.tally[0]+Q.tally[1];$("#qTally").textContent=n?`${Q.tally[0]} × 0   ${Q.tally[1]} × 1`:"none yet";
+}
+function drawBloch(vec){
+  const{c,W,H}=setupCanvas($("#blCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line"),qc=css("--q");
+  const R=Math.min(W,H)*0.36,cx=W/2,cy=H/2+4,cyw=Math.cos(Q.yaw),syw=Math.sin(Q.yaw),cp=Math.cos(Q.pitch),sp=Math.sin(Q.pitch);
+  const P=([x,y,z])=>{const X=x*cyw-y*syw,Y=x*syw+y*cyw;return{x:cx+X*R,y:cy-(z*cp-Y*sp)*R,d:Y*cp+z*sp}};
+  c.strokeStyle=line;c.lineWidth=1.5;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke();
+  const ring=(f,dash)=>{c.beginPath();for(let i=0;i<=72;i++){const t=i/72*2*Math.PI;const p=P(f(t));i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}c.setLineDash(dash);c.stroke();c.setLineDash([])};
+  c.strokeStyle=muted;c.globalAlpha=.5;ring(t=>[Math.cos(t),Math.sin(t),0],[4,4]);ring(t=>[Math.cos(t),0,Math.sin(t)],[2,5]);c.globalAlpha=1;
+  const axes=[[[0,0,1],"|0⟩"],[[0,0,-1],"|1⟩"],[[1,0,0],"|+⟩"],[[-1,0,0],"|−⟩"],[[0,1,0],"|+i⟩"],[[0,-1,0],"|−i⟩"]];
+  c.font="600 13px 'IBM Plex Mono', monospace";c.textAlign="center";
+  axes.forEach(([v,l])=>{const p=P(v),o=P([0,0,0]);c.strokeStyle=muted;c.globalAlpha=.4;c.beginPath();c.moveTo(o.x,o.y);c.lineTo(p.x,p.y);c.stroke();c.globalAlpha=p.d<0?.45:1;c.fillStyle=ink;const q=P(v.map(x=>x*1.16));c.fillText(l,q.x,q.y+4);c.globalAlpha=1});
+  const o=P([0,0,0]),t=P(vec);c.strokeStyle=qc;c.lineWidth=4;c.lineCap="round";c.beginPath();c.moveTo(o.x,o.y);c.lineTo(t.x,t.y);c.stroke();
+  c.fillStyle=qc;c.beginPath();c.arc(t.x,t.y,8,0,7);c.fill();
+  // shadow on equator plane
+  const sh=P([vec[0],vec[1],0]);c.strokeStyle=qc;c.globalAlpha=.3;c.setLineDash([3,3]);c.beginPath();c.moveTo(t.x,t.y);c.lineTo(sh.x,sh.y);c.stroke();c.setLineDash([]);c.globalAlpha=1;
+}
+function applyGate(g){
+  if(Q.anim)return;const M=GATES[g];const a=Q.a,b=Q.b;const na=add(mul(M[0][0],a),mul(M[0][1],b)),nb=add(mul(M[1][0],a),mul(M[1][1],b));
+  const start=bloch();const[ax,ang]=AXES[g];Q.a=na;Q.b=nb;qText();
+  if(reduce){drawBloch(bloch());return}
+  const t0=performance.now();Q.anim=true;const step=now=>{const k=Math.min(1,(now-t0)/450);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;drawBloch(rot(start,ax,ang*e));if(k<1)requestAnimationFrame(step);else{Q.anim=null;drawBloch(bloch())}};requestAnimationFrame(step);
+}
+$("#gates").addEventListener("click",e=>{const b=e.target.closest("[data-g]");if(b)applyGate(b.dataset.g)});
+$("#measure").addEventListener("click",()=>{if(Q.anim)return;const p0=abs2(Q.a);const r=Math.random()<p0?0:1;Q.a=C(r?0:1);Q.b=C(r?1:0);Q.tally[r]++;qText();drawBloch(bloch())});
+$("#qReset").addEventListener("click",()=>{Q.a=C(1);Q.b=C(0);Q.tally=[0,0];qText();drawBloch(bloch())});
+(function(){const cv=$("#blCv");let drag=null;cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,yaw:Q.yaw,pitch:Q.pitch};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
+cv.addEventListener("pointermove",e=>{if(!drag)return;Q.yaw=drag.yaw+(e.clientX-drag.x)*0.01;Q.pitch=Math.max(-1.2,Math.min(1.2,drag.pitch+(e.clientY-drag.y)*0.01));if(!Q.anim)drawBloch(bloch())});
+const up=()=>{drag=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= BELL ================= */
+const BL={a:0,b:45,pts:[]};
+const Eq=d=>-Math.cos(d*Math.PI/180);
+const Elhv=d=>{d=Math.abs(d)%360;if(d>180)d=360-d;return -1+2*d/180};
+function pairQ(a,b){const same=Math.random()<Math.pow(Math.sin((a-b)*Math.PI/360),2);return same?1:-1}
+function pairL(a,b){const l=Math.random()*2*Math.PI;const A=Math.cos(a*Math.PI/180-l)>=0?1:-1;const B=-(Math.cos(b*Math.PI/180-l)>=0?1:-1);return A*B}
+function drawBell(){
+  $("#bAv").textContent=BL.a+"°";$("#bBv").textContent=BL.b+"°";
+  const{c,W,H}=setupCanvas($("#bCv"));const muted=css("--muted"),line=css("--line"),ink=css("--ink");
+  const ml=40,mr=12,mt=14,mb=30,X=d=>ml+d/180*(W-ml-mr),Y=e=>mt+(1-e)/2*(H-mt-mb);
+  c.font="11px 'IBM Plex Mono', monospace";
+  [-1,-.5,0,.5,1].forEach(e=>{c.strokeStyle=line;c.beginPath();c.moveTo(ml,Y(e));c.lineTo(W-mr,Y(e));c.stroke();c.fillStyle=muted;c.textAlign="right";c.fillText(e,ml-6,Y(e)+4)});
+  [0,45,90,135,180].forEach(d=>{c.fillStyle=muted;c.textAlign="center";c.fillText(d+"°",X(d),H-mb+16)});
+  c.textAlign="right";c.fillText("angle between detectors →",W-mr,H-2);c.textAlign="left";c.fillText("correlation",ml,10);
+  const curve=(f,col)=>{c.strokeStyle=col;c.lineWidth=2.5;c.beginPath();for(let d=0;d<=180;d+=2){const x=X(d),y=Y(f(d));d?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()};
+  curve(Elhv,css("--cl"));curve(Eq,css("--q"));
+  const d=Math.abs(BL.a-BL.b);c.strokeStyle=ink;c.setLineDash([3,4]);c.beginPath();c.moveTo(X(d),mt);c.lineTo(X(d),H-mb);c.stroke();c.setLineDash([]);
+  BL.pts.forEach(p=>{c.fillStyle=ink;c.beginPath();c.arc(X(p.d),Y(p.e),5,0,7);c.fill()});
+}
+$("#bA").addEventListener("input",e=>{BL.a=+e.target.value;drawBell()});
+$("#bB").addEventListener("input",e=>{BL.b=+e.target.value;drawBell()});
+$("#bSend").addEventListener("click",()=>{let s=0,same=0;for(let i=0;i<500;i++){const r=pairQ(BL.a,BL.b);s+=r;if(r>0)same++}const d=Math.abs(BL.a-BL.b);BL.pts.push({d,e:s/500});if(BL.pts.length>12)BL.pts.shift();$("#bOut").textContent=`agreed ${same}/500 · correlation ${(s/500).toFixed(2)}`;drawBell()});
+$("#bChsh").addEventListener("click",()=>{
+  const sets=[[0,45],[0,135],[90,45],[90,135]],N=4000;const E=(f,a,b)=>{let s=0;for(let i=0;i<N;i++)s+=f(a,b);return s/N};
+  const Sq=Math.abs(E(pairQ,...sets[0])-E(pairQ,...sets[1])+E(pairQ,...sets[2])+E(pairQ,...sets[3]));
+  const Sl=Math.abs(E(pairL,...sets[0])-E(pairL,...sets[1])+E(pairL,...sets[2])+E(pairL,...sets[3]));
+  $("#bRes").innerHTML=`<b>CHSH result (4 × ${N.toLocaleString()} pairs each)</b>Quantum entangled pairs: <b style="color:var(--q)">S = ${Sq.toFixed(2)}</b>. Hidden-instructions model: <b style="color:var(--cl)">S = ${Sl.toFixed(2)}</b>. Bell proved no hidden-instructions theory can exceed 2. Real experiments, including 2015 tests that closed the main loopholes, find about 2.8.`;
+});
+
+/* ================= GROVER ================= */
+const GN=16;const G={amp:new Array(GN).fill(1/4),marked:11,it:0,phase:"ready"};
+function gReset(){G.amp=new Array(GN).fill(1/Math.sqrt(GN));G.it=0;G.phase="ready";drawGrover()}
+function oracle(){G.amp[G.marked]*=-1}
+function diffuse(){const m=G.amp.reduce((s,x)=>s+x,0)/GN;G.amp=G.amp.map(x=>2*m-x)}
+function drawGrover(){
+  const{c,W,H}=setupCanvas($("#gCv"));const muted=css("--muted"),line=css("--line"),acc=css("--accent"),qc=css("--q");
+  const ml=34,mr=8,mt=12,mb=26,bw=(W-ml-mr)/GN,Y=v=>mt+(1-v)/2*(H-mt-mb);
+  c.font="11px 'IBM Plex Mono', monospace";
+  [-1,-.5,0,.5,1].forEach(v=>{c.strokeStyle=line;c.globalAlpha=v===0?1:.6;c.beginPath();c.moveTo(ml,Y(v));c.lineTo(W-mr,Y(v));c.stroke();c.globalAlpha=1;c.fillStyle=muted;c.textAlign="right";c.fillText(v,ml-4,Y(v)+4)});
+  G.amp.forEach((a,i)=>{const x=ml+i*bw+bw*.15;c.fillStyle=i===G.marked?qc:acc;c.globalAlpha=i===G.marked?1:.55;const y0=Y(0),y1=Y(a);c.fillRect(x,Math.min(y0,y1),bw*.7,Math.abs(y1-y0));c.globalAlpha=1;c.fillStyle=i===G.marked?qc:muted;c.textAlign="center";c.fillText(i.toString(2).padStart(4,"0"),x+bw*.35,H-mb+15)});
+  const m=G.amp.reduce((s,x)=>s+x,0)/GN;c.strokeStyle=css("--ink");c.setLineDash([5,4]);c.beginPath();c.moveTo(ml,Y(m));c.lineTo(W-mr,Y(m));c.stroke();c.setLineDash([]);c.fillStyle=css("--ink");c.textAlign="left";c.fillText("average",ml+4,Y(m)-5);
+  const p=G.amp[G.marked]**2;$("#gIt").textContent=G.it;$("#gP").textContent=(p*100).toFixed(1)+"%";
+  const opt=Math.round(Math.PI/4*Math.sqrt(GN));
+  $("#gMsg").innerHTML=G.it===0&&G.phase==="ready"?`<b>Start</b>All 16 items have amplitude 0.25, so a 6.25% chance each. Marked item: <b style="color:var(--q)">${G.marked.toString(2).padStart(4,"0")}</b>.`
+   :G.phase==="oracle"?"<b>After the oracle</b>The marked item’s amplitude is now negative. Its probability hasn’t changed (it’s the square), but the average dipped slightly.":
+   G.it<opt?`<b>Growing</b>Reflecting every bar around the average boosts the flipped one. ${opt-G.it} more step${opt-G.it===1?"":"s"} to the peak.`:
+   G.it===opt?`<b>Peak after ${opt} steps</b>Measure now and you find the marked item about ${(p*100).toFixed(0)}% of the time, versus 8 lookups on average classically. For a million items the gap is ~785 steps versus 500,000.`:
+   `<b>Overshoot</b>Keep going and the probability falls again: amplitude rotates past the answer. Quantum algorithms have to stop at the right moment.`;
+}
+$("#gOr").addEventListener("click",()=>{oracle();G.phase="oracle";drawGrover()});
+$("#gDi").addEventListener("click",()=>{diffuse();if(G.phase==="oracle")G.it++;G.phase="step";drawGrover()});
+$("#gStep").addEventListener("click",()=>{oracle();diffuse();G.it++;G.phase="step";drawGrover()});
+$("#gReset").addEventListener("click",gReset);
+$("#gCv").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.floor((e.clientX-r.left-34)/((r.width-42)/GN));if(i>=0&&i<GN){G.marked=i;gReset()}});
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Superposition","1926","A quantum system can be in a blend of states at once, described by Schrödinger’s wave equation. Measurement gives one definite result, with probabilities set by the blend (the Born rule)."],
+ ["Uncertainty principle","1927","Werner Heisenberg: the more precisely you pin down a particle’s position, the less precisely its momentum can be defined. It isn’t clumsy measuring; the properties aren’t sharp together."],
+ ["Entanglement","1935","Einstein, Podolsky and Rosen showed that quantum mechanics links distant particles so measuring one fixes the other. Einstein called it “spooky action at a distance.” It can’t send messages faster than light."],
+ ["Schrödinger’s cat","1935","Erwin Schrödinger’s thought experiment: link a cat’s fate to one radioactive atom, and the theory seems to say the cat is alive and dead until someone looks. He meant it as a reductio, not a description."],
+ ["Tunneling","1928","Particles can cross barriers they classically lack the energy to climb. It powers the Sun’s fusion and flash memory. The 2025 Nobel Prize went to Clarke, Devoret and Martinis for showing it in an electric circuit you can hold, the basis of superconducting qubits."],
+ ["Decoherence","1970s","Why we don’t see cats in superposition: interactions with the environment rapidly spread quantum information out, so big objects behave classically. It is also the main enemy of quantum computers."],
+ ["No-cloning theorem","1982","An unknown quantum state can’t be copied perfectly (Wootters, Zurek and Dieks). It makes quantum encryption possible and quantum error correction hard."],
+ ["Quantized energy","1900","Max Planck’s fix for glowing hot objects: energy comes in discrete packets. Einstein (1905) applied it to light itself. That’s where the “quantum” comes from."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3><span class="yr">${i[1]}</span></div><p>${i[2]}</p></article>`).join("");
+const COMP=[
+ ["Qubits and gates","","Qubits are built from superconducting circuits, trapped ions, neutral atoms, photons and more. Gates rotate qubits (demo 2) and entangle them. A computation is a choreography of interference that makes wrong answers cancel."],
+ ["Shor’s algorithm","1994","Peter Shor showed a quantum computer could factor large numbers and solve discrete logarithms exponentially faster. That would break RSA and the elliptic-curve signatures used by Bitcoin, Ethereum and most of the web.","Not yet possible: it needs a large error-corrected machine. In 2025 a Google researcher estimated RSA-2048 could fall to under a million noisy qubits running for about a week, down from ~20 million in 2019."],
+ ["Grover’s algorithm","1996","Searches unsorted data in about √N steps instead of N (demo 4). Against hashing and symmetric encryption it only halves the effective key length, so AES-256 and SHA-256 stay comfortable.","See the hash chain on the Blockchain page: mining uses SHA-256."],
+ ["Error correction","","Qubits are fragile, so many physical qubits are combined into one reliable “logical” qubit. In December 2024 Google’s Willow chip showed errors falling as the code grew, the long-sought “below threshold” result. Since then several teams have run small sets of logical qubits.","Useful fault-tolerant machines are still expected years away; most roadmaps point to around 2030."],
+ ["Quantum advantage","2019","Google’s 53-qubit Sycamore performed a sampling task it said would take a supercomputer 10,000 years. Better classical methods later cut that to hours, a pattern that has repeated with other claims.","Advantage on a commercially useful problem has not yet been clearly shown."],
+ ["Post-quantum cryptography","2024","New encryption based on maths quantum computers aren’t known to break. NIST published its first standards in August 2024: ML-KEM (FIPS 203), ML-DSA (FIPS 204) and SLH-DSA (FIPS 205), and picked HQC as a backup in March 2025.","Why act now: “harvest now, decrypt later.” Data recorded today could be read once a large quantum computer exists."]
+];
+$("#compGrid").innerHTML=COMP.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3>${i[1]?`<span class="yr">${i[1]}</span>`:""}</div><p>${i[2]}</p>${i[3]?`<div class="res"><b>Status</b>${i[3]}</div>`:""}</article>`).join("");
+
+/* boot */
+dsMsg();drawDS();qText();drawBloch(bloch());drawBell();gReset();
+if(reduce)$("#dsFire").textContent="Fire particles";
+io.observe($("#dsCv"));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawDS();drawBloch(bloch());drawBell();drawGrover()},120)});
+</script>
+</body>
+</html>

@@ -9,6 +9,9 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Home | `index.html` | Links to each concept |
 | Metric units | `units.html` | 64 metric units by quantity: name origins, history, original and current definitions, imperial equivalents, and a converter |
 | Voting methods | `voting.html` | Election simulator, ranked-ballot paradoxes, a guide to 12 counting methods, and a fairness-criteria table |
+| Time paradoxes | `time.html` | Twin-paradox spacetime diagram, ladder paradox, reversible arrow-of-time gas, Zeno’s race, grandfather-paradox timeline |
+| Blockchain & consensus | `blockchain.html` | Live SHA-256 hash chain with mining, 51% attack odds and simulator, Byzantine generals vote, consensus field guide |
+| Quantum mechanics | `quantum.html` | Double-slit experiment, Bloch-sphere qubit with gates, Bell/CHSH test, Grover’s search |
 
 ## Brand assets
 
