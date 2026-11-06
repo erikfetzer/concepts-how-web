@@ -225,7 +225,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<style>.lang{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:6px 10px!important;color:var(--ink)!important;text-decoration:none}.lang:hover{border-color:var(--accent)!important}</style>
+<style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
 </head>
 <body>
 <nav class="site" aria-label="Sitio">
@@ -236,8 +236,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
     <a class="nl" href="time.html">Tiempo</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html">Cuántica</a>
-    <a class="nl lang" href="../voting.html" lang="en" hreflang="en" title="View in English">EN</a>
-    <span data-theme-picker></span>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../voting.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="voting.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
