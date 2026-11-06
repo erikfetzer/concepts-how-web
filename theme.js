@@ -61,7 +61,8 @@
 /* Mobile topics menu: on narrow screens the topic links fold into a kebab (⋮) button. */
 (function () {
   var es = (document.documentElement.lang || "").slice(0, 2) === "es";
-  var L = es ? { btn: "Temas", menu: "Temas" } : { btn: "Topics", menu: "Topics" };
+  var L = es ? { btn: "Menú", menu: "Temas", set: "Idioma y tema" } : { btn: "Menu", menu: "Topics", set: "Language & theme" };
+  var SM = 640;
   var BP = 1180;
   var css = ".site{position:relative}" +
     ".kb{display:none;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer;padding:0}" +
@@ -75,7 +76,9 @@
     ".kbm a[aria-current=page]{background:var(--accent-soft,var(--paper));color:var(--accent);font-weight:600}" +
     ".kbm a span{font-family:var(--mono,monospace);font-size:11px;color:var(--muted)}" +
     "@media (max-width:" + BP + "px){.site a.nl{display:none!important}.kb{display:grid}.site .ctl{margin-left:auto}.site .wrap{flex-wrap:nowrap;padding-bottom:0}}" +
-    "@media (max-width:420px){.site .ctl{gap:4px}.site .wrap{gap:8px}}";
+    ".kbm .set{border-top:1px solid var(--line);margin-top:4px;padding:10px 12px 8px;display:grid;gap:8px}" +
+    ".kbm .set .ctl{display:flex!important;gap:8px;margin:0!important;flex-wrap:wrap}" +
+    "@media (max-width:" + SM + "px){.wrap{padding-left:12px!important;padding-right:12px!important}.kbm{right:12px;left:12px;min-width:0;max-width:none}}";
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   function init() {
@@ -98,6 +101,18 @@
     menu.innerHTML = html;
     wrap.appendChild(btn);
     wrap.parentNode.appendChild(menu);
+    var ctl = wrap.querySelector(".ctl"), set = null;
+    if (ctl && window.matchMedia) {
+      set = document.createElement("div"); set.className = "set";
+      set.innerHTML = '<div class="h" style="padding:0">' + L.set + "</div>";
+      var small = matchMedia("(max-width:" + SM + "px)");
+      var place = function () {
+        if (small.matches) { set.appendChild(ctl); if (!set.parentNode) menu.appendChild(set); }
+        else { wrap.insertBefore(ctl, btn); if (set.parentNode) set.remove(); }
+      };
+      place();
+      small.addEventListener ? small.addEventListener("change", place) : small.addListener(place);
+    }
     function open(v) {
       menu.hidden = !v; btn.setAttribute("aria-expanded", v ? "true" : "false");
       if (v) { var f = menu.querySelector("a[aria-current]") || menu.querySelector("a"); f && f.focus({ preventScroll: true }); }
