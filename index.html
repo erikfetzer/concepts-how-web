@@ -76,6 +76,14 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .bal i{display:flex;align-items:center;gap:6px;font-style:normal;font-family:var(--mono);font-size:10px;color:var(--muted)}
 .bal i::before{content:attr(data-m);display:inline-grid;place-items:center;width:15px;height:15px;border:1px solid var(--ink);border-radius:3px;font-size:9px;color:var(--ink);font-weight:600}
 .bal i.on::before{background:var(--accent);border-color:var(--accent);color:#fff}
+/* light-cone instrument */
+.cone{position:absolute;inset:0}
+.cone .ax{position:absolute;left:50%;top:8px;bottom:8px;width:2px;background:var(--earth,#2E86DE);transform:translateX(-50%)}
+.cone .lc{position:absolute;bottom:8px;width:90px;height:2px;background:repeating-linear-gradient(90deg,var(--muted) 0 4px,transparent 4px 8px);transform-origin:left center}
+.cone .lc.l{left:50%;transform:rotate(-135deg)}
+.cone .lc.r{left:50%;transform:rotate(-45deg)}
+.cone .wl,.cone .wl2{position:absolute;bottom:8px;left:50%;width:2px;height:44px;background:#E4572E;transform-origin:bottom center;transform:rotate(28deg)}
+.cone .wl2{bottom:46px;transform:rotate(-28deg);left:calc(50% + 20px)}
 footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -113,6 +121,16 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
         <div class="tags"><span>Simulator</span><span>Paradoxes</span><span>Arrow’s theorem</span></div>
       </div>
       <span class="go">Open Voting Methods Lab</span>
+    </a>
+    <a class="tile" href="time.html">
+      <div class="no"><span>03</span><span>Physics &amp; philosophy</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="cone"><span class="ax"></span><span class="lc l"></span><span class="lc r"></span><span class="wl"></span><span class="wl2"></span></div></div>
+        <h2 style="margin-top:16px">Time paradoxes</h2>
+        <p>The twin paradox, Zeno’s race, the arrow of time and the grandfather paradox, with spacetime diagrams and demos you can run.</p>
+        <div class="tags"><span>Relativity</span><span>Zeno</span><span>Time travel</span></div>
+      </div>
+      <span class="go">Open Time Paradoxes</span>
     </a>
   </div>
 </main>

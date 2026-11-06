@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Time Paradoxes · concepts.how</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a lab notebook on time. The twin-paradox spacetime diagram is the hero; demos sit beside the paradoxes they explain, filed as physics, philosophy and time travel. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --earth:#2E86DE; --trav:#E4572E; --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --earth:#5AA8F0; --trav:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --earth:#5AA8F0; --trav:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono)}
+a{color:var(--accent)}
+
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* clock-face rule: long tick every 5, like minute marks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 60px) bottom/100% 12px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 12px) bottom/100% 5px no-repeat}
+
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:64ch;color:var(--muted);font-size:17px;margin:0}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);touch-action:none}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.ro.e .v{color:var(--earth)} .ro.t .v{color:var(--trav)}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:3px;border-radius:2px;display:inline-block;background:var(--c)}
+.legend i.dash{background:repeating-linear-gradient(90deg,var(--c) 0 4px,transparent 4px 7px)}
+
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc p{margin:0;font-size:14.5px}
+.pc .q{font-size:15px;font-weight:500}
+.pc .res{border-top:1px dashed var(--line);padding-top:10px;font-size:14px;color:var(--muted)}
+.pc .res b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-right:6px}
+.pc .try{font-size:13px;font-weight:600;text-decoration:none}
+
+.track{position:relative;height:110px;border-radius:10px;border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.lane{position:absolute;left:12px;right:12px;height:2px;background:var(--line)}
+.runner{position:absolute;width:30px;height:30px;margin-left:-15px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--mono);font-size:13px}
+.mark{position:absolute;width:2px;height:12px;margin-left:-1px;background:var(--accent);opacity:.7}
+.ztable{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.ztable th,.ztable td{padding:4px 8px;border-bottom:1px solid var(--line);text-align:right}
+.ztable th:first-child,.ztable td:first-child{text-align:left}
+.ztable tr.cur td{background:var(--accent-soft)}
+.tblwrap{max-height:230px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+
+.tl svg{width:100%;height:auto;display:block}
+.tl .msg{min-height:72px}
+@keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.4s ease forwards}
+.d2{animation-delay:1.2s} .d3{animation-delay:2.2s}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.pop{opacity:0;transform-origin:center;transform-box:fill-box;animation:pop .4s ease forwards}
+@keyframes flick{0%,49%{opacity:1}50%,100%{opacity:.12}}
+.flick{animation:flick .9s steps(1) infinite}
+.flick2{animation:flick .9s steps(1) infinite reverse}
+
+.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.view{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.view h4{margin:0 0 6px;font-family:var(--display);font-size:18px}
+.view svg{width:100%;height:auto;display:block;margin:6px 0}
+.view p{margin:0;font-size:14px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+
+@media (max-width:960px){.demo{grid-template-columns:1fr}.views{grid-template-columns:1fr}}
+@media (max-width:520px){.readout{grid-template-columns:1fr 1fr}.ro .v{font-size:18px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.draw{stroke-dashoffset:0}.pop{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html" aria-current="page">Time</a>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Time paradoxes</b> · physics &amp; philosophy</div>
+    <h1>Two clocks disagree. <em>Both are right.</em></h1>
+    <p class="lede">Einstein showed that elapsed time depends on how you move. Philosophers had been arguing about whether time flows at all for two thousand years. Here are the puzzles that came out of both, with demos you can run.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#twin">Twin paradox</a><a href="#ladder">Ladder paradox</a><a href="#arrow">Arrow of time</a><a href="#zeno">Zeno’s race</a><a href="#grandfather">Grandfather paradox</a><a href="#views">Does time flow?</a>
+    </nav>
+  </header>
+
+  <!-- TWIN -->
+  <section class="demo" id="twin" aria-labelledby="twinH" style="scroll-margin-top:20px">
+    <div class="panel">
+      <canvas id="twinCv" class="cv" height="520" aria-label="Spacetime diagram of the twin paradox. Time runs up, distance runs right."></canvas>
+      <div class="legend">
+        <span><i style="--c:var(--earth)"></i>Earth twin</span>
+        <span><i style="--c:var(--trav)"></i>Traveling twin</span>
+        <span><i class="dash" style="--c:var(--muted)"></i>Light (45°)</span>
+        <span><i style="--c:var(--trav);opacity:.4"></i>Traveler’s “now” lines</span>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <span class="eyebrow">Demo 1 · special relativity</span>
+        <h2 id="twinH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">The twin paradox</h2>
+        <p style="margin:8px 0 0;color:var(--muted)">One twin flies to a star and back; the other stays home. When they meet again the traveler is younger. Each saw the other’s clock running slow, so why isn’t it symmetric? Because only the traveler turns around and changes frames.</p>
+      </div>
+      <div class="seg" id="twinPresets" role="group" aria-label="Trip presets"></div>
+      <div class="sl"><label for="twV">Speed<span id="twVv"></span></label><input type="range" id="twV" min="0.1" max="0.995" step="0.005" value="0.8"></div>
+      <div class="sl"><label for="twD">Distance to the star<span id="twDv"></span></label><input type="range" id="twD" min="1" max="25" step="0.1" value="4.2"></div>
+      <div class="readout">
+        <div class="ro e"><div class="k">Earth clock</div><div class="v" id="twE">0.00 y</div></div>
+        <div class="ro t"><div class="k">Traveler clock</div><div class="v" id="twT">0.00 y</div></div>
+        <div class="ro"><div class="k">Time dilation γ</div><div class="v" id="twG"></div></div>
+        <div class="ro"><div class="k">Age gap at reunion</div><div class="v" id="twGap"></div></div>
+      </div>
+      <div class="row"><button class="btn" type="button" id="twPlay">Play the trip</button><button class="btn ghost" type="button" id="twReset">Reset</button></div>
+      <div class="callout"><b>Where the missing years go</b><span id="twJump"></span></div>
+    </div>
+  </section>
+
+  <!-- PHYSICS -->
+  <section class="block" id="physics" aria-labelledby="physH">
+    <div class="shead">
+      <span class="eyebrow">Physics</span>
+      <h2 id="physH">When the laws of nature argue with intuition</h2>
+      <p>None of these are true contradictions. Each one shows that an everyday assumption about time is wrong.</p>
+    </div>
+
+    <div class="demo" id="ladder" style="scroll-margin-top:20px">
+      <div class="panel">
+        <canvas id="ladCv" class="cv" height="270" aria-label="A pole moving through a barn with doors at each end."></canvas>
+        <div class="sl" style="margin-top:12px"><label for="ladT">Scrub time in this frame<span id="ladTv"></span></label><input type="range" id="ladT" min="0" max="1000" value="500"></div>
+        <div class="row" style="margin-top:8px"><button class="btn" type="button" id="ladPlay">Play</button><span class="lbl" id="ladStatus" aria-live="polite"></span></div>
+      </div>
+      <div class="stack">
+        <div>
+          <span class="eyebrow">Demo 2 · relativity of simultaneity</span>
+          <h3 style="font-size:clamp(24px,2.6vw,32px);margin-top:6px">The ladder (barn–pole) paradox</h3>
+          <p style="margin:8px 0 0;color:var(--muted)">A 10 m pole flies through an 8 m barn. To the farmer, the pole is length-contracted and fits, so both doors can shut at once with it inside. To the runner carrying it, the <i>barn</i> is contracted and the pole can’t possibly fit. Who’s right?</p>
+        </div>
+        <div><div class="lbl" style="margin-bottom:6px">Whose view?</div><div class="seg" id="ladFrame" role="group" aria-label="Reference frame"><button type="button" class="pill" data-f="barn" aria-pressed="true">Farmer (barn at rest)</button><button type="button" class="pill" data-f="pole" aria-pressed="false">Runner (pole at rest)</button></div></div>
+        <div class="sl"><label for="ladV">Speed<span id="ladVv"></span></label><input type="range" id="ladV" min="0.6" max="0.95" step="0.01" value="0.8"></div>
+        <div class="readout">
+          <div class="ro"><div class="k">Pole length here</div><div class="v" id="ladPL"></div></div>
+          <div class="ro"><div class="k">Barn length here</div><div class="v" id="ladBL"></div></div>
+        </div>
+        <div class="callout"><b>The resolution</b><span id="ladRes"></span></div>
+      </div>
+    </div>
+
+    <div class="demo" id="arrow" style="scroll-margin-top:20px">
+      <div class="panel">
+        <canvas id="arCv" class="cv" height="300" aria-label="Gas particles in a box spreading out."></canvas>
+        <canvas id="arSp" class="cv" height="70" style="margin-top:8px" aria-label="Entropy over time"></canvas>
+        <div class="row" style="margin-top:10px">
+          <button class="btn" type="button" id="arPlay">Pause</button>
+          <button class="btn ghost" type="button" id="arRev">Reverse every velocity</button>
+          <button class="btn ghost" type="button" id="arReset">Reset</button>
+          <span class="lbl" id="arInfo" aria-live="polite"></span>
+        </div>
+      </div>
+      <div class="stack">
+        <div>
+          <span class="eyebrow">Demo 3 · thermodynamics</span>
+          <h3 style="font-size:clamp(24px,2.6vw,32px);margin-top:6px">The arrow of time (Loschmidt’s paradox)</h3>
+          <p style="margin:8px 0 0;color:var(--muted)">Newton’s laws work the same forwards and backwards, yet eggs break and never unbreak. In 1876 Josef Loschmidt challenged Ludwig Boltzmann: if every collision is reversible, how can entropy only increase?</p>
+        </div>
+        <div class="callout"><b>Try it</b>Let the gas spread, then reverse every velocity. Each particle exactly retraces its path and the gas regathers in the corner. The laws allow it; you just never see it, because almost every possible arrangement is a spread-out one.</div>
+        <p style="margin:0;font-size:14px;color:var(--muted)">The usual answer: the arrow of time comes from the starting conditions, not the laws. The universe began in an extraordinarily low-entropy state, and we live on the long slide away from it. Why it started that way is still open.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="pc"><div class="top"><h3>Andromeda paradox</h3><span class="yr">Penrose, 1989</span></div>
+        <p class="q">Two people walk past each other on Earth. For one, the Andromeda fleet’s launch decision is already “in the past”; for the other it hasn’t been made yet.</p>
+        <p>At 2.5 million light-years, even walking speed tilts your line of “now” by days on Andromeda. Based on arguments by Rietdijk (1966) and Putnam (1967).</p>
+        <div class="res"><b>Takeaway</b>There is no universal present. Some take this as evidence that past, present and future all exist equally (see “Does time flow?” below).</div></article>
+      <article class="pc"><div class="top"><h3>Clocks on planes</h3><span class="yr">Hafele–Keating, 1971</span></div>
+        <p class="q">Is time dilation real or a trick of bookkeeping?</p>
+        <p>Physicists flew cesium atomic clocks around the world in both directions. The eastbound clocks lost about 59 nanoseconds and the westbound gained about 273, matching relativity’s predictions.</p>
+        <div class="res"><b>Today</b>GPS satellite clocks run about 38 microseconds a day fast (gravity speeds them up more than motion slows them), and the system corrects for it. Without that, positions would drift by kilometers a day.</div></article>
+      <article class="pc"><div class="top"><h3>Closed timelike curves</h3><span class="yr">Gödel, 1949</span></div>
+        <p class="q">Does general relativity allow travel to your own past?</p>
+        <p>Kurt Gödel found a solution to Einstein’s equations, a rotating universe, where you can loop back to your own past. Wormhole versions followed (Morris, Thorne and Yurtsever, 1988).</p>
+        <div class="res"><b>Status</b>The equations permit them, but every known version needs conditions nobody has seen, such as exotic negative energy. That opens the door to the paradoxes below.</div></article>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="block" id="philosophy" aria-labelledby="philH">
+    <div class="shead">
+      <span class="eyebrow">Philosophy</span>
+      <h2 id="philH">Puzzles from people who only had thought</h2>
+      <p>Long before atomic clocks, philosophers found that time breaks logic in surprising places.</p>
+    </div>
+
+    <div class="demo" id="zeno" style="scroll-margin-top:20px">
+      <div class="panel">
+        <div class="track" id="zTrack" aria-label="Race track: Achilles chases the tortoise"></div>
+        <div class="sl" style="margin-top:12px"><label for="zN">Zeno’s stages shown<span id="zNv"></span></label><input type="range" id="zN" min="0" max="10" value="3"></div>
+        <div class="row" style="margin:10px 0"><button class="btn" type="button" id="zPlay">Run the race in real time</button></div>
+        <div class="tblwrap"><table class="ztable"><thead><tr><th>Stage</th><th>Time added</th><th>Total time</th><th>Gap left</th></tr></thead><tbody id="zBody"></tbody></table></div>
+      </div>
+      <div class="stack">
+        <div>
+          <span class="eyebrow">Demo 4 · infinity</span>
+          <h3 style="font-size:clamp(24px,2.6vw,32px);margin-top:6px">Zeno’s Achilles and the tortoise</h3>
+          <p style="margin:8px 0 0;color:var(--muted)">Zeno of Elea (5th century BC) argued that swift Achilles can never catch a tortoise with a head start. By the time he reaches where it was, it has moved on; by the time he reaches that spot, it has moved again, forever. Here Achilles runs 10 m/s and the tortoise 1 m/s with a 100 m lead.</p>
+        </div>
+        <div class="callout"><b>The modern answer</b><span id="zRes">Infinitely many stages can fit in finite time: 10 + 1 + 0.1 + 0.01 + … seconds adds up to exactly 11.11… seconds. The tools to sum such series rigorously (limits) arrived in the 1800s. Some philosophers still argue that the maths describes the race without explaining how anything completes infinitely many steps.</span></div>
+        <p style="margin:0;font-size:14px;color:var(--muted)">His <b>dichotomy</b> paradox is the same trick backwards: to cross a room you must first cross half, and half of that, so how do you ever start? His <b>arrow</b> paradox asks how a flying arrow moves if at every instant it is motionless.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="pc"><div class="top"><h3>Augustine’s puzzle</h3><span class="yr">c. 400 AD</span></div>
+        <p class="q">“What then is time? If no one asks me, I know; if I wish to explain it, I do not know.”</p>
+        <p>In <i>Confessions</i> Book XI, Augustine notes that the past no longer exists and the future doesn’t exist yet, while the present has no length. So how can we measure a stretch of time at all?</p>
+        <div class="res"><b>His answer</b>Time lives in the mind: memory holds the past, expectation the future, attention the present.</div></article>
+      <article class="pc"><div class="top"><h3>McTaggart’s unreality of time</h3><span class="yr">1908</span></div>
+        <p class="q">Can an event be past, present and future at once?</p>
+        <p>J. M. E. McTaggart split time into the A-series (past, present, future, which keep changing) and the B-series (earlier and later, which never change). He argued change needs the A-series, but the A-series is contradictory, since every event has all three properties.</p>
+        <div class="res"><b>Legacy</b>Most philosophers reject his conclusion that time is unreal, but his A/B split still frames the debate below.</div></article>
+      <article class="pc"><div class="top"><h3>The sea battle</h3><span class="yr">Aristotle, 4th c. BC</span></div>
+        <p class="q">Is “there will be a sea battle tomorrow” already true or false today?</p>
+        <p>If it is already true, the battle seems unavoidable, and fatalism follows. If it’s neither, logic’s rule that every statement is true or false fails.</p>
+        <div class="res"><b>Open</b>Aristotle seems to say future contingents aren’t yet true or false. Logicians still debate it under the name “future contingents”.</div></article>
+      <article class="pc"><div class="top"><h3>The unexpected hanging</h3><span class="yr">in print 1948</span></div>
+        <p class="q">A judge says you’ll be hanged on a weekday next week, and it will be a surprise.</p>
+        <p>You reason it can’t be Friday (you’d know Thursday night), so not Thursday either, and so on, concluding it can’t happen. Then you’re hanged on Wednesday, completely surprised.</p>
+        <div class="res"><b>Why it’s here</b>It shows how knowledge about the future can undercut itself. Martin Gardner popularized it in 1963, and there’s still no agreed fix.</div></article>
+    </div>
+  </section>
+
+  <!-- TIME TRAVEL -->
+  <section class="block" id="travel" aria-labelledby="travH">
+    <div class="shead">
+      <span class="eyebrow">Time travel</span>
+      <h2 id="travH">If you could visit the past, what would stop you?</h2>
+      <p>Physicists take these seriously because closed timelike curves are allowed by the equations. Each paradox has a proposed escape.</p>
+    </div>
+
+    <div class="demo" id="grandfather" style="scroll-margin-top:20px">
+      <div class="panel tl">
+        <svg id="tlSvg" viewBox="0 0 800 280" role="img" aria-label="Timeline of the grandfather paradox"></svg>
+        <div class="callout msg" id="tlMsg" aria-live="polite"></div>
+      </div>
+      <div class="stack">
+        <div>
+          <span class="eyebrow">Demo 5 · causality</span>
+          <h3 style="font-size:clamp(24px,2.6vw,32px);margin-top:6px">The grandfather paradox</h3>
+          <p style="margin:8px 0 0;color:var(--muted)">A traveler born in 1990 goes back to 1958 and stops their grandparents from meeting in 1960. Then the traveler is never born, so who went back? Choose a theory and watch what it says happens.</p>
+        </div>
+        <div><div class="lbl" style="margin-bottom:6px">Theory</div><div class="seg" id="tlModels" role="group" aria-label="Resolution"></div></div>
+        <button class="btn ghost" type="button" id="tlReplay" style="justify-self:start">Replay</button>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="pc"><div class="top"><h3>Bootstrap paradox</h3><span class="yr">Heinlein, 1941</span></div>
+        <p class="q">A traveler hands young Shakespeare a copy of <i>Hamlet</i>, which Shakespeare then publishes. Who wrote it?</p>
+        <p>Information or objects circle in a closed loop with no origin. Named after Robert Heinlein’s story “By His Bootstraps”.</p>
+        <div class="res"><b>Why it bothers people</b>Nothing contradicts itself, which makes it harder to dismiss than the grandfather paradox. It just creates something from nothing.</div></article>
+      <article class="pc"><div class="top"><h3>Polchinski’s billiard ball</h3><span class="yr">c. 1990</span></div>
+        <p class="q">A ball enters a wormhole, exits in the past, and knocks its younger self off course so it never enters.</p>
+        <p>Physicist Joseph Polchinski posed this grandfather paradox without free will. Echeverria, Klinkhammer and Thorne (1991) found that every starting shot they tried had at least one self-consistent path, often glancing blows, and sometimes infinitely many.</p>
+        <div class="res"><b>Takeaway</b>Physics may simply have no paradoxical solutions, just surprising consistent ones.</div></article>
+      <article class="pc"><div class="top"><h3>Predestination paradox</h3><span class="yr">ancient</span></div>
+        <p class="q">Trying to prevent a prophecy is what fulfils it.</p>
+        <p>Oedipus’s parents abandon him to avoid a prophecy, which sets up its fulfilment. Time-travel stories use the same loop: the attempt to change history is part of history.</p>
+        <div class="res"><b>Link</b>This is Novikov’s self-consistency principle told as tragedy.</div></article>
+      <article class="pc"><div class="top"><h3>Where are the tourists?</h3><span class="yr">Hawking, 1992</span></div>
+        <p class="q">If time travel is ever invented, why haven’t visitors from the future shown up?</p>
+        <p>Stephen Hawking proposed a chronology protection conjecture: physics, likely quantum effects, prevents time machines. In 2009 he threw a party for time travelers and sent the invitations only afterwards. Nobody came.</p>
+        <div class="res"><b>Caveat</b>Many proposals only allow travel back to when the machine was built, which would also explain the empty party.</div></article>
+    </div>
+  </section>
+
+  <!-- VIEWS -->
+  <section class="block" id="views" aria-labelledby="viewsH">
+    <div class="shead">
+      <span class="eyebrow">Big picture</span>
+      <h2 id="viewsH">Does time flow? Three answers</h2>
+      <p>Relativity’s lack of a shared “now” pushes many physicists toward the block universe, but the debate is philosophical, not settled by experiment.</p>
+    </div>
+    <div class="views">
+      <div class="view"><h4>Presentism</h4>
+        <svg viewBox="0 0 200 60" aria-hidden="true"><line x1="10" y1="30" x2="190" y2="30" stroke="currentColor" stroke-opacity=".2" stroke-width="2" stroke-dasharray="4 4"/><circle cx="100" cy="30" r="9" fill="var(--accent)"/><text x="100" y="56" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="currentColor">now</text></svg>
+        <p>Only the present exists. The past is gone, the future isn’t real yet. Matches experience, but clashes with relativity, where observers disagree about what “present” means.</p></div>
+      <div class="view"><h4>Growing block</h4>
+        <svg viewBox="0 0 200 60" aria-hidden="true"><rect x="10" y="22" width="90" height="16" rx="3" fill="var(--accent)" fill-opacity=".8"/><line x1="100" y1="30" x2="190" y2="30" stroke="currentColor" stroke-opacity=".2" stroke-width="2" stroke-dasharray="4 4"/><text x="100" y="56" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="currentColor">now →</text></svg>
+        <p>The past and present exist; the future doesn’t yet. Reality grows as new moments are added. Defended by C. D. Broad (1923) and others.</p></div>
+      <div class="view"><h4>Eternalism (block universe)</h4>
+        <svg viewBox="0 0 200 60" aria-hidden="true"><rect x="10" y="22" width="180" height="16" rx="3" fill="var(--accent)" fill-opacity=".8"/><text x="100" y="56" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="currentColor">all times equally real</text></svg>
+        <p>Past, present and future all exist, like places on a map. “Now” is just where you are, the way “here” is. Fits relativity neatly, but makes the feeling of flow hard to explain.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Further reading</b>
+  <ul>
+    <li>Kip Thorne, <i>Black Holes and Time Warps</i> (1994), on wormholes, Polchinski’s paradox and chronology protection</li>
+    <li>J. C. Hafele and R. E. Keating, “Around-the-World Atomic Clocks,” <i>Science</i>, 1972</li>
+    <li>Stanford Encyclopedia of Philosophy: entries on Zeno’s paradoxes, time travel, and the experience and metaphysics of time</li>
+  </ul>
+  <p>Demos use simplified models: instant turnaround for the twins, rigid ideal objects for the ladder, and non-colliding particles for the gas so the reversal is exact.</p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const r=cv.getBoundingClientRect();const d=window.devicePixelRatio||1;const h=+cv.getAttribute("height");cv.style.height=h+"px";cv.width=r.width*d;cv.height=h*d;const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);return{c,W:r.width,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ================= TWIN ================= */
+const TW={v:.8,D:4.2,p:0,playing:false};
+const twPresets=[["Proxima Centauri",.8,4.2],["Sirius at 0.99c",.99,8.6],["Slow cruise",.3,4.2],["Vega at 0.995c",.995,25]];
+$("#twinPresets").innerHTML=twPresets.map((p,i)=>`<button type="button" class="pill" data-i="${i}" aria-pressed="${i===0}">${p[0]}</button>`).join("");
+$("#twinPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;const p=twPresets[b.dataset.i];TW.v=p[1];TW.D=p[2];$("#twV").value=p[1];$("#twD").value=p[2];TW.p=0;markPreset(b.dataset.i);drawTwin()});
+function markPreset(i){document.querySelectorAll("#twinPresets .pill").forEach(b=>b.setAttribute("aria-pressed",b.dataset.i==i?"true":"false"))}
+$("#twV").addEventListener("input",e=>{TW.v=+e.target.value;markPreset(-1);drawTwin()});
+$("#twD").addEventListener("input",e=>{TW.D=+e.target.value;markPreset(-1);drawTwin()});
+function niceStep(span){const raw=span/8;const p=Math.pow(10,Math.floor(Math.log10(raw)));for(const m of[1,2,5,10])if(raw<=m*p)return m*p;return 10*p}
+function drawTwin(){
+  const {c,W,H}=setupCanvas($("#twinCv"));
+  const {v,D}=TW,g=1/Math.sqrt(1-v*v),T=2*D/v,tau=T/g,half=T/2;
+  $("#twVv").textContent=`${v.toFixed(3)} c (${Math.round(v*299792)} km/s)`;
+  $("#twDv").textContent=`${D.toFixed(1)} light-years`;
+  $("#twG").textContent=g.toFixed(3);
+  $("#twGap").textContent=`${(T-tau).toFixed(2)} y`;
+  const ink=css("--ink"),muted=css("--muted"),line=css("--line"),E=css("--earth"),R=css("--trav");
+  const ml=44,mr=20,mt=18,mb=34;
+  const s=Math.min((W-ml-mr)/(D*1.12),(H-mt-mb)/(T*1.02));
+  const ox=ml,oy=H-mb,X=x=>ox+x*s,Y=t=>oy-t*s;
+  // grid
+  const st=niceStep(Math.max(T,D));
+  c.font="11px 'IBM Plex Mono', monospace";c.lineWidth=1;
+  for(let t=0;t<=T*1.02;t+=st){c.strokeStyle=line;c.beginPath();c.moveTo(ox,Y(t));c.lineTo(X(D*1.12),Y(t));c.stroke();c.fillStyle=muted;c.textAlign="right";c.fillText(+t.toFixed(2),ox-6,Y(t)+4)}
+  for(let x=0;x<=D*1.12;x+=st){c.strokeStyle=line;c.beginPath();c.moveTo(X(x),oy);c.lineTo(X(x),Y(T*1.02));c.stroke();c.fillStyle=muted;c.textAlign="center";c.fillText(+x.toFixed(2),X(x),oy+16)}
+  c.textAlign="left";c.fillText("years ↑",4,mt+2);c.textAlign="right";c.fillText("light-years →",W-mr,oy+30);
+  // light
+  c.setLineDash([5,5]);c.strokeStyle=muted;c.beginPath();c.moveTo(X(0),Y(0));c.lineTo(X(Math.min(D*1.12,T)),Y(Math.min(D*1.12,T)));c.moveTo(X(0),Y(T));c.lineTo(X(Math.min(D*1.12,T)),Y(T-Math.min(D*1.12,T)));c.stroke();c.setLineDash([]);
+  // simultaneity lines
+  c.strokeStyle=R;c.globalAlpha=.28;c.lineWidth=1;
+  const ticks=[];for(let k=1;k*g<T-1e-9;k++)ticks.push(k*g);
+  const every=Math.max(1,Math.ceil(ticks.length/14));
+  ticks.forEach((te,i)=>{if(i%every)return;const x=te<=half?v*te:D-v*(te-half);const t0=te<=half?te-v*x:te+v*x;c.beginPath();c.moveTo(X(x),Y(te));c.lineTo(X(0),Y(t0));c.stroke()});
+  c.globalAlpha=1;
+  // turnaround jump
+  const jLo=half-v*D,jHi=half+v*D;
+  c.strokeStyle=R;c.lineWidth=1.5;c.setLineDash([2,3]);c.beginPath();c.moveTo(X(D),Y(half));c.lineTo(X(0),Y(jLo));c.moveTo(X(D),Y(half));c.lineTo(X(0),Y(jHi));c.stroke();c.setLineDash([]);
+  c.fillStyle=R;c.globalAlpha=.16;c.fillRect(X(0)-7,Y(jHi),14,(jHi-jLo)*s);c.globalAlpha=1;
+  // worldlines
+  c.lineWidth=4;c.lineCap="round";c.strokeStyle=E;c.beginPath();c.moveTo(X(0),Y(0));c.lineTo(X(0),Y(T));c.stroke();
+  c.strokeStyle=R;c.beginPath();c.moveTo(X(0),Y(0));c.lineTo(X(D),Y(half));c.lineTo(X(0),Y(T));c.stroke();
+  // tick dots
+  const estep=T>40?5:1;c.fillStyle=E;for(let t=estep;t<T;t+=estep){c.beginPath();c.arc(X(0),Y(t),2.6,0,7);c.fill()}
+  const tstep=tau>40?5:1;c.fillStyle=R;for(let k=tstep;k<tau;k+=tstep){const te=k*g;const x=te<=half?v*te:D-v*(te-half);c.beginPath();c.arc(X(x),Y(te),2.6,0,7);c.fill()}
+  // labels
+  c.font="600 12px 'IBM Plex Sans', sans-serif";c.textAlign="left";c.fillStyle=R;c.fillText("turnaround",Math.min(X(D)+8,W-80),Y(half)+4);
+  c.fillStyle=E;c.fillText("Earth",X(0)+8,Y(T*0.06));
+  // moving markers
+  const te=TW.p*T,xT=te<=half?v*te:D-v*(te-half);
+  c.fillStyle=E;c.strokeStyle=css("--card");c.lineWidth=3;c.beginPath();c.arc(X(0),Y(te),7,0,7);c.fill();c.stroke();
+  c.fillStyle=R;c.beginPath();c.arc(X(xT),Y(te),7,0,7);c.fill();c.stroke();
+  $("#twE").textContent=te.toFixed(2)+" y";$("#twT").textContent=(te/g).toFixed(2)+" y";
+  $("#twJump").innerHTML=` On the way out, the traveler’s “now” on Earth reaches only year ${jLo.toFixed(2)} at the turnaround. After turning, it jumps to year ${jHi.toFixed(2)}. That swing of <b>${(jHi-jLo).toFixed(2)} Earth-years</b> (shaded) is the asymmetry: the traveler changed frames, the Earth twin never did. Total: ${T.toFixed(2)} years at home, ${tau.toFixed(2)} aboard.`;
+}
+let twRaf=0,twLast=0;
+$("#twPlay").addEventListener("click",()=>{if(TW.playing){TW.playing=false;$("#twPlay").textContent="Play the trip";return}if(TW.p>=1)TW.p=0;TW.playing=true;$("#twPlay").textContent="Pause";twLast=performance.now();cancelAnimationFrame(twRaf);twRaf=requestAnimationFrame(twTick)});
+function twTick(now){if(!TW.playing)return;TW.p=Math.min(1,TW.p+(now-twLast)/7000);twLast=now;drawTwin();if(TW.p>=1){TW.playing=false;$("#twPlay").textContent="Play again";return}twRaf=requestAnimationFrame(twTick)}
+$("#twReset").addEventListener("click",()=>{TW.p=0;TW.playing=false;$("#twPlay").textContent="Play the trip";drawTwin()});
+
+/* ================= LADDER ================= */
+const LD={v:.8,frame:"barn",tn:.5,playing:false};const L0=10,B=8;
+function ladModel(){
+  const v=LD.v,g=1/Math.sqrt(1-v*v),L=L0/g,t1=L/v,t2=B/v,tc=(t1+t2)/2;
+  // worldlines in barn frame: [x0,u]
+  const W={entr:[0,0],exit:[B,0],front:[0,v],rear:[-L,v]};
+  const tA=LD.frame==="barn"?tc:g*tc, tB=LD.frame==="barn"?tc:g*(tc-v*B);
+  return{v,g,L,tc,W,tA,tB};
+}
+function posAt(M,wl,tau){const[x0,u]=wl;if(LD.frame==="barn")return x0+u*tau;const{v,g}=M;const t=(tau/g+v*x0)/(1-v*u);const x=x0+u*t;return g*(x-v*t)}
+function ladRange(M){const lo=Math.min(M.tA,M.tB),hi=Math.max(M.tA,M.tB);const span=Math.max(hi-lo,3)+ (L0+B)/M.v*0.9;return[lo-span*0.55,hi+span*0.55]}
+function drawLad(){
+  const {c,W,H}=setupCanvas($("#ladCv"));const M=ladModel();const[t0,t1]=ladRange(M);const tau=t0+(t1-t0)*LD.tn;
+  const ink=css("--ink"),muted=css("--muted"),line=css("--line"),acc=css("--accent"),R=css("--trav"),good=css("--good"),bad=css("--bad");
+  // window centred on the barn at the key moment
+  const mid=(posAt(M,M.W.entr,(M.tA+M.tB)/2)+posAt(M,M.W.exit,(M.tA+M.tB)/2))/2;
+  const half=Math.max(L0,B)*1.15;const sx=(W-24)/(2*half);const X=x=>12+(x-(mid-half))*sx;
+  const xe=posAt(M,M.W.entr,tau),xx=posAt(M,M.W.exit,tau),xf=posAt(M,M.W.front,tau),xr=posAt(M,M.W.rear,tau);
+  const entrClosed=tau>=M.tA, exitClosed=tau<M.tB, both=entrClosed&&exitClosed;
+  // barn
+  const by=60,bh=96;
+  c.fillStyle=both?good:muted;c.globalAlpha=both?.14:.08;c.fillRect(X(xe),by,X(xx)-X(xe),bh);c.globalAlpha=1;
+  c.strokeStyle=ink;c.lineWidth=2;c.beginPath();c.moveTo(X(xe),by);c.lineTo(X(xx),by);c.moveTo(X(xe),by+bh);c.lineTo(X(xx),by+bh);c.stroke();
+  // roof
+  c.beginPath();c.moveTo(X(xe),by);c.lineTo((X(xe)+X(xx))/2,by-26);c.lineTo(X(xx),by);c.stroke();
+  const door=(x,closed)=>{c.lineWidth=closed?6:2;c.strokeStyle=closed?ink:muted;c.setLineDash(closed?[]:[4,5]);c.beginPath();c.moveTo(X(x),by);c.lineTo(X(x),by+bh);c.stroke();c.setLineDash([])};
+  door(xe,entrClosed);door(xx,exitClosed);
+  // pole
+  c.fillStyle=R;c.fillRect(X(xr),by+bh/2-7,X(xf)-X(xr),14);
+  c.fillStyle=ink;c.font="11px 'IBM Plex Mono', monospace";c.textAlign="center";
+  c.fillText("entrance "+(entrClosed?"shut":"open"),X(xe),by+bh+18);c.fillText("exit "+(exitClosed?"shut":"open"),X(xx),by+bh+34);
+  c.fillStyle=R;c.fillText("pole →",(X(xr)+X(xf))/2,by+bh/2-14);
+  // timeline of events
+  const ty=H-30,TX=t=>12+(t-t0)/(t1-t0)*(W-24);
+  c.strokeStyle=line;c.lineWidth=2;c.beginPath();c.moveTo(12,ty);c.lineTo(W-12,ty);c.stroke();
+  const ev=(t,lab,col,below)=>{c.fillStyle=col;c.beginPath();c.arc(TX(t),ty,5,0,7);c.fill();c.font="10px 'IBM Plex Mono', monospace";c.fillText(lab,TX(t),below?ty+20:ty-11)};
+  ev(M.tA,"entrance shuts",ink,false);ev(M.tB,"exit opens",acc,true);
+  c.strokeStyle=R;c.lineWidth=2;c.beginPath();c.moveTo(TX(tau),ty-6);c.lineTo(TX(tau),ty+6);c.stroke();
+  c.textAlign="left";c.fillStyle=muted;c.fillText(LD.frame==="barn"?"farmer’s clock":"runner’s clock",12,24);
+  // readouts
+  $("#ladVv").textContent=`${LD.v.toFixed(2)} c · γ ${M.g.toFixed(2)}`;
+  $("#ladPL").textContent=(LD.frame==="barn"?M.L:L0).toFixed(1)+" m";
+  $("#ladBL").textContent=(LD.frame==="barn"?B:B/M.g).toFixed(1)+" m";
+  $("#ladTv").textContent=(tau/1).toFixed(1)+" (m/c)";
+  $("#ladStatus").textContent=both?"Both doors shut, pole inside":"";
+  $("#ladRes").textContent=LD.frame==="barn"
+   ?` In the farmer’s frame the pole is ${M.L.toFixed(1)} m and the barn 8 m, so both doors shut at the same instant with the pole inside, then the exit opens.`
+   :` In the runner’s frame the pole is 10 m and the barn only ${(B/M.g).toFixed(1)} m. But the two door events are no longer simultaneous: the exit opens ${(M.tA-M.tB).toFixed(1)} m/c before the entrance shuts, so the pole is never trapped. Both views agree on everything that physically happens.`;
+}
+$("#ladFrame").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;LD.frame=b.dataset.f;document.querySelectorAll("#ladFrame .pill").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));drawLad()});
+$("#ladV").addEventListener("input",e=>{LD.v=+e.target.value;drawLad()});
+$("#ladT").addEventListener("input",e=>{LD.tn=e.target.value/1000;drawLad()});
+let ladRaf=0,ladLast=0;
+$("#ladPlay").addEventListener("click",()=>{if(LD.playing){LD.playing=false;$("#ladPlay").textContent="Play";return}if(LD.tn>=1)LD.tn=0;LD.playing=true;$("#ladPlay").textContent="Pause";ladLast=performance.now();ladRaf=requestAnimationFrame(ladTick)});
+function ladTick(now){if(!LD.playing)return;LD.tn=Math.min(1,LD.tn+(now-ladLast)/6000);ladLast=now;$("#ladT").value=Math.round(LD.tn*1000);drawLad();if(LD.tn>=1){LD.playing=false;$("#ladPlay").textContent="Play";return}ladRaf=requestAnimationFrame(ladTick)}
+
+/* ================= ARROW OF TIME ================= */
+const AW=1000,AH=600,AN=180;let AR={ps:[],step:0,dir:1,running:true,hist:[]};
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function arReset(){const r=mulberry(1876);AR.ps=[];for(let i=0;i<AN;i++){let vx=0,vy=0;while(!vx&&!vy){vx=Math.round(r()*14-7);vy=Math.round(r()*14-7)}AR.ps.push({x:20+Math.floor(r()*150),y:20+Math.floor(r()*150),vx,vy})}AR.step=0;AR.dir=1;AR.hist=[];AR.running=true;$("#arPlay").textContent="Pause"}
+function arStep(){for(const p of AR.ps){p.x+=p.vx;p.y+=p.vy;if(p.x<0){p.x=-p.x;p.vx=-p.vx}if(p.x>AW){p.x=2*AW-p.x;p.vx=-p.vx}if(p.y<0){p.y=-p.y;p.vy=-p.vy}if(p.y>AH){p.y=2*AH-p.y;p.vy=-p.vy}}AR.step+=AR.dir}
+function entropy(){const gx=10,gy=6,cnt=new Array(gx*gy).fill(0);for(const p of AR.ps){const i=Math.min(gx-1,Math.floor(p.x/AW*gx)),j=Math.min(gy-1,Math.floor(p.y/AH*gy));cnt[j*gx+i]++}let S=0;for(const n of cnt)if(n){const q=n/AN;S-=q*Math.log(q)}return S/Math.log(gx*gy)}
+function drawAr(){
+  const {c,W,H}=setupCanvas($("#arCv"));const sx=W/AW,sy=H/AH;const acc=css("--accent"),line=css("--line");
+  c.strokeStyle=line;for(let i=1;i<10;i++){c.beginPath();c.moveTo(i*W/10,0);c.lineTo(i*W/10,H);c.stroke()}for(let j=1;j<6;j++){c.beginPath();c.moveTo(0,j*H/6);c.lineTo(W,j*H/6);c.stroke()}
+  c.fillStyle=AR.dir>0?acc:css("--trav");for(const p of AR.ps){c.beginPath();c.arc(p.x*sx,p.y*sy,2.6,0,7);c.fill()}
+  const S=entropy();AR.hist.push(S);if(AR.hist.length>500)AR.hist.shift();
+  const sp=setupCanvas($("#arSp"));const sc=sp.c;sc.fillStyle=css("--muted");sc.font="10px 'IBM Plex Mono', monospace";sc.fillText("disorder (entropy) "+(S*100).toFixed(0)+"%",8,13);
+  sc.beginPath();AR.hist.forEach((h,i)=>{const x=8+i/(500-1)*(sp.W-16),y=sp.H-6-h*(sp.H-24);i?sc.lineTo(x,y):sc.moveTo(x,y)});sc.strokeStyle=AR.dir>0?acc:css("--trav");sc.lineWidth=2;sc.stroke();
+  $("#arInfo").textContent=`step ${AR.step} · ${AR.dir>0?"forward":"reversed"}`;
+}
+let arRaf=0;function arTick(){if(AR.running){for(let k=0;k<2;k++){if(AR.dir<0&&AR.step<=0){AR.running=false;$("#arPlay").textContent="Play";break}arStep()}}drawAr();arRaf=requestAnimationFrame(arTick)}
+$("#arPlay").addEventListener("click",()=>{AR.running=!AR.running;$("#arPlay").textContent=AR.running?"Pause":"Play"});
+$("#arRev").addEventListener("click",()=>{for(const p of AR.ps){p.vx=-p.vx;p.vy=-p.vy}AR.dir=-AR.dir;AR.running=true;$("#arPlay").textContent="Pause"});
+$("#arReset").addEventListener("click",arReset);
+
+/* ================= ZENO ================= */
+const ZS=[];{let a=0,b=100,t=0;for(let k=0;k<=12;k++){ZS.push({a,b,t,gap:b-a});const dt=(b-a)/10;t+=dt;const nb=b+dt;a=b;b=nb}}
+let zN=3,zPlaying=false,zt=null;
+function zX(m){return 4+(m/125)*92}
+function drawZeno(){
+  const tr=$("#zTrack");let ach,tor,showMarks=zN;
+  if(zt!==null){ach=10*zt;tor=100+zt}else{ach=ZS[zN].a;tor=ZS[zN].b}
+  let marks="";for(let k=1;k<=Math.min(10,showMarks);k++){marks+=`<span class="mark" style="left:${zX(ZS[k].a)}%;top:58px"></span>`}
+  tr.innerHTML=`<div class="lane" style="top:44px"></div><div class="lane" style="top:84px"></div>
+   <span class="runner" style="left:${zX(ach)}%;top:29px;background:var(--trav)" title="Achilles">A</span>
+   <span class="runner" style="left:${zX(tor)}%;top:69px;background:var(--good)" title="Tortoise">T</span>${marks}
+   <span class="lbl" style="position:absolute;left:12px;top:6px">0 m</span><span class="lbl" style="position:absolute;right:12px;top:6px">125 m</span>
+   <span class="lbl" style="position:absolute;left:${zX(111.11)}%;top:92px;transform:translateX(-50%)">111.1 m</span>`;
+  $("#zNv").textContent=zN;
+  $("#zBody").innerHTML=ZS.slice(1,11).map((s,i)=>`<tr class="${i+1===zN?"cur":""}"><td>${i+1}</td><td>${(ZS[i].gap/10).toPrecision(3)} s</td><td>${s.t.toFixed(Math.min(9,i+2))} s</td><td>${s.gap.toPrecision(3)} m</td></tr>`).join("");
+}
+$("#zN").addEventListener("input",e=>{zN=+e.target.value;zt=null;drawZeno()});
+$("#zPlay").addEventListener("click",()=>{if(zPlaying)return;zPlaying=true;const st=performance.now();const run=now=>{zt=Math.min(12.5,(now-st)/1000*2);drawZeno();if(zt<12.5)requestAnimationFrame(run);else{zPlaying=false;$("#zPlay").textContent="Run it again"}};requestAnimationFrame(run)});
+
+/* ================= GRANDFATHER TIMELINE ================= */
+const TLX=y=>40+(y-1950)/(2030-1950)*720;
+const TL={
+ naive:{l:"One fixed timeline",msg:"<b>Contradiction</b>If there is one history and the traveler changes it, they are never born, so they never travel, so the meeting happens, so they are born… The timeline can’t settle. This is why most physicists think simple changeable-past time travel is impossible."},
+ novikov:{l:"Self-consistency (Novikov)",msg:"<b>The attempt always fails</b>Igor Novikov’s principle (1980s): only self-consistent histories happen. The traveler was always part of 1958. Something stops them, a missed train or a slip, and maybe their visit is even how the grandparents met. No paradox, but it limits free will."},
+ branch:{l:"Branching worlds (Deutsch)",msg:"<b>A new branch splits off</b>In David Deutsch’s 1991 quantum model, the traveler arrives in a different branch of the many-worlds universe. The grandparents never meet there, but the traveler still came from the original history, which is untouched. Nothing contradicts itself; you just can’t return to the world you left."},
+ protect:{l:"Chronology protection (Hawking)",msg:"<b>The machine never works</b>Stephen Hawking’s 1992 conjecture: as a time loop starts to form, quantum vacuum effects build up and destroy it. The universe is kept safe for historians, in his phrase, and the trip never happens."}
+};
+let tlModel="naive";
+$("#tlModels").innerHTML=Object.entries(TL).map(([k,m])=>`<button type="button" class="pill" data-k="${k}" aria-pressed="${k==="naive"}">${m.l}</button>`).join("");
+$("#tlModels").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;tlModel=b.dataset.k;document.querySelectorAll("#tlModels .pill").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));drawTL()});
+$("#tlReplay").addEventListener("click",drawTL);
+function drawTL(){
+  const y0=150,x58=TLX(1958),x60=TLX(1960),x90=TLX(1990),x25=TLX(2025);
+  const tick=(y,lab,dy=0)=>`<line x1="${TLX(y)}" y1="${y0-6}" x2="${TLX(y)}" y2="${y0+6}" stroke="currentColor"/><text x="${TLX(y)}" y="${y0+24+dy}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor">${lab}</text>`;
+  const arc=`M ${x25} ${y0-8} C ${x25} ${y0-140}, ${x58} ${y0-140}, ${x58} ${y0-8}`;
+  const arcLen=780;
+  let body="";
+  const base=`<line x1="40" y1="${y0}" x2="760" y2="${y0}" stroke="currentColor" stroke-width="3"/>${tick(1950,"1950")}${tick(1960,"meet 1960")}${tick(1990,"born 1990")}${tick(2025,"departs 2025")}${tick(2030,"2030",0)}`;
+  const arcEl=(cls,col,extra="")=>`<path d="${arc}" fill="none" stroke="${col}" stroke-width="3" class="${cls}" style="--len:${arcLen}" ${extra}/><text x="${(x25+x58)/2}" y="${y0-112}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="${col}">time machine</text>`;
+  if(tlModel==="naive"){
+    body=`${base}${arcEl("draw","var(--trav)")}
+     <g class="pop d2" style="animation-delay:1.3s"><circle cx="${x58}" cy="${y0}" r="7" fill="var(--trav)"/></g>
+     <g style="opacity:0;animation:pop .3s 1.6s forwards"><line class="flick" x1="${x60}" y1="${y0}" x2="760" y2="${y0}" stroke="var(--bad)" stroke-width="5" stroke-dasharray="8 6"/>
+     <text class="flick2" x="${(x60+x90)/2}" y="${y0+56}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="15" fill="var(--bad)">born? not born? born? …</text></g>`;
+  } else if(tlModel==="novikov"){
+    body=`${base}${arcEl("draw","var(--good)")}
+     <g class="pop" style="animation-delay:1.3s"><circle cx="${x58}" cy="${y0}" r="7" fill="var(--good)"/></g>
+     <g class="pop" style="animation-delay:1.8s"><text x="${x60+8}" y="${y0-22}" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="14" fill="var(--good)">attempt fails ✓</text></g>
+     <g class="pop" style="animation-delay:2.3s"><text x="400" y="${y0+62}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="currentColor">One loop, always the same: history already included the visit</text></g>`;
+  } else if(tlModel==="branch"){
+    const by=230;
+    body=`${base}${arcEl("draw","var(--accent)")}
+     <path d="M ${x58} ${y0} C ${x58+20} ${by}, ${x58+60} ${by}, ${x58+90} ${by} L 760 ${by}" fill="none" stroke="var(--accent)" stroke-width="3" class="draw d2" style="--len:760"/>
+     <g class="pop" style="animation-delay:2.4s"><text x="770" y="${by+4}" text-anchor="end" dx="-6" dy="-10" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--accent)">branch B: no meeting, no birth</text>
+     <text x="770" y="${y0-14}" text-anchor="end" dx="-6" font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor">branch A: unchanged</text></g>`;
+  } else {
+    body=`${base}<path d="${arc}" fill="none" stroke="var(--muted)" stroke-width="3" stroke-dasharray="${arcLen*0.45} ${arcLen}" class="draw" style="--len:${arcLen*0.45}"/>
+     <g class="pop" style="animation-delay:1.3s"><text x="${(x25+x58)/2+70}" y="${y0-118}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="700" font-size="28" fill="var(--bad)">✕</text>
+     <text x="${(x25+x58)/2+70}" y="${y0-90}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--bad)">loop destroyed</text></g>
+     <g class="pop" style="animation-delay:1.8s"><text x="400" y="${y0+62}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="currentColor">History is never threatened: the trip can’t be made</text></g>`;
+  }
+  $("#tlSvg").innerHTML=body;$("#tlSvg").style.color=css("--ink");
+  $("#tlMsg").innerHTML=TL[tlModel].msg;
+}
+
+/* ================= boot ================= */
+function drawAll(){drawTwin();drawLad();drawZeno();drawTL()}
+arReset();drawAll();
+if(reduce){AR.running=false;$("#arPlay").textContent="Play"}
+requestAnimationFrame(arTick);
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(drawAll,120)});
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",drawAll);
+</script>
+</body>
+</html>
