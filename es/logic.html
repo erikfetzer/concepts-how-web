@@ -246,7 +246,7 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
 .qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
 .search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
 </style>
-<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -264,8 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="nl" href="dimensions.html">Dimensiones</a>
     <a class="nl" href="universe.html">Universo</a>
     <a class="nl" href="gametheory.html">Teoría de juegos</a>
-    <a class="nl" href="logic.html" aria-current="page">Lógica</a>
-    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../logic.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="logic.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+    <a class="nl" href="logic.html" aria-current="page">Lógica</a><span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../logic.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="logic.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
@@ -466,7 +465,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li>Stanford Encyclopedia of Philosophy: «Fallacies», «Classical Logic», «Gödel’s Incompleteness Theorems»</li>
   </ul>
   <p>Las tablas de verdad usan la lógica clásica bivalente. Los nombres de las falacias varían según el manual; aquí están los más comunes.</p>
-<div class="sitefoot"><span>concepts.how · pronto, más conceptos.</span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
 
 <script>
 const $=s=>document.querySelector(s);

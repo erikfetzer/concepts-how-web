@@ -82,11 +82,11 @@
   function init() {
     var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
     // "Cookies" link in the footer bar to change your mind later
-    var foot = document.querySelector(".sitefoot span:last-child");
-    if (foot) {
-      var b = document.createElement("button"); b.type = "button"; b.className = "cc-link"; b.textContent = T.link;
-      b.onclick = show; foot.insertBefore(document.createTextNode(" · "), foot.firstChild); foot.insertBefore(b, foot.firstChild);
-    }
+    var left = document.querySelector(".sitefoot .sf-l"), foot = document.querySelector(".sitefoot > span:last-child");
+    var b = document.createElement("button"); b.type = "button"; b.className = "cc-link"; b.textContent = T.link; b.onclick = show;
+    if (left) { left.appendChild(document.createTextNode(" · ")); left.appendChild(b); }
+    else if (foot) { foot.insertBefore(document.createTextNode(" · "), foot.firstChild); foot.insertBefore(b, foot.firstChild); }
+    window.openCookieSettings = show;
     var v = null; try { v = localStorage.getItem(KEY); } catch (e) {}
     if (v !== "granted" && v !== "denied") show();
   }

@@ -41,6 +41,10 @@ npx serve .
 
 Works as-is on Vercel, Netlify or GitHub Pages. No framework or build command; the output directory is the repo root.
 
+## Disclaimer
+
+`disclaimer.html` (and `es/disclaimer.html`, “Aviso legal”) covers as-is use, no professional advice, demos, limitation of liability, sources, privacy and cookies (with a button that reopens the cookie banner), content and trademarks, translations and changes. Each page’s footer links to it.
+
 ## Analytics and cookie consent
 
 Google Tag Manager (`GTM-T9P7XFHH`) and Google Analytics 4 (`G-1EL2GJW0J3`, via gtag.js directly) load on every page. Don’t also add a GA4 tag for the same ID inside GTM, or page views will count twice. A small inline script sets Google Consent Mode v2 to denied for everything before GTM loads. `consent.js` shows an Accept / Decline banner (English or Spanish, from the page language), stores the choice in `localStorage` under `consent`, and sends `gtag('consent','update', …)` plus a `consent_update` dataLayer event. A **Cookies** link in each footer reopens the banner.
