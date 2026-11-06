@@ -3,7 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Concept Atlas</title>
+<title>concepts.how</title>
+<meta name="description" content="Interactive explainers for big ideas: what each concept is and how it works. Metric units, voting methods and more.">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="concepts.how">
+<meta property="og:description" content="Interactive explainers for big ideas: what each concept is and how it works. Metric units, voting methods and more.">
+<meta property="og:url" content="https://concepts.how/">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers on metric units and voting methods.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="concepts.how">
+<meta name="twitter:description" content="Interactive explainers for big ideas: what each concept is and how it works. Metric units, voting methods and more.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,15 +30,15 @@
 /* Layout idea: a library index card. One big wordmark, then each concept as a drawer front with its own instrument drawn in CSS. */
 :root{
   --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
-  --accent:#1D47F0; --accent-soft:#E4EAFE;
+  --accent:#1D47F0; --accent-soft:#E4EAFE; --ghost:#9AA6B8;
   --display:"Syne","Arial Narrow",system-ui,sans-serif;
   --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246; --accent:#7E9CFF; --accent-soft:#18244A; color-scheme:dark;}}
-:root[data-theme="dark"]{--paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246; --accent:#7E9CFF; --accent-soft:#18244A; color-scheme:dark;}
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246; --accent:#7E9CFF; --accent-soft:#18244A; --ghost:#4A5B78; color-scheme:dark;}}
+:root[data-theme="dark"]{--paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246; --accent:#7E9CFF; --accent-soft:#18244A; --ghost:#4A5B78; color-scheme:dark;}
 *{box-sizing:border-box}
 html,body{margin:0;overflow-x:clip;max-width:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -27,8 +46,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);line-heigh
 .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
 header{padding:clamp(40px,8vw,96px) 0 clamp(28px,4vw,48px)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,11vw,132px);line-height:.92;letter-spacing:-.045em;margin:14px 0 20px;text-wrap:balance}
-h1 span{color:var(--accent)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,8.2vw,92px);line-height:1;letter-spacing:-.05em;margin:18px 0 26px;display:inline-flex;flex-direction:column;align-items:flex-end}
+h1 span{white-space:nowrap}
+h1 .dot{color:var(--accent)}
+h1 .ghost{font-weight:800;color:transparent;-webkit-text-stroke:1.5px var(--ghost)}
+@supports not (-webkit-text-stroke:1px black){h1 .ghost{color:var(--ghost)}}
 .lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:52ch;margin:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:16px;padding-bottom:40px}
 a.tile{display:grid;grid-template-rows:auto 1fr auto;gap:14px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:transform .18s,border-color .18s,box-shadow .18s;min-height:300px}
@@ -62,7 +84,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 <main class="wrap">
   <header>
     <div class="eyebrow">Interactive explainers</div>
-    <h1>Concept<br><span>Atlas</span></h1>
+    <h1 aria-label="concepts.how: how they work"><span class="l1">concepts<span class="dot">.</span>how</span><span class="ghost" aria-hidden="true">they work</span></h1>
     <p class="lede">Big ideas you can take apart and play with. Each atlas explains one concept, shows where it came from and lets you try it yourself.</p>
   </header>
 
@@ -94,6 +116,6 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
     </a>
   </div>
 </main>
-<footer class="wrap">Concept Atlas · more concepts to come.</footer>
+<footer class="wrap">concepts.how · more concepts to come.</footer>
 </body>
 </html>

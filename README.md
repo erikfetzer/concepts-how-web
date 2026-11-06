@@ -10,6 +10,14 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Metric units | `units.html` | 64 metric units by quantity: name origins, history, original and current definitions, imperial equivalents, and a converter |
 | Voting methods | `voting.html` | Election simulator, ranked-ballot paradoxes, a guide to 12 counting methods, and a fairness-criteria table |
 
+## Brand assets
+
+- `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`: the “c.” mark
+- `og.png`: 1200×630 link-preview card
+- `site.webmanifest`: install metadata (name, colors, icons)
+
+Social tags point at `https://concepts.how/og.png`, so previews work once the domain is live. `vercel.json` turns on clean URLs (`/units`, `/voting`).
+
 ## Run locally
 
 Open `index.html` in a browser, or serve the folder:
