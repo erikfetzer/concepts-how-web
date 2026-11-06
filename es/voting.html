@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Métodos de votación · concepts.how</title>
+<meta name="description" content="Un simulador electoral y una guía de 12 métodos de votación: cómo cuenta los votos cada uno, sus ventajas y limitaciones, y dónde se usa.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/voting">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/voting">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Métodos de votación · concepts.how">
+<meta property="og:description" content="Un simulador electoral y una guía de 12 métodos de votación: cómo cuenta los votos cada uno, sus ventajas y limitaciones, y dónde se usa.">
+<meta property="og:url" content="https://concepts.how/es/voting">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Métodos de votación · concepts.how">
+<meta name="twitter:description" content="Un simulador electoral y una guía de 12 métodos de votación: cómo cuenta los votos cada uno, sus ventajas y limitaciones, y dónde se usa.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a civic laboratory. The election simulator is the hero; below it a ballot bench, a field guide of methods filed by ballot type, and a criteria ledger. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+
+/* site nav */
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+
+/* ballot rule: a row of ballot check boxes */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 6px,var(--ink) 6px 7px,transparent 7px 17px,var(--ink) 17px 18px,transparent 18px 24px) center/100% 1px no-repeat,
+ repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 24px) center/100% 12px no-repeat}
+
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+
+/* Hero */
+.hero{padding:clamp(24px,4vw,44px) 0 10px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:14ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:62ch;color:var(--muted);font-size:17px;margin:0}
+
+/* Simulator */
+.sim{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(16px,3vw,32px);margin-top:24px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.canvas-wrap{position:relative;aspect-ratio:1/1;width:100%;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+canvas#map{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+canvas#map.dragging{cursor:grabbing}
+.maphint{font-size:13px;color:var(--muted);margin:10px 0 0}
+.ctrls{display:grid;gap:12px;margin-top:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.sliders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
+.sl label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:2px}
+.sl label span{font-family:var(--mono);color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+
+/* Results */
+.sum{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--accent);color:var(--accent-ink);margin-bottom:12px}
+.sum b{font-family:var(--display);font-size:20px;display:block;line-height:1.15}
+.sum small{opacity:.88;font-size:13px}
+.tallies{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tally{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border-radius:999px;padding:2px 9px 2px 3px;font-family:var(--mono);font-size:12px}
+.dot{width:20px;height:20px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-weight:700;font-size:11px;font-family:var(--mono);flex:none;background:var(--c)}
+.methods{display:grid;gap:8px}
+.m{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:12px;align-items:center;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.m .mn{font-weight:600;font-size:14px;line-height:1.2}
+.m .mf{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.m .win{justify-self:end}
+.m .win .dot{width:30px;height:30px;font-size:14px}
+.bars{display:grid;gap:3px}
+.bar{display:grid;grid-template-columns:14px minmax(0,1fr) 54px;gap:6px;align-items:center;font-size:11px;font-family:var(--mono)}
+.bar .k{color:var(--muted)}
+.bar .t{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--c);border-radius:4px}
+.bar .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--muted);margin-top:4px}
+.mj{display:grid;gap:4px}
+.mjr{display:grid;grid-template-columns:14px minmax(0,1fr) 70px;gap:6px;align-items:center;font-size:11px;font-family:var(--mono)}
+.mjb{position:relative;display:flex;height:10px;border-radius:3px;overflow:hidden}
+.mjb i{display:block;height:100%}
+.mjb::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:4px}
+.legend span{display:inline-flex;gap:4px;align-items:center}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+/* Sections */
+section.block{padding-top:clamp(44px,6vw,72px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:18px;max-width:72ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+
+/* Ballot bench */
+.bench{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.story{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:12px}
+.story b{display:block;margin-bottom:2px}
+.groups{display:grid;gap:8px}
+.grp{display:grid;grid-template-columns:minmax(0,1fr) 110px 32px;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--paper)}
+.grp select{width:100%;min-width:0;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 8px;min-height:38px;font-size:14px}
+.grp .share{display:grid;gap:0}
+.grp .share span{font-family:var(--mono);font-size:12px;text-align:right}
+.x{border:1px solid var(--line);background:var(--card);border-radius:8px;width:32px;height:32px;cursor:pointer}
+.x:hover{border-color:var(--bad);color:var(--bad)}
+.total{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+.out{display:grid;gap:10px}
+.oc{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+.oc h3{font-family:var(--body);font-size:14px;font-weight:600;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.oc h3 .res{font-family:var(--mono);font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.rounds{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;margin-top:6px}
+.rounds th,.rounds td{border-bottom:1px solid var(--line);padding:4px 6px;text-align:right}
+.rounds th:first-child,.rounds td:first-child{text-align:left}
+.rounds td.out-c{color:var(--muted);text-decoration:line-through}
+.tblwrap{overflow-x:auto}
+
+/* Field guide */
+.fam{margin-top:26px}
+.fam h3{font-size:22px;font-weight:700;display:flex;gap:10px;align-items:baseline;margin-bottom:12px}
+.fam h3 small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px}
+details.mc{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.mc[open]{border-color:var(--ink)}
+details.mc summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:start}
+details.mc summary::-webkit-details-marker{display:none}
+.mc .t{font-family:var(--display);font-size:20px;font-weight:700;line-height:1.15}
+.mc .aka{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.mc .one{grid-column:1/3;font-size:14px;color:var(--muted);margin-top:4px}
+.mc .chev{font-family:var(--mono);color:var(--muted);transition:transform .2s;font-size:18px}
+details.mc[open] .chev{transform:rotate(45deg)}
+.mc .body{padding:0 16px 16px;display:grid;gap:12px}
+.ballot{border:1px dashed var(--muted);border-radius:8px;padding:10px 12px;background:var(--paper);font-size:13px}
+.ballot .bh{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ballot .bl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center}
+.ballot .mk{font-family:var(--mono);font-weight:600;min-width:22px;text-align:center;border:1px solid var(--ink);border-radius:4px;padding:0 4px;font-size:12px}
+.ballot .mk.off{opacity:.35}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc h4{margin:0 0 4px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.pc .pro h4{color:var(--good)} .pc .con h4{color:var(--bad)}
+.pc ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:3px}
+.used{font-size:13px;border-top:1px solid var(--line);padding-top:10px}
+.used b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
+.how{font-size:14px;margin:0}
+
+/* Criteria */
+.ledger{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:720px}
+.ledger th,.ledger td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.ledger thead th{font-weight:600;font-size:12px;line-height:1.3;background:var(--paper)}
+.ledger th[scope=row]{text-align:left;font-weight:600;white-space:nowrap}
+.ledger tr:last-child td,.ledger tr:last-child th{border-bottom:0}
+.y,.n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:13px}
+.y{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.n{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.foot{font-size:13px;color:var(--muted);margin-top:10px;max-width:80ch}
+
+/* Ideas */
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:12px}
+.idea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.idea .yr{font-family:var(--mono);font-size:11px;color:var(--accent)}
+.idea h3{font-family:var(--body);font-size:17px;font-weight:600;margin:2px 0 6px}
+.idea p{margin:0;font-size:14px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+
+@media (max-width:960px){
+  .sim,.bench{grid-template-columns:1fr}
+  .sim .panel:first-child{max-width:560px}
+}
+@media (max-width:560px){
+  .m{grid-template-columns:minmax(0,1fr) 36px}
+  .m .bars,.m .mj{grid-column:1/3;grid-row:2}
+  .m .win .dot{width:26px;height:26px}
+  .sliders{grid-template-columns:1fr}
+  .pc{grid-template-columns:1fr}
+  .grp{grid-template-columns:minmax(0,1fr) 32px}
+  .grp .share{grid-column:1/2;grid-row:2}
+  .site .wrap{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>.lang{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:6px 10px!important;color:var(--ink)!important;text-decoration:none}.lang:hover{border-color:var(--accent)!important}</style>
+</head>
+<body>
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html" aria-current="page">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl lang" href="../voting.html" lang="en" hreflang="en" title="View in English">EN</a>
+    <span data-theme-picker></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Métodos de votación</b> · interactivo</div>
+    <h1>Mismos votantes. <em>Distintos ganadores.</em></h1>
+    <p class="lede">Las reglas para contar votos pueden decidir una elección tanto como los propios votos. Arrastra a los candidatos y a los grupos de votantes y mira cómo nueve métodos de recuento no se ponen de acuerdo sobre quién ganó.</p>
+  </header>
+
+  <section class="sim" id="simulator" aria-label="Simulador electoral">
+    <div class="panel">
+      <div class="canvas-wrap"><canvas id="map" role="img" aria-label="Mapa de votantes y candidatos. Cada votante tiene el color de su candidato favorito."></canvas></div>
+      <p class="maphint">Cada punto es un votante, coloreado según el candidato más cercano. Los votantes prefieren a los candidatos más próximos. Arrastra un círculo con letra para mover un candidato, o un anillo numerado para mover un grupo de votantes.</p>
+      <div class="ctrls">
+        <div>
+          <div class="lbl" style="margin-bottom:6px">Escenario</div>
+          <div class="seg" id="simPresets" role="group" aria-label="Escenario"></div>
+        </div>
+        <div class="row">
+          <button class="btn" type="button" id="addC">+ Candidato</button>
+          <button class="btn" type="button" id="remC">− Candidato</button>
+        </div>
+        <div class="sliders" id="blobSliders"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sum" id="summary" aria-live="polite"></div>
+      <div class="methods" id="methods"></div>
+    </div>
+  </section>
+
+  <section class="block" id="bench" aria-labelledby="benchH">
+    <div class="shead">
+      <span class="eyebrow">Banco de papeletas</span>
+      <h2 id="benchH">Cuenta papeletas ordenadas a mano</h2>
+      <p>Elige una paradoja clásica o construye tu propio electorado con grupos de papeletas ordenadas. Cambia el tamaño o el orden de un grupo y todos los recuentos se actualizan.</p>
+    </div>
+    <div class="bench">
+      <div class="panel">
+        <div class="presets" id="benchPresets" role="group" aria-label="Paradojas predefinidas"></div>
+        <div class="story" id="story"></div>
+        <div id="variantRow" class="row" style="margin-bottom:12px"></div>
+        <div class="groups" id="groups"></div>
+        <div class="row" style="margin-top:10px;justify-content:space-between">
+          <button class="btn" type="button" id="addG">+ Grupo de papeletas</button>
+          <span class="total" id="total"></span>
+        </div>
+      </div>
+      <div class="out" id="benchOut" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="block" id="guide" aria-labelledby="guideH">
+    <div class="shead">
+      <span class="eyebrow">Guía de campo</span>
+      <h2 id="guideH">Doce formas de contar un voto</h2>
+      <p>Clasificados según lo que te pide la papeleta: elegir uno, ordenar o calificar. El último grupo reparte muchos escaños a la vez para que los parlamentos reflejen el voto. Toca un método para abrirlo.</p>
+    </div>
+    <div id="families"></div>
+  </section>
+
+  <section class="block" id="criteria" aria-labelledby="critH">
+    <div class="shead">
+      <span class="eyebrow">Registro de equidad</span>
+      <h2 id="critH">Qué promesas cumple cada método</h2>
+      <p>Los matemáticos evalúan los métodos de un solo ganador con criterios de equidad. Ningún método los cumple todos; Arrow y Gibbard demostraron que ninguno puede. Cada método elige con qué defecto vivir.</p>
+    </div>
+    <div class="tblwrap">
+      <table class="ledger">
+        <thead><tr>
+          <th scope="col">Método</th>
+          <th scope="col">Elige al ganador de Condorcet cuando existe</th>
+          <th scope="col">Una mayoría de primeras preferencias siempre gana</th>
+          <th scope="col">Más apoyo nunca perjudica (monotonía)</th>
+          <th scope="col">Ordenar una segunda opción no perjudica a tu favorito</th>
+          <th scope="col">Candidatos parecidos no dividen el voto</th>
+          <th scope="col">Papeleta</th>
+        </tr></thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+    <p class="foot">La fila de Condorcet supone un método de Condorcet moderno, como Ranked Pairs o Schulze. La aprobación, la puntuación y el juicio mayoritario pasan la prueba del voto dividido siempre que los votantes califiquen a cada candidato por sus propios méritos. Las definiciones siguen la literatura estándar de la elección social.</p>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead">
+      <span class="eyebrow">Ideas clave</span>
+      <h2 id="ideasH">El vocabulario del recuento de votos</h2>
+    </div>
+    <div class="ideas" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>François L. Girard, «The fairest way to elect a president, according to mathematics», <i>The Polymathy’s Path</i> (Medium), abril de 2025. Fuente del enfoque sobre Francia 2002 y 1992, de los escenarios de monotonía y del favorito exprimido, y de la explicación del juicio mayoritario. Se basa en David Louapre (<i>Science étonnante</i>) y Rida Laraki.</li>
+    <li><a href="https://www.ncsl.org/elections-and-campaigns/ranked-choice-voting">NCSL: uso del voto por orden de preferencia</a> (uso y prohibiciones por estado)</li>
+    <li><a href="https://ballotpedia.org/Approval_voting">Ballotpedia: voto por aprobación</a> (St. Louis y Fargo)</li>
+    <li><a href="https://www.adn.com/politics/2026/11/03/alaska-on-track-to-keep-its-election-system-early-results-show/">Anchorage Daily News: la Medida 2 de Alaska en 2026</a> (resultados no oficiales)</li>
+    <li><a href="https://www.klcc.org/politics-government/2024-04-23/eugene-could-adopt-star-voting-for-city-elections-how-would-this-work">KLCC: el voto STAR en Oregón</a></li>
+  </ul>
+  <p>El simulador modela votantes que votan con sinceridad según la distancia. Las elecciones reales implican estrategia, participación y mucho más. Esta página explica métodos y no recomienda ninguno.</p>
+</footer>
+
+<script>
+/* ================= shared ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COL=["#E4572E","#2E86DE","#17A673","#D99A0B","#8E44AD"];
+const LET=["A","B","C","D","E"];
+const GRADES=["Rechazo","Malo","Regular","Bueno","Muy bueno","Excelente"];
+const GCOL=["#9B2C3B","#D9644A","#E6B450","#9CC27A","#3FA06B","#1E7A55"];
+const pct=x=>(x*100).toFixed(x>=0.995||x<0.005?0:1)+"%";
+const dot=(i,name)=>`<span class="dot" style="--c:${COL[i]}" title="${esc(name||"Candidato "+LET[i])}">${LET[i]}</span>`;
+const argmax=a=>a.reduce((b,v,i)=>v>a[b]?i:b,0);
+
+/* ================= Simulator ================= */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd=mulberry(20261106);
+const OFF=[0,1,2].map(()=>Array.from({length:320},()=>{const u=Math.max(1e-9,rnd()),v=rnd();const r=Math.sqrt(-2*Math.log(u));return[r*Math.cos(2*Math.PI*v),r*Math.sin(2*Math.PI*v)]}));
+
+const PRESETS={
+  squeeze:{l:"Compresión del centro",spread:.085,blobs:[[.2,.5,170],[.5,.53,120],[.8,.5,160]],cands:[[.2,.44],[.5,.45],[.8,.44]]},
+  spoiler:{l:"Spoiler",spread:.09,blobs:[[.33,.5,230],[.7,.5,200],[.5,.2,0]],cands:[[.3,.48],[.39,.56],[.7,.5]]},
+  consensus:{l:"Amplio consenso",spread:.11,blobs:[[.3,.55,150],[.7,.55,150],[.5,.3,130]],cands:[[.28,.6],[.5,.48],[.73,.6],[.5,.18]]},
+  polarized:{l:"Polarizado",spread:.07,blobs:[[.22,.5,200],[.78,.5,190],[.5,.8,40]],cands:[[.22,.48],[.5,.52],[.78,.5],[.5,.2]]}
+};
+let S={};
+function loadPreset(k){
+  const p=PRESETS[k];
+  S={preset:k,spread:p.spread,blobs:p.blobs.map(b=>({x:b[0],y:b[1],n:b[2]})),cands:p.cands.map(c=>({x:c[0],y:c[1]}))};
+  document.querySelectorAll("#simPresets .pill").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false"));
+  buildSliders(); update();
+}
+$("#simPresets").innerHTML=Object.entries(PRESETS).map(([k,p])=>`<button type="button" class="pill" data-k="${k}" aria-pressed="false">${p.l}</button>`).join("");
+$("#simPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(b)loadPreset(b.dataset.k)});
+
+function buildSliders(){
+  $("#blobSliders").innerHTML=S.blobs.map((b,i)=>`<div class="sl"><label for="bs${i}">Grupo de votantes ${i+1}<span id="bsv${i}">${b.n}</span></label><input type="range" id="bs${i}" min="0" max="300" step="10" value="${b.n}" data-i="${i}"></div>`).join("")+
+   `<div class="sl"><label for="spread">Dispersión de los grupos<span id="spv">${Math.round(S.spread*100)}</span></label><input type="range" id="spread" min="3" max="20" step="1" value="${Math.round(S.spread*100)}"></div>`;
+}
+$("#blobSliders").addEventListener("input",e=>{
+  const t=e.target;
+  if(t.id==="spread"){S.spread=t.value/100;$("#spv").textContent=t.value}
+  else if(t.dataset.i){S.blobs[t.dataset.i].n=+t.value;$("#bsv"+t.dataset.i).textContent=t.value}
+  markCustom(); update();
+});
+function markCustom(){document.querySelectorAll("#simPresets .pill").forEach(b=>b.setAttribute("aria-pressed","false"))}
+$("#addC").addEventListener("click",()=>{if(S.cands.length<5){const spots=[[.5,.85],[.15,.2],[.85,.2],[.5,.15],[.85,.85]];S.cands.push({x:spots[S.cands.length][0],y:spots[S.cands.length][1]});markCustom();update()}});
+$("#remC").addEventListener("click",()=>{if(S.cands.length>2){S.cands.pop();markCustom();update()}});
+
+function voters(){
+  const V=[];
+  S.blobs.forEach((b,bi)=>{for(let i=0;i<b.n;i++){const o=OFF[bi][i];V.push({x:Math.min(1,Math.max(0,b.x+o[0]*S.spread)),y:Math.min(1,Math.max(0,b.y+o[1]*S.spread))})}});
+  return V;
+}
+
+function elect(){
+  const V=voters(),C=S.cands.length,N=V.length;
+  if(!N) return null;
+  const D=V.map(v=>S.cands.map(c=>Math.hypot(v.x-c.x,v.y-c.y)));
+  const R=D.map(d=>[...d.keys()].sort((a,b)=>d[a]-d[b]));
+  const res=[];
+  // plurality
+  const first=Array(C).fill(0);R.forEach(r=>first[r[0]]++);
+  const pw=argmax(first);
+  res.push({k:"plu",n:"Mayoría simple",f:"Elegir uno",w:pw,bars:first.map(v=>({v:v/N,l:pct(v/N)}))});
+  // two-round
+  const ord=[...first.keys()].sort((a,b)=>first[b]-first[a]);const[a,b]=ord;
+  let ha=0,hb=0;D.forEach(d=>{if(d[a]<d[b])ha++;else if(d[b]<d[a])hb++});
+  const trw=first[a]/N>0.5?a:(ha>=hb?a:b);
+  res.push({k:"tr",n:"Segunda vuelta",f:"Elegir uno",w:trw,bars:first.map(v=>({v:v/N,l:pct(v/N)})),note:first[a]/N>0.5?`${LET[a]} gana directamente con mayoría.`:`Segunda vuelta: ${LET[a]} ${pct(ha/(ha+hb))} vs ${LET[b]} ${pct(hb/(ha+hb))}`});
+  // IRV
+  let act=new Set([...Array(C).keys()]),rounds=[],iw=null,elim=[];
+  while(act.size>0){
+    const t=Array(C).fill(0);R.forEach(r=>{const f=r.find(x=>act.has(x));t[f]++});
+    rounds.push(t.slice());
+    const al=[...act];const top=al.reduce((p,x)=>t[x]>t[p]?x:p,al[0]);
+    if(t[top]>N/2||act.size===1){iw=top;break}
+    const lo=al.reduce((p,x)=>t[x]<t[p]?x:p,al[0]);act.delete(lo);elim.push(lo);
+  }
+  const fin=rounds[rounds.length-1];
+  res.push({k:"irv",n:"Voto preferencial (IRV)",f:"Ordenar",w:iw,bars:fin.map(v=>({v:v/N,l:v?pct(v/N):"fuera"})),note:`${rounds.length} ronda${rounds.length>1?"s":""}. ${elim.length?"Eliminados en orden: "+elim.map(x=>LET[x]).join(", ")+".":"Mayoría en la primera ronda."}`});
+  // Borda
+  const bo=Array(C).fill(0);R.forEach(r=>r.forEach((c,i)=>bo[c]+=C-1-i));
+  const bmax=N*(C-1);
+  res.push({k:"borda",n:"Recuento Borda",f:"Ordenar",w:argmax(bo),bars:bo.map(v=>({v:v/bmax,l:(v/N).toFixed(2)+" pt"})),note:"Puntos promedio por votante."});
+  // Condorcet
+  const P=[...Array(C)].map(()=>Array(C).fill(0));
+  D.forEach(d=>{for(let i=0;i<C;i++)for(let j=0;j<C;j++)if(i!==j&&d[i]<d[j])P[i][j]++});
+  const wins=[...Array(C).keys()].map(i=>[...Array(C).keys()].filter(j=>j!==i&&P[i][j]>P[j][i]).length);
+  let cw=wins.findIndex(w=>w===C-1),cnote;
+  if(cw>=0) cnote=`${LET[cw]} vence a todos sus rivales uno contra uno.`;
+  else{const worst=[...Array(C).keys()].map(i=>Math.max(...[...Array(C).keys()].filter(j=>j!==i).map(j=>P[j][i]-P[i][j])));cw=worst.indexOf(Math.min(...worst));cnote=`Ningún candidato vence a todos (un ciclo). Minimax elige a ${LET[cw]}.`}
+  res.push({k:"cond",n:"Condorcet",f:"Ordenar",w:cw,bars:wins.map(w=>({v:w/(C-1),l:`${w}/${C-1} victorias`})),note:cnote});
+  // Approval
+  const ap=Array(C).fill(0);D.forEach((d,vi)=>{const m=d.reduce((s,x)=>s+x,0)/C;d.forEach((x,c)=>{if(x<m||c===R[vi][0])ap[c]++})});
+  res.push({k:"app",n:"Aprobación",f:"Calificar",w:argmax(ap),bars:ap.map(v=>({v:v/N,l:pct(v/N)})),note:"Cada votante aprueba a todos los candidatos más cercanos que su promedio."});
+  // Score + STAR
+  const sc=Array(C).fill(0),SV=D.map(d=>{const mn=Math.min(...d),mx=Math.max(...d);return d.map(x=>mx>mn?Math.round(5*(mx-x)/(mx-mn)):5)});
+  SV.forEach(s=>s.forEach((x,c)=>sc[c]+=x));
+  res.push({k:"score",n:"Puntuación (0–5)",f:"Calificar",w:argmax(sc),bars:sc.map(v=>({v:v/(5*N),l:(v/N).toFixed(2)+" ★"})),note:"Estrellas promedio por votante."});
+  const so=[...sc.keys()].sort((x,y)=>sc[y]-sc[x]);const[s1,s2]=so;let p1=0,p2=0;SV.forEach(s=>{if(s[s1]>s[s2])p1++;else if(s[s2]>s[s1])p2++});
+  res.push({k:"star",n:"STAR",f:"Calificar",w:p1>=p2?s1:s2,bars:sc.map(v=>({v:v/(5*N),l:(v/N).toFixed(2)+" ★"})),note:`Segunda vuelta automática: ${LET[s1]} preferido por ${p1}, ${LET[s2]} por ${p2}.`});
+  // Majority judgment
+  const G=D.map(d=>d.map(x=>Math.max(0,Math.min(5,5-Math.floor(x/0.11)))));
+  const mj=[...Array(C).keys()].map(c=>{const g=G.map(r=>r[c]).sort((x,y)=>x-y);const med=g[Math.floor((N-1)/2)];const p=g.filter(x=>x>med).length/N,q=g.filter(x=>x<med).length/N;const dist=Array(6).fill(0);g.forEach(x=>dist[x]++);return{med,val:med+(p>q?p:-q),dist:dist.map(x=>x/N)}});
+  const mjw=argmax(mj.map(m=>m.val));
+  res.push({k:"mj",n:"Juicio mayoritario",f:"Calificar",w:mjw,mj,note:`${LET[mjw]} tiene la mejor calificación mediana: ${GRADES[mj[mjw].med]}.`});
+  // utility reference
+  const avg=[...Array(C).keys()].map(c=>D.reduce((s,d)=>s+d[c],0)/N);
+  return {res,N,util:avg.indexOf(Math.min(...avg)),R};
+}
+
+/* canvas */
+const cv=$("#map"),ctx=cv.getContext("2d");
+let W=400,dpr=1,last=null;
+function resize(){const r=cv.getBoundingClientRect();dpr=window.devicePixelRatio||1;W=r.width;cv.width=W*dpr;cv.height=W*dpr;draw()}
+new ResizeObserver(resize).observe(cv);
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function draw(){
+  if(!S.cands)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,W);
+  const line=css("--line"),ink=css("--ink"),muted=css("--muted"),card=css("--card");
+  ctx.strokeStyle=line;ctx.lineWidth=1;
+  for(let i=1;i<10;i++){const p=i*W/10;ctx.beginPath();ctx.moveTo(p,0);ctx.lineTo(p,W);ctx.moveTo(0,p);ctx.lineTo(W,p);ctx.stroke()}
+  ctx.fillStyle=muted;ctx.font="11px 'IBM Plex Mono', monospace";
+  ctx.fillText("Tema 1 →",W-70,W-8);ctx.save();ctx.translate(12,70);ctx.rotate(-Math.PI/2);ctx.fillText("Tema 2 →",0,0);ctx.restore();
+  // voters
+  const V=voters();
+  V.forEach(v=>{let best=0,bd=9;S.cands.forEach((c,i)=>{const d=Math.hypot(v.x-c.x,v.y-c.y);if(d<bd){bd=d;best=i}});ctx.fillStyle=COL[best];ctx.globalAlpha=.7;ctx.beginPath();ctx.arc(v.x*W,v.y*W,2.3,0,7);ctx.fill()});
+  ctx.globalAlpha=1;
+  // blob handles
+  S.blobs.forEach((b,i)=>{if(!b.n)return;ctx.setLineDash([4,4]);ctx.strokeStyle=ink;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(b.x*W,b.y*W,16,0,7);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=card;ctx.beginPath();ctx.arc(b.x*W,b.y*W,9,0,7);ctx.fill();ctx.fillStyle=ink;ctx.font="600 11px 'IBM Plex Mono', monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(i+1,b.x*W,b.y*W+.5)});
+  // candidates
+  S.cands.forEach((c,i)=>{const r=drag&&drag.t==="c"&&drag.i===i?19:16;ctx.fillStyle=COL[i];ctx.strokeStyle=card;ctx.lineWidth=3;ctx.beginPath();ctx.arc(c.x*W,c.y*W,r,0,7);ctx.fill();ctx.stroke();ctx.strokeStyle=ink;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle="#fff";ctx.font="700 14px 'IBM Plex Mono', monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(LET[i],c.x*W,c.y*W+1)});
+  ctx.textAlign="start";ctx.textBaseline="alphabetic";
+}
+let drag=null;
+function pos(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height}}
+cv.addEventListener("pointerdown",e=>{
+  const p=pos(e);let hit=null,bd=24;
+  S.cands.forEach((c,i)=>{const d=Math.hypot((c.x-p.x)*W,(c.y-p.y)*W);if(d<bd){bd=d;hit={t:"c",i}}});
+  S.blobs.forEach((b,i)=>{const d=Math.hypot((b.x-p.x)*W,(b.y-p.y)*W);if(b.n&&d<bd-6){bd=d;hit={t:"b",i}}});
+  if(hit){drag=hit;cv.setPointerCapture(e.pointerId);cv.classList.add("dragging");markCustom();e.preventDefault()}
+});
+cv.addEventListener("pointermove",e=>{if(!drag)return;const p=pos(e);const o=drag.t==="c"?S.cands[drag.i]:S.blobs[drag.i];o.x=Math.min(.98,Math.max(.02,p.x));o.y=Math.min(.98,Math.max(.02,p.y));schedule()});
+const end=()=>{drag=null;cv.classList.remove("dragging");draw()};
+cv.addEventListener("pointerup",end);cv.addEventListener("pointercancel",end);
+let raf=0;function schedule(){if(!raf)raf=requestAnimationFrame(()=>{raf=0;update()})}
+
+function update(){
+  draw();
+  $("#addC").disabled=S.cands.length>=5;$("#remC").disabled=S.cands.length<=2;
+  const E=elect();
+  if(!E){$("#summary").innerHTML="<div><b>Sin votantes</b><small>Aumenta el tamaño de un grupo de votantes.</small></div>";$("#methods").innerHTML="";return}
+  const cnt=Array(S.cands.length).fill(0);E.res.forEach(r=>cnt[r.w]++);
+  const distinct=cnt.filter(x=>x).length;
+  const order=[...cnt.keys()].filter(i=>cnt[i]).sort((a,b)=>cnt[b]-cnt[a]);
+  $("#summary").innerHTML=`<div style="min-width:0"><b>${distinct===1?`Todos los métodos eligen a ${LET[order[0]]}`:`${distinct} ganadores distintos con las mismas papeletas`}</b>
+    <small>${E.N} votantes. El más cercano al votante promedio: candidato ${LET[E.util]}.</small>
+    <div class="tallies">${order.map(i=>`<span class="tally">${dot(i)}${cnt[i]} de ${E.res.length}</span>`).join("")}</div></div>`;
+  $("#methods").innerHTML=E.res.map(r=>{
+    let inner;
+    if(r.k==="mj"){
+      inner=`<div class="mj">${r.mj.map((m,i)=>`<div class="mjr"><span style="color:${COL[i]};font-weight:700">${LET[i]}</span><span class="mjb">${m.dist.map((x,g)=>`<i style="width:${x*100}%;background:${GCOL[g]}"></i>`).join("")}</span><span style="color:var(--muted)">${GRADES[m.med]}</span></div>`).join("")}
+      <div class="note">${esc(r.note)} La línea marca el 50 %.</div></div>`;
+    } else {
+      inner=`<div class="bars">${r.bars.map((b,i)=>`<div class="bar"><span class="k" style="color:${COL[i]};font-weight:700">${LET[i]}</span><span class="t"><i style="width:${Math.max(0,b.v*100)}%;--c:${COL[i]}"></i></span><span class="v">${b.l}</span></div>`).join("")}${r.note?`<div class="note">${esc(r.note)}</div>`:""}</div>`;
+    }
+    return `<div class="m"><div><div class="mn">${r.n}</div><div class="mf">${r.f}</div></div>${inner}<div class="win">${dot(r.w)}</div></div>`;
+  }).join("");
+}
+
+/* ================= Ballot bench ================= */
+const BP={
+  mono:{l:"Más votos y aun así pierde",cands:[["Rojo","#E4572E"],["Celeste","#4FB3E8"],["Marino","#2B3F8C"]],
+    story:"<b>Fallo de monotonía (del artículo de Girard)</b>Antes: Rojo gana con voto preferencial. Después: tres puntos de los votantes que ponían primero a Marino pasan a Rojo, y Rojo pierde. Ganar apoyo le cuesta la elección, porque cambia quién queda eliminado primero.",
+    variants:[["Antes",[[[0,1,2],34],[[1,0,2],32],[[2,1,0],34]]],["Tras pasar 3 puntos a Rojo",[[[0,1,2],37],[[1,0,2],32],[[2,1,0],31]]]]},
+  squeeze:{l:"Favorito exprimido",cands:[["Rojo","#E4572E"],["Verde","#17A673"],["Azul","#2E86DE"]],
+    story:"<b>El candidato con el que todos pueden vivir</b>Verde es la primera o segunda opción de todos y vence a cada rival uno contra uno, pero queda último en primeras preferencias. Adaptado del artículo de Girard; cambiamos su reparto 40/40 por 41/39 para evitar un empate.",
+    variants:[["Predeterminado",[[[0,1,2],41],[[2,1,0],39],[[1,0,2],10],[[1,2,0],10]]]]},
+  cycle:{l:"La paradoja de Condorcet",cands:[["A","#E4572E"],["B","#2E86DE"],["C","#17A673"]],
+    story:"<b>Mayorías que dan vueltas en círculo (Condorcet, 1785)</b>A vence a B, B vence a C y C vence a A, cada uno por casi dos a uno. Gane quien gane, una mayoría prefiere a otro.",
+    variants:[["Predeterminado",[[[0,1,2],34],[[1,2,0],33],[[2,0,1],33]]]]}
+};
+let B={};
+const perms3=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+function loadBench(k,v=0){
+  const p=BP[k];B={k,v,cands:p.cands,groups:p.variants[v][1].map(g=>({o:g[0].slice(),s:g[1]}))};
+  document.querySelectorAll("#benchPresets .pill").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false"));
+  $("#story").innerHTML=p.story;
+  $("#variantRow").innerHTML=p.variants.length>1?`<span class="lbl">Mostrar</span><div class="seg">${p.variants.map((x,i)=>`<button type="button" class="pill" data-v="${i}" aria-pressed="${i===v}">${esc(x[0])}</button>`).join("")}</div>`:"";
+  $("#variantRow").style.display=p.variants.length>1?"flex":"none";
+  renderGroups();benchCount();
+}
+$("#benchPresets").innerHTML=Object.entries(BP).map(([k,p])=>`<button type="button" class="pill" data-k="${k}" aria-pressed="false">${p.l}</button>`).join("");
+$("#benchPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(b)loadBench(b.dataset.k)});
+$("#variantRow").addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(b)loadBench(B.k,+b.dataset.v)});
+const cn=i=>B.cands[i][0];
+function cdot(i){return `<span class="dot" style="--c:${B.cands[i][1]}">${esc(cn(i)[0])}</span>`}
+function renderGroups(){
+  $("#groups").innerHTML=B.groups.map((g,gi)=>`<div class="grp">
+    <select data-g="${gi}" aria-label="Orden del grupo de papeletas ${gi+1}">${perms3.map(p=>`<option value="${p.join("")}" ${p.join("")===g.o.join("")?"selected":""}>${p.map(cn).join(" › ")}</option>`).join("")}</select>
+    <div class="share"><input type="range" min="0" max="60" value="${g.s}" data-s="${gi}" aria-label="Porcentaje de votantes del grupo ${gi+1}"><span id="sv${gi}">${g.s}</span></div>
+    <button class="x" type="button" data-x="${gi}" aria-label="Quitar grupo ${gi+1}" ${B.groups.length<=2?"disabled":""}>×</button></div>`).join("");
+  $("#addG").disabled=B.groups.length>=6;
+}
+$("#groups").addEventListener("input",e=>{const t=e.target;if(t.dataset.s){B.groups[t.dataset.s].s=+t.value;$("#sv"+t.dataset.s).textContent=t.value;benchCount()}});
+$("#groups").addEventListener("change",e=>{const t=e.target;if(t.dataset.g){B.groups[t.dataset.g].o=t.value.split("").map(Number);benchCount()}});
+$("#groups").addEventListener("click",e=>{const t=e.target.closest("[data-x]");if(t&&B.groups.length>2){B.groups.splice(+t.dataset.x,1);renderGroups();benchCount()}});
+$("#addG").addEventListener("click",()=>{if(B.groups.length<6){B.groups.push({o:[0,2,1],s:10});renderGroups();benchCount()}});
+
+function benchCount(){
+  const tot=B.groups.reduce((s,g)=>s+g.s,0);
+  $("#total").textContent=`Total: ${tot} votantes · porcentajes sobre el total`;
+  if(!tot){$("#benchOut").innerHTML='<div class="oc">Da votantes al menos a un grupo.</div>';return}
+  const G=B.groups.map(g=>({o:g.o,w:g.s/tot})),C=3,E=1e-9;
+  const winTxt=(arr,hi=true)=>{const m=hi?Math.max(...arr):Math.min(...arr);const t=[...arr.keys()].filter(i=>Math.abs(arr[i]-m)<E);return t};
+  const show=ids=>ids.length>1?`Empate ${ids.map(cdot).join("")}`:`${cdot(ids[0])} ${esc(cn(ids[0]))}`;
+  const row=(lab,arr,fmt)=>arr.map((v,i)=>`<td>${fmt(v)}</td>`).join("");
+  // plurality
+  const f=Array(C).fill(0);G.forEach(g=>f[g.o[0]]+=g.w);
+  const pw=winTxt(f);
+  // runoff
+  const ord=[0,1,2].sort((a,b)=>f[b]-f[a]);const[a,b]=ord;
+  const h=(x,y)=>G.reduce((s,g)=>s+(g.o.indexOf(x)<g.o.indexOf(y)?g.w:0),0);
+  let rw,rnote;
+  if(f[a]>0.5+E){rw=[a];rnote=`${cn(a)} tiene mayoría en la primera vuelta.`}
+  else{const ha=h(a,b),hb=h(b,a);rw=Math.abs(ha-hb)<E?[a,b]:[ha>hb?a:b];rnote=`${Math.abs(f[b]-f[ord[2]])<E?"Empate por el segundo lugar en la primera vuelta. ":""}Segunda vuelta: ${cn(a)} ${pct(ha)} vs ${cn(b)} ${pct(hb)}.`}
+  // IRV
+  let act=[0,1,2],rounds=[],iw=null,inote="";
+  while(true){
+    const t=Array(C).fill(0);G.forEach(g=>{const x=g.o.find(c=>act.includes(c));t[x]+=g.w});
+    rounds.push({t:t.slice(),act:act.slice()});
+    const mx=Math.max(...act.map(c=>t[c]));
+    if(mx>0.5+E||act.length===1){iw=act.filter(c=>Math.abs(t[c]-mx)<E);break}
+    if(act.length===2){iw=act;break}
+    const mn=Math.min(...act.map(c=>t[c]));const lows=act.filter(c=>Math.abs(t[c]-mn)<E);
+    if(lows.length>1)inote="Empate en el último lugar; este recuento elimina al último de la lista. Las reglas reales desempatan por sorteo o por rondas anteriores.";
+    act=act.filter(c=>c!==lows[lows.length-1]);
+  }
+  const irvT=`<table class="rounds"><thead><tr><th>Ronda</th>${[0,1,2].map(i=>`<th>${esc(cn(i))}</th>`).join("")}</tr></thead><tbody>${rounds.map((r,ri)=>`<tr><td>${ri+1}</td>${r.t.map((v,i)=>r.act.includes(i)?`<td>${pct(v)}</td>`:`<td class="out-c">fuera</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  // Borda
+  const bo=Array(C).fill(0);G.forEach(g=>g.o.forEach((c,i)=>bo[c]+=g.w*(C-1-i)));
+  const bw=winTxt(bo);
+  // Condorcet
+  const P=[0,1,2].map(x=>[0,1,2].map(y=>x===y?null:h(x,y)));
+  const beatsAll=[0,1,2].filter(x=>[0,1,2].every(y=>y===x||P[x][y]>P[y][x]+E));
+  const cyc=!beatsAll.length;
+  const pt=`<table class="rounds"><thead><tr><th>vs</th>${[0,1,2].map(i=>`<th>${esc(cn(i))}</th>`).join("")}</tr></thead><tbody>${[0,1,2].map(x=>`<tr><td>${esc(cn(x))}</td>${[0,1,2].map(y=>x===y?"<td>–</td>":`<td style="color:${P[x][y]>P[y][x]+E?"var(--good)":P[y][x]>P[x][y]+E?"var(--bad)":"inherit"}">${pct(P[x][y])}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const ws=new Set([pw,rw,iw,bw,beatsAll.length?beatsAll:[]].map(x=>x.join(",")));
+  $("#benchOut").innerHTML=`
+   <div class="oc"><h3>Mayoría simple <span class="res">${show(pw)}</span></h3><div class="note">Primeras preferencias: ${[0,1,2].map(i=>`${esc(cn(i))} ${pct(f[i])}`).join(" · ")}</div></div>
+   <div class="oc"><h3>Segunda vuelta <span class="res">${show(rw)}</span></h3><div class="note">${esc(rnote)}</div></div>
+   <div class="oc"><h3>Voto preferencial (IRV) <span class="res">${show(iw)}</span></h3>${irvT}${inote?`<div class="note">${inote}</div>`:""}</div>
+   <div class="oc"><h3>Recuento Borda <span class="res">${show(bw)}</span></h3><div class="note">Puntos por votante (2 por el primero, 1 por el segundo): ${[0,1,2].map(i=>`${esc(cn(i))} ${bo[i].toFixed(2)}`).join(" · ")}</div></div>
+   <div class="oc"><h3>Condorcet <span class="res">${cyc?"Sin ganador: un ciclo":show(beatsAll)}</span></h3><div class="tblwrap">${pt}</div><div class="note">Lee por filas: el porcentaje que prefiere al candidato de la fila sobre el de la columna. En verde, gana el duelo; en rojo, lo pierde.</div></div>
+   <div class="note" style="padding:0 4px">${ws.size>1?`Estas papeletas producen ${ws.size} resultados distintos según el recuento.`:"Todos los métodos ordinales coinciden con estas papeletas."} La aprobación, la puntuación y el juicio mayoritario necesitan papeletas con calificaciones, así que están en el simulador de arriba.</div>`;
+}
+
+/* ================= Field guide ================= */
+const FAM=[
+ {n:"Elegir uno",s:"Marca un solo candidato",m:[
+  {t:"Plurality",aka:"Mayoría simple (first-past-the-post)",one:"Gana quien tiene más votos, haya mayoría o no.",
+   ballot:{h:"Marca uno",rows:[["✕","Candidato A"],["","Candidato B"],["","Candidato C"]]},
+   how:"Se cuenta la única marca de cada papeleta. Gana el candidato con más marcas, aunque tenga bastante menos de la mitad de los votos.",
+   pro:["La papeleta más simple y el recuento más rápido","Vincula a un representante con un distrito","Suele dar ganadores claros y gobiernos bipartidistas estables"],
+   con:["Los candidatos parecidos se dividen el voto (el efecto spoiler)","El ganador puede tener en contra a la mayoría","Empuja a abandonar al favorito por opciones «elegibles» y tiende al bipartidismo (ley de Duverger)"],
+   used:"La Cámara de Representantes y la mayoría de elecciones en EE. UU., la Cámara de los Comunes del Reino Unido, Canadá, India."},
+  {t:"Segunda vuelta",aka:"Sistema a dos vueltas",one:"Si nadie supera el 50 %, los dos primeros vuelven a enfrentarse.",
+   ballot:{h:"Vuelta 1: marca uno",rows:[["✕","Candidato A"],["","Candidato B"],["","Candidato C"]]},
+   how:"La primera vuelta es por mayoría simple. Si nadie obtiene mayoría, los dos primeros se enfrentan en una segunda elección semanas después.",
+   pro:["El ganador tiene mayoría en la vuelta final","Los votantes pueden apoyar a su favorito en la primera vuelta","Conocido y fácil de explicar"],
+   con:["La división del voto en la primera vuelta puede eliminar a un candidato con amplio apoyo","Cuesta una segunda elección, y la participación suele bajar","Más apoyo puede ser contraproducente (falla la monotonía)"],
+   used:"Las elecciones presidenciales de Francia y Brasil; las segundas vueltas de primarias en varios estados de EE. UU., como Georgia. En Francia, en 2002, el voto de la izquierda se dividió entre muchos candidatos y Lionel Jospin (16,2 %) quedó fuera de la segunda vuelta por detrás de Jean-Marie Le Pen (16,9 %)."}
+ ]},
+ {n:"Ordenar",s:"Ordena a los candidatos por preferencia",m:[
+  {t:"Voto preferencial",aka:"Segunda vuelta instantánea (IRV) · voto alternativo",one:"Elimina al último y transfiere sus papeletas, ronda a ronda.",
+   ballot:{h:"Ordena por preferencia",rows:[["1","Candidato B"],["2","Candidato A"],["3","Candidato C"]]},
+   how:"Se cuentan las primeras preferencias. Si nadie tiene mayoría, se elimina al último y cada una de sus papeletas pasa a su siguiente opción. Se repite hasta que alguien tenga mayoría de las papeletas restantes.",
+   pro:["Reduce los spoilers: poner primero a un candidato con pocas opciones no desperdicia tu voto","El ganador final tiene mayoría de las papeletas que siguen en juego","Ordenar una segunda opción nunca perjudica a tu favorito (later-no-harm)"],
+   con:["Puede eliminar pronto a un centrista con amplio apoyo (compresión del centro)","Más apoyo puede causar una derrota (mira el banco de arriba)","El recuento requiere centralización y puede tardar días; las papeletas que no ordenan a ningún finalista quedan fuera"],
+   used:"La Cámara de Representantes de Australia (desde 1918), la presidencia de Irlanda y, a nivel estatal, Alaska y Maine. La NCSL contabiliza 19 estados de EE. UU. que lo prohíben. En resultados no oficiales de noviembre de 2026, los votantes de Alaska rechazaban por poco un segundo intento de derogarlo."},
+  {t:"Recuento Borda",aka:"Puntos por posición",one:"Puntos por cada posición; gana el total más alto.",
+   ballot:{h:"Ordena por preferencia",rows:[["2 pt","Candidato B"],["1 pt","Candidato A"],["0 pt","Candidato C"]]},
+   how:"Con n candidatos, la primera opción recibe n−1 puntos, la segunda n−2, y así sucesivamente. Se suman los puntos. Propuesto por Jean-Charles de Borda en 1770.",
+   pro:["Usa toda la papeleta","Premia a los candidatos ampliamente aceptables","Fácil de sumar"],
+   con:["Muy sensible a la estrategia, como hundir a un rival en el último lugar","Añadir un candidato menor puede cambiar al ganador","Puede derrotar a un candidato al que una mayoría absoluta puso primero"],
+   used:"El parlamento de Nauru (una variante), los dos escaños de las minorías en Eslovenia y muchos premios, como los puntos 3-2-1 del Trofeo Heisman."},
+  {t:"Métodos de Condorcet",aka:"Ranked Pairs · Schulze · Copeland",one:"Elige a quien vence a todos sus rivales uno contra uno.",
+   ballot:{h:"Ordena por preferencia",rows:[["1","Candidato C"],["2","Candidato B"],["3","Candidato A"]]},
+   how:"Con las preferencias se simulan todos los duelos uno contra uno. Quien los gana todos es el ganador de Condorcet. Cuando las mayorías forman un ciclo, reglas como Ranked Pairs o Schulze lo resuelven. Lleva el nombre del marqués de Condorcet (1785).",
+   pro:["Elige al candidato que una mayoría prefiere frente a cada alternativa","Resiste a los spoilers y a la compresión del centro","Sólido pedigrí matemático"],
+   con:["Los ciclos necesitan una regla de desempate difícil de explicar","El recuento es opaco para la mayoría de los votantes","Ordenar una segunda opción puede perjudicar a tu favorito"],
+   used:"Elecciones del líder del proyecto Debian y muchas organizaciones profesionales y de código abierto. Poco usado en cargos públicos."}
+ ]},
+ {n:"Calificar",s:"Juzga a cada candidato por separado",m:[
+  {t:"Voto por aprobación",aka:"Vota por los que quieras",one:"Marca a todos los candidatos que te parezcan aceptables.",
+   ballot:{h:"Marca a todos los que apruebes",rows:[["✕","Candidato A"],["✕","Candidato B"],["","Candidato C"]]},
+   how:"Cada aprobación es un voto. Gana el candidato aprobado por más votantes.",
+   pro:["Tan fácil de contar como la mayoría simple, con el mismo equipo","Aprobar también a tu favorito nunca perjudica","Los candidatos parecidos no se dividen el apoyo"],
+   con:["No hay forma de mostrar cuánto prefieres a un candidato aprobado","Decidir dónde trazar la línea de aprobación es en sí estratégico","Puede elegir a un candidato que una mayoría puso segundo, por encima de su favorito"],
+   used:"Las primarias municipales de St. Louis desde 2021 (pasan los dos primeros); Fargo (Dakota del Norte) de 2020 a 2024, antes de una prohibición estatal; varias sociedades científicas."},
+  {t:"Voto por puntuación",aka:"Voto por rango",one:"Califica a cada candidato en una escala; gana el total más alto.",
+   ballot:{h:"Califica de 0 a 5",rows:[["5","Candidato A"],["3","Candidato B"],["0","Candidato C"]]},
+   how:"Da a cada candidato un número, por ejemplo de 0 a 5. Se suman o promedian las puntuaciones. Gana el más alto.",
+   pro:["Expresa la intensidad de la preferencia","Sumas simples, mesa por mesa","Los candidatos parecidos no dividen el voto"],
+   con:["Los votantes estratégicos exageran con puntuaciones de todo o nada","Un 3 significa cosas distintas para distintas personas","Rara vez se ha probado en cargos públicos"],
+   used:"Deportes con jueces y valoraciones en línea; casi nunca en elecciones públicas."},
+  {t:"Voto STAR",aka:"Puntuación con segunda vuelta automática",one:"Puntúa a los candidatos de 0 a 5; luego los dos primeros se enfrentan en una segunda vuelta instantánea.",
+   ballot:{h:"Califica de 0 a 5 estrellas",rows:[["5","Candidato A"],["4","Candidato B"],["0","Candidato C"]]},
+   how:"Se suman las estrellas. Pasan los dos candidatos con más puntos. Gana el finalista al que más votantes puntuaron más alto.",
+   pro:["Papeleta expresiva más un control de mayoría","La segunda vuelta amortigua la exageración de puntuaciones","Se cuenta con simples sumas"],
+   con:["El recuento en dos pasos es más difícil de explicar que la mayoría simple","Los candidatos parecidos pueden influir en quién llega a la segunda vuelta","Poca experiencia en elecciones públicas"],
+   used:"Inventado en Oregón hacia 2014. Se usa en elecciones de partidos de Oregón y en la primaria de 2020 del Independent Party of Oregon. Los votantes de Eugene lo rechazaron para las elecciones municipales en 2024."},
+  {t:"Juicio mayoritario",aka:"Calificación mediana",one:"Califica a cada candidato con palabras; gana la mejor calificación mediana.",
+   ballot:{h:"Califica a cada uno",rows:[["Excelente","Candidato A"],["Regular","Candidato B"],["Rechazo","Candidato C"]]},
+   how:"Los votantes califican a cada candidato de Excelente a Rechazo. La calificación mayoritaria de un candidato es la mediana: la mejor calificación que al menos la mitad de los votantes le da o supera. Gana la calificación mayoritaria más alta, con un desempate definido. Propuesto por Michel Balinski y Rida Laraki (2007).",
+   pro:["Cada candidato se juzga con independencia de los demás","Exagerar una calificación rara vez cambia la mediana","Si todos los candidatos salen mal calificados, el resultado lo dice"],
+   con:["Necesita un significado compartido para las calificaciones","Las reglas de desempate son poco conocidas","El voto estratégico se reduce, no se elimina: ningún método escapa al teorema de Gibbard"],
+   used:"La «Primaire populaire» ciudadana de Francia en 2022, y algunas asociaciones y primarias de partidos."}
+ ]},
+ {n:"Proporcional",s:"Reparte muchos escaños para que reflejen el voto",m:[
+  {t:"Voto único transferible",aka:"STV",one:"Papeletas ordenadas en distritos plurinominales; los excedentes y los eliminados se transfieren.",
+   ballot:{h:"Ordena a tantos como quieras",rows:[["1","Candidato A (Partido X)"],["2","Candidato D (Partido Y)"],["3","Candidato B (Partido X)"]]},
+   how:"Un candidato que alcanza la cuota de votos queda elegido. Sus votos sobrantes, y los de los candidatos eliminados, pasan a las siguientes opciones hasta cubrir todos los escaños.",
+   pro:["Proporcional sin necesidad de listas de partido","Los votantes eligen entre candidatos del mismo partido","Pocos votos desperdiciados"],
+   con:["Papeletas largas y recuentos complejos","Los distritos más grandes debilitan el vínculo local","Los resultados pueden tardar días"],
+   used:"El Dáil de Irlanda, Malta, el Senado de Australia, la Asamblea de Irlanda del Norte, los concejos locales de Escocia y Cambridge (Massachusetts)."},
+  {t:"Representación proporcional por listas",aka:"Listas abiertas o cerradas",one:"Los partidos obtienen escaños en proporción a sus votos.",
+   ballot:{h:"Marca un partido",rows:[["✕","Partido X"],["","Partido Y"],["","Partido Z"]]},
+   how:"Los escaños se reparten con una fórmula como D’Hondt o Sainte-Laguë, a menudo por encima de un umbral mínimo. Van a los candidatos según el orden de la lista, o según los votos personales en listas abiertas.",
+   pro:["El reparto de escaños se ajusta mucho al de votos","Los partidos y puntos de vista minoritarios logran representación","Papeleta sencilla"],
+   con:["Vínculo débil o nulo con un representante local","Las listas cerradas dan a la dirección del partido el poder de decidir quién ocupa los escaños","Suele requerir coaliciones para gobernar"],
+   used:"Países Bajos, Israel, España, Suecia y la mayor parte de Europa y América Latina."},
+  {t:"Representación proporcional mixta",aka:"Sistema mixto · sistema de miembro adicional",one:"Escaños de distrito más escaños compensatorios de lista para que el total sea proporcional.",
+   ballot:{h:"Dos votos",rows:[["✕","Distrito: Candidato A"],["✕","Partido: Partido Y"]]},
+   how:"Los votantes eligen a un representante local por mayoría simple y también votan por un partido. Se añaden escaños de lista para que el total de cada partido coincida con su porcentaje de voto de partido.",
+   pro:["Mantiene representantes locales","El resultado global es proporcional","Una contienda de mayoría simple conocida a nivel de distrito"],
+   con:["Los dos tipos de miembros pueden parecer desiguales","Los partidos pueden manipularlo con listas señuelo","El tamaño del parlamento puede variar (escaños excedentes)"],
+   used:"Alemania, Nueva Zelanda (desde 1996) y el Parlamento escocés."}
+ ]}
+];
+$("#families").innerHTML=FAM.map(f=>`<div class="fam"><h3>${f.n} <small>${f.s}</small></h3><div class="cards">${f.m.map(m=>`
+  <details class="mc"><summary><div><div class="t">${m.t}</div><div class="aka">${esc(m.aka)}</div></div><span class="chev" aria-hidden="true">+</span><div class="one">${esc(m.one)}</div></summary>
+  <div class="body">
+    <div class="ballot"><div class="bh">Papeleta de ejemplo · ${esc(m.ballot.h)}</div><div class="bl">${m.ballot.rows.map(r=>`<span class="mk ${r[0]?"":"off"}">${r[0]||"&nbsp;"}</span><span>${esc(r[1])}</span>`).join("")}</div></div>
+    <p class="how">${esc(m.how)}</p>
+    <div class="pc"><div class="pro"><h4>Ventajas</h4><ul>${m.pro.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div><div class="con"><h4>Limitaciones</h4><ul>${m.con.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
+    <div class="used"><b>Dónde se usa</b>${esc(m.used)}</div>
+  </div></details>`).join("")}</div></div>`).join("");
+
+/* ================= Ledger ================= */
+const L=[["Mayoría simple",[0,1,1,1,0],"Elegir uno"],["Segunda vuelta",[0,1,0,1,0],"Elegir uno ×2"],["Voto preferencial (IRV)",[0,1,0,1,1],"Ordenar"],["Recuento Borda",[0,0,1,0,0],"Ordenar"],["Condorcet",[1,1,1,0,1],"Ordenar"],["Aprobación",[0,0,1,0,1],"Aprobar"],["Puntuación",[0,0,1,0,1],"Calificar"],["STAR",[0,0,1,0,0],"Calificar"],["Juicio mayoritario",[0,0,1,0,1],"Calificar con palabras"]];
+$("#ledger").innerHTML=L.map(r=>`<tr><th scope="row">${r[0]}</th>${r[1].map(v=>`<td>${v?'<span class="y" aria-label="Sí">✓</span>':'<span class="n" aria-label="No">✕</span>'}</td>`).join("")}<td class="mono" style="font-size:12px">${r[2]}</td></tr>`).join("");
+
+/* ================= Ideas ================= */
+const IDEAS=[
+ ["Efecto spoiler","","Un candidato que no puede ganar cambia quién gana al restarle votos a un rival parecido. Los analistas aún discuten casos concretos, como el de Ross Perot en 1992, porque las encuestas a boca de urna sugerían que sus votantes se repartían entre los dos grandes candidatos."],
+ ["Ganador de Condorcet","1785","El candidato que vencería a cada rival en un duelo uno contra uno. Condorcet mostró que no siempre existe: las mayorías pueden formar ciclos, como en el banco de arriba."],
+ ["Monotonía","","Más apoyo nunca debería hacer perder a un candidato. La segunda vuelta, el IRV y el VUT pueden fallar en esto, que es la paradoja del primer ejemplo del banco."],
+ ["Teorema de imposibilidad de Arrow","1951","Kenneth Arrow demostró que ningún método ordinal con tres o más candidatos cumple a la vez una breve lista de condiciones de equidad. Compartió el Nobel de Economía de 1972."],
+ ["Teorema de Gibbard","1973","Las papeletas con calificaciones esquivan a Arrow, pero no a la estrategia: Allan Gibbard (con Satterthwaite en 1975) demostró que todo método determinista con tres o más opciones puede premiar el voto insincero."],
+ ["Ley de Duverger","1950s","Maurice Duverger observó que las elecciones por mayoría simple en distritos uninominales tienden a producir dos partidos dominantes, porque votar a terceros se siente como desperdiciar el voto."],
+ ["Later-no-harm","","Añadir una segunda opción nunca debería perjudicar a tu primera opción. El IRV lo cumple; Condorcet, Borda y los métodos de calificación no. Choca con elegir al candidato de consenso."],
+ ["Voto táctico","","Votar por alguien que no es tu favorito sincero para obtener un mejor resultado, como el «vote utile» francés. Todo método lo permite en parte; se diferencian en cuánto compensa."],
+ ["Compresión del centro","","Un centrista que es la segunda opción de todos queda eliminado por falta de primeras preferencias. Prueba el primer escenario del simulador: el IRV y la mayoría simple pasan por alto al candidato más cercano al votante promedio."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<div class="idea">${i[1]?`<div class="yr">${i[1]}</div>`:""}<h3>${esc(i[0])}</h3><p>${esc(i[2])}</p></div>`).join("");
+
+/* boot */
+loadPreset("squeeze");
+loadBench("mono");
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",draw);
+new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+addEventListener("themechange",()=>{if(typeof draw==="function")draw()});
+</script>
+</body>
+</html>

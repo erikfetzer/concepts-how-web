@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mecánica cuántica · concepts.how</title>
+<meta name="description" content="El experimento de la doble rendija, un cúbit en la esfera de Bloch, una prueba de Bell y la búsqueda de Grover: mecánica y computación cuánticas, interactivas.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/quantum">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/quantum">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Mecánica cuántica · concepts.how">
+<meta property="og:description" content="El experimento de la doble rendija, un cúbit en la esfera de Bloch, una prueba de Bell y la búsqueda de Grover: mecánica y computación cuánticas, interactivas.">
+<meta property="og:url" content="https://concepts.how/es/quantum">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mecánica cuántica · concepts.how">
+<meta name="twitter:description" content="El experimento de la doble rendija, un cúbit en la esfera de Bloch, una prueba de Bell y la búsqueda de Grover: mecánica y computación cuánticas, interactivas.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: an optics bench. The double-slit experiment is the hero; then a qubit you can rotate, a Bell test, and Grover's search, each beside its explanation. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --q:#7B3FE4; --cl:#E4572E; --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --q:#B48CFF; --cl:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --q:#B48CFF; --cl:#FF7A55; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* wave rule: an interference pattern of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 6px,var(--ink) 6px 7px,transparent 7px 14px,var(--ink) 14px 15px,transparent 15px 30px) bottom/100% 7px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.gate{font-family:var(--mono);font-weight:600;min-width:46px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:16px}
+.gate:hover{border-color:var(--q);color:var(--q)}
+.gate.meas{background:var(--ink);color:var(--paper);border-color:var(--ink);font-size:14px;padding:0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.toggle{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+.toggle input{appearance:none;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;transition:background .2s}
+.toggle input::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--card);transition:transform .2s}
+.toggle input:checked{background:var(--cl)}
+.toggle input:checked::after{transform:translateX(18px)}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pbar{display:grid;grid-template-columns:44px minmax(0,1fr) 56px;gap:8px;align-items:center;font-family:var(--mono);font-size:12px}
+.pbar .t{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.pbar .t i{display:block;height:100%;background:var(--c);transition:width .25s}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc p{margin:0;font-size:14.5px}
+.pc .res{border-top:1px dashed var(--line);padding-top:10px;font-size:14px;color:var(--muted)}
+.pc .res b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-right:6px}
+.interp{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:720px}
+.interp th,.interp td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.interp thead th{font-size:12px;background:var(--paper)}
+.interp tr:last-child td,.interp tr:last-child th{border-bottom:0}
+.tblwrap{overflow-x:auto;margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>.lang{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:6px 10px!important;color:var(--ink)!important;text-decoration:none}.lang:hover{border-color:var(--accent)!important}</style>
+</head>
+<body>
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html" aria-current="page">Cuántica</a>
+    <a class="nl lang" href="../quantum.html" lang="en" hreflang="en" title="View in English">EN</a>
+    <span data-theme-picker></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Mecánica cuántica</b> · y computación cuántica</div>
+    <h1>Todo es una onda, <em>hasta que miras.</em></h1>
+    <p class="lede">La mecánica cuántica es la teoría mejor comprobada de la ciencia, y también la más extraña. Las partículas se extienden como ondas, partículas lejanas comparten resultados y mirar cambia el resultado. Los ordenadores cuánticos convierten esa rareza en un nuevo tipo de computación.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#slits">Doble rendija</a><a href="#qubit">Un cúbit</a><a href="#bell">Entrelazamiento</a><a href="#grover">Búsqueda de Grover</a><a href="#ideas">Ideas clave</a><a href="#computing">Computación cuántica</a></nav>
+  </header>
+
+  <section class="demo" id="slits" aria-labelledby="slitH" style="scroll-margin-top:20px">
+    <div class="panel">
+      <canvas id="dsCv" class="cv" height="360" aria-label="Partículas que pasan por dos rendijas y llegan a una pantalla"></canvas>
+      <div class="row" style="margin-top:10px"><button class="btn" type="button" id="dsFire">Pausa</button><button class="btn ghost" type="button" id="dsClear">Limpiar pantalla</button><span class="lbl" id="dsCount" aria-live="polite"></span></div>
+    </div>
+    <div class="stack">
+      <div>
+        <span class="eyebrow">Demo 1 · dualidad onda–partícula</span>
+        <h2 id="slitH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">El experimento de la doble rendija</h2>
+        <p style="margin:8px 0 0;color:var(--muted)">Dispara partículas de una en una hacia dos rendijas. Cada una llega como un único punto, pero juntos los puntos forman franjas: un patrón de interferencia, como si cada partícula pasara por ambas rendijas como una onda. Richard Feynman lo llamó el único misterio de la mecánica cuántica.</p>
+      </div>
+      <label class="toggle" for="dsDet"><input type="checkbox" id="dsDet"> Observar por qué rendija pasa cada partícula</label>
+      <div class="sl"><label for="dsD">Separación entre rendijas<span id="dsDv"></span></label><input type="range" id="dsD" min="0.5" max="1.6" step="0.05" value="1"></div>
+      <div class="sl"><label for="dsL">Longitud de onda<span id="dsLv"></span></label><input type="range" id="dsL" min="400" max="700" step="10" value="520"></div>
+      <div class="callout" id="dsMsg"></div>
+    </div>
+  </section>
+
+  <section class="block" id="qubit" aria-labelledby="qubitH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · superposición</span>
+      <h2 id="qubitH">Un cúbit que puedes girar</h2>
+      <p>Un bit clásico es 0 o 1. Un cúbit puede ser cualquier punto de una esfera: el polo norte es |0⟩, el polo sur es |1⟩ y todo lo demás es una superposición. Las puertas giran la flecha; medir la lleva a un polo al azar, con más probabilidad cuanto más cerca estaba.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="blCv" class="cv" height="380" aria-label="Esfera de Bloch que muestra el estado del cúbit como una flecha" style="cursor:grab;touch-action:none"></canvas>
+        <p class="lbl" style="margin:8px 0 0">Arrastra la esfera para girarla</p>
+      </div>
+      <div class="stack">
+        <div><div class="lbl" style="margin-bottom:6px">Aplica una puerta</div>
+          <div class="row" id="gates">
+            <button class="gate" type="button" data-g="H" title="Hadamard: crea una superposición equilibrada">H</button>
+            <button class="gate" type="button" data-g="X" title="NOT: intercambia 0 y 1">X</button>
+            <button class="gate" type="button" data-g="Y">Y</button>
+            <button class="gate" type="button" data-g="Z" title="Inversión de fase">Z</button>
+            <button class="gate" type="button" data-g="S" title="Fase de un cuarto de vuelta">S</button>
+            <button class="gate" type="button" data-g="T" title="Fase de un octavo de vuelta">T</button>
+            <button class="gate meas" type="button" id="measure">Medir</button>
+            <button class="btn ghost" type="button" id="qReset">Volver a |0⟩</button>
+          </div></div>
+        <div class="ro"><div class="k">Estado</div><div class="v" id="qState" style="font-size:16px"></div></div>
+        <div class="pbar"><span>P(0)</span><span class="t"><i id="p0" style="--c:var(--accent)"></i></span><span id="p0v"></span></div>
+        <div class="pbar"><span>P(1)</span><span class="t"><i id="p1" style="--c:var(--q)"></i></span><span id="p1v"></span></div>
+        <div class="ro"><div class="k">Mediciones hasta ahora</div><div class="v" id="qTally">ninguna todavía</div></div>
+        <div class="callout"><b>Prueba esto</b>Pulsa H y luego Medir una y otra vez: más o menos la mitad 0 y la mitad 1. Ahora pulsa H, Z, H: la flecha acaba en |1⟩ siempre. La fase, invisible en una sola medición, dirigió el resultado. Los algoritmos cuánticos se construyen con ese tipo de interferencia.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="bell" aria-labelledby="bellH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · entrelazamiento</span>
+      <h2 id="bellH">Acción fantasmal: la prueba de Bell</h2>
+      <p>Einstein esperaba que las partículas entrelazadas llevaran instrucciones ocultas desde el principio. En 1964 John Bell encontró una forma de comprobarlo: cualquier teoría de «instrucciones ocultas» da correlaciones de como máximo 2 en la prueba CHSH, mientras que la mecánica cuántica predice unos 2,83. Los experimentos dan la razón a la mecánica cuántica, lo que valió el Nobel de 2022 a Aspect, Clauser y Zeilinger.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="bCv" class="cv" height="300" aria-label="Correlación entre los resultados de Alicia y Bob según el ángulo entre sus detectores"></canvas>
+        <div class="row" style="margin-top:10px;gap:16px;font-size:12px;color:var(--muted)">
+          <span><i style="display:inline-block;width:16px;height:3px;background:var(--q);vertical-align:middle"></i> predicción cuántica</span>
+          <span><i style="display:inline-block;width:16px;height:3px;background:var(--cl);vertical-align:middle"></i> mejor modelo de instrucciones ocultas</span>
+          <span><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ink);vertical-align:middle"></i> tus pares medidos</span>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="sl"><label for="bA">Ángulo del detector de Alicia<span id="bAv"></span></label><input type="range" id="bA" min="0" max="180" step="5" value="0"></div>
+        <div class="sl"><label for="bB">Ángulo del detector de Bob<span id="bBv"></span></label><input type="range" id="bB" min="0" max="180" step="5" value="45"></div>
+        <div class="row"><button class="btn" type="button" id="bSend">Enviar 500 pares entrelazados</button><span class="lbl" id="bOut" aria-live="polite"></span></div>
+        <button class="btn ghost" type="button" id="bChsh" style="justify-self:start">Ejecutar la prueba CHSH completa</button>
+        <div class="callout" id="bRes"><b>Cómo leerlo</b>Alicia y Bob miden cada par muy lejos uno del otro. Una correlación de −1 significa que siempre discrepan; 0, que no hay relación. Las curvas difieren más en torno a 45° y 135°, justo donde mira la prueba de Bell.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="grover" aria-labelledby="grovH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · computación cuántica</span>
+      <h2 id="grovH">La búsqueda de Grover: encontrar la aguja más rápido</h2>
+      <p>Para encontrar un elemento marcado entre 16 mirándolos de uno en uno necesitas 8 intentos de media. El algoritmo de Lov Grover de 1996 necesita unos 3. Empieza con todos los elementos igual de probables y repite dos pasos que bombean probabilidad hacia la respuesta correcta.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="gCv" class="cv" height="300" aria-label="Gráfico de barras de la amplitud de cada uno de los 16 elementos" style="cursor:pointer"></canvas>
+        <p class="lbl" style="margin:8px 0 0">Toca una barra para elegir qué elemento está marcado</p>
+      </div>
+      <div class="stack">
+        <div class="row">
+          <button class="btn ghost" type="button" id="gOr">1 · Oráculo: invierte el elemento marcado</button>
+          <button class="btn ghost" type="button" id="gDi">2 · Difusión: refleja respecto al promedio</button>
+        </div>
+        <div class="row"><button class="btn" type="button" id="gStep">Hacer un paso completo de Grover</button><button class="btn ghost" type="button" id="gReset">Reiniciar</button></div>
+        <div class="readout">
+          <div class="ro"><div class="k">Pasos de Grover</div><div class="v" id="gIt">0</div></div>
+          <div class="ro"><div class="k">Probabilidad de encontrarlo</div><div class="v" id="gP"></div></div>
+        </div>
+        <div class="callout" id="gMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead"><span class="eyebrow">Ideas clave</span><h2 id="ideasH">Las reglas extrañas, una por una</h2></div>
+    <div class="cards" id="ideaGrid"></div>
+    <div class="tblwrap">
+      <table class="interp">
+        <thead><tr><th>Interpretación</th><th>¿Qué ocurre cuando mides?</th><th>Coste</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Copenhague (Bohr, Heisenberg, década de 1920)</th><td>La función de onda «colapsa» en un resultado. No preguntes qué pasa en medio.</td><td>Nunca dice qué cuenta como medición</td></tr>
+          <tr><th scope="row">Muchos mundos (Everett, 1957)</th><td>Nada colapsa. Ocurren todos los resultados, cada uno en su propia rama de la realidad.</td><td>Un número inimaginable de mundos invisibles; la probabilidad es difícil de explicar</td></tr>
+          <tr><th scope="row">Onda piloto (de Broglie 1927, Bohm 1952)</th><td>Las partículas siempre tienen posición, guiadas por una onda real. Totalmente determinista.</td><td>Influencias instantáneas a distancia; difícil de conciliar con la relatividad</td></tr>
+          <tr><th scope="row">Colapso objetivo (GRW, 1986)</th><td>El colapso es un proceso físico real y aleatorio que los objetos grandes desencadenan rápidamente.</td><td>Modifica ligeramente la teoría; los experimentos lo están buscando</td></tr>
+          <tr><th scope="row">QBismo y visiones relacionales</th><td>La función de onda es información o creencia, no algo físico.</td><td>Deja abierto cómo es el mundo por debajo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="computing" aria-labelledby="compH">
+    <div class="shead">
+      <span class="eyebrow">Computación cuántica</span>
+      <h2 id="compH">De una física extraña a un nuevo tipo de ordenador</h2>
+      <p>Un ordenador cuántico no es un ordenador normal más rápido. Es una máquina para dirigir la interferencia. Para unos pocos problemas eso es muchísimo mejor; para la mayoría de las tareas cotidianas no aporta nada.</p>
+    </div>
+    <div class="cards" id="compGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Lecturas recomendadas</b>
+  <ul>
+    <li>Richard Feynman, <i>The Feynman Lectures on Physics</i>, vol. III, cap. 1 (la doble rendija)</li>
+    <li>Nielsen y Chuang, <i>Quantum Computation and Quantum Information</i></li>
+    <li><a href="https://csrc.nist.gov/Projects/Post-Quantum-Cryptography/Post-Quantum-Cryptography-Standardization">NIST: estandarización de la criptografía poscuántica</a></li>
+  </ul>
+  <p>Las demostraciones usan fórmulas exactas de libro de texto: intensidad de dos rendijas, puertas de un cúbit en la esfera de Bloch, correlaciones del estado singlete para la prueba de Bell y las amplitudes de Grover. El muestreo aleatorio hace las veces del azar de la naturaleza.</p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const visible=new Map();const io=new IntersectionObserver(es=>es.forEach(e=>{visible.set(e.target.id,e.isIntersecting);if(e.isIntersecting&&e.target.id==="dsCv")dsKick()}));
+
+/* ================= DOUBLE SLIT ================= */
+const DS={d:1,lam:520,det:false,running:!reduce,hits:[],bins:new Array(140).fill(0),flying:[],raf:0};
+function wlColor(nm){let r=0,g=0,b=0;if(nm<440){r=-(nm-440)/40;b=1}else if(nm<490){g=(nm-440)/50;b=1}else if(nm<510){g=1;b=-(nm-510)/20}else if(nm<580){r=(nm-510)/70;g=1}else if(nm<645){r=1;g=-(nm-645)/65}else{r=1}return`rgb(${Math.round(r*235)},${Math.round(g*220)},${Math.round(b*255)})`}
+function intensity(u){const B=4.2,A=22*DS.d*(550/DS.lam);const env=u===0?1:Math.pow(Math.sin(B*u)/(B*u),2);return DS.det?env:env*Math.pow(Math.cos(A*u),2)}
+function sampleU(){for(let k=0;k<200;k++){const u=Math.random()*2-1;if(Math.random()<intensity(u))return u}return 0}
+function dsMsg(){
+  $("#dsDv").textContent=DS.d.toFixed(2)+"×";$("#dsLv").textContent=DS.lam+" nm";
+  $("#dsMsg").innerHTML=DS.det?"<b>Observar destruye las franjas</b>En cuanto un detector registra por qué rendija pasó cada partícula, la interferencia desaparece y obtienes una sola banda ancha. Basta cualquier registro del camino, aunque nadie lo lea.":"<b>Nadie está mirando</b>La onda de cada partícula pasa por ambas rendijas e interfiere consigo misma. Donde coinciden crestas con crestas aparecen franjas brillantes; donde coinciden crestas con valles, huecos oscuros. Prueba con más separación entre rendijas o una longitud de onda más corta: las franjas se juntan.";
+}
+function drawDS(){
+  const{c,W,H}=setupCanvas($("#dsCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line");const col=wlColor(DS.lam);
+  const sx=28,bx=Math.round(W*0.36),scrX=Math.round(W*0.68),cy=H/2,gap=34*DS.d,sw=10;
+  // source
+  c.fillStyle=ink;c.beginPath();c.arc(sx,cy,7,0,7);c.fill();c.fillStyle=muted;c.font="10px 'IBM Plex Mono', monospace";c.textAlign="center";c.fillText("fuente",sx+6,cy+24);
+  // waves (decorative, static)
+  if(!DS.det){c.strokeStyle=col;c.globalAlpha=.18;c.lineWidth=1.2;for(let r=16;r<bx-sx;r+=14){c.beginPath();c.arc(sx,cy,r,-0.5,0.5);c.stroke()}
+    [-gap/2,gap/2].forEach(o=>{for(let r=12;r<scrX-bx;r+=14){c.beginPath();c.arc(bx,cy+o,r,-1.1,1.1);c.stroke()}});c.globalAlpha=1}
+  // barrier
+  c.fillStyle=ink;c.fillRect(bx-3,12,6,cy-gap/2-sw/2-12);c.fillRect(bx-3,cy-gap/2+sw/2,6,gap-sw);c.fillRect(bx-3,cy+gap/2+sw/2,6,H-12-(cy+gap/2+sw/2));
+  if(DS.det){c.fillStyle=css("--cl");[-gap/2,gap/2].forEach(o=>{c.beginPath();c.arc(bx+14,cy+o,5,0,7);c.fill()});c.fillStyle=css("--cl");c.fillText("detectores",bx+16,cy+gap/2+26)}
+  // screen
+  c.fillStyle=line;c.fillRect(scrX-2,12,4,H-24);
+  const half=(H-24)/2,uy=u=>cy+u*half;
+  c.fillStyle=col;c.globalAlpha=.85;for(const h of DS.hits){c.fillRect(scrX+4+h.j*26,uy(h.u)-1,2,2)}c.globalAlpha=1;
+  // histogram
+  const hx=scrX+38,hw=W-hx-8,max=Math.max(4,...DS.bins);c.fillStyle=col;
+  DS.bins.forEach((n,i)=>{const y=12+i/DS.bins.length*(H-24);c.fillRect(hx,y,n/max*hw,(H-24)/DS.bins.length+0.5)});
+  c.strokeStyle=muted;c.globalAlpha=.6;c.beginPath();for(let i=0;i<=200;i++){const u=-1+i/100;const x=hx+intensity(u)*hw*0.98,y=uy(u);i?c.lineTo(x,y):c.moveTo(x,y)}c.stroke();c.globalAlpha=1;
+  c.fillStyle=muted;c.textAlign="left";c.fillText("impactos",hx,10);
+  // flying particles
+  c.fillStyle=col;for(const f of DS.flying){c.beginPath();c.arc(f.x,f.y,3,0,7);c.fill()}
+  $("#dsCount").textContent=DS.hits.length.toLocaleString()+" partículas";
+  DS.geom={sx,bx,scrX,cy,gap,half};
+}
+function dsTick(){
+  DS.raf=0;if(!visible.get("dsCv"))return;
+  if(DS.running){
+    const g=DS.geom;if(g){
+      if(Math.random()<0.5){const slit=Math.random()<.5?-1:1;DS.flying.push({x:g.sx,y:g.cy,slit,phase:0,u:sampleU()})}
+      for(const f of DS.flying){f.phase+=0.06;const p=f.phase;
+        if(p<1){f.x=g.sx+(g.bx-g.sx)*p;f.y=g.cy+(f.slit*g.gap/2)*p}
+        else{const q=p-1;f.x=g.bx+(g.scrX-g.bx)*q;f.y=g.cy+f.slit*g.gap/2+(g.cy+f.u*g.half-(g.cy+f.slit*g.gap/2))*q}
+        if(p>=2){f.done=true;DS.hits.push({u:f.u,j:Math.random()});const bi=Math.min(DS.bins.length-1,Math.floor((f.u+1)/2*DS.bins.length));DS.bins[bi]++}}
+      DS.flying=DS.flying.filter(f=>!f.done);
+      for(let k=0;k<6;k++){const u=sampleU();DS.hits.push({u,j:Math.random()});DS.bins[Math.min(DS.bins.length-1,Math.floor((u+1)/2*DS.bins.length))]++}
+      if(DS.hits.length>6000){DS.hits.splice(0,DS.hits.length-6000)}
+    }
+    drawDS();
+  }
+  if(DS.running)DS.raf=requestAnimationFrame(dsTick);
+}
+function dsKick(){if(!DS.raf&&DS.running)DS.raf=requestAnimationFrame(dsTick)}
+function dsReset(){DS.hits=[];DS.bins.fill(0);DS.flying=[];drawDS()}
+$("#dsFire").addEventListener("click",()=>{DS.running=!DS.running;$("#dsFire").textContent=DS.running?"Pausa":"Disparar partículas";dsKick()});
+$("#dsClear").addEventListener("click",dsReset);
+$("#dsDet").addEventListener("change",e=>{DS.det=e.target.checked;dsMsg();dsReset()});
+$("#dsD").addEventListener("input",e=>{DS.d=+e.target.value;dsMsg();dsReset()});
+$("#dsL").addEventListener("input",e=>{DS.lam=+e.target.value;dsMsg();dsReset()});
+
+/* ================= QUBIT / BLOCH ================= */
+// complex helpers
+const C=(re,im=0)=>({re,im}),add=(a,b)=>C(a.re+b.re,a.im+b.im),mul=(a,b)=>C(a.re*b.re-a.im*b.im,a.re*b.im+a.im*b.re),conj=a=>C(a.re,-a.im),abs2=a=>a.re*a.re+a.im*a.im;
+const r2=Math.SQRT1_2;
+const GATES={X:[[C(0),C(1)],[C(1),C(0)]],Y:[[C(0),C(0,-1)],[C(0,1),C(0)]],Z:[[C(1),C(0)],[C(0),C(-1)]],H:[[C(r2),C(r2)],[C(r2),C(-r2)]],S:[[C(1),C(0)],[C(0),C(0,1)]],T:[[C(1),C(0)],[C(0),C(r2,r2)]]};
+const AXES={X:[[1,0,0],Math.PI],Y:[[0,1,0],Math.PI],Z:[[0,0,1],Math.PI],H:[[r2,0,r2],Math.PI],S:[[0,0,1],Math.PI/2],T:[[0,0,1],Math.PI/4]};
+const Q={a:C(1),b:C(0),tally:[0,0],yaw:-0.6,pitch:0.32,anim:null};
+function bloch(){const ab=mul(conj(Q.a),Q.b);return[2*ab.re,2*ab.im,abs2(Q.a)-abs2(Q.b)]}
+function rot(v,k,t){const[x,y,z]=v,[kx,ky,kz]=k,c=Math.cos(t),s=Math.sin(t),d=kx*x+ky*y+kz*z;return[x*c+(ky*z-kz*y)*s+kx*d*(1-c),y*c+(kz*x-kx*z)*s+ky*d*(1-c),z*c+(kx*y-ky*x)*s+kz*d*(1-c)]}
+function fmtC(z){const re=Math.abs(z.re)<5e-4?0:z.re,im=Math.abs(z.im)<5e-4?0:z.im;if(!im)return re.toFixed(3);if(!re)return(im<0?"−":"")+Math.abs(im).toFixed(3)+"i";return`(${re.toFixed(3)} ${im<0?"−":"+"} ${Math.abs(im).toFixed(3)}i)`}
+function qText(){
+  const p0=abs2(Q.a),p1=abs2(Q.b);$("#qState").textContent=`${fmtC(Q.a)} |0⟩ + ${fmtC(Q.b)} |1⟩`;
+  $("#p0").style.width=(p0*100)+"%";$("#p1").style.width=(p1*100)+"%";$("#p0v").textContent=(p0*100).toFixed(1)+"%";$("#p1v").textContent=(p1*100).toFixed(1)+"%";
+  const n=Q.tally[0]+Q.tally[1];$("#qTally").textContent=n?`${Q.tally[0]} × 0   ${Q.tally[1]} × 1`:"ninguna todavía";
+}
+function drawBloch(vec){
+  const{c,W,H}=setupCanvas($("#blCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line"),qc=css("--q");
+  const R=Math.min(W,H)*0.36,cx=W/2,cy=H/2+4,cyw=Math.cos(Q.yaw),syw=Math.sin(Q.yaw),cp=Math.cos(Q.pitch),sp=Math.sin(Q.pitch);
+  const P=([x,y,z])=>{const X=x*cyw-y*syw,Y=x*syw+y*cyw;return{x:cx+X*R,y:cy-(z*cp-Y*sp)*R,d:Y*cp+z*sp}};
+  c.strokeStyle=line;c.lineWidth=1.5;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke();
+  const ring=(f,dash)=>{c.beginPath();for(let i=0;i<=72;i++){const t=i/72*2*Math.PI;const p=P(f(t));i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}c.setLineDash(dash);c.stroke();c.setLineDash([])};
+  c.strokeStyle=muted;c.globalAlpha=.5;ring(t=>[Math.cos(t),Math.sin(t),0],[4,4]);ring(t=>[Math.cos(t),0,Math.sin(t)],[2,5]);c.globalAlpha=1;
+  const axes=[[[0,0,1],"|0⟩"],[[0,0,-1],"|1⟩"],[[1,0,0],"|+⟩"],[[-1,0,0],"|−⟩"],[[0,1,0],"|+i⟩"],[[0,-1,0],"|−i⟩"]];
+  c.font="600 13px 'IBM Plex Mono', monospace";c.textAlign="center";
+  axes.forEach(([v,l])=>{const p=P(v),o=P([0,0,0]);c.strokeStyle=muted;c.globalAlpha=.4;c.beginPath();c.moveTo(o.x,o.y);c.lineTo(p.x,p.y);c.stroke();c.globalAlpha=p.d<0?.45:1;c.fillStyle=ink;const q=P(v.map(x=>x*1.16));c.fillText(l,q.x,q.y+4);c.globalAlpha=1});
+  const o=P([0,0,0]),t=P(vec);c.strokeStyle=qc;c.lineWidth=4;c.lineCap="round";c.beginPath();c.moveTo(o.x,o.y);c.lineTo(t.x,t.y);c.stroke();
+  c.fillStyle=qc;c.beginPath();c.arc(t.x,t.y,8,0,7);c.fill();
+  // shadow on equator plane
+  const sh=P([vec[0],vec[1],0]);c.strokeStyle=qc;c.globalAlpha=.3;c.setLineDash([3,3]);c.beginPath();c.moveTo(t.x,t.y);c.lineTo(sh.x,sh.y);c.stroke();c.setLineDash([]);c.globalAlpha=1;
+}
+function applyGate(g){
+  if(Q.anim)return;const M=GATES[g];const a=Q.a,b=Q.b;const na=add(mul(M[0][0],a),mul(M[0][1],b)),nb=add(mul(M[1][0],a),mul(M[1][1],b));
+  const start=bloch();const[ax,ang]=AXES[g];Q.a=na;Q.b=nb;qText();
+  if(reduce){drawBloch(bloch());return}
+  const t0=performance.now();Q.anim=true;const step=now=>{const k=Math.min(1,(now-t0)/450);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;drawBloch(rot(start,ax,ang*e));if(k<1)requestAnimationFrame(step);else{Q.anim=null;drawBloch(bloch())}};requestAnimationFrame(step);
+}
+$("#gates").addEventListener("click",e=>{const b=e.target.closest("[data-g]");if(b)applyGate(b.dataset.g)});
+$("#measure").addEventListener("click",()=>{if(Q.anim)return;const p0=abs2(Q.a);const r=Math.random()<p0?0:1;Q.a=C(r?0:1);Q.b=C(r?1:0);Q.tally[r]++;qText();drawBloch(bloch())});
+$("#qReset").addEventListener("click",()=>{Q.a=C(1);Q.b=C(0);Q.tally=[0,0];qText();drawBloch(bloch())});
+(function(){const cv=$("#blCv");let drag=null;cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,yaw:Q.yaw,pitch:Q.pitch};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
+cv.addEventListener("pointermove",e=>{if(!drag)return;Q.yaw=drag.yaw+(e.clientX-drag.x)*0.01;Q.pitch=Math.max(-1.2,Math.min(1.2,drag.pitch+(e.clientY-drag.y)*0.01));if(!Q.anim)drawBloch(bloch())});
+const up=()=>{drag=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= BELL ================= */
+const BL={a:0,b:45,pts:[]};
+const Eq=d=>-Math.cos(d*Math.PI/180);
+const Elhv=d=>{d=Math.abs(d)%360;if(d>180)d=360-d;return -1+2*d/180};
+function pairQ(a,b){const same=Math.random()<Math.pow(Math.sin((a-b)*Math.PI/360),2);return same?1:-1}
+function pairL(a,b){const l=Math.random()*2*Math.PI;const A=Math.cos(a*Math.PI/180-l)>=0?1:-1;const B=-(Math.cos(b*Math.PI/180-l)>=0?1:-1);return A*B}
+function drawBell(){
+  $("#bAv").textContent=BL.a+"°";$("#bBv").textContent=BL.b+"°";
+  const{c,W,H}=setupCanvas($("#bCv"));const muted=css("--muted"),line=css("--line"),ink=css("--ink");
+  const ml=40,mr=12,mt=14,mb=30,X=d=>ml+d/180*(W-ml-mr),Y=e=>mt+(1-e)/2*(H-mt-mb);
+  c.font="11px 'IBM Plex Mono', monospace";
+  [-1,-.5,0,.5,1].forEach(e=>{c.strokeStyle=line;c.beginPath();c.moveTo(ml,Y(e));c.lineTo(W-mr,Y(e));c.stroke();c.fillStyle=muted;c.textAlign="right";c.fillText(e,ml-6,Y(e)+4)});
+  [0,45,90,135,180].forEach(d=>{c.fillStyle=muted;c.textAlign="center";c.fillText(d+"°",X(d),H-mb+16)});
+  c.textAlign="right";c.fillText("ángulo entre detectores →",W-mr,H-2);c.textAlign="left";c.fillText("correlación",ml,10);
+  const curve=(f,col)=>{c.strokeStyle=col;c.lineWidth=2.5;c.beginPath();for(let d=0;d<=180;d+=2){const x=X(d),y=Y(f(d));d?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()};
+  curve(Elhv,css("--cl"));curve(Eq,css("--q"));
+  const d=Math.abs(BL.a-BL.b);c.strokeStyle=ink;c.setLineDash([3,4]);c.beginPath();c.moveTo(X(d),mt);c.lineTo(X(d),H-mb);c.stroke();c.setLineDash([]);
+  BL.pts.forEach(p=>{c.fillStyle=ink;c.beginPath();c.arc(X(p.d),Y(p.e),5,0,7);c.fill()});
+}
+$("#bA").addEventListener("input",e=>{BL.a=+e.target.value;drawBell()});
+$("#bB").addEventListener("input",e=>{BL.b=+e.target.value;drawBell()});
+$("#bSend").addEventListener("click",()=>{let s=0,same=0;for(let i=0;i<500;i++){const r=pairQ(BL.a,BL.b);s+=r;if(r>0)same++}const d=Math.abs(BL.a-BL.b);BL.pts.push({d,e:s/500});if(BL.pts.length>12)BL.pts.shift();$("#bOut").textContent=`coincidieron ${same}/500 · correlación ${(s/500).toFixed(2)}`;drawBell()});
+$("#bChsh").addEventListener("click",()=>{
+  const sets=[[0,45],[0,135],[90,45],[90,135]],N=4000;const E=(f,a,b)=>{let s=0;for(let i=0;i<N;i++)s+=f(a,b);return s/N};
+  const Sq=Math.abs(E(pairQ,...sets[0])-E(pairQ,...sets[1])+E(pairQ,...sets[2])+E(pairQ,...sets[3]));
+  const Sl=Math.abs(E(pairL,...sets[0])-E(pairL,...sets[1])+E(pairL,...sets[2])+E(pairL,...sets[3]));
+  $("#bRes").innerHTML=`<b>Resultado CHSH (4 × ${N.toLocaleString()} pares cada uno)</b>Pares cuánticos entrelazados: <b style="color:var(--q)">S = ${Sq.toFixed(2)}</b>. Modelo de instrucciones ocultas: <b style="color:var(--cl)">S = ${Sl.toFixed(2)}</b>. Bell demostró que ninguna teoría de instrucciones ocultas puede superar 2. Los experimentos reales, incluidos los de 2015 que cerraron los principales resquicios, obtienen alrededor de 2,8.`;
+});
+
+/* ================= GROVER ================= */
+const GN=16;const G={amp:new Array(GN).fill(1/4),marked:11,it:0,phase:"ready"};
+function gReset(){G.amp=new Array(GN).fill(1/Math.sqrt(GN));G.it=0;G.phase="ready";drawGrover()}
+function oracle(){G.amp[G.marked]*=-1}
+function diffuse(){const m=G.amp.reduce((s,x)=>s+x,0)/GN;G.amp=G.amp.map(x=>2*m-x)}
+function drawGrover(){
+  const{c,W,H}=setupCanvas($("#gCv"));const muted=css("--muted"),line=css("--line"),acc=css("--accent"),qc=css("--q");
+  const ml=34,mr=8,mt=12,mb=26,bw=(W-ml-mr)/GN,Y=v=>mt+(1-v)/2*(H-mt-mb);
+  c.font="11px 'IBM Plex Mono', monospace";
+  [-1,-.5,0,.5,1].forEach(v=>{c.strokeStyle=line;c.globalAlpha=v===0?1:.6;c.beginPath();c.moveTo(ml,Y(v));c.lineTo(W-mr,Y(v));c.stroke();c.globalAlpha=1;c.fillStyle=muted;c.textAlign="right";c.fillText(v,ml-4,Y(v)+4)});
+  G.amp.forEach((a,i)=>{const x=ml+i*bw+bw*.15;c.fillStyle=i===G.marked?qc:acc;c.globalAlpha=i===G.marked?1:.55;const y0=Y(0),y1=Y(a);c.fillRect(x,Math.min(y0,y1),bw*.7,Math.abs(y1-y0));c.globalAlpha=1;c.fillStyle=i===G.marked?qc:muted;c.textAlign="center";c.fillText(i.toString(2).padStart(4,"0"),x+bw*.35,H-mb+15)});
+  const m=G.amp.reduce((s,x)=>s+x,0)/GN;c.strokeStyle=css("--ink");c.setLineDash([5,4]);c.beginPath();c.moveTo(ml,Y(m));c.lineTo(W-mr,Y(m));c.stroke();c.setLineDash([]);c.fillStyle=css("--ink");c.textAlign="left";c.fillText("promedio",ml+4,Y(m)-5);
+  const p=G.amp[G.marked]**2;$("#gIt").textContent=G.it;$("#gP").textContent=(p*100).toFixed(1)+"%";
+  const opt=Math.round(Math.PI/4*Math.sqrt(GN));
+  $("#gMsg").innerHTML=G.it===0&&G.phase==="ready"?`<b>Inicio</b>Los 16 elementos tienen amplitud 0,25, es decir, un 6,25 % de probabilidad cada uno. Elemento marcado: <b style="color:var(--q)">${G.marked.toString(2).padStart(4,"0")}</b>.`
+   :G.phase==="oracle"?"<b>Tras el oráculo</b>La amplitud del elemento marcado ahora es negativa. Su probabilidad no ha cambiado (es el cuadrado), pero el promedio bajó un poco.":
+   G.it<opt?`<b>Creciendo</b>Reflejar cada barra respecto al promedio refuerza la invertida. Falta${opt-G.it===1?"":"n"} ${opt-G.it} paso${opt-G.it===1?"":"s"} para el máximo.`:
+   G.it===opt?`<b>Máximo tras ${opt} pasos</b>Si mides ahora, encuentras el elemento marcado alrededor del ${(p*100).toFixed(0)} % de las veces, frente a 8 consultas de media en un ordenador clásico. Con un millón de elementos la diferencia es de ~785 pasos frente a 500 000.`:
+   `<b>Te pasaste</b>Si sigues, la probabilidad vuelve a bajar: la amplitud gira más allá de la respuesta. Los algoritmos cuánticos tienen que detenerse en el momento justo.`;
+}
+$("#gOr").addEventListener("click",()=>{oracle();G.phase="oracle";drawGrover()});
+$("#gDi").addEventListener("click",()=>{diffuse();if(G.phase==="oracle")G.it++;G.phase="step";drawGrover()});
+$("#gStep").addEventListener("click",()=>{oracle();diffuse();G.it++;G.phase="step";drawGrover()});
+$("#gReset").addEventListener("click",gReset);
+$("#gCv").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.floor((e.clientX-r.left-34)/((r.width-42)/GN));if(i>=0&&i<GN){G.marked=i;gReset()}});
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Superposición","1926","Un sistema cuántico puede estar en una mezcla de estados a la vez, descrita por la ecuación de onda de Schrödinger. La medición da un resultado definido, con probabilidades fijadas por la mezcla (la regla de Born)."],
+ ["Principio de incertidumbre","1927","Werner Heisenberg: cuanto más precisamente fijas la posición de una partícula, menos precisamente puede definirse su momento. No es torpeza al medir; esas propiedades no son nítidas a la vez."],
+ ["Entrelazamiento","1935","Einstein, Podolsky y Rosen mostraron que la mecánica cuántica vincula partículas lejanas de modo que medir una fija la otra. Einstein lo llamó «acción fantasmal a distancia». No permite enviar mensajes más rápido que la luz."],
+ ["El gato de Schrödinger","1935","El experimento mental de Erwin Schrödinger: liga el destino de un gato a un átomo radiactivo y la teoría parece decir que el gato está vivo y muerto hasta que alguien mira. Lo planteó como reducción al absurdo, no como descripción."],
+ ["Efecto túnel","1928","Las partículas pueden atravesar barreras que, clásicamente, no tienen energía para superar. Alimenta la fusión del Sol y la memoria flash. El Nobel de 2025 fue para Clarke, Devoret y Martinis por demostrarlo en un circuito eléctrico que cabe en la mano, la base de los cúbits superconductores."],
+ ["Decoherencia","década de 1970","Por qué no vemos gatos en superposición: las interacciones con el entorno dispersan rápidamente la información cuántica, así que los objetos grandes se comportan de forma clásica. También es el principal enemigo de los ordenadores cuánticos."],
+ ["Teorema de no clonación","1982","Un estado cuántico desconocido no puede copiarse perfectamente (Wootters, Zurek y Dieks). Hace posible el cifrado cuántico y difícil la corrección de errores cuántica."],
+ ["Energía cuantizada","1900","La solución de Max Planck para los objetos calientes que brillan: la energía viene en paquetes discretos. Einstein (1905) la aplicó a la propia luz. De ahí viene lo de «cuántico»."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3><span class="yr">${i[1]}</span></div><p>${i[2]}</p></article>`).join("");
+const COMP=[
+ ["Cúbits y puertas","","Los cúbits se construyen con circuitos superconductores, iones atrapados, átomos neutros, fotones y más. Las puertas giran los cúbits (demo 2) y los entrelazan. Un cálculo es una coreografía de interferencias que hace que las respuestas erróneas se cancelen."],
+ ["Algoritmo de Shor","1994","Peter Shor demostró que un ordenador cuántico podría factorizar números grandes y resolver logaritmos discretos de forma exponencialmente más rápida. Eso rompería RSA y las firmas de curva elíptica que usan Bitcoin, Ethereum y la mayor parte de la web.","Aún no es posible: requiere una máquina grande con corrección de errores. En 2025 un investigador de Google estimó que RSA-2048 podría caer con menos de un millón de cúbits ruidosos funcionando durante una semana, frente a ~20 millones estimados en 2019."],
+ ["Algoritmo de Grover","1996","Busca en datos desordenados en unos √N pasos en lugar de N (demo 4). Contra el hashing y el cifrado simétrico solo reduce a la mitad la longitud efectiva de la clave, así que AES-256 y SHA-256 siguen siendo holgados.","Mira la cadena de hashes de la página de Blockchain: el minado usa SHA-256."],
+ ["Corrección de errores","","Los cúbits son frágiles, así que muchos cúbits físicos se combinan en un cúbit «lógico» fiable. En diciembre de 2024 el chip Willow de Google mostró que los errores bajaban al crecer el código, el ansiado resultado «por debajo del umbral». Desde entonces varios equipos han hecho funcionar pequeños conjuntos de cúbits lógicos.","Todavía se espera que falten años para máquinas tolerantes a fallos útiles; la mayoría de las hojas de ruta apuntan a alrededor de 2030."],
+ ["Ventaja cuántica","2019","El Sycamore de 53 cúbits de Google realizó una tarea de muestreo que, según dijo, a un superordenador le llevaría 10 000 años. Mejores métodos clásicos la redujeron después a horas, un patrón que se ha repetido con otras afirmaciones.","Todavía no se ha demostrado con claridad una ventaja en un problema de utilidad comercial."],
+ ["Criptografía poscuántica","2024","Nuevo cifrado basado en matemáticas que no se sabe que los ordenadores cuánticos puedan romper. El NIST publicó sus primeros estándares en agosto de 2024: ML-KEM (FIPS 203), ML-DSA (FIPS 204) y SLH-DSA (FIPS 205), y eligió HQC como respaldo en marzo de 2025.","Por qué actuar ya: «recolectar ahora, descifrar después». Los datos grabados hoy podrían leerse cuando exista un gran ordenador cuántico."]
+];
+$("#compGrid").innerHTML=COMP.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3>${i[1]?`<span class="yr">${i[1]}</span>`:""}</div><p>${i[2]}</p>${i[3]?`<div class="res"><b>Situación</b>${i[3]}</div>`:""}</article>`).join("");
+
+/* boot */
+dsMsg();drawDS();qText();drawBloch(bloch());drawBell();gReset();
+if(reduce)$("#dsFire").textContent="Disparar partículas";
+io.observe($("#dsCv"));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawDS();drawBloch(bloch());drawBell();drawGrover()},120)});
+addEventListener("themechange",()=>{drawDS();drawBloch(bloch());drawBell();drawGrover()});
+</script>
+</body>
+</html>

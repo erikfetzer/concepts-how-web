@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blockchain y consenso · concepts.how</title>
+<meta name="description" content="Una cadena de hashes SHA-256 en vivo, un simulador de ataque del 51 %, los generales bizantinos y una guía de prueba de trabajo, prueba de participación y BFT.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/blockchain">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/blockchain">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Blockchain y consenso · concepts.how">
+<meta property="og:description" content="Una cadena de hashes SHA-256 en vivo, un simulador de ataque del 51 %, los generales bizantinos y una guía de prueba de trabajo, prueba de participación y BFT.">
+<meta property="og:url" content="https://concepts.how/es/blockchain">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blockchain y consenso · concepts.how">
+<meta name="twitter:description" content="Una cadena de hashes SHA-256 en vivo, un simulador de ataque del 51 %, los generales bizantinos y una guía de prueba de trabajo, prueba de participación y BFT.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a ledger. A live, editable hash chain is the hero; then the attack race, the generals' vote, and a field guide of consensus mechanisms. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --good:#1E8A5A; --bad:#C2413A; --atk:#E4572E;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; --atk:#FF7A55; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --good:#4CC38A; --bad:#F07A72; --atk:#FF7A55; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* chain-link rule */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 18px,transparent 18px 24px) center/100% 2px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 24px) center/100% 10px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover:not(:disabled){background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.5;cursor:progress}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.btn.sm{padding:5px 12px;min-height:34px;font-size:13px}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.stack{display:grid;gap:14px}
+
+/* chain */
+.chainbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 12px}
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;position:relative}
+.blk{background:var(--card);border:2px solid var(--good);border-radius:14px;padding:12px;display:grid;gap:8px;position:relative;transition:border-color .2s,background .2s}
+.blk.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--card))}
+.blk .hd{display:flex;justify-content:space-between;align-items:center}
+.blk .no{font-family:var(--display);font-weight:800;font-size:20px}
+.st{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+.st.ok{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.st.no{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.f label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.f textarea{width:100%;min-height:64px;resize:vertical;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:6px 8px;font-size:14px}
+.hash{font-family:var(--mono);font-size:11.5px;word-break:break-all;line-height:1.35;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.hash b{color:var(--good)}
+.blk.bad .hash.me b{color:var(--bad)}
+.prev.mismatch{border-color:var(--bad);color:var(--bad)}
+.nonce{font-family:var(--mono);font-size:13px}
+.blk::after{content:"";position:absolute;right:-16px;top:50%;width:18px;height:2px;background:var(--muted)}
+.blk:last-child::after{display:none}
+
+/* split demos */
+.demo{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.big{font-family:var(--mono);font-size:clamp(30px,4vw,44px);font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.raceRows{display:grid;gap:8px;margin-top:12px}
+.rr{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px;align-items:center;font-size:12px;font-family:var(--mono)}
+.rr .bl{display:flex;gap:3px;flex-wrap:wrap;min-height:18px}
+.rr .bl i{width:14px;height:14px;border-radius:3px;background:var(--c)}
+#gens svg{width:100%;height:auto;display:block}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc p{margin:0;font-size:14.5px}
+.pc .q{font-size:15px;font-weight:500}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13px;border-top:1px dashed var(--line);padding-top:10px}
+.meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.meta dd{margin:0}
+.ledger{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:760px}
+.ledger th,.ledger td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.ledger thead th{font-size:12px;background:var(--paper)}
+.ledger tr:last-child td,.ledger tr:last-child th{border-bottom:0}
+.tblwrap{overflow-x:auto;margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:1000px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.blk::after{display:none}}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:540px){.chain{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>.lang{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:6px 10px!important;color:var(--ink)!important;text-decoration:none}.lang:hover{border-color:var(--accent)!important}</style>
+</head>
+<body>
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html" aria-current="page">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl lang" href="../blockchain.html" lang="en" hreflang="en" title="View in English">EN</a>
+    <span data-theme-picker></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Blockchain</b> · mecanismos de consenso</div>
+    <h1>Acuerdo <em>sin nadie al mando.</em></h1>
+    <p class="lede">Una blockchain es un libro de cuentas compartido del que miles de desconocidos guardan copias idénticas, sin banco ni árbitro. Dos ideas la hacen funcionar: hashes que delatan cualquier manipulación y una regla de consenso que decide qué página se añade a continuación.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#chain">Cadena de hashes</a><a href="#race">Ataque del 51 %</a><a href="#generals">Generales bizantinos</a><a href="#guide">Guía de consenso</a><a href="#ideas">Ideas clave</a></nav>
+  </header>
+
+  <section id="chain" aria-labelledby="chainH" style="scroll-margin-top:20px">
+    <div class="chainbar">
+      <div>
+        <span class="eyebrow">Demo 1 · SHA-256 en vivo</span>
+        <h2 id="chainH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">Edita cualquier bloque y mira cómo se rompe la cadena</h2>
+        <p style="margin:6px 0 0;color:var(--muted);max-width:70ch">El hash de cada bloque es una huella de su contenido <i>y</i> del hash del bloque anterior. Cambia un carácter del bloque 2 y su huella cambia, así que el bloque 3 ya no apunta a él, y así hasta el final de la cadena. Volver a minar significa encontrar un nuevo nonce cuyo hash empiece con suficientes ceros: ese trabajo es la prueba de trabajo.</p>
+      </div>
+      <div class="stack" style="min-width:min(260px,100%)">
+        <div class="sl"><label for="diff">Dificultad (ceros iniciales)<span id="diffV">3</span></label><input type="range" id="diff" min="1" max="5" value="3"></div>
+        <span class="lbl" id="diffNote"></span>
+      </div>
+    </div>
+    <div class="chain" id="chainEl"></div>
+  </section>
+
+  <section class="block" id="race" aria-labelledby="raceH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · seguridad de la prueba de trabajo</span>
+      <h2 id="raceH">¿Puede un atacante reescribir la historia?</h2>
+      <p>Para revertir un pago, un atacante debe construir en secreto una cadena más larga que la de la red honesta. Cada confirmación es un bloque que tiene que recuperar. El white paper de Satoshi Nakamoto de 2008 calculó las probabilidades.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="raceCv" class="cv" height="260" aria-label="Probabilidad de que el atacante alcance a la red, según el número de confirmaciones"></canvas>
+        <div class="raceRows" id="raceRows" aria-live="polite"></div>
+      </div>
+      <div class="stack">
+        <div class="sl"><label for="q">Porcentaje del poder de minado del atacante<span id="qV"></span></label><input type="range" id="q" min="0.05" max="0.5" step="0.01" value="0.25"></div>
+        <div class="sl"><label for="z">Confirmaciones que espera el comerciante<span id="zV"></span></label><input type="range" id="z" min="0" max="12" value="6"></div>
+        <div class="ro"><div class="k">Probabilidad de que el atacante llegue a alcanzarla</div><div class="big" id="pV"></div></div>
+        <div class="row"><button class="btn" type="button" id="raceRun">Simular 2000 carreras</button><span class="lbl" id="raceEmp"></span></div>
+        <div class="callout"><b>¿Por qué seis confirmaciones?</b>Con el 10 % del poder de minado, la probabilidad de un atacante frente a 6 confirmaciones es de alrededor del 0,02 %. Con el 50 % o más, el atacante siempre acaba ganando: es el «ataque del 51 %». Cadenas de prueba de trabajo más pequeñas, con poco poder de minado, como Ethereum Classic en 2020, han sufrido ataques reales.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="generals" aria-labelledby="genH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · tolerancia a fallos</span>
+      <h2 id="genH">Los generales bizantinos</h2>
+      <p>Los generales que rodean una ciudad deben atacar todos juntos o esperar todos, pero algunos pueden ser traidores que envían mensajes contradictorios. Lamport, Shostak y Pease (1982) demostraron que el acuerdo requiere que más de dos tercios de los generales sean leales. Las cadenas de prueba de participación como Ethereum y las cadenas BFT como Cosmos se basan en este resultado.</p>
+    </div>
+    <div class="demo">
+      <div class="panel" id="gens"><svg id="genSvg" viewBox="0 0 480 400" role="img" aria-label="Generales dispuestos en círculo enviando votos"></svg></div>
+      <div class="stack">
+        <div class="sl"><label for="gn">Generales (nodos)<span id="gnV"></span></label><input type="range" id="gn" min="4" max="13" value="7"></div>
+        <div class="sl"><label for="gf">Traidores<span id="gfV"></span></label><input type="range" id="gf" min="0" max="6" value="2"></div>
+        <div class="ro"><div class="k">El protocolo tolera hasta</div><div class="v" id="gtol"></div></div>
+        <div class="row"><button class="btn" type="button" id="gRun">Ejecutar una ronda de votación</button></div>
+        <div class="callout" id="gRes" aria-live="polite"></div>
+        <p style="margin:0;font-size:13px;color:var(--muted)">Modelo: los generales leales votan ATACAR. Los traidores dicen ATACAR a la mitad de los demás y RETIRADA a la otra mitad. Un general se compromete cuando oye un quórum (2f+1 votos iguales, donde f es el número de traidores que el protocolo puede tolerar). Este es el núcleo de PBFT (Castro y Liskov, 1999) y Tendermint.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="guide" aria-labelledby="guideH">
+    <div class="shead">
+      <span class="eyebrow">Guía de campo</span>
+      <h2 id="guideH">Cómo deciden las redes quién escribe el siguiente bloque</h2>
+      <p>Todos los mecanismos responden a la misma pregunta: ¿qué hace costoso hacer trampa? La electricidad, el dinero en juego, la reputación o simplemente suficientes votos honestos.</p>
+    </div>
+    <div class="cards" id="mechs"></div>
+    <div class="tblwrap">
+      <table class="ledger">
+        <thead><tr><th>Mecanismo</th><th>Coste de hacer trampa</th><th>Finalidad</th><th>Consumo de energía</th><th>Quién puede participar</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Prueba de trabajo</th><td>Hardware + electricidad</td><td>Probabilística (cuanto más profundo, más seguro)</td><td>Muy alto</td><td>Cualquiera con hardware</td></tr>
+          <tr><th scope="row">Prueba de participación</th><td>Las monedas en staking pueden recortarse</td><td>Final tras ~2 épocas en Ethereum</td><td>Bajo</td><td>Cualquiera con participación</td></tr>
+          <tr><th scope="row">PoS delegada</th><td>Perder votos y recompensas</td><td>Rápida</td><td>Bajo</td><td>Productores elegidos</td></tr>
+          <tr><th scope="row">Prueba de autoridad</th><td>Reputación pública</td><td>Rápida</td><td>Bajo</td><td>Validadores aprobados</td></tr>
+          <tr><th scope="row">BFT (PBFT, Tendermint)</th><td>Hace falta más de ⅓ de los votos para romperla</td><td>Instantánea, una vez confirmada</td><td>Bajo</td><td>Un conjunto conocido de validadores</td></tr>
+          <tr><th scope="row">Raft / Paxos</th><td>Supone que no hay mentirosos, solo caídas</td><td>Instantánea</td><td>Bajo</td><td>Servidores de confianza</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead"><span class="eyebrow">Ideas clave</span><h2 id="ideasH">El vocabulario del acuerdo distribuido</h2></div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Lecturas recomendadas</b>
+  <ul>
+    <li>Satoshi Nakamoto, <i>Bitcoin: A Peer-to-Peer Electronic Cash System</i> (2008), sección 11, para el cálculo del atacante usado arriba</li>
+    <li>Lamport, Shostak y Pease, «The Byzantine Generals Problem» (1982); Castro y Liskov, «Practical Byzantine Fault Tolerance» (1999)</li>
+    <li>Documentación de ethereum.org sobre prueba de participación, slots, épocas y finalidad</li>
+  </ul>
+  <p>La cadena de hashes usa SHA-256 real, calculado en tu navegador. Las demostraciones simplifican: la carrera sigue el modelo de Nakamoto, en el que el atacante empieza a minar en secreto cuando se envía el pago (la simulación cuenta de forma exacta y la fórmula de Nakamoto usa una aproximación, así que difieren un poco), y los generales votan en una sola ronda.</p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const r=cv.getBoundingClientRect();const d=window.devicePixelRatio||1;const h=+cv.getAttribute("height");cv.style.height=h+"px";cv.width=r.width*d;cv.height=h*d;const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);return{c,W:r.width,H:h}}
+
+/* ---------- SHA-256 (sync, for mining) ---------- */
+const K=new Uint32Array([0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2]);
+const enc=new TextEncoder();const Wb=new Uint32Array(64);
+function sha256(str){
+  const m=enc.encode(str),l=m.length,nb=((l+9+63)>>6)<<6,b=new Uint8Array(nb);b.set(m);b[l]=0x80;
+  const bits=l*8;b[nb-4]=bits>>>24;b[nb-3]=bits>>>16&255;b[nb-2]=bits>>>8&255;b[nb-1]=bits&255;b[nb-5]=Math.floor(bits/4294967296)&255;
+  let h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  for(let o=0;o<nb;o+=64){
+    for(let i=0;i<16;i++)Wb[i]=b[o+4*i]<<24|b[o+4*i+1]<<16|b[o+4*i+2]<<8|b[o+4*i+3];
+    for(let i=16;i<64;i++){const x=Wb[i-15],y=Wb[i-2];const s0=(x>>>7|x<<25)^(x>>>18|x<<14)^(x>>>3),s1=(y>>>17|y<<15)^(y>>>19|y<<13)^(y>>>10);Wb[i]=Wb[i-16]+s0+Wb[i-7]+s1|0}
+    let a=h0,bb=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+    for(let i=0;i<64;i++){const S1=(e>>>6|e<<26)^(e>>>11|e<<21)^(e>>>25|e<<7),ch=e&f^~e&g,t1=h+S1+ch+K[i]+Wb[i]|0,S0=(a>>>2|a<<30)^(a>>>13|a<<19)^(a>>>22|a<<10),mj=a&bb^a&c^bb&c,t2=S0+mj|0;h=g;g=f;f=e;e=d+t1|0;d=c;c=bb;bb=a;a=t1+t2|0}
+    h0=h0+a|0;h1=h1+bb|0;h2=h2+c|0;h3=h3+d|0;h4=h4+e|0;h5=h5+f|0;h6=h6+g|0;h7=h7+h|0;
+  }
+  return[h0,h1,h2,h3,h4,h5,h6,h7].map(x=>(x>>>0).toString(16).padStart(8,"0")).join("");
+}
+
+/* ---------- Hash chain ---------- */
+let diff=3;const ZERO="0000000000000000000000000000000000000000000000000000000000000000";
+const chain=[{data:"Génesis: Alicia empieza con 50 monedas",nonce:0},{data:"Alicia paga 10 a Bob",nonce:0},{data:"Bob paga 4 a Carol",nonce:0},{data:"Carol paga 1 a Dave",nonce:0}];
+const blockStr=(i,prev)=>`${i+1}|${chain[i].nonce}|${chain[i].data}|${prev}`;
+function hashes(){const out=[];let prev=ZERO;for(let i=0;i<chain.length;i++){const h=sha256(blockStr(i,prev));out.push({prev,h});prev=h}return out}
+function mineOne(i,prev){let n=0;const pre="0".repeat(diff);while(!sha256(`${i+1}|${n}|${chain[i].data}|${prev}`).startsWith(pre))n++;chain[i].nonce=n}
+function mineAll(){let prev=ZERO;for(let i=0;i<chain.length;i++){mineOne(i,prev);prev=sha256(blockStr(i,prev))}}
+function renderChain(){
+  $("#chainEl").innerHTML=chain.map((b,i)=>`<article class="blk" id="blk${i}" aria-label="Bloque ${i+1}">
+    <div class="hd"><span class="no">Bloque ${i+1}</span><span class="st" id="st${i}"></span></div>
+    <div class="f"><label for="data${i}">Datos</label><textarea id="data${i}" data-i="${i}" spellcheck="false">${b.data.replace(/</g,"&lt;")}</textarea></div>
+    <div class="f"><label>Nonce</label><div class="nonce" id="nonce${i}"></div></div>
+    <div class="f"><label>Hash anterior</label><div class="hash prev" id="prev${i}"></div></div>
+    <div class="f"><label>Hash de este bloque</label><div class="hash me" id="hash${i}"></div></div>
+    <button class="btn sm" type="button" data-mine="${i}">Minar bloque ${i+1}</button></article>`).join("");
+  updateChain();
+}
+function updateChain(){
+  const H=hashes(),pre="0".repeat(diff);let broken=false;
+  H.forEach((x,i)=>{
+    const okWork=x.h.startsWith(pre);const valid=okWork&&!broken;
+    if(!valid)broken=true;
+    $("#blk"+i).classList.toggle("bad",!valid);
+    $("#st"+i).className="st "+(valid?"ok":"no");$("#st"+i).textContent=valid?"válido":(okWork?"enlace roto":"falta minar");
+    $("#nonce"+i).textContent=chain[i].nonce.toLocaleString();
+    const z=(x.h.match(/^0*/)||[""])[0].length;
+    $("#hash"+i).innerHTML=`<b>${x.h.slice(0,Math.min(z,diff))}</b>${x.h.slice(Math.min(z,diff))}`;
+    $("#prev"+i).textContent=x.prev;
+  });
+  const avg=Math.pow(16,diff);$("#diffNote").textContent=`unos ${avg.toLocaleString()} intentos por bloque en promedio`;
+}
+$("#chainEl").addEventListener("input",e=>{const t=e.target;if(t.dataset.i){chain[t.dataset.i].data=t.value;updateChain()}});
+$("#chainEl").addEventListener("click",e=>{const b=e.target.closest("[data-mine]");if(!b)return;const i=+b.dataset.mine;b.disabled=true;b.textContent="Minando…";
+  setTimeout(()=>{const H=hashes();const t0=performance.now();mineOne(i,H[i].prev);const ms=performance.now()-t0;updateChain();b.disabled=false;b.textContent=`Minado en ${ms<1000?Math.round(ms)+" ms":(ms/1000).toFixed(1)+" s"}`;setTimeout(()=>b.textContent=`Minar bloque ${i+1}`,2200)},30)});
+$("#diff").addEventListener("input",e=>{diff=+e.target.value;$("#diffV").textContent=diff;updateChain()});
+
+/* ---------- Attack race ---------- */
+function nakamoto(q,z){if(q>=0.5)return 1;const p=1-q,lam=z*(q/p);let sum=1;for(let k=0;k<=z;k++){let po=Math.exp(-lam);for(let i=1;i<=k;i++)po*=lam/i;sum-=po*(1-Math.pow(q/p,z-k))}return Math.max(0,Math.min(1,sum))}
+let RQ=.25,RZ=6,lastRace=null;
+function fmtP(p){if(p>=0.9995)return"100%";if(p<1e-6)return"< 0.0001%";if(p<0.001)return(p*100).toFixed(4)+"%";return(p*100).toFixed(p<0.1?2:1)+"%"}
+function drawRace(){
+  $("#qV").textContent=Math.round(RQ*100)+"%";$("#zV").textContent=RZ;$("#pV").textContent=fmtP(nakamoto(RQ,RZ));
+  const{c,W,H}=setupCanvas($("#raceCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line"),acc=css("--accent"),atk=css("--atk");
+  const ml=44,mb=30,mt=16,mr=12,bw=(W-ml-mr)/13;
+  c.font="11px 'IBM Plex Mono', monospace";
+  [0,.25,.5,.75,1].forEach(v=>{const y=H-mb-v*(H-mb-mt);c.strokeStyle=line;c.beginPath();c.moveTo(ml,y);c.lineTo(W-mr,y);c.stroke();c.fillStyle=muted;c.textAlign="right";c.fillText(v*100+"%",ml-6,y+4)});
+  for(let z=0;z<=12;z++){const p=nakamoto(RQ,z),x=ml+z*bw+bw*.15,h=p*(H-mb-mt);c.fillStyle=z===RZ?atk:acc;c.globalAlpha=z===RZ?1:.55;c.fillRect(x,H-mb-h,bw*.7,h);c.globalAlpha=1;c.fillStyle=muted;c.textAlign="center";c.fillText(z,x+bw*.35,H-mb+15)}
+  c.textAlign="left";c.fillStyle=muted;c.fillText("éxito del atacante",ml,11);c.textAlign="right";c.fillText("confirmaciones →",W-mr,H-2);
+  renderRaceRows();
+}
+function oneRace(q,z){let honest=0,atk=0;const seq=[];for(let steps=0;steps<600;steps++){if(honest>=z&&atk>=honest)return{win:true,seq};if(honest-atk>60)return{win:false,seq};if(Math.random()<q){atk++;seq.push("a")}else{honest++;seq.push("h")}}return{win:false,seq}}
+function renderRaceRows(){
+  if(!lastRace){$("#raceRows").innerHTML=`<div class="lbl">Ejecuta una simulación para ver una carrera de ejemplo bloque a bloque.</div>`;return}
+  const h=lastRace.seq.filter(s=>s==="h").length,a=lastRace.seq.filter(s=>s==="a").length,cap=40;
+  const row=(lab,n,col,pre)=>`<div class="rr"><span>${lab}</span><span class="bl">${pre}${Array.from({length:Math.min(n,cap)},()=>`<i style="--c:${col}"></i>`).join("")}${n>cap?" +"+(n-cap):""}</span></div>`;
+  const g=Math.min(RZ,h);
+  $("#raceRows").innerHTML=row("honesta",h-g,"var(--accent)",Array.from({length:g},()=>`<i style="--c:var(--muted)"></i>`).join(""))+row("atacante",a,"var(--atk)","")+`<div class="lbl">Carrera de ejemplo: ${lastRace.win?"el atacante alcanzó a la red y puede sustituir la cadena honesta":"el atacante quedó irremediablemente atrás y se rindió"}. Los bloques grises son las ${RZ} confirmaciones del comerciante; el atacante mina en secreto desde el principio.</div>`;
+}
+$("#q").addEventListener("input",e=>{RQ=+e.target.value;lastRace=null;$("#raceEmp").textContent="";drawRace()});
+$("#z").addEventListener("input",e=>{RZ=+e.target.value;lastRace=null;$("#raceEmp").textContent="";drawRace()});
+$("#raceRun").addEventListener("click",()=>{let wins=0;for(let i=0;i<2000;i++){const r=oneRace(RQ,RZ);if(r.win)wins++;if(i===0)lastRace=r}$("#raceEmp").textContent=`simulado: ${(wins/20).toFixed(1)} % · fórmula: ${fmtP(nakamoto(RQ,RZ))}`;renderRaceRows()});
+
+/* ---------- Byzantine generals ---------- */
+let GN=7,GF=2;
+function gUpdate(){GF=Math.min(GF,GN-1);$("#gf").max=GN-1;$("#gf").value=GF;$("#gnV").textContent=GN;$("#gfV").textContent=GF;const tol=Math.floor((GN-1)/3);$("#gtol").textContent=`${tol} traidor${tol===1?"":"es"} (n ≥ 3f + 1)`;drawGens(null)}
+function drawGens(result){
+  const cx=240,cy=200,R=150,pts=[...Array(GN)].map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/GN;return[cx+R*Math.cos(a),cy+R*Math.sin(a)]});
+  const traitor=i=>i>=GN-GF;
+  let lines="";
+  if(result){result.msgs.forEach(m=>{const[a,b]=[pts[m.from],pts[m.to]];lines+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${m.v==="A"?"var(--good)":"var(--bad)"}" stroke-opacity="${traitor(m.from)?.85:.22}" stroke-width="${traitor(m.from)?1.6:1}"/>`})}
+  const nodes=pts.map((p,i)=>{const t=traitor(i);const d=result?result.dec[i]:null;const fill=t?"var(--atk)":d==="A"?"var(--good)":d==="stuck"?"var(--muted)":"var(--card)";
+    const label=t?"traidor":d==="A"?"se compromete a ATACAR":d==="stuck"?"sin quórum":"";
+    return `<g><circle cx="${p[0]}" cy="${p[1]}" r="22" fill="${fill}" stroke="var(--ink)" stroke-width="2"/><text x="${p[0]}" y="${p[1]+5}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="14" fill="${t||d?"#fff":"var(--ink)"}">${i+1}</text>${label?`<text x="${p[0]}" y="${p[1]+(p[1]>cy?40:-30)}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--ink)">${label}</text>`:""}</g>`}).join("");
+  $("#genSvg").innerHTML=lines+nodes;
+  if(!result)$("#gRes").innerHTML="<b>Listo</b>Elige el número de traidores y ejecuta una ronda.";
+}
+function gRun(){
+  const tol=Math.floor((GN-1)/3),quorum=2*tol+1,traitor=i=>i>=GN-GF;const msgs=[];const counts=Array(GN).fill(0);
+  for(let f=0;f<GN;f++)for(let t=0;t<GN;t++){if(f===t)continue;let v="A";if(traitor(f))v=(t%2===0)?"A":"R";msgs.push({from:f,to:t,v});if(v==="A")counts[t]++}
+  const dec=[...Array(GN)].map((_,i)=>traitor(i)?null:(counts[i]+1>=quorum?"A":"stuck"));
+  drawGens({msgs,dec});
+  const loyal=dec.filter(d=>d!==null),ok=loyal.filter(d=>d==="A").length,stuck=loyal.length-ok;
+  $("#gRes").innerHTML=GF<=tol?`<b>Acuerdo</b>Los ${ok} generales leales se comprometen a ATACAR. Con ${GF} traidor${GF===1?"":"es"} de ${GN}, los votos leales bastan para el quórum de ${quorum}, así que los traidores no pueden cambiar el resultado.`
+    :(stuck&&ok?`<b>División: la red se rompe</b>${ok} general${ok===1?"":"es"} leal${ok===1?"":"es"} se comprometi${ok===1?"ó":"eron"} y ${stuck} no alcanz${stuck===1?"ó":"aron"} el quórum. Con más de un tercio de nodos mintiendo, los traidores deciden quién oye qué. En una cadena real, esto significa bloques detenidos o historias contradictorias.`
+    :`<b>Detenida</b>Ningún general leal alcanza el quórum de ${quorum}. Con ${GF} traidores de ${GN} (más de un tercio), la red no puede decidir nada con seguridad.`);
+}
+$("#gn").addEventListener("input",e=>{GN=+e.target.value;gUpdate()});
+$("#gf").addEventListener("input",e=>{GF=+e.target.value;gUpdate()});
+$("#gRun").addEventListener("click",gRun);
+
+/* ---------- Field guide ---------- */
+const MECH=[
+ ["Prueba de trabajo","Bitcoin, 2009","Los mineros compiten por encontrar un hash por debajo de un objetivo. El ganador añade el bloque y gana monedas nuevas y comisiones. Gana la cadena más larga, es decir, la que acumula más trabajo.","Bitcoin, Litecoin, Dogecoin, Monero","Probada desde 2009; cualquiera puede participar; los ataques cuestan energía real","Enorme consumo eléctrico; los pools de minería concentran el poder; la finalidad es solo probabilística","Un bloque cada unos 10 minutos. La recompensa se redujo a la mitad, a 3,125 BTC, en abril de 2024, como ocurre cada 210 000 bloques."],
+ ["Prueba de participación","Ethereum desde 2022","Los validadores bloquean monedas como garantía. El protocolo elige proponentes de bloques y comités de certificadores; a los tramposos se les recorta parte de su participación (slashing).","Ethereum, Cardano, Polkadot, Tezos","Usa una fracción ínfima de la energía de la PoW; finalidad determinista; los ataques pueden castigarse","Concentración de riqueza y pools de staking; más compleja; el problema de «nada en juego» requiere el slashing para resolverse","Ethereum: slots de 12 segundos, épocas de 32 slots, finalidad tras unas dos épocas (~13 min). The Merge, en septiembre de 2022, redujo su consumo de energía en torno al 99,95 %."],
+ ["Prueba de participación delegada","EOS, 2018","Los poseedores de tokens votan por un pequeño grupo de productores de bloques que se turnan.","EOS, Tron, BNB Smart Chain (una variante)","Rápida y barata","Pocos productores implica más centralización y riesgo de compra de votos",""],
+ ["Prueba de autoridad","2017","Una lista fija de validadores aprobados e identificados públicamente firma los bloques. La confianza viene de la reputación.","Cadenas privadas y de consorcio, algunas redes de prueba","Muy rápida, eficiente, predecible","Con permisos: tienes que confiar en la lista de validadores",""],
+ ["Tolerancia a fallos bizantinos","PBFT, 1999","Un conjunto conocido de validadores vota por rondas; un bloque es final cuando lo firman más de dos tercios. Tolera que hasta un tercio de los validadores mienta.","Cosmos (CometBFT, antes Tendermint), BNB Chain, Aptos, Sui","Finalidad instantánea, sin bifurcaciones","Los mensajes crecen rápido con el número de validadores; se detiene si más de un tercio se desconecta","La capa de finalidad de Ethereum usa la misma regla de dos tercios."],
+ ["Prueba de historia","Solana, 2020","Un reloj verificable: una cadena de hashes secuenciales demuestra que ha pasado tiempo entre sucesos, así que los validadores acuerdan el orden sin comunicarse antes. Se combina con una votación BFT (Tower BFT).","Solana","Rendimiento muy alto","Requisitos de hardware exigentes; ha sufrido caídas",""],
+ ["Consenso Avalanche","2018","Cada nodo consulta repetidamente a una pequeña muestra aleatoria de otros y adopta la opinión mayoritaria hasta que la red se fija.","Avalanche","Finalidad rápida, escala a muchos nodos","Seguridad probabilística; más nueva y menos estudiada",""],
+ ["Raft y Paxos","Paxos 1989 · Raft 2014","Un líder elegido replica un registro en sus seguidores; una mayoría confirma cada entrada. Soporta caídas, no mentirosos.","No son blockchains: etcd, Kubernetes, muchas bases de datos","Simples, rápidos, probados en la industria","Falla si algún nodo miente activamente (no tolera fallos bizantinos)","Muestra lo que añaden las blockchains: tolerancia a participantes maliciosos."]
+];
+$("#mechs").innerHTML=MECH.map(m=>`<article class="pc"><div class="top"><h3>${m[0]}</h3><span class="yr">${m[1]}</span></div><p>${m[2]}</p>
+  <dl class="meta"><dt>Usado por</dt><dd>${m[3]}</dd><dt>Ventajas</dt><dd>${m[4]}</dd><dt>Desventajas</dt><dd>${m[5]}</dd>${m[6]?`<dt>Detalle</dt><dd>${m[6]}</dd>`:""}</dl></article>`).join("");
+
+const IDEAS=[
+ ["El problema del doble gasto","","El dinero digital puede copiarse como cualquier archivo. La tarea de una blockchain es que todos acuerden cuál de dos pagos contradictorios llegó primero."],
+ ["Tolerancia a fallos bizantinos","1982","Acuerdo a pesar de participantes que mienten o envían mensajes contradictorios. Requiere n ≥ 3f + 1 nodos para tolerar f traidores."],
+ ["Imposibilidad FLP","1985","Fischer, Lynch y Paterson demostraron que ningún protocolo determinista puede garantizar el acuerdo en una red poco fiable si aunque sea un nodo puede caerse. Los sistemas reales lo esquivan con tiempos de espera o aleatoriedad."],
+ ["Teorema CAP","2000","Eric Brewer: cuando la red se parte, un sistema debe elegir entre seguir siendo consistente o seguir disponible. Bitcoin prioriza la disponibilidad (bifurcaciones); las cadenas BFT, la consistencia (se detienen)."],
+ ["El trilema de la blockchain","","El planteamiento de Vitalik Buterin: es difícil ser descentralizada, segura y rápida a la vez. Los rollups de capa 2 son una respuesta: procesan transacciones fuera de la cadena y publican pruebas en ella."],
+ ["Finalidad","","Cuando una transacción ya no puede revertirse. En la prueba de trabajo se vuelve exponencialmente más segura con cada bloque (demo 2). En BFT y en la prueba de participación de Ethereum se vuelve final en un punto de control concreto."],
+ ["Nada en juego","","En una prueba de participación ingenua, votar en cada bifurcación no cuesta nada, así que los validadores lo harían. El slashing, que destruye la participación de quien sea descubierto votando dos veces, lo soluciona."],
+ ["Árboles de Merkle","1979","Las transacciones se combinan por pares mediante hashes hasta una única raíz en la cabecera del bloque, así que un teléfono puede verificar un pago sin descargar el bloque entero. Inventados por Ralph Merkle."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3>${i[1]?`<span class="yr">${i[1]}</span>`:""}</div><p>${i[2]}</p></article>`).join("");
+
+/* boot */
+mineAll();renderChain();drawRace();gUpdate();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(drawRace,120)});
+addEventListener("themechange",()=>{drawRace();drawGens(null)});
+</script>
+</body>
+</html>

@@ -13,6 +13,10 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Blockchain & consensus | `blockchain.html` | Live SHA-256 hash chain with mining, 51% attack odds and simulator, Byzantine generals vote, consensus field guide |
 | Quantum mechanics | `quantum.html` | Double-slit experiment, Bloch-sphere qubit with gates, Bell/CHSH test, Grover’s search |
 
+## Spanish
+
+Every page has a hand-translated Spanish copy in `es/` (served at `/es/...`). The EN/ES link in the nav switches between matching pages, and `hreflang` alternates tell search engines they are translations.
+
 ## Brand assets
 
 - `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`: the “c.” mark
