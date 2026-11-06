@@ -39,3 +39,7 @@ npx serve .
 ## Deploy
 
 Works as-is on Vercel, Netlify or GitHub Pages. No framework or build command; the output directory is the repo root.
+
+## Analytics and cookie consent
+
+Google Tag Manager (`GTM-T9P7XFHH`) loads on every page. A small inline script sets Google Consent Mode v2 to denied for everything before GTM loads. `consent.js` shows an Accept / Decline banner (English or Spanish, from the page language), stores the choice in `localStorage` under `consent`, and sends `gtag('consent','update', …)` plus a `consent_update` dataLayer event. A **Cookies** link in each footer reopens the banner.
