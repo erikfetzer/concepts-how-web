@@ -95,15 +95,19 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .chainmini i.bad{border-color:#C2413A}
 .chainmini i+i::before{content:"";position:absolute;left:-20px;top:50%;width:18px;height:2px;background:var(--muted)}
 .fringes{position:absolute;inset:12px 16px;border-radius:6px;background:repeating-linear-gradient(90deg,transparent 0,rgba(123,63,228,.85) 8px,transparent 16px),linear-gradient(90deg,var(--paper),transparent 30%,transparent 70%,var(--paper));background-blend-mode:normal}
-footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);font-size:13px}
+/* hypercube instrument */
+.hyper{position:absolute;inset:0;display:grid;place-items:center}
+.hyper i{position:absolute;border:2px solid var(--accent);width:64px;height:64px;transform:rotate(12deg)}
+.hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
+footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style>
 <style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
 </head>
 <body>
 <main class="wrap">
-  <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-top:16px">
-    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="index.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/index.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-top:16px"><span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="index.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/index.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span></div>
   <header>
     <div class="eyebrow">Interactive explainers</div>
     <h1 aria-label="concepts.how: how they work"><span class="l1">concepts<span class="dot">.</span>how</span><span class="ghost" aria-hidden="true">they work</span></h1>
@@ -167,8 +171,18 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
       </div>
       <span class="go">Open Quantum</span>
     </a>
+    <a class="tile" href="dimensions.html">
+      <div class="no"><span>06</span><span>Geometry &amp; mind</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="hyper"><i></i><i></i></div></div>
+        <h2 style="margin-top:16px">Dimensions &amp; perception</h2>
+        <p>Rotate a 4D hypercube, watch a higher-dimensional visitor appear in a sealed room, see why orbits only close in 3D, and test the limits of your own senses.</p>
+        <div class="tags"><span>Tesseract</span><span>Flatland</span><span>Illusions</span></div>
+      </div>
+      <span class="go">Open Dimensions</span>
+    </a>
   </div>
 </main>
-<footer class="wrap">concepts.how · more concepts to come.</footer>
+<footer class="wrap"><div class="sitefoot"><span>concepts.how · more concepts to come.</span><span>by <b>Erik</b></span></div></footer>
 </body>
 </html>

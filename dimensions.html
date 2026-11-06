@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimensions &amp; Perception · concepts.how</title>
+<meta name="description" content="Rotate a 4D hypercube, slice shapes like a Flatlander, see why orbits only close in 3D, measure a fractal’s dimension and test the limits of your own senses.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/dimensions">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/dimensions">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Dimensions &amp; Perception · concepts.how">
+<meta property="og:description" content="Rotate a 4D hypercube, slice shapes like a Flatlander, see why orbits only close in 3D, measure a fractal’s dimension and test the limits of your own senses.">
+<meta property="og:url" content="https://concepts.how/dimensions">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dimensions &amp; Perception · concepts.how">
+<meta name="twitter:description" content="Rotate a 4D hypercube, slice shapes like a Flatlander, see why orbits only close in 3D, measure a fractal’s dimension and test the limits of your own senses.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a cabinet of extra dimensions. The rotating tesseract is the hero; then a Flatland slicer, orbits by dimension, a fractal, and a lab for your own senses. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --w4:#E4572E; --w3:#1D47F0; --good:#1E8A5A; --bad:#C2413A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --w4:#FF7A55; --w3:#7E9CFF; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --w4:#FF7A55; --w3:#7E9CFF; --good:#4CC38A; --bad:#F07A72; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* projection rule: ticks shrinking toward a vanishing point */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 20px) bottom/100% 12px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 5px) bottom/100% 4px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ncube{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.ncube th,.ncube td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
+.ncube th:first-child,.ncube td:first-child{text-align:left}
+.ncube tr.hl td{background:var(--accent-soft);font-weight:600}
+.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px}
+.toggle{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+.toggle input{appearance:none;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;transition:background .2s}
+.toggle input::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--card);transition:transform .2s}
+.toggle input:checked{background:var(--accent)}
+.toggle input:checked::after{transform:translateX(18px)}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.lab .panel{display:grid;gap:10px;align-content:start}
+.lab h3{font-size:20px;font-weight:700}
+.lab p{margin:0;font-size:14px;color:var(--muted)}
+.lab svg{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+.spec svg{width:100%;height:auto;display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc p{margin:0;font-size:14.5px}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}.lab{grid-template-columns:1fr}}
+@media (max-width:520px){.split{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style>
+<style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html" aria-current="page">Dimensions</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="dimensions.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/dimensions.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Dimensions</b> · and perception</div>
+    <h1>You live in three dimensions. <em>Probably.</em></h1>
+    <p class="lede">We can’t picture a fourth spatial dimension, but we can reason about one, project it, and slice it, the same way a flat creature could reason about our world. And even the three we have reach us through senses that catch only a sliver of what’s there.</p>
+    <nav class="jump" aria-label="On this page"><a href="#tesseract">Tesseract</a><a href="#flatland">Flatland</a><a href="#visitor">4D visitor</a><a href="#orbits">Why three?</a><a href="#fractal">Fractal dimension</a><a href="#senses">Your senses</a><a href="#ideas">Key ideas</a></nav>
+  </header>
+
+  <section class="demo" id="tesseract" aria-labelledby="tesH" style="scroll-margin-top:20px">
+    <div class="panel">
+      <canvas id="tesCv" class="cv" height="440" aria-label="A four-dimensional hypercube projected into three and then two dimensions" style="cursor:grab;touch-action:none"></canvas>
+      <p class="lbl" style="margin:8px 0 0">Drag to turn it in ordinary 3D space</p>
+    </div>
+    <div class="stack">
+      <div>
+        <span class="eyebrow">Demo 1 · the fourth dimension</span>
+        <h2 id="tesH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">Rotate a tesseract</h2>
+        <p style="margin:8px 0 0;color:var(--muted)">A tesseract is to a cube what a cube is to a square. Here it is projected down to your screen, like a cube’s shadow on a wall. Rotating it through the fourth dimension turns it inside out: the small inner cube swells to become the outer one.</p>
+      </div>
+      <div><div class="lbl" style="margin-bottom:6px">Rotate through the 4th dimension</div>
+        <div class="seg" id="tesPlanes" role="group" aria-label="Rotation planes">
+          <button type="button" class="pill" data-p="xw" aria-pressed="true">X–W</button>
+          <button type="button" class="pill" data-p="yw" aria-pressed="false">Y–W</button>
+          <button type="button" class="pill" data-p="zw" aria-pressed="true">Z–W</button>
+          <button type="button" class="pill" data-p="xy" aria-pressed="false">X–Y (ordinary)</button>
+        </div></div>
+      <div class="sl"><label for="tesSpeed">Rotation speed<span id="tesSpeedV"></span></label><input type="range" id="tesSpeed" min="0" max="2" step="0.05" value="0.6"></div>
+      <label class="toggle" for="tesCube"><input type="checkbox" id="tesCube"> Show an ordinary cube instead</label>
+      <table class="ncube" aria-label="Counting parts of n-dimensional cubes">
+        <thead><tr><th>Shape</th><th>Dim</th><th>Corners</th><th>Edges</th><th>Squares</th><th>Cubes</th></tr></thead>
+        <tbody>
+          <tr><td>Point</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>Line</td><td>1</td><td>2</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>Square</td><td>2</td><td>4</td><td>4</td><td>1</td><td>0</td></tr>
+          <tr id="rowCube"><td>Cube</td><td>3</td><td>8</td><td>12</td><td>6</td><td>1</td></tr>
+          <tr id="rowTes" class="hl"><td>Tesseract</td><td>4</td><td>16</td><td>32</td><td>24</td><td>8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="flatland" aria-labelledby="flatH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · Flatland</span>
+      <h2 id="flatH">How a 2D creature would see your world</h2>
+      <p>In Edwin Abbott’s 1884 novella <i>Flatland</i>, A Square is visited by a sphere. He can only see where it crosses his plane: a dot that grows into a circle and shrinks away. We would see a 4D object passing through our space the same way, as a 3D shape that appears, changes and vanishes.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <div class="split">
+          <canvas id="flCv" class="cv" height="300" aria-label="3D view: a shape passing through a flat plane"></canvas>
+          <canvas id="flSl" class="cv" height="300" aria-label="2D view: what the Flatlander sees"></canvas>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:6px"><span class="lbl">Our view (3D)</span><span class="lbl">The Flatlander’s view (2D)</span></div>
+      </div>
+      <div class="stack">
+        <div><div class="lbl" style="margin-bottom:6px">Visitor</div>
+          <div class="seg" id="flShapes" role="group" aria-label="Shape">
+            <button type="button" class="pill" data-s="sphere" aria-pressed="true">Sphere</button>
+            <button type="button" class="pill" data-s="cube" aria-pressed="false">Cube, face first</button>
+            <button type="button" class="pill" data-s="corner" aria-pressed="false">Cube, corner first</button>
+            <button type="button" class="pill" data-s="cone" aria-pressed="false">Cone</button>
+          </div></div>
+        <div class="sl"><label for="flH">Height of the plane<span id="flHV"></span></label><input type="range" id="flH" min="-1" max="1" step="0.005" value="0.3"></div>
+        <div class="row"><button class="btn" type="button" id="flPlay">Pass it through</button></div>
+        <div class="callout" id="flMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="visitor" aria-labelledby="visH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · a visitor from the fourth dimension</span>
+      <h2 id="visH">What a higher-dimensional being would look like here</h2>
+      <p>Now flip Flatland around. Imagine a being with one more spatial direction than us, which we’ll call W. Our whole 3D world is a thin slice of its space, and we only see the parts of it that cross our slice.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <div class="split">
+          <canvas id="viCv" class="cv" height="320" aria-label="A sealed room with blobs appearing inside it"></canvas>
+          <canvas id="viW" class="cv" height="320" aria-label="Side view along the W direction showing the whole being and our 3D slice"></canvas>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:6px"><span class="lbl">What you see in a sealed room</span><span class="lbl">The being, seen along W</span></div>
+      </div>
+      <div class="stack">
+        <div class="sl"><label for="viWs">How far the being has moved along W<span id="viWsV"></span></label><input type="range" id="viWs" min="-1.2" max="1.9" step="0.005" value="-0.1"></div>
+        <div class="row"><button class="btn" type="button" id="viPlay">Let it pass through</button><span class="lbl" id="viCount" aria-live="polite"></span></div>
+        <div class="callout"><b>What it could do</b>Appear inside a locked room without touching the walls. See the inside of everything at once, the way you see every room on a floor plan. Lift an object out of a sealed box. Turn you around through W and set you back as your own mirror image, heart on the right.</div>
+        <div class="callout"><b>And a fifth dimension?</b>Each extra dimension repeats the trick one level up. If you count time as the fourth dimension, a five-dimensional being might take in our whole timeline at once, the way you can see every panel of a comic strip. Fiction loves this (the tesseract in <i>Interstellar</i>, Vonnegut’s Tralfamadorians in <i>Slaughterhouse-Five</i>), but there’s no evidence such beings or directions exist.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="orbits" aria-labelledby="orbH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · physics</span>
+      <h2 id="orbH">Why three dimensions might be special</h2>
+      <p>In 3D, gravity spreads over a sphere’s surface and weakens as 1/r². In a world with n spatial dimensions it would weaken as 1/rⁿ⁻¹. In 1917 Paul Ehrenfest pointed out a consequence: with four or more dimensions, planets have no stable orbits.</p>
+    </div>
+    <div class="demo">
+      <div class="panel">
+        <canvas id="orCv" class="cv" height="380" aria-label="A planet orbiting a star under different gravity laws"></canvas>
+      </div>
+      <div class="stack">
+        <div><div class="lbl" style="margin-bottom:6px">Number of spatial dimensions</div>
+          <div class="seg" id="orDims" role="group" aria-label="Dimensions">
+            <button type="button" class="pill" data-n="2" aria-pressed="false">2D · gravity ∝ 1/r</button>
+            <button type="button" class="pill" data-n="3" aria-pressed="true">3D · ∝ 1/r²</button>
+            <button type="button" class="pill" data-n="4" aria-pressed="false">4D · ∝ 1/r³</button>
+          </div></div>
+        <div class="sl"><label for="orV">Launch speed (1 = perfect circle)<span id="orVV"></span></label><input type="range" id="orV" min="0.6" max="1.4" step="0.01" value="0.85"></div>
+        <div class="row"><button class="btn" type="button" id="orGo">Launch again</button><span class="lbl" id="orStatus" aria-live="polite"></span></div>
+        <div class="callout" id="orMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="fractal" aria-labelledby="frH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · in-between dimensions</span>
+      <h2 id="frH">A shape with 1.26 dimensions</h2>
+      <p>Dimension doesn’t have to be a whole number. The Koch snowflake (Helge von Koch, 1904) replaces every edge with four edges a third as long. Its outline grows forever while its area stays finite, so it’s more than a line but less than a surface.</p>
+    </div>
+    <div class="demo">
+      <div class="panel"><canvas id="frCv" class="cv" height="360" aria-label="Koch snowflake"></canvas></div>
+      <div class="stack">
+        <div class="sl"><label for="frK">Iterations<span id="frKV"></span></label><input type="range" id="frK" min="0" max="6" value="3"></div>
+        <div class="readout">
+          <div class="ro"><div class="k">Edges</div><div class="v" id="frE"></div></div>
+          <div class="ro"><div class="k">Perimeter (start = 3)</div><div class="v" id="frP"></div></div>
+          <div class="ro"><div class="k">Area (start = 1)</div><div class="v" id="frA"></div></div>
+          <div class="ro"><div class="k">Fractal dimension</div><div class="v">log 4 / log 3 ≈ 1.262</div></div>
+        </div>
+        <div class="callout"><b>Coastlines too</b>In 1967 Benoit Mandelbrot asked “How long is the coast of Britain?” The answer depends on your ruler: the smaller it is, the longer the coast. Britain’s west coast behaves like a fractal of dimension about 1.25.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="senses" aria-labelledby="senH">
+    <div class="shead">
+      <span class="eyebrow">Demo 6 · perception</span>
+      <h2 id="senH">Your senses are a narrow window</h2>
+      <p>Your brain doesn’t record the world; it builds a model of it from limited, noisy signals, and fills the gaps with assumptions. These experiments show the window, and the guesswork.</p>
+    </div>
+    <div class="lab">
+      <div class="panel">
+        <h3>Same length?</h3>
+        <svg id="mlSvg" viewBox="0 0 300 170" role="img" aria-label="Müller-Lyer illusion: two lines with arrowheads"></svg>
+        <div class="sl"><label for="mlL">Adjust the bottom line until they match<span id="mlLV"></span></label><input type="range" id="mlL" min="120" max="260" value="150"></div>
+        <div class="row"><button class="btn ghost" type="button" id="mlReveal">Reveal</button><span class="lbl" id="mlRes" aria-live="polite"></span></div>
+        <p>The Müller-Lyer illusion (1889). One theory: we read the fins as the corners of rooms and buildings, and correct for depth that isn’t there.</p>
+      </div>
+      <div class="panel">
+        <h3>Same grey?</h3>
+        <svg id="grSvg" viewBox="0 0 300 170" role="img" aria-label="Two grey squares on a gradient background"></svg>
+        <label class="toggle" for="grBg"><input type="checkbox" id="grBg"> Remove the background</label>
+        <p>Both squares are exactly the same grey (#808080). Your visual system judges brightness relative to the surroundings, which helps you see a white page as white in sunlight or shade.</p>
+      </div>
+      <div class="panel">
+        <h3>What can you hear?</h3>
+        <div class="ro" style="text-align:center"><div class="k">Frequency</div><div class="v" id="toneV" style="font-size:28px">1,000 Hz</div></div>
+        <div class="sl"><label for="toneF">Pitch (low → high)<span></span></label><input type="range" id="toneF" min="0" max="1000" value="500"></div>
+        <div class="row"><button class="btn" type="button" id="tonePlay">Play tone</button><span class="lbl">Starts quiet. Lower your volume first.</span></div>
+        <p>Young ears hear roughly 20 Hz to 20,000 Hz. The top end falls with age; many adults stop hearing somewhere between 14,000 and 17,000 Hz. Your speakers may also cut off before you do.</p>
+      </div>
+    </div>
+    <div class="panel spec" style="margin-top:12px">
+      <div class="lbl" style="margin-bottom:8px">The electromagnetic spectrum: your eyes see the coloured sliver</div>
+      <svg viewBox="0 0 1000 120" role="img" aria-label="Electromagnetic spectrum from radio to gamma rays with the visible band highlighted">
+        <defs><linearGradient id="vis" x1="0" x2="1"><stop offset="0" stop-color="#7a00ff"/><stop offset=".2" stop-color="#3050ff"/><stop offset=".38" stop-color="#00c8ff"/><stop offset=".5" stop-color="#20d040"/><stop offset=".65" stop-color="#f0e000"/><stop offset=".8" stop-color="#ff8a00"/><stop offset="1" stop-color="#e00000"/></linearGradient></defs>
+        <rect x="20" y="30" width="960" height="34" rx="6" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".25"/>
+        <rect x="583" y="24" width="14" height="46" rx="2" fill="url(#vis)" transform="rotate(180 590 47)"/>
+        <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+          <text x="90" y="52">radio</text><text x="270" y="52">microwave</text><text x="460" y="52">infrared</text><text x="680" y="52">ultraviolet</text><text x="820" y="52">X-ray</text><text x="935" y="52">gamma</text>
+          <text x="590" y="96" font-weight="600">visible: 380–750 nm</text>
+          <text x="40" y="18" text-anchor="start" fill-opacity=".6">long waves (km)</text><text x="960" y="18" text-anchor="end" fill-opacity=".6">short waves (pm)</text>
+        </g>
+        <line x1="590" y1="72" x2="590" y2="82" stroke="currentColor"/>
+      </svg>
+      <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">Visible light is roughly one part in a trillion of the span shown here. Bees see ultraviolet, snakes sense infrared, and your phone talks in microwaves you’ll never perceive.</p>
+    </div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="ideasH">
+    <div class="shead"><span class="eyebrow">Key ideas</span><h2 id="ideasH">More dimensions, fewer certainties</h2></div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Further reading</b>
+  <ul>
+    <li>Edwin A. Abbott, <i>Flatland: A Romance of Many Dimensions</i> (1884), free and public domain</li>
+    <li>Charles Howard Hinton, <i>A New Era of Thought</i> (1888), where the word “tesseract” first appears</li>
+    <li>Benoit Mandelbrot, “How Long Is the Coast of Britain?”, <i>Science</i> (1967)</li>
+  </ul>
+  <p>Demos use exact geometry and simple physics: perspective projection for the tesseract, plane–solid intersections for Flatland, and a force of 1/rⁿ⁻¹ for orbits. Hearing and colour perception vary from person to person.</p>
+  <div class="sitefoot"><span>concepts.how · more concepts to come.</span><span>by <b>Erik</b></span></div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const vis=new Map();const io=new IntersectionObserver(es=>es.forEach(e=>{vis.set(e.target.id,e.isIntersecting);if(e.isIntersecting)kick(e.target.id)}));
+const kicks={};function kick(id){kicks[id]&&kicks[id]()}
+
+/* ================= TESSERACT ================= */
+const TS={planes:{xw:true,yw:false,zw:true,xy:false},speed:.6,ang:{xw:0,yw:0,zw:0,xy:0},yaw:.5,pitch:.35,cube:false,raf:0,last:0};
+const V4=[];for(let i=0;i<16;i++)V4.push([i&1?1:-1,i&2?1:-1,i&4?1:-1,i&8?1:-1]);
+const E4=[];for(let i=0;i<16;i++)for(let j=i+1;j<16;j++){const d=i^j;if(d&&!(d&(d-1)))E4.push([i,j])}
+function rot4(v){let[x,y,z,w]=v;const r=(a,b,t)=>[a*Math.cos(t)-b*Math.sin(t),a*Math.sin(t)+b*Math.cos(t)];
+  [x,w]=r(x,w,TS.ang.xw);[y,w]=r(y,w,TS.ang.yw);[z,w]=r(z,w,TS.ang.zw);[x,y]=r(x,y,TS.ang.xy);return[x,y,z,w]}
+function drawTes(){
+  const{c,W,H}=setupCanvas($("#tesCv"));const c3=css("--w3"),c4=css("--w4"),muted=css("--muted");
+  const S=Math.min(W,H)*0.27,cx=W/2,cy=H/2;
+  const cyw=Math.cos(TS.yaw),syw=Math.sin(TS.yaw),cp=Math.cos(TS.pitch),sp=Math.sin(TS.pitch);
+  const proj=(x,y,z)=>{const X=x*cyw-z*syw,Z=x*syw+z*cyw;const Y=y*cp-Z*sp,Z2=y*sp+Z*cp;const f=3.2/(3.2+Z2*0.55);return{x:cx+X*S*f,y:cy-Y*S*f,d:Z2}};
+  let pts,edges,wv;
+  if(TS.cube){pts=V4.filter(v=>v[3]===1).map(v=>{let[x,y,z]=v;const a=TS.ang.xw+TS.ang.zw;const r=(p,q,t)=>[p*Math.cos(t)-q*Math.sin(t),p*Math.sin(t)+q*Math.cos(t)];[x,z]=r(x,z,a*0.7);[x,y]=r(x,y,TS.ang.xy);return proj(x*1.15,y*1.15,z*1.15)});edges=[];for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const d=i^j;if(d&&!(d&(d-1)))edges.push([i,j])}wv=pts.map(()=>0)}
+  else{const r=V4.map(rot4);wv=r.map(v=>v[3]);pts=r.map(([x,y,z,w])=>{const f=3.6/(3.6-w);return proj(x*f*0.62,y*f*0.62,z*f*0.62)});edges=E4}
+  c.lineCap="round";
+  edges.map(e=>({e,d:(pts[e[0]].d+pts[e[1]].d)/2})).sort((a,b)=>b.d-a.d).forEach(({e})=>{const a=pts[e[0]],b=pts[e[1]];const w=(wv[e[0]]+wv[e[1]])/2;const t=(w+1)/2;
+    c.strokeStyle=TS.cube?c3:(t>0.5?c4:c3);c.globalAlpha=TS.cube?.9:0.35+0.6*Math.abs(t-0.5)*2;c.lineWidth=TS.cube?2.5:1.6+t*1.8;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()});
+  c.globalAlpha=1;pts.forEach((p,i)=>{const t=(wv[i]+1)/2;c.fillStyle=TS.cube?c3:(t>0.5?c4:c3);c.beginPath();c.arc(p.x,p.y,TS.cube?4:2.5+t*2.5,0,7);c.fill()});
+  c.fillStyle=muted;c.font="11px 'IBM Plex Mono', monospace";c.textAlign="left";
+  if(!TS.cube){c.fillStyle=c4;c.fillText("● toward +W (the 4th direction)",10,H-26);c.fillStyle=c3;c.fillText("● toward −W",10,H-10)}
+}
+function tesTick(now){TS.raf=0;if(!vis.get("tesCv"))return;const dt=Math.min(50,now-(TS.last||now))/1000;TS.last=now;
+  for(const p in TS.planes)if(TS.planes[p])TS.ang[p]+=dt*TS.speed;drawTes();if(TS.speed>0&&!reduce)TS.raf=requestAnimationFrame(tesTick)}
+kicks.tesCv=()=>{if(!TS.raf){TS.last=0;TS.raf=requestAnimationFrame(tesTick)}};
+$("#tesPlanes").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;const p=b.dataset.p;TS.planes[p]=!TS.planes[p];b.setAttribute("aria-pressed",TS.planes[p]);drawTes();kick("tesCv")});
+$("#tesSpeed").addEventListener("input",e=>{TS.speed=+e.target.value;$("#tesSpeedV").textContent=TS.speed.toFixed(2)+"×";kick("tesCv")});
+$("#tesCube").addEventListener("change",e=>{TS.cube=e.target.checked;$("#rowCube").classList.toggle("hl",TS.cube);$("#rowTes").classList.toggle("hl",!TS.cube);drawTes()});
+(function(){const cv=$("#tesCv");let d=null;cv.addEventListener("pointerdown",e=>{d={x:e.clientX,y:e.clientY,yaw:TS.yaw,pitch:TS.pitch};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
+cv.addEventListener("pointermove",e=>{if(!d)return;TS.yaw=d.yaw+(e.clientX-d.x)*0.01;TS.pitch=Math.max(-1.3,Math.min(1.3,d.pitch+(e.clientY-d.y)*0.01));drawTes()});
+const up=()=>{d=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= FLATLAND ================= */
+const FL={shape:"sphere",h:.3,playing:false};
+const CUBEV=[];for(let i=0;i<8;i++)CUBEV.push([i&1?1:-1,i&2?1:-1,i&4?1:-1]);
+const CUBEE=[];for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const d=i^j;if(d&&!(d&(d-1)))CUBEE.push([i,j])}
+function rodrigues(v,k,t){const[x,y,z]=v,[a,b,c]=k,co=Math.cos(t),si=Math.sin(t),d=a*x+b*y+c*z;return[x*co+(b*z-c*y)*si+a*d*(1-co),y*co+(c*x-a*z)*si+b*d*(1-co),z*co+(a*y-b*x)*si+c*d*(1-co)]}
+// rotate (1,1,1) onto +z for corner-first; scale so the long diagonal spans [-1,1]
+const nrm=Math.sqrt(2),kAx=[1/nrm,-1/nrm,0],tAng=Math.acos(1/Math.sqrt(3));
+const CORNERV=CUBEV.map(v=>rodrigues(v,kAx,tAng).map(x=>x/Math.sqrt(3)));
+const FACEV=CUBEV.map(v=>v.map(x=>x*0.62));
+function range(){return 1}
+function sliceShape(){
+  const h=FL.h;
+  if(FL.shape==="sphere"){return h*h<1?{circle:Math.sqrt(1-h*h)}:null}
+  if(FL.shape==="cone"){return h>=-1&&h<=1?{circle:(1-h)/2*1.0}:null}
+  const V=FL.shape==="cube"?FACEV:CORNERV;const P=[];
+  CUBEE.forEach(([i,j])=>{const a=V[i],b=V[j];if((a[2]-h)*(b[2]-h)<=0&&a[2]!==b[2]){const t=(h-a[2])/(b[2]-a[2]);P.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])])}});
+  if(P.length<3)return null;const cx=P.reduce((s,p)=>s+p[0],0)/P.length,cy=P.reduce((s,p)=>s+p[1],0)/P.length;
+  const U=[];P.sort((p,q)=>Math.atan2(p[1]-cy,p[0]-cx)-Math.atan2(q[1]-cy,q[0]-cx)).forEach(p=>{if(!U.some(u=>Math.hypot(u[0]-p[0],u[1]-p[1])<1e-6))U.push(p)});
+  return U.length>=3?{poly:U}:null;
+}
+const FLNAMES={3:"triangle",4:"square",5:"pentagon",6:"hexagon"};
+function drawFL(){
+  const{c,W,H}=setupCanvas($("#flCv"));const ink=css("--ink"),muted=css("--muted"),acc=css("--accent"),w4=css("--w4");
+  const S=Math.min(W,H)*0.3,cx=W/2,cy=H/2+10,yaw=0.6,pitch=0.42,cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const P=([x,y,z])=>{const X=x*cyw-y*syw,Y=x*syw+y*cyw;return{x:cx+X*S,y:cy-(z*cp-Y*sp)*S,d:Y*cp+z*sp}};
+  const h=FL.h,sl=sliceShape();
+  const drawShape=(front)=>{c.strokeStyle=ink;c.lineWidth=1.4;
+    if(FL.shape==="sphere"){for(let k=-2;k<=2;k++){const z=k/3,r=Math.sqrt(1-z*z);ring(r,z)}for(let m=0;m<6;m++){const a=m*Math.PI/6;c.beginPath();for(let i=0;i<=40;i++){const t=i/40*2*Math.PI;const p=P([Math.cos(a)*Math.sin(t),Math.sin(a)*Math.sin(t),Math.cos(t)]);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}c.globalAlpha=.35;c.stroke();c.globalAlpha=1}}
+    else if(FL.shape==="cone"){ring(1,-1);[0,1,2,3,4,5].forEach(m=>{const a=m*Math.PI/3;const b=P([Math.cos(a),Math.sin(a),-1]),t=P([0,0,1]);c.globalAlpha=.6;c.beginPath();c.moveTo(b.x,b.y);c.lineTo(t.x,t.y);c.stroke();c.globalAlpha=1})}
+    else{const V=FL.shape==="cube"?FACEV:CORNERV;CUBEE.forEach(([i,j])=>{const a=P(V[i]),b=P(V[j]);c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()})}};
+  function ring(r,z){c.beginPath();for(let i=0;i<=48;i++){const t=i/48*2*Math.PI;const p=P([r*Math.cos(t),r*Math.sin(t),z]);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}c.globalAlpha=.45;c.stroke();c.globalAlpha=1}
+  drawShape();
+  // plane
+  const L=1.5,q=[[-L,-L,h],[L,-L,h],[L,L,h],[-L,L,h]].map(P);c.fillStyle=acc;c.globalAlpha=.12;c.beginPath();q.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.closePath();c.fill();c.globalAlpha=.5;c.strokeStyle=acc;c.stroke();c.globalAlpha=1;
+  // slice outline in 3D
+  if(sl){c.strokeStyle=w4;c.lineWidth=3;c.beginPath();if(sl.circle!==undefined){for(let i=0;i<=60;i++){const t=i/60*2*Math.PI;const p=P([sl.circle*Math.cos(t),sl.circle*Math.sin(t),h]);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}}else{sl.poly.forEach((v,i)=>{const p=P([v[0],v[1],h]);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)});c.closePath()}c.stroke()}
+  // flatlander view
+  const s2=setupCanvas($("#flSl"));const d=s2.c,W2=s2.W,H2=s2.H,R=Math.min(W2,H2)*0.36,ox=W2/2,oy=H2/2;
+  d.strokeStyle=css("--line");d.beginPath();d.moveTo(10,oy);d.lineTo(W2-10,oy);d.moveTo(ox,10);d.lineTo(ox,H2-10);d.stroke();
+  if(sl){d.fillStyle=w4;d.globalAlpha=.85;d.beginPath();if(sl.circle!==undefined){d.arc(ox,oy,Math.max(1.5,sl.circle*R),0,7)}else{sl.poly.forEach((v,i)=>{i?d.lineTo(ox+v[0]*R,oy-v[1]*R):d.moveTo(ox+v[0]*R,oy-v[1]*R)});d.closePath()}d.fill();d.globalAlpha=1}
+  else{d.fillStyle=muted;d.font="13px 'IBM Plex Sans', sans-serif";d.textAlign="center";d.fillText("nothing here",ox,oy-14)}
+  $("#flHV").textContent=h.toFixed(2);
+  const name=!sl?"nothing":sl.circle!==undefined?(sl.circle<0.04?"a point":"a circle"):(FLNAMES[sl.poly.length]||sl.poly.length+"-gon");
+  const msgs={sphere:"<b>Sphere</b>The Flatlander sees a point appear, grow into a circle, then shrink and vanish. Right now: "+name+".",
+    cube:"<b>Cube, face first</b>A square pops into existence, stays exactly the same, then disappears at once. Right now: "+name+".",
+    corner:"<b>Cube, corner first</b>The same cube tilted onto a corner gives a point, a growing triangle, then a hexagon, then a triangle again. Same object, very different story. Right now: "+name+".",
+    cone:"<b>Cone</b>A circle that steadily shrinks to a point. A Flatlander might call it a dying circle. Right now: "+name+"."};
+  $("#flMsg").innerHTML=msgs[FL.shape];
+}
+$("#flShapes").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;FL.shape=b.dataset.s;document.querySelectorAll("#flShapes .pill").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));drawFL()});
+$("#flH").addEventListener("input",e=>{FL.h=+e.target.value;drawFL()});
+$("#flPlay").addEventListener("click",()=>{if(FL.playing)return;FL.playing=true;const t0=performance.now();const run=now=>{const k=Math.min(1,(now-t0)/5000);FL.h=1-2*k;$("#flH").value=FL.h;drawFL();if(k<1&&!reduce)requestAnimationFrame(run);else FL.playing=false};requestAnimationFrame(run)});
+
+/* ================= 4D VISITOR ================= */
+const VI={w:-0.1,playing:false};
+const BLOBS=[[0,-0.25,0,0,.62],[-.6,.5,.05,.55,.34],[-.22,.78,0,.78,.32],[.22,.78,-.05,.95,.3],[.6,.5,0,.62,.32],[.85,-.15,.05,-.45,.3]];
+function drawVI(){
+  const{c,W,H}=setupCanvas($("#viCv"));const ink=css("--ink"),muted=css("--muted"),w4=css("--w4");
+  const S=Math.min(W,H)*0.25,cx=W/2,cy=H/2+12,yaw=0.55,pitch=0.32,cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const P=([x,y,z])=>{const X=x*cyw-z*syw,Z=x*syw+z*cyw;const Y=y*cp-Z*sp,D=y*sp+Z*cp;const f=7/(7+D);return{x:cx+X*S*f,y:cy-Y*S*f,d:D,f}};
+  const R=1.1,box=[];for(let i=0;i<8;i++)box.push([i&1?R:-R,i&2?R:-R,i&4?R:-R]);
+  c.strokeStyle=ink;c.lineWidth=1.3;c.globalAlpha=.55;for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const d=i^j;if(d&&!(d&(d-1))){const a=P(box[i]),b=P(box[j]);c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()}}c.globalAlpha=1;
+  c.fillStyle=muted;c.font="10px 'IBM Plex Mono', monospace";c.textAlign="center";c.fillText("sealed room",cx,H-8);
+  const vis=BLOBS.map(b=>{const dw=VI.w-b[3];return dw*dw<b[4]*b[4]?{p:P([b[0],b[1],b[2]]),r:Math.sqrt(b[4]*b[4]-dw*dw)}:null}).filter(Boolean).sort((a,b)=>b.p.d-a.p.d);
+  vis.forEach(v=>{const rr=v.r*S*v.p.f;const g=c.createRadialGradient(v.p.x-rr*.35,v.p.y-rr*.35,rr*.1,v.p.x,v.p.y,rr);g.addColorStop(0,"#ffd2c2");g.addColorStop(1,w4);c.fillStyle=g;c.beginPath();c.arc(v.p.x,v.p.y,rr,0,7);c.fill()});
+  // side view along W
+  const s2=setupCanvas($("#viW"));const d=s2.c,W2=s2.W,H2=s2.H;const wx=w=>W2*0.12+(w+1.2)/3.1*W2*0.8,yy=y=>H2/2-y*H2*0.32;
+  d.strokeStyle=css("--line");d.beginPath();d.moveTo(10,H2-24);d.lineTo(W2-10,H2-24);d.stroke();d.fillStyle=muted;d.font="10px 'IBM Plex Mono', monospace";d.textAlign="right";d.fillText("W →",W2-10,H2-8);
+  BLOBS.forEach(b=>{d.fillStyle=w4;d.globalAlpha=.35;d.beginPath();d.ellipse(wx(b[3]),yy(b[1]),b[4]/3.1*W2*0.8,b[4]*H2*0.32,0,0,7);d.fill()});d.globalAlpha=1;
+  d.strokeStyle=css("--accent");d.lineWidth=3;d.beginPath();d.moveTo(wx(VI.w),14);d.lineTo(wx(VI.w),H2-30);d.stroke();
+  d.fillStyle=css("--accent");d.textAlign="center";d.fillText("our 3D space",wx(VI.w),12);
+  $("#viWsV").textContent=VI.w.toFixed(2);
+  const n=vis.length;$("#viCount").textContent=n===0?"Nothing visible":n===1?"1 blob in the room":n+" separate blobs in the room";
+}
+$("#viWs").addEventListener("input",e=>{VI.w=+e.target.value;drawVI()});
+$("#viPlay").addEventListener("click",()=>{if(VI.playing)return;VI.playing=true;const t0=performance.now();const run=now=>{const k=Math.min(1,(now-t0)/7000);VI.w=-1.2+3.1*k;$("#viWs").value=VI.w;drawVI();if(k<1&&!reduce)requestAnimationFrame(run);else VI.playing=false};requestAnimationFrame(run)});
+
+/* ================= ORBITS ================= */
+const OR={n:3,v0:.85,x:1,y:0,vx:0,vy:.85,trail:[],state:"run",raf:0,t:0};
+function orReset(){OR.x=1;OR.y=0;OR.vx=0;OR.vy=OR.v0;OR.trail=[];OR.state="run";OR.t=0;$("#orStatus").textContent="";orMsg();kick("orCv")}
+function acc(x,y){const r=Math.hypot(x,y);const f=1/Math.pow(r,OR.n-1);return[-f*x/r,-f*y/r]}
+function orStep(dt){let[ax,ay]=acc(OR.x,OR.y);OR.vx+=ax*dt/2;OR.vy+=ay*dt/2;OR.x+=OR.vx*dt;OR.y+=OR.vy*dt;[ax,ay]=acc(OR.x,OR.y);OR.vx+=ax*dt/2;OR.vy+=ay*dt/2;OR.t+=dt}
+function orMsg(){const m={2:"<b>2D: bound but never closing</b>With gravity falling off as 1/r, a planet can never escape, but its orbit doesn’t close either. It traces a rosette, swinging round a different way each time.",
+  3:"<b>3D: closed, stable ellipses</b>Inverse-square gravity is one of only two force laws where every bound orbit closes on itself (Bertrand’s theorem, 1873). Nudge the speed and the ellipse changes shape, but stays put.",
+  4:"<b>4D: no stable orbits</b>With 1/r³ gravity, a perfect circle is a knife-edge. Any speed below 1 and the planet spirals into the star; any above and it flies away. No planets, no long-lived solar systems."};$("#orMsg").innerHTML=m[OR.n]}
+function drawOR(){
+  const{c,W,H}=setupCanvas($("#orCv"));const S=Math.min(W,H)*0.28,cx=W/2,cy=H/2;const w4=css("--w4"),acc2=css("--accent"),muted=css("--muted");
+  c.strokeStyle=css("--line");c.setLineDash([3,5]);c.beginPath();c.arc(cx,cy,S,0,7);c.stroke();c.setLineDash([]);
+  c.fillStyle=muted;c.font="10px 'IBM Plex Mono', monospace";c.fillText("circular orbit",cx+S*0.72,cy-S*0.72);
+  c.strokeStyle=acc2;c.lineWidth=1.6;c.beginPath();OR.trail.forEach((p,i)=>{const X=cx+p[0]*S,Y=cy-p[1]*S;i?c.lineTo(X,Y):c.moveTo(X,Y)});c.stroke();
+  c.fillStyle="#F2B134";c.beginPath();c.arc(cx,cy,10,0,7);c.fill();
+  if(OR.state!=="crash"){c.fillStyle=w4;c.beginPath();c.arc(cx+OR.x*S,cy-OR.y*S,6,0,7);c.fill()}
+}
+function orTick(){OR.raf=0;if(!vis.get("orCv"))return;
+  if(OR.state==="run"){for(let k=0;k<40;k++){orStep(0.0025);const r=Math.hypot(OR.x,OR.y);if(r<0.06){OR.state="crash";$("#orStatus").textContent="Crashed into the star";break}if(r>3.4){OR.state="escape";$("#orStatus").textContent="Escaped to deep space";break}}
+    OR.trail.push([OR.x,OR.y]);if(OR.trail.length>1600)OR.trail.shift();if(OR.t>160){OR.state="done"}}
+  drawOR();if(OR.state==="run"&&!reduce)OR.raf=requestAnimationFrame(orTick)}
+kicks.orCv=()=>{if(!OR.raf&&OR.state==="run")OR.raf=requestAnimationFrame(orTick)};
+$("#orDims").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;OR.n=+b.dataset.n;document.querySelectorAll("#orDims .pill").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));orReset()});
+$("#orV").addEventListener("input",e=>{OR.v0=+e.target.value;$("#orVV").textContent=OR.v0.toFixed(2);orReset()});
+$("#orGo").addEventListener("click",orReset);
+
+/* ================= FRACTAL ================= */
+function koch(k){const h=Math.sqrt(3)/2;let pts=[[0,0],[1,0],[.5,h],[0,0]];const C=[.5,h/3];
+  for(let it=0;it<k;it++){const n=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];const dx=(b[0]-a[0])/3,dy=(b[1]-a[1])/3;const p1=[a[0]+dx,a[1]+dy],p2=[a[0]+2*dx,a[1]+2*dy];
+    const c60=.5,s60=h;const q1=[p1[0]+dx*c60-dy*s60,p1[1]+dx*s60+dy*c60],q2=[p1[0]+dx*c60+dy*s60,p1[1]-dx*s60+dy*c60];
+    const m=[(a[0]+b[0])/2,(a[1]+b[1])/2];const dist=q=>Math.hypot(q[0]-C[0],q[1]-C[1]);const pk=dist(q1)>dist(q2)?q1:q2;void m;
+    n.push(a,p1,pk,p2)}n.push(pts[pts.length-1]);pts=n}return pts}
+function drawFR(){const k=+$("#frK").value;const{c,W,H}=setupCanvas($("#frCv"));const pts=koch(k);
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;koch(Math.max(k,2)).forEach(p=>{x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])});
+  const S=Math.min((W-40)/(x1-x0),(H-40)/(y1-y0)),ox=(W-(x1-x0)*S)/2-x0*S,oy=(H-(y1-y0)*S)/2-y0*S;
+  c.fillStyle=css("--accent-soft");c.strokeStyle=css("--accent");c.lineWidth=1.4;c.beginPath();pts.forEach((p,i)=>{const x=ox+p[0]*S,y=H-(oy+p[1]*S);i?c.lineTo(x,y):c.moveTo(x,y)});c.closePath();c.fill();c.stroke();
+  $("#frKV").textContent=k;$("#frE").textContent=(3*Math.pow(4,k)).toLocaleString();$("#frP").textContent=(3*Math.pow(4/3,k)).toFixed(3);
+  let a=1;for(let i=1;i<=k;i++)a+=3*Math.pow(4,i-1)/Math.pow(9,i);$("#frA").textContent=a.toFixed(4)+" → 1.6";}
+$("#frK").addEventListener("input",drawFR);
+
+/* ================= PERCEPTION ================= */
+let mlRevealed=false;
+function drawML(){const L=+$("#mlL").value;const top=200,cx=150;const ink=css("--ink");const fin=18;
+  const line=(y,len,out)=>{const a=cx-len/2,b=cx+len/2,d=out?-fin:fin;return`<line x1="${a}" y1="${y}" x2="${b}" y2="${y}" stroke="${ink}" stroke-width="3"/><path d="M${a+d} ${y-fin} L${a} ${y} L${a+d} ${y+fin} M${b-d} ${y-fin} L${b} ${y} L${b-d} ${y+fin}" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/>`};
+  let extra="";if(mlRevealed){extra=`<line x1="${cx-top/2}" y1="20" x2="${cx-top/2}" y2="150" stroke="${css("--w4")}" stroke-dasharray="4 4"/><line x1="${cx+top/2}" y1="20" x2="${cx+top/2}" y2="150" stroke="${css("--w4")}" stroke-dasharray="4 4"/>`}
+  $("#mlSvg").innerHTML=`<rect width="300" height="170" fill="${css("--paper")}"/>`+line(55,top,false)+line(120,L,true)+extra;$("#mlLV").textContent=mlRevealed?`${L} vs ${top}`:"";}
+$("#mlL").addEventListener("input",()=>{mlRevealed=false;$("#mlRes").textContent="";drawML()});
+$("#mlReveal").addEventListener("click",()=>{mlRevealed=true;const L=+$("#mlL").value;const e=(L-200)/200*100;$("#mlRes").textContent=Math.abs(e)<2?"Spot on!":`You set it ${Math.abs(e).toFixed(0)}% ${e<0?"short":"long"}`;drawML()});
+function drawGR(){const plain=$("#grBg").checked;
+  $("#grSvg").innerHTML=`<defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#111"/><stop offset="1" stop-color="#f4f4f4"/></linearGradient></defs><rect width="300" height="170" fill="${plain?"#c9c9c9":"url(#gg)"}"/><rect x="45" y="60" width="50" height="50" fill="#808080"/><rect x="205" y="60" width="50" height="50" fill="#808080"/>`}
+$("#grBg").addEventListener("change",drawGR);
+let actx=null,osc=null,gain=null;const freq=v=>Math.round(20*Math.pow(1000,v/1000));
+function toneLabel(){const f=freq(+$("#toneF").value);$("#toneV").textContent=f.toLocaleString()+" Hz";if(osc)osc.frequency.setTargetAtTime(f,actx.currentTime,0.02)}
+$("#toneF").addEventListener("input",toneLabel);
+$("#tonePlay").addEventListener("click",()=>{
+  try{if(osc){gain.gain.setTargetAtTime(0,actx.currentTime,0.05);const o=osc;setTimeout(()=>o.stop(),200);osc=null;$("#tonePlay").textContent="Play tone";return}
+  actx=actx||new (window.AudioContext||window.webkitAudioContext)();osc=actx.createOscillator();gain=actx.createGain();osc.type="sine";osc.frequency.value=freq(+$("#toneF").value);gain.gain.value=0;osc.connect(gain).connect(actx.destination);osc.start();gain.gain.setTargetAtTime(0.05,actx.currentTime,0.1);$("#tonePlay").textContent="Stop tone"}
+  catch(err){$("#tonePlay").textContent="Audio unavailable"}});
+
+/* ================= IDEAS ================= */
+const IDEAS=[
+ ["Time as the fourth dimension","1908","Hermann Minkowski recast Einstein’s relativity as geometry in four-dimensional spacetime, declaring that space and time on their own would “fade away into mere shadows.” Unlike the tesseract’s W, time enters with a minus sign, which is why you can’t turn around in it."],
+ ["The tesseract","1888","Charles Howard Hinton coined the word and spent years training himself to visualize it with coloured cubes. Salvador Dalí painted an unfolded tesseract as the cross in <i>Corpus Hypercubus</i> (1954)."],
+ ["Hidden extra dimensions","1921","Theodor Kaluza showed that a fifth dimension could unify gravity and electromagnetism; Oskar Klein (1926) suggested it was curled up too small to see. String theory needs 10 dimensions and M-theory 11, with the extras rolled up out of sight. None have been detected."],
+ ["The holographic principle","1993","Gerard ’t Hooft and Leonard Susskind proposed that everything inside a region might be encoded on its boundary, like a hologram. Juan Maldacena’s 1997 AdS/CFT correspondence made a precise version, in which a universe with gravity is equivalent to a theory with one fewer dimension."],
+ ["Colour is three-dimensional","","Humans have three types of cone cell, so every colour you see is a mix of three signals. That’s why screens need only red, green and blue. A small number of women carry a fourth cone type, and mantis shrimp have 12 or more photoreceptor types, though tests suggest they tell colours apart worse than we do."],
+ ["The Necker cube","1832","A wire-frame cube that flips between two 3D readings while the drawing never changes. Your brain is choosing between interpretations of 2D input, and it can’t hold both at once."],
+ ["Umwelt","1909","Biologist Jakob von Uexküll’s word for the slice of reality an animal can sense. A tick’s world is warmth, butyric acid and touch. Ours is wider, but just as much a slice."],
+ ["More than five senses","","Besides sight, hearing, touch, taste and smell, you sense balance (the inner ear), the position of your limbs (proprioception), temperature, pain and internal states like hunger. Counts range from about nine to over twenty depending on how you split them."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3>${i[1]?`<span class="yr">${i[1]}</span>`:""}</div><p>${i[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+$("#tesSpeedV").textContent=TS.speed.toFixed(2)+"×";$("#orVV").textContent=OR.v0.toFixed(2);
+drawTes();drawFL();drawVI();orMsg();drawOR();drawFR();drawML();drawGR();toneLabel();
+["tesCv","orCv"].forEach(id=>io.observe(document.getElementById(id)));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawTes();drawFL();drawVI();drawOR();drawFR()},120)});
+addEventListener("themechange",()=>{drawTes();drawFL();drawVI();drawOR();drawFR();drawML()});
+</script>
+</body>
+</html>

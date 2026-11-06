@@ -205,7 +205,7 @@ dialog[open].drawer{animation:slide .28s cubic-bezier(.2,.8,.2,1)}
 .minilist{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 16px}
 .btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 16px;cursor:pointer;font-weight:500;min-height:42px}
 .btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
 
 /* mobile pickers replace horizontal pill strips */
 .mselect{display:none;width:100%;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 12px;min-height:44px;font-size:16px;cursor:pointer}
@@ -242,6 +242,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);f
   *{animation:none!important;transition:none!important}
 }
 </style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style>
 <style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
 </head>
 <body>
@@ -253,7 +254,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);f
     <a class="nl" href="time.html">Time</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html">Quantum</a>
-    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="units.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/units.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+    <a class="nl" href="dimensions.html">Dimensions</a><span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="units.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/units.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
   </div>
 </nav>
 <div class="ruler" aria-hidden="true"></div>
@@ -324,6 +325,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);f
 
 <footer class="wrap">
   Definitions follow the SI Brochure (9th edition, 2019) of the International Bureau of Weights and Measures (BIPM). Imperial figures are rounded to about six significant digits; the inch has been exactly 2.54 cm and the pound exactly 0.45359237 kg since 1959.
+  <div class="sitefoot"><span>concepts.how · more concepts to come.</span><span>by <b>Erik</b></span></div>
 </footer>
 
 <dialog class="drawer" id="drawer" aria-labelledby="dName">

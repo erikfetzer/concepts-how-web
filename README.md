@@ -12,6 +12,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Time paradoxes | `time.html` | Twin-paradox spacetime diagram, ladder paradox, reversible arrow-of-time gas, Zeno’s race, grandfather-paradox timeline |
 | Blockchain & consensus | `blockchain.html` | Live SHA-256 hash chain with mining, 51% attack odds and simulator, Byzantine generals vote, consensus field guide |
 | Quantum mechanics | `quantum.html` | Double-slit experiment, Bloch-sphere qubit with gates, Bell/CHSH test, Grover’s search |
+| Dimensions & perception | `dimensions.html` | Rotating tesseract, Flatland slicer, 4D visitor in a sealed room, orbits by dimension, Koch fractal, perception lab |
 
 ## Spanish
 
