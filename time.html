@@ -116,9 +116,9 @@ section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
 .d2{animation-delay:1.2s} .d3{animation-delay:2.2s}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 .pop{opacity:0;transform-origin:center;transform-box:fill-box;animation:pop .4s ease forwards}
-@keyframes flick{0%,49%{opacity:1}50%,100%{opacity:.12}}
-.flick{animation:flick .9s steps(1) infinite}
-.flick2{animation:flick .9s steps(1) infinite reverse}
+@keyframes flick{0%,49%{opacity:1}50%,100%{opacity:.25}}
+.flick{animation:flick .9s steps(1) 3}
+.flick2{animation:flick .9s steps(1) 3 reverse}
 
 .views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
 .view{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
@@ -378,7 +378,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
 <script>
 const $=s=>document.querySelector(s);
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-function setupCanvas(cv){const r=cv.getBoundingClientRect();const d=window.devicePixelRatio||1;const h=+cv.getAttribute("height");cv.style.height=h+"px";cv.width=r.width*d;cv.height=h*d;const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);return{c,W:r.width,H:h}}
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ================= TWIN ================= */
@@ -511,10 +511,12 @@ function drawAr(){
   sc.beginPath();AR.hist.forEach((h,i)=>{const x=8+i/(500-1)*(sp.W-16),y=sp.H-6-h*(sp.H-24);i?sc.lineTo(x,y):sc.moveTo(x,y)});sc.strokeStyle=AR.dir>0?acc:css("--trav");sc.lineWidth=2;sc.stroke();
   $("#arInfo").textContent=`step ${AR.step} · ${AR.dir>0?"forward":"reversed"}`;
 }
-let arRaf=0;function arTick(){if(AR.running){for(let k=0;k<2;k++){if(AR.dir<0&&AR.step<=0){AR.running=false;$("#arPlay").textContent="Play";break}arStep()}}drawAr();arRaf=requestAnimationFrame(arTick)}
-$("#arPlay").addEventListener("click",()=>{AR.running=!AR.running;$("#arPlay").textContent=AR.running?"Pause":"Play"});
-$("#arRev").addEventListener("click",()=>{for(const p of AR.ps){p.vx=-p.vx;p.vy=-p.vy}AR.dir=-AR.dir;AR.running=true;$("#arPlay").textContent="Pause"});
-$("#arReset").addEventListener("click",arReset);
+let arRaf=0,arVisible=false;function arTick(){arRaf=0;if(!arVisible)return;if(AR.running){for(let k=0;k<2;k++){if(AR.dir<0&&AR.step<=0){AR.running=false;$("#arPlay").textContent="Play";break}if(AR.dir>0&&AR.step>=900){AR.running=false;$("#arPlay").textContent="Play";break}arStep()}drawAr()}if(AR.running)arRaf=requestAnimationFrame(arTick)}
+function arKick(){if(!arRaf&&arVisible)arRaf=requestAnimationFrame(arTick)}
+new IntersectionObserver(es=>{arVisible=es[0].isIntersecting;arKick()}).observe(document.getElementById("arCv"));
+$("#arPlay").addEventListener("click",()=>{if(!AR.running&&AR.dir>0&&AR.step>=900){arReset()}else{AR.running=!AR.running}$("#arPlay").textContent=AR.running?"Pause":"Play";arKick()});
+$("#arRev").addEventListener("click",()=>{for(const p of AR.ps){p.vx=-p.vx;p.vy=-p.vy}AR.dir=-AR.dir;AR.running=true;$("#arPlay").textContent="Pause";arKick()});
+$("#arReset").addEventListener("click",()=>{arReset();drawAr();arKick()});
 
 /* ================= ZENO ================= */
 const ZS=[];{let a=0,b=100,t=0;for(let k=0;k<=12;k++){ZS.push({a,b,t,gap:b-a});const dt=(b-a)/10;t+=dt;const nb=b+dt;a=b;b=nb}}
@@ -559,7 +561,7 @@ function drawTL(){
     body=`${base}${arcEl("draw","var(--trav)")}
      <g class="pop d2" style="animation-delay:1.3s"><circle cx="${x58}" cy="${y0}" r="7" fill="var(--trav)"/></g>
      <g style="opacity:0;animation:pop .3s 1.6s forwards"><line class="flick" x1="${x60}" y1="${y0}" x2="760" y2="${y0}" stroke="var(--bad)" stroke-width="5" stroke-dasharray="8 6"/>
-     <text class="flick2" x="${(x60+x90)/2}" y="${y0+56}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="15" fill="var(--bad)">born? not born? born? …</text></g>`;
+     <text class="flick2" x="${(x60+x90)/2}" y="${y0+56}" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="15" fill="var(--bad)">contradiction: born and not born</text></g>`;
   } else if(tlModel==="novikov"){
     body=`${base}${arcEl("draw","var(--good)")}
      <g class="pop" style="animation-delay:1.3s"><circle cx="${x58}" cy="${y0}" r="7" fill="var(--good)"/></g>
@@ -583,9 +585,8 @@ function drawTL(){
 
 /* ================= boot ================= */
 function drawAll(){drawTwin();drawLad();drawZeno();drawTL()}
-arReset();drawAll();
+arReset();drawAll();drawAr();
 if(reduce){AR.running=false;$("#arPlay").textContent="Play"}
-requestAnimationFrame(arTick);
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(drawAll,120)});
 matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",drawAll);
 </script>
