@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El universo · concepts.how</title>
+<meta name="description" content="Viaja de la longitud de Planck al borde del universo observable, comprime la historia cósmica en un año, mide un agujero negro, mira cómo se expande el espacio y conoce los objetos más extraños que existen.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/universe">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/universe">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="El universo · concepts.how">
+<meta property="og:description" content="Viaja de la longitud de Planck al borde del universo observable, comprime la historia cósmica en un año, mide un agujero negro, mira cómo se expande el espacio y conoce los objetos más extraños que existen.">
+<meta property="og:url" content="https://concepts.how/universe">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="El universo · concepts.how">
+<meta name="twitter:description" content="Viaja de la longitud de Planck al borde del universo observable, comprime la historia cósmica en un año, mide un agujero negro, mira cómo se expande el espacio y conoce los objetos más extraños que existen.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: an observatory log. A powers-of-ten zoom is the hero; then the cosmic calendar, a black-hole sizer, expanding space, and a bestiary of strange objects. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style></head>
+<body>
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html" aria-current="page">Universo</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../universe.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="universe.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>El universo</b> · escala, rarezas, grandes preguntas</div>
+    <h1>Sesenta y dos potencias de diez, <em>y estamos en el medio.</em></h1>
+    <p class="lede">De la longitud más pequeña de la que puede hablar la física al borde de lo que podemos ver hay un factor de unas 10⁶² veces. Los humanos estamos cerca de la mitad de ese rango. Recórrelo, comprime 13 800 millones de años en un calendario y conoce los objetos que desafían la intuición.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#zoom">Potencias de diez</a><a href="#calendar">Calendario cósmico</a><a href="#blackhole">Medidor de agujeros negros</a><a href="#expansion">Espacio en expansión</a><a href="#weird">Objetos extraños</a><a href="#ideas">Grandes preguntas</a></nav>
+  </header>
+
+  <section class="demo" id="zoom" aria-labelledby="zoomH" style="scroll-margin-top:20px">
+    <div class="panel">
+      <canvas id="zCv" class="cv" height="440" aria-label="Círculos anidados que muestran objetos a la escala actual"></canvas>
+      <div class="sl" style="margin-top:12px"><label for="zL">Ancho de la vista<span id="zLV"></span></label><input type="range" id="zL" min="-35" max="27.2" step="0.01" value="0.3"></div>
+      <div class="row" style="margin-top:8px"><button class="btn" type="button" id="zOut">Alejarse hasta el borde</button><button class="btn ghost" type="button" id="zIn">Acercarse a la longitud de Planck</button><button class="btn ghost" type="button" id="zHome">Volver al tamaño humano</button></div>
+    </div>
+    <div class="stack">
+      <div>
+        <span class="eyebrow">Demo 1 · escala</span>
+        <h2 id="zoomH" style="font-size:clamp(26px,3vw,36px);margin-top:6px">Potencias de diez</h2>
+        <p style="margin:8px 0 0;color:var(--muted)">Cada paso del control multiplica la vista por diez. Cada círculo está dibujado a escala. Inspirado en la película de 1977 de Charles y Ray Eames <i>Powers of Ten</i>.</p>
+      </div>
+      <div class="obj" id="zObj" aria-live="polite"></div>
+      <div class="ro"><div class="k">La luz tarda esto en cruzar la vista</div><div class="v" id="zLight"></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="calendar" aria-labelledby="calH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · tiempo</span>
+      <h2 id="calH">El calendario cósmico</h2>
+      <p>Comprime los 13 800 millones de años del universo en un año de calendario, como hizo Carl Sagan en <i>Los dragones del Edén</i> (1977). El Big Bang es la medianoche del 1 de enero. Hoy es la última campanada de medianoche del 31 de diciembre. Cada día equivale a unos 38 millones de años; cada segundo, a unos 440 años.</p>
+    </div>
+    <div class="cal">
+      <div class="months" id="months"></div>
+      <div class="dec31" id="dec31"><span class="lb">31 de diciembre, ampliado: las últimas 3 horas</span></div>
+      <div class="evlist" id="evlist"></div>
+    </div>
+  </section>
+
+  <section class="block" id="blackhole" aria-labelledby="bhH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · gravedad</span>
+      <h2 id="bhH">¿Cuánto habría que comprimirlo?</h2>
+      <p>Cualquier cosa se convierte en agujero negro si se comprime dentro de su radio de Schwarzschild, r = 2GM/c². Ese radio crece en proporción directa a la masa: unos 3 km por cada masa solar.</p>
+    </div>
+    <div class="demo">
+      <div class="panel"><canvas id="bhCv" class="cv" height="300" aria-label="Tamaño del agujero negro comparado con un objeto conocido"></canvas></div>
+      <div class="stack">
+        <div class="seg" id="bhPresets" role="group" aria-label="Masa"></div>
+        <div class="ro"><div class="k">Masa</div><div class="v" id="bhM"></div></div>
+        <div class="ro"><div class="k">Radio del horizonte de sucesos</div><div class="big" id="bhR"></div></div>
+        <div class="callout" id="bhMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="expansion" aria-labelledby="exH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · cosmología</span>
+      <h2 id="exH">El espacio se expande, y no hay centro</h2>
+      <p>En 1929 Edwin Hubble descubrió que las galaxias lejanas se alejan más rápido cuanto más lejos están. No es una explosión desde un punto: el propio espacio se estira, así que cada galaxia ve a todas las demás alejarse. Toca cualquier galaxia para situarte en ella.</p>
+    </div>
+    <div class="demo">
+      <div class="panel"><canvas id="exCv" class="cv" height="380" aria-label="Galaxias que se separan a medida que el espacio se expande" style="cursor:pointer"></canvas></div>
+      <div class="stack">
+        <div class="row"><button class="btn" type="button" id="exPlay">Pausa</button><button class="btn ghost" type="button" id="exReset">Reiniciar</button></div>
+        <div class="callout"><b>Ley de Hubble</b>Velocidad = H₀ × distancia. Cada flecha es proporcional a la distancia de su galaxia a ti, estés donde estés. Hoy H₀ ronda los 70 km/s por cada megapársec (3,26 millones de años luz).</div>
+        <div class="callout"><b>La tensión de Hubble</b>Las mediciones del resplandor del universo primitivo dan unos 67 km/s/Mpc; las de supernovas cercanas, unos 73. La diferencia ha resistido años de comprobaciones y podría apuntar a nueva física.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="weird" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">Bestiario</span>
+      <h2 id="wH">Lo más extraño que hay ahí fuera</h2>
+      <p>Objetos reales, observados o medidos, que parecen ciencia ficción.</p>
+    </div>
+    <div class="cards" id="weirdGrid"></div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Grandes preguntas</span>
+      <h2 id="iH">Lo que sabemos y lo que no</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Colaboración Planck (2018) para la edad y la composición del universo; NASA Exoplanet Archive para el recuento de planetas</li>
+    <li>Naidu et al., «A Cosmic Miracle: A Remarkably Luminous Galaxy at z = 14.44 Confirmed with JWST», <i>Open Journal of Astrophysics</i> (2026)</li>
+    <li>Colaboración DESI, resultados de la segunda publicación de datos (2025) sobre la energía oscura en evolución</li>
+    <li>Carl Sagan, <i>Los dragones del Edén</i> (1977); Charles y Ray Eames, <i>Powers of Ten</i> (1977)</li>
+  </ul>
+  <p>Los tamaños y las fechas están redondeados; muchas cifras astronómicas tienen una incertidumbre real, indicada donde importa. La demostración de expansión muestra la idea, no datos reales de galaxias.</p>
+<div class="sitefoot"><span>concepts.how · pronto, más conceptos.</span><span>por <b>Erik</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ================= POWERS OF TEN ================= */
+const LY=9.4607e15,AU=1.496e11;
+const OBJ=[
+ ["Longitud de Planck",1.616e-35,"La escala en la que los efectos cuánticos sobre el propio espacio-tiempo deberían importar. Ningún experimento se acerca a menos de un billón de billones de veces."],
+ ["Protón",1.7e-15,"Formado por tres quarks unidos por gluones. Casi toda la masa de los átomos de tu cuerpo está en protones y neutrones."],
+ ["Núcleo atómico (oro)",1.4e-14,"Si el átomo fuera un estadio, el núcleo sería un guisante en el centro, con el 99,97 % de la masa."],
+ ["Átomo de hidrógeno",1.06e-10,"Casi todo espacio vacío alrededor de un protón. Una fila de diez millones mediría un milímetro."],
+ ["Doble hélice de ADN (ancho)",2e-9,"Dos nanómetros de ancho, pero el ADN de una sola de tus células mide unos 2 metros, enrollado."],
+ ["Virus (gripe)",1e-7,"Demasiado pequeño para los microscopios ópticos comunes; las ondas de la luz visible son varias veces más grandes."],
+ ["Glóbulo rojo",8e-6,"Tienes unos 25 billones, aproximadamente cuatro de cada cinco células de tu cuerpo."],
+ ["Cabello humano (grosor)",7e-5,"Unos 70 micrómetros: lo más pequeño que la mayoría de la gente puede ver a simple vista."],
+ ["Hormiga",4e-3,"Unos milímetros. Puede que haya unos 20 000 billones de hormigas en la Tierra."],
+ ["Humano",1.7,"Estás aquí: más o menos a mitad de camino, en potencias de diez, entre la longitud de Planck y el universo observable."],
+ ["Ballena azul",30,"El animal más grande que se sabe que ha existido."],
+ ["Torre Eiffel",330,"Crece unos 15 cm en verano porque el hierro se dilata."],
+ ["Monte Everest",8849,"8849 m sobre el nivel del mar; el Mauna Kea es más alto si se mide desde su base en el fondo marino."],
+ ["Tierra",1.2742e7,"12 742 km de diámetro. La luz podría darle la vuelta unas 7,5 veces en un segundo."],
+ ["Órbita de la Luna",7.69e8,"La Luna está a unos 384 400 km y se aleja 3,8 cm al año."],
+ ["Sol",1.3927e9,"109 Tierras de ancho; contiene el 99,8 % de la masa del sistema solar."],
+ ["Órbita de la Tierra",2*AU,"A una unidad astronómica del Sol. La luz solar tarda unos 8 minutos y 20 segundos en llegarte."],
+ ["Órbita de Neptuno",60*AU,"El borde exterior de los planetas: a 4 horas luz del Sol."],
+ ["Un año luz",LY,"Unos 9,46 billones de km: la distancia que recorre la luz en un año."],
+ ["Distancia a Próxima Centauri",4.24*LY,"La estrella más cercana al Sol. La Voyager 1 necesitaría más de 70 000 años para llegar."],
+ ["Vía Láctea",1e5*LY,"Unos 100 000 años luz de diámetro, con entre 100 000 y 400 000 millones de estrellas."],
+ ["Grupo Local",1e7*LY,"La Vía Láctea, Andrómeda y decenas de galaxias más pequeñas. Andrómeda viene hacia nosotros."],
+ ["Supercúmulo Laniakea",5.2e8*LY,"Nuestro supercúmulo, cartografiado en 2014: unas 100 000 galaxias que fluyen hacia un centro común."],
+ ["Universo observable",9.3e10*LY,"Unos 93 000 millones de años luz de diámetro. Es más que 13 800 millones de años luz porque el espacio siguió expandiéndose mientras la luz viajaba."]
+];
+function fmtLen(m){const a=Math.abs(m);
+  if(a<1e-15)return(m/1e-35).toPrecision(3)+"×10⁻³⁵ m";if(a<1e-12)return(m*1e15).toPrecision(3)+" fm";if(a<1e-9)return(m*1e12).toPrecision(3)+" pm";if(a<1e-6)return(m*1e9).toPrecision(3)+" nm";if(a<1e-3)return(m*1e6).toPrecision(3)+" µm";if(a<1)return(m*1e3).toPrecision(3)+" mm";if(a<1e3)return m.toPrecision(3)+" m";if(a<1e9)return(m/1e3).toLocaleString("en-US",{maximumSignificantDigits:4})+" km";if(a<0.1*LY)return(m/AU).toPrecision(3)+" AU";if(a<1e6*LY)return(m/LY).toLocaleString("en-US",{maximumSignificantDigits:3})+" años luz";if(a<1e9*LY)return(m/LY/1e6).toPrecision(3)+" millones de años luz";return(m/LY/1e9).toPrecision(3)+" mil millones de años luz"}
+function fmtTime(s){if(s<1e-15)return s.toExponential(1)+" s";if(s<1e-9)return(s*1e12).toPrecision(3)+" picosegundos";if(s<1e-6)return(s*1e9).toPrecision(3)+" nanosegundos";if(s<1e-3)return(s*1e6).toPrecision(3)+" microsegundos";if(s<1)return(s*1e3).toPrecision(3)+" milisegundos";if(s<120)return s.toPrecision(3)+" segundos";if(s<7200)return(s/60).toPrecision(3)+" minutos";if(s<172800)return(s/3600).toPrecision(3)+" horas";if(s<3.156e7*2)return(s/86400).toPrecision(3)+" días";return fmtLen(s*299792458).replace("años luz","años").replace(" m"," metros luz")}
+let ZL=0.3;
+function drawZoom(){
+  const{c,W,H}=setupCanvas($("#zCv"));const ink=css("--ink"),muted=css("--muted"),acc=css("--accent"),hot=css("--hot");
+  const view=Math.pow(10,ZL),cx=W/2,cy=H/2+10,half=Math.min(W,H)*0.47;
+  // focus object: closest log-size to 0.55 of view
+  let best=0,bd=1e9;OBJ.forEach((o,i)=>{const d=Math.abs(Math.log10(o[1]/view)-Math.log10(0.55));if(d<bd){bd=d;best=i}});
+  const vis=OBJ.map((o,i)=>({o,i,r:o[1]/view*half})).filter(x=>x.r>1.2&&x.r<half*6);
+  c.textAlign="center";c.font="11px 'IBM Plex Mono', monospace";
+  vis.sort((a,b)=>b.r-a.r).forEach(x=>{const f=x.i===best;c.strokeStyle=f?hot:acc;c.globalAlpha=f?1:0.45;c.lineWidth=f?2.5:1.2;c.beginPath();c.arc(cx,cy,x.r,0,7);c.stroke();
+    if(x.r<half*1.02&&x.r>14){c.fillStyle=f?hot:muted;c.globalAlpha=f?1:.8;c.fillText(x.o[0],cx,cy-x.r-6)}c.globalAlpha=1});
+  const tiny=vis.filter(x=>x.r<=14&&x.r>1.2);if(tiny.length){c.fillStyle=muted;c.fillText(tiny.map(x=>x.o[0]).slice(-2).join(" · "),cx,cy+26)}
+  // scale bar
+  c.strokeStyle=ink;c.lineWidth=2;c.beginPath();c.moveTo(cx-half,H-14);c.lineTo(cx+half,H-14);c.moveTo(cx-half,H-20);c.lineTo(cx-half,H-8);c.moveTo(cx+half,H-20);c.lineTo(cx+half,H-8);c.stroke();
+  c.fillStyle=ink;c.fillText(fmtLen(view),cx,H-20);
+  const o=OBJ[best];$("#zObj").innerHTML=`<div class="nm">${o[0]}</div><div class="sz">${fmtLen(o[1])}</div><p>${o[2]}</p>`;
+  $("#zLV").textContent="10^"+ZL.toFixed(1)+" m";$("#zLight").textContent=fmtTime(view/299792458);
+}
+$("#zL").addEventListener("input",e=>{ZL=+e.target.value;drawZoom()});
+let zAnim=0;function zoomTo(target,ms){cancelAnimationFrame(zAnim);const s=ZL,t0=performance.now();const step=now=>{const k=Math.min(1,(now-t0)/ms);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;ZL=s+(target-s)*e;$("#zL").value=ZL;drawZoom();if(k<1&&!reduce)zAnim=requestAnimationFrame(step);else{ZL=target;$("#zL").value=ZL;drawZoom()}};zAnim=requestAnimationFrame(step)}
+$("#zOut").addEventListener("click",()=>zoomTo(27.2,9000));$("#zIn").addEventListener("click",()=>zoomTo(-35,11000));$("#zHome").addEventListener("click",()=>zoomTo(0.3,2500));
+
+/* ================= COSMIC CALENDAR ================= */
+const AGE=13.8e9;
+const EV=[
+ ["Big Bang",13.8e9,"Comienzan el espacio, el tiempo y la materia, calientes y densos."],
+ ["Se encienden las primeras estrellas",13.6e9,"Unos 200 millones de años después, el gas se condensa en las primeras estrellas."],
+ ["La galaxia más lejana vista (MoM-z14)",13.52e9,"El JWST la ve como era 280 millones de años después del Big Bang: el récord actual."],
+ ["Las estrellas más antiguas de la Vía Láctea",13e9,"Las estrellas más antiguas conocidas de nuestra galaxia datan aproximadamente de esta época."],
+ ["Se forman el Sol y el sistema solar",4.6e9,"Una nube de gas colapsa; el Sol se enciende y los planetas se ensamblan."],
+ ["Se forma la Tierra",4.54e9,"Roca, hierro y un océano de magma global."],
+ ["Primeros indicios de vida",3.7e9,"Rastros químicos de microbios en rocas antiguas (algunas afirmaciones son más antiguas)."],
+ ["El oxígeno llena el aire",2.4e9,"La Gran Oxidación, impulsada por microbios fotosintéticos."],
+ ["Aparecen las células complejas",1.8e9,"Eucariotas: células con núcleo, antepasadas de todas las plantas y animales."],
+ ["Explosión cámbrica",5.38e8,"La mayoría de los grandes grupos de animales aparecen en el registro fósil en unas pocas decenas de millones de años."],
+ ["Las plantas llegan a tierra",4.7e8,"Los musgos y sus parientes salen del agua."],
+ ["Primeros dinosaurios",2.3e8,"Dominarán durante más de 160 millones de años."],
+ ["Un asteroide acaba con los dinosaurios",6.6e7,"Un asteroide de unos 10 km impacta en Chicxulub (México)."],
+ ["Primeros humanos (Homo)",2.8e6,"Los primeros miembros de nuestro género caminan por África oriental."],
+ ["Homo sapiens",3e5,"Aparecen en África los humanos anatómicamente modernos."],
+ ["Comienza la agricultura",1.2e4,"La agricultura empieza en el Creciente Fértil y en otros lugares."],
+ ["Gran Pirámide de Guiza",4.5e3,"Construida hace unos 4500 años."],
+ ["El telescopio de Galileo",417,"1609: la primera mirada telescópica al cielo. Hace menos de un segundo cósmico."]
+];
+const MONTHS=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],MD=[31,28,31,30,31,30,31,31,30,31,30,31];
+function calDate(age){const doy=(1-age/AGE)*365;let d=Math.floor(doy),m=0;while(m<11&&d>=MD[m]){d-=MD[m];m++}const frac=doy-Math.floor(doy);const secs=Math.round(frac*86400);const hh=Math.floor(secs/3600),mm=Math.floor(secs%3600/60),ss=secs%60;
+  return{m,d:d+1,time:`${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}`,doy}}
+function ageTxt(a){return a>=1e9?(a/1e9).toFixed(a%1e9?2:1).replace(/\.?0+$/,"")+" mil millones de años":a>=1e6?(a/1e6).toLocaleString("en-US",{maximumSignificantDigits:3})+" millones de años":a.toLocaleString("en-US")+" años"}
+let calSel=null;
+function renderCal(){
+  $("#months").innerHTML=MONTHS.map((n,i)=>`<div class="mo" id="mo${i}"><span>${n}</span></div>`).join("");
+  EV.forEach((e,k)=>{const cd=calDate(e[1]);if(cd.m===11&&cd.d===31&&e[1]<3e6)return;const b=document.createElement("button");b.className="mk";b.type="button";b.title=e[0];b.setAttribute("aria-label",e[0]);b.style.left=(cd.d-0.5)/MD[cd.m]*100+"%";b.dataset.k=k;$("#mo"+cd.m).appendChild(b)});
+  const dc=$("#dec31");dc.querySelectorAll(".mk").forEach(x=>x.remove());
+  EV.forEach((e,k)=>{if(e[1]>=3e6)return;const secs=e[1]/AGE*365*86400;const x=100-secs/(3*3600)*100;const b=document.createElement("button");b.className="mk";b.type="button";b.title=e[0];b.setAttribute("aria-label",e[0]);b.style.left=Math.max(1.5,Math.min(98.5,x))+"%";b.dataset.k=k;dc.appendChild(b)});
+  $("#evlist").innerHTML=EV.map((e,k)=>{const cd=calDate(e[1]);const when=cd.m===11&&cd.d===31?`31 dic ${cd.time}`:`${cd.d} ${MONTHS[cd.m]}`;return`<button type="button" class="ev" data-k="${k}"><span class="d">${when}</span><span class="t">${e[0]}</span><span class="a">${ageTxt(e[1])} · ${e[2]}</span></button>`}).join("");
+}
+function selEv(k){calSel=k;document.querySelectorAll(".mk,.ev").forEach(x=>x.classList.toggle("on",+x.dataset.k===k))}
+document.getElementById("calendar").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(b)selEv(+b.dataset.k)});
+
+/* ================= BLACK HOLE ================= */
+const RS=2953.25;// metres per solar mass
+const BH=[
+ ["Tú (70 kg)",3.52e-29,"Una fracción diminuta del ancho de un protón. Comprimir a una persona hasta ahí requeriría mucha más presión de la que proporciona cualquier cosa en la naturaleza."],
+ ["Monte Everest",8.1e-16,"Un par de picómetros: más pequeño que un solo átomo."],
+ ["Tierra",3.003e-6,"Unos 9 mm: la Tierra aplastada al tamaño de una canica."],
+ ["Sol",1,"Unos 3 km: el Sol comprimido en un pueblo pequeño. (El Sol nunca se convertirá en uno; no tiene suficiente masa.)"],
+ ["Sagitario A*",4.3e6,"El agujero negro del centro de nuestra galaxia: 4,3 millones de soles, con un horizonte de sucesos de unos 25 millones de km de diámetro, lo bastante pequeño para caber de sobra dentro de la órbita de Mercurio. Fotografiado en 2022."],
+ ["M87*",6.5e9,"El primer agujero negro fotografiado (2019): 6500 millones de soles, con un horizonte más ancho que la región planetaria de nuestro sistema solar."],
+ ["TON 618",4e10,"Uno de los agujeros negros más masivos que se conocen, unos 40 000 millones de soles (las estimaciones varían), que alimenta un cuásar a 10 000 millones de años luz."]
+];
+let bhSel=2;
+$("#bhPresets").innerHTML=BH.map((b,i)=>`<button type="button" class="pill" data-i="${i}" aria-pressed="${i===bhSel}">${b[0]}</button>`).join("");
+$("#bhPresets").addEventListener("click",e=>{const b=e.target.closest(".pill");if(!b)return;bhSel=+b.dataset.i;document.querySelectorAll("#bhPresets .pill").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));drawBH()});
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","+":""};
+function fmtMass(ms){const kg=ms*1.989e30;if(ms<1e-3){const[m,e]=kg.toExponential(2).split("e");return m+" × 10"+e.split("").map(ch=>SUPD[ch]).join("")+" kg"}return ms.toLocaleString("en-US",{maximumSignificantDigits:3})+" masas solares"}
+function drawBH(){const b=BH[bhSel],r=RS*b[1];$("#bhM").textContent=fmtMass(b[1]);$("#bhR").textContent=fmtLen(r);$("#bhMsg").innerHTML="<b>"+b[0]+"</b>"+b[2];
+  const{c,W,H}=setupCanvas($("#bhCv"));const cx=W/2,cy=H/2;const R=Math.min(W,H)*0.3;
+  const g=c.createRadialGradient(cx,cy,R*0.9,cx,cy,R*1.9);g.addColorStop(0,css("--gold"));g.addColorStop(.35,css("--hot"));g.addColorStop(1,"rgba(0,0,0,0)");
+  c.globalAlpha=.55;c.fillStyle=g;c.beginPath();c.ellipse(cx,cy,R*1.9,R*0.55,-.15,0,7);c.fill();c.globalAlpha=1;
+  c.fillStyle="#000";c.beginPath();c.arc(cx,cy,R,0,7);c.fill();
+  c.strokeStyle=css("--gold");c.lineWidth=2;c.globalAlpha=.8;c.beginPath();c.arc(cx,cy,R*1.04,0,7);c.stroke();c.globalAlpha=1;
+  c.fillStyle=css("--ink");c.font="600 13px 'IBM Plex Mono', monospace";c.textAlign="center";c.fillText("radio "+fmtLen(r),cx,H-14);}
+
+/* ================= EXPANSION ================= */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const EX={g:[],home:0,a:1,running:!reduce,raf:0,vis:false};
+(function(){const r=mulberry(1929);for(let i=0;i<70;i++)EX.g.push([r()*2-1,r()*2-1,0.6+r()*0.8])})();
+EX.home=EX.g.reduce((b,g,i)=>Math.hypot(g[0],g[1])<Math.hypot(EX.g[b][0],EX.g[b][1])?i:b,0);
+function exPos(i,W,H){const h=EX.g[EX.home],g=EX.g[i];const s=Math.min(W,H)*0.42;const hx=W/2+h[0]*s*0.35,hy=H/2+h[1]*s*0.35;return[hx+(g[0]-h[0])*s*EX.a*0.55,hy+(g[1]-h[1])*s*EX.a*0.55]}
+function drawEX(){const{c,W,H}=setupCanvas($("#exCv"));const acc=css("--accent"),hot=css("--hot"),muted=css("--muted");
+  const hp=exPos(EX.home,W,H);
+  EX.g.forEach((g,i)=>{const[p,q]=exPos(i,W,H);if(p<-20||p>W+20||q<-20||q>H+20)return;
+    if(i!==EX.home){const dx=p-hp[0],dy=q-hp[1];c.strokeStyle=muted;c.globalAlpha=.55;c.lineWidth=1.2;c.beginPath();c.moveTo(p,q);const L=0.16;c.lineTo(p+dx*L,q+dy*L);c.stroke();
+      const ang=Math.atan2(dy,dx),tx=p+dx*L,ty=q+dy*L;c.beginPath();c.moveTo(tx,ty);c.lineTo(tx-6*Math.cos(ang-0.4),ty-6*Math.sin(ang-0.4));c.moveTo(tx,ty);c.lineTo(tx-6*Math.cos(ang+0.4),ty-6*Math.sin(ang+0.4));c.stroke();c.globalAlpha=1}
+    c.fillStyle=i===EX.home?hot:acc;c.beginPath();c.ellipse(p,q,(i===EX.home?7:4.5)*g[2],(i===EX.home?7:3)*g[2],i,0,7);c.fill()});
+  c.fillStyle=hot;c.font="600 12px 'IBM Plex Sans', sans-serif";c.textAlign="center";c.fillText("estás aquí",hp[0],hp[1]-14);
+  c.fillStyle=muted;c.font="11px 'IBM Plex Mono', monospace";c.textAlign="left";c.fillText("factor de escala ×"+EX.a.toFixed(2),10,H-10);}
+function exTick(){EX.raf=0;if(!EX.vis)return;if(EX.running){EX.a+=0.0025;if(EX.a>2.2)EX.a=1}drawEX();if(EX.running)EX.raf=requestAnimationFrame(exTick)}
+function exKick(){if(!EX.raf&&EX.vis&&EX.running)EX.raf=requestAnimationFrame(exTick)}
+new IntersectionObserver(es=>{EX.vis=es[0].isIntersecting;exKick()}).observe($("#exCv"));
+$("#exCv").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;const W=r.width,H=r.height;let best=EX.home,bd=1e9;EX.g.forEach((g,i)=>{const[p,q]=exPos(i,W,H);const d=Math.hypot(p-x,q-y);if(d<bd){bd=d;best=i}});if(bd<30){EX.home=best;drawEX()}});
+$("#exPlay").addEventListener("click",()=>{EX.running=!EX.running;$("#exPlay").textContent=EX.running?"Pausa":"Reproducir";exKick()});
+$("#exReset").addEventListener("click",()=>{EX.a=1;drawEX();exKick()});
+
+/* ================= CARDS ================= */
+const WEIRD=[
+ ["Estrellas de neutrones","1967","Un terrón de azúcar de estrella de neutrones pesa unos mil millones de toneladas","El núcleo colapsado de una estrella masiva: más masa que el Sol en una bola de unos 20 km de ancho. Jocelyn Bell Burnell descubrió la primera, como púlsar de radio, en 1967. La más rápida conocida gira 716 veces por segundo."],
+ ["Magnetares","1998","Campos magnéticos de hasta 10¹⁵ gauss","Estrellas de neutrones con campos magnéticos mil billones de veces más intensos que el de la Tierra. A 1000 km, una de ellas desordenaría los átomos de tu cuerpo. Una erupción de una a 50 000 años luz alteró en 2004 la alta atmósfera terrestre."],
+ ["Agujeros negros, fotografiados","2019","Primera imagen: M87*, a 55 millones de años luz","El Event Horizon Telescope unió radiotelescopios de toda la Tierra en un telescopio del tamaño del planeta para fotografiar la sombra de M87* (2019) y la de nuestro Sagitario A* (2022)."],
+ ["Cuásares","1963","Algunos brillan miles de veces más que toda su galaxia","El gas que cae en espiral hacia un agujero negro supermasivo se calienta y resplandece a través del universo. El primero, 3C 273, lo identificó Maarten Schmidt en 1963."],
+ ["La partícula «Oh-My-God»","1991","3,2 × 10²⁰ eV en una sola partícula subatómica","Un rayo cósmico detectado sobre Utah llevaba la energía de una pelota de béisbol lanzada a unos 90 km/h, concentrada en un solo protón o núcleo. Aún se desconoce de dónde vienen estas partículas; en 2023 se informó de otra parecida, la partícula Amaterasu."],
+ ["El Vacío de Boötes","1981","Unos 330 millones de años luz de casi nada","Una región inmensa y casi vacía con solo unas 60 galaxias conocidas donde cabría esperar miles. Si la Vía Láctea estuviera en su centro, no habríamos sabido que existían otras galaxias hasta la década de 1960."],
+ ["Planetas errantes","","Planetas sin ninguna estrella","Expulsados de sus sistemas, vagan en la oscuridad entre las estrellas. Los estudios sugieren que la Vía Láctea podría albergar miles de millones, quizá más que estrellas."],
+ ["Enanas blancas","1910s","Una cucharadita pesa varias toneladas","Los núcleos del tamaño de la Tierra, en enfriamiento, que dejan estrellas como el Sol. El nuestro será una dentro de unos 5000 millones de años. Se cree que algunas cristalizan en un núcleo sólido al enfriarse."]
+];
+const IDEAS=[
+ ["De qué está hecho el universo","","La materia ordinaria, todo lo que has visto jamás, es alrededor del 5 %. La materia oscura, detectada solo por su gravedad, alrededor del 27 %. La energía oscura, que acelera la expansión, alrededor del 68 %.","pie"],
+ ["El fondo cósmico de microondas","1965","Arno Penzias y Robert Wilson encontraron un leve siseo que llegaba de todas direcciones: luz liberada 380 000 años después del Big Bang, hoy enfriada a 2,725 grados sobre el cero absoluto. Es la luz más antigua que existe."],
+ ["El universo en aceleración","1998","Dos equipos que estudiaban supernovas lejanas descubrieron que la expansión se acelera en lugar de frenarse. El descubrimiento ganó el Nobel de 2011 e introdujo la energía oscura."],
+ ["¿Se está debilitando la energía oscura?","2025","Los resultados del Instrumento Espectroscópico de Energía Oscura (DESI), que cartografía millones de galaxias, sugieren que la energía oscura podría estar desvaneciéndose con el tiempo. Si se confirma, derribaría el modelo estándar de la cosmología, pero las pruebas aún no son concluyentes y los investigadores siguen debatiéndolo."],
+ ["Más de 6000 exoplanetas","2025","El recuento confirmado de la NASA superó los 6000 en septiembre de 2025, tres décadas después del primer planeta hallado alrededor de una estrella como el Sol (51 Pegasi b, 1995). Miles de candidatos más esperan confirmación."],
+ ["La paradoja de Fermi","1950","Se cuenta que Enrico Fermi preguntó: «¿Dónde está todo el mundo?». La galaxia es lo bastante antigua y extensa como para que una civilización espacial se hubiera extendido por ella muchas veces. Hasta ahora no hemos encontrado ninguna señal."],
+ ["¿Cómo terminará?","","Si la energía oscura se mantiene constante, las galaxias se alejan hasta que el universo se vuelve frío y oscuro (muerte térmica). Si se fortalece, un Gran Desgarro podría despedazarlo todo. Si se debilita y se invierte, un Gran Colapso. Los datos actuales favorecen el lento apagado frío, pero DESI ha reabierto la pregunta."],
+ ["El límite observable","","Solo podemos ver la luz que ha tenido tiempo de llegarnos. El universo más allá de ese horizonte podría ser mucho mayor, o infinito, y no podemos mirar."]
+];
+$("#weirdGrid").innerHTML=WEIRD.map(w=>`<article class="pc"><div class="top"><h3>${w[0]}</h3>${w[1]?`<span class="yr">${w[1]}</span>`:""}</div><div class="stat">${w[2]}</div><p>${w[3]}</p></article>`).join("");
+$("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>${i[0]}</h3>${i[1]?`<span class="yr">${i[1]}</span>`:""}</div><p>${i[2]}</p>${i[3]==="pie"?`<div class="pie" role="img" aria-label="5 % materia ordinaria, 27 % materia oscura, 68 % energía oscura"><i style="width:5%;background:var(--hot)"></i><i style="width:27%;background:var(--gold)"></i><i style="width:68%;background:var(--accent)"></i></div><div class="lbl" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px"><span style="color:var(--hot)">■ ordinaria 5 %</span><span style="color:var(--gold)">■ materia oscura 27 %</span><span style="color:var(--accent)">■ energía oscura 68 %</span></div>`:""}</article>`).join("");
+
+/* ================= boot ================= */
+drawZoom();renderCal();selEv(13);drawBH();drawEX();
+if(!EX.running)$("#exPlay").textContent="Reproducir";
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawZoom();drawBH();drawEX()},120)});
+addEventListener("themechange",()=>{drawZoom();drawBH();drawEX()});
+</script>
+</body>
+</html>
