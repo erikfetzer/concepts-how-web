@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Metric Atlas · concepts.how</title>
 <meta name="description" content="64 metric units by quantity: what each name means, how it was first defined, how it’s defined today, its imperial equivalent, and a live converter.">
@@ -247,6 +250,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);f
     <a class="nl" href="time.html">Time</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html">Quantum</a>
+    <span data-theme-picker></span>
   </div>
 </nav>
 <div class="ruler" aria-hidden="true"></div>

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quantum Mechanics · concepts.how</title>
 <meta name="description" content="The double-slit experiment, a qubit on the Bloch sphere, a Bell test and Grover’s search: quantum mechanics and computing, interactive.">
@@ -135,6 +138,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
     <a class="nl" href="time.html">Time</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html" aria-current="page">Quantum</a>
+    <span data-theme-picker></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
@@ -476,6 +480,7 @@ dsMsg();drawDS();qText();drawBloch(bloch());drawBell();gReset();
 if(reduce)$("#dsFire").textContent="Fire particles";
 io.observe($("#dsCv"));
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawDS();drawBloch(bloch());drawBell();drawGrover()},120)});
+addEventListener("themechange",()=>{drawDS();drawBloch(bloch());drawBell();drawGrover()});
 </script>
 </body>
 </html>

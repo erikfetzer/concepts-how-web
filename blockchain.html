@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blockchain &amp; Consensus · concepts.how</title>
 <meta name="description" content="A live SHA-256 hash chain, a 51% attack simulator, the Byzantine generals, and a field guide to proof of work, proof of stake and BFT.">
@@ -156,6 +159,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
     <a class="nl" href="time.html">Time</a>
     <a class="nl" href="blockchain.html" aria-current="page">Blockchain</a>
     <a class="nl" href="quantum.html">Quantum</a>
+    <span data-theme-picker></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
@@ -402,6 +406,7 @@ $("#ideaGrid").innerHTML=IDEAS.map(i=>`<article class="pc"><div class="top"><h3>
 /* boot */
 mineAll();renderChain();drawRace();gUpdate();
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(drawRace,120)});
+addEventListener("themechange",()=>{drawRace();drawGens(null)});
 </script>
 </body>
 </html>

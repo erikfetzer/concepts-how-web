@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Voting Methods · concepts.how</title>
 <meta name="description" content="An election simulator and field guide to 12 voting methods: how each counts votes, its benefits and limitations, and where it’s used.">
@@ -230,6 +233,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
     <a class="nl" href="time.html">Time</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html">Quantum</a>
+    <span data-theme-picker></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
@@ -711,6 +715,7 @@ loadPreset("squeeze");
 loadBench("mono");
 matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",draw);
 new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+addEventListener("themechange",()=>{if(typeof draw==="function")draw()});
 </script>
 </body>
 </html>

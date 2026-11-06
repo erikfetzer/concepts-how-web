@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>concepts.how</title>
 <meta name="description" content="Interactive explainers for big ideas: what each concept is and how it works. Metric units, voting methods and more.">
@@ -44,7 +47,7 @@ html,body{margin:0;overflow-x:clip;max-width:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
-header{padding:clamp(40px,8vw,96px) 0 clamp(28px,4vw,48px)}
+header{padding:clamp(20px,6vw,72px) 0 clamp(28px,4vw,48px)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,8.2vw,92px);line-height:1;letter-spacing:-.05em;margin:18px 0 26px;display:inline-flex;flex-direction:column;align-items:flex-end}
 h1 span{white-space:nowrap}
@@ -96,6 +99,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--muted);f
 </head>
 <body>
 <main class="wrap">
+  <div style="display:flex;justify-content:flex-end;padding-top:16px"><span data-theme-picker></span></div>
   <header>
     <div class="eyebrow">Interactive explainers</div>
     <h1 aria-label="concepts.how: how they work"><span class="l1">concepts<span class="dot">.</span>how</span><span class="ghost" aria-hidden="true">they work</span></h1>

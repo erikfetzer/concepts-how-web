@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Time Paradoxes · concepts.how</title>
 <meta name="description" content="The twin paradox, the ladder paradox, the arrow of time, Zeno and the grandfather paradox, with spacetime diagrams and demos you can run.">
@@ -162,6 +165,7 @@ footer ul{padding-left:18px;margin:6px 0 0}
     <a class="nl" href="time.html" aria-current="page">Time</a>
     <a class="nl" href="blockchain.html">Blockchain</a>
     <a class="nl" href="quantum.html">Quantum</a>
+    <span data-theme-picker></span>
   </div>
 </nav>
 <div class="rule" aria-hidden="true"></div>
@@ -610,6 +614,7 @@ arReset();drawAll();drawAr();
 if(reduce){AR.running=false;$("#arPlay").textContent="Play"}
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(drawAll,120)});
 matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",drawAll);
+addEventListener("themechange",()=>{drawAll();drawAr()});
 </script>
 </body>
 </html>
