@@ -99,6 +99,7 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .hyper{position:absolute;inset:0;display:grid;place-items:center}
 .hyper i{position:absolute;border:2px solid var(--accent);width:64px;height:64px;transform:rotate(12deg)}
 .orbit{position:absolute;inset:0;display:grid;place-items:center}.orbit i{position:absolute;border-radius:50%;border:1.5px solid var(--accent)}.orbit i:nth-child(1){width:14px;height:14px;background:#E4572E;border-color:#E4572E}.orbit i:nth-child(2){width:44px;height:44px;opacity:.8}.orbit i:nth-child(3){width:78px;height:78px;opacity:.55}.orbit i:nth-child(4){width:116px;height:116px;opacity:.3}
+.payoff{position:absolute;inset:0;display:grid;place-items:center}.payoff b{display:grid;grid-template-columns:30px 30px;gap:4px}.payoff i{width:30px;height:30px;border-radius:5px;border:1.5px solid var(--line);background:var(--card)}.payoff i:nth-child(1){border-color:var(--accent);background:var(--accent-soft,transparent)}.payoff i:nth-child(4){border-color:#E4572E;background:#E4572E}
 .hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
 footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -191,6 +192,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;col
         <div class="tags"><span>Escala</span><span>Agujeros negros</span><span>Expansión</span></div>
       </div>
       <span class="go">Abrir Universo</span>
+    </a>
+    <a class="tile" href="gametheory.html">
+      <div class="no"><span>08</span><span>Estrategia y decisión</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="payoff"><b><i></i><i></i><i></i><i></i></b></div></div>
+        <h2 style="margin-top:16px">Teoría de juegos</h2>
+        <p>Juega al dilema del prisionero, organiza el torneo de Axelrod, mira cómo se extiende la cooperación por una cuadrícula y encuentra el equilibrio de Nash de juegos clásicos.</p>
+        <div class="tags"><span>Dilema</span><span>Nash</span><span>Evolución</span></div>
+      </div>
+      <span class="go">Abrir Teoría de juegos</span>
     </a>
   </div>
 </main>

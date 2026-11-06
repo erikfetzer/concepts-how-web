@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teoría de juegos · concepts.how</title>
+<meta name="description" content="Juega al dilema del prisionero, organiza el torneo de Axelrod, mira cómo se extiende la cooperación por una cuadrícula, encuentra equilibrios de Nash y adivina dos tercios de la media.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/gametheory">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/gametheory">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Teoría de juegos · concepts.how">
+<meta property="og:description" content="Juega al dilema del prisionero, organiza el torneo de Axelrod, mira cómo se extiende la cooperación por una cuadrícula, encuentra equilibrios de Nash y adivina dos tercios de la media.">
+<meta property="og:url" content="https://concepts.how/gametheory">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Teoría de juegos · concepts.how">
+<meta name="twitter:description" content="Juega al dilema del prisionero, organiza el torneo de Axelrod, mira cómo se extiende la cooperación por una cuadrícula, encuentra equilibrios de Nash y adivina dos tercios de la media.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a strategy notebook. Play the dilemma first, then watch strategies compete, evolve and settle into equilibrium. */
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+</style>
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html" aria-current="page">Teoría de juegos</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../gametheory.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="gametheory.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Teoría de juegos</b> · estrategia, cooperación, equilibrio</div>
+    <h1>Cada uno hace lo mejor para sí, <em>y todos pierden.</em></h1>
+    <p class="lede">La teoría de juegos es la matemática de las decisiones que dependen de las decisiones de otros. Explica guerras de precios, carreras armamentísticas, penaltis, subastas y por qué la cooperación es frágil y, a la vez, sorprendentemente difícil de matar. Juega al juego más famoso de todos y luego mira cómo las estrategias compiten, evolucionan y se asientan en un equilibrio.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#dilemma">Dilema del prisionero</a><a href="#tournament">Torneo de Axelrod</a><a href="#spatial">Cooperación en una cuadrícula</a><a href="#nash">Equilibrio de Nash</a><a href="#guess">Adivina ⅔ de la media</a><a href="#ideas">Ideas clave</a><a href="#wild">En el mundo real</a></nav>
+  </header>
+
+  <!-- ============ 1. dilemma ============ -->
+  <section class="block" id="dilemma" aria-labelledby="dH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · juega</span>
+      <h2 id="dH">El dilema del prisionero</h2>
+      <p>Dos sospechosos son interrogados en salas separadas. Cada uno puede callar (cooperar con el otro) o delatarlo (traicionar). Aquí el resultado se mide en puntos: más es mejor. Te enfrentas a un rival misterioso durante 10 rondas. ¿Sabrás descubrir su estrategia?</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="mx" id="pdM" role="table" aria-label="Matriz de pagos: tus puntos y luego los suyos">
+          <div class="h"></div><div class="h">Coopera</div><div class="h">Traiciona</div>
+          <div class="h r">Cooperas</div>
+          <div class="c" data-k="CC"><span class="pp"><span class="you">3</span> · <span class="them">3</span></span><small>Recompensa para ambos</small></div>
+          <div class="c" data-k="CD"><span class="pp"><span class="you">0</span> · <span class="them">5</span></span><small>Eres el ingenuo</small></div>
+          <div class="h r">Traicionas</div>
+          <div class="c" data-k="DC"><span class="pp"><span class="you">5</span> · <span class="them">0</span></span><small>La tentación paga</small></div>
+          <div class="c" data-k="DD"><span class="pp"><span class="you">1</span> · <span class="them">1</span></span><small>Castigo para ambos</small></div>
+        </div>
+        <div class="callout"><b>Por qué es un dilema</b>Haga lo que haga el otro, traicionar te da más: 5 en vez de 3 si coopera, 1 en vez de 0 si traiciona. El otro razona igual, así que dos jugadores racionales traicionan y se llevan 1 cada uno, cuando cooperando habrían conseguido 3 cada uno.</div>
+      </div>
+      <div class="panel stack">
+        <div class="row" style="justify-content:space-between"><span class="lbl" id="pdRound">Ronda 1 de 10</span><span class="lbl">Rival: <b id="pdOpp">???</b></span></div>
+        <div class="score">
+          <div class="ro"><div class="k">Tú</div><div class="v you" id="pdSm">0</div></div>
+          <div class="ro"><div class="k">Rival</div><div class="v them" id="pdSt">0</div></div>
+        </div>
+        <div class="stack" style="gap:6px">
+          <span class="lbl">Tus jugadas</span><div class="dots" id="pdMe"></div>
+          <span class="lbl">Sus jugadas</span><div class="dots" id="pdThem"></div>
+        </div>
+        <div class="row" id="pdBtns">
+          <button class="btn mvbtn" id="pdC">Cooperar</button>
+          <button class="btn mvbtn d" id="pdD">Traicionar</button>
+        </div>
+        <p id="pdMsg" style="margin:0;font-size:14.5px" aria-live="polite">Elige una jugada. Tu rival elige a la vez.</p>
+        <button class="btn ghost" id="pdNew">Nuevo rival misterioso</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. tournament ============ -->
+  <section class="block" id="tournament" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · competición</span>
+      <h2 id="tH">El torneo de Axelrod</h2>
+      <p>En 1980 el politólogo Robert Axelrod invitó a expertos a enviar programas que jugaran entre sí al dilema del prisionero repetido, 200 rondas por partida. Ganó la propuesta más corta: Tit for Tat (Ojo por ojo), enviada por Anatol Rapoport. Elige los participantes, añade algo de ruido (errores) y organízalo tú.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <span class="lbl">Puntos medios por ronda</span>
+        <canvas class="cv" id="tCv" height="300" aria-label="Puntuación del torneo por estrategia"></canvas>
+        <span class="lbl">Evolución: proporción de la población en 150 generaciones</span>
+        <canvas class="cv" id="eCv" height="240" aria-label="Proporción de cada estrategia en la población a lo largo de las generaciones"></canvas>
+        <div class="leg" id="tLeg"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Estrategias del torneo</span>
+        <div class="seg" id="tPick"></div>
+        <div class="sl"><label for="tNoise">Ruido: probabilidad de que cada jugada sea un error <span id="tNoiseV">0%</span></label><input type="range" id="tNoise" min="0" max="10" step="1" value="0"></div>
+        <div class="row"><button class="btn" id="tRun">Iniciar torneo</button></div>
+        <div id="tDesc" class="stack" style="gap:6px;font-size:14px"></div>
+        <div class="callout"><b>Qué gana</b>Axelrod descubrió que las estrategias de éxito compartían cuatro rasgos. Eran <i>amables</i> (nunca traicionan primero), <i>vengativas</i> (castigan la traición), <i>indulgentes</i> (vuelven a cooperar) y <i>claras</i> (fáciles de leer para los demás). Sube el ruido y verás cómo se hunden las estrategias que no perdonan, como Grim Trigger.</div>
+        <div class="callout"><b>Evolución</b>En el gráfico inferior, la proporción de cada estrategia en la siguiente generación crece según lo bien que puntuó contra la población actual. Los explotadores como Siempre traiciona solo prosperan mientras haya cooperadores ingenuos de los que aprovecharse. Quita Grim Trigger y la familia Ojo por ojo y verás cómo Siempre traiciona se impone; vuelve a añadirlas y se muere de hambre.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. spatial ============ -->
+  <section class="block" id="spatial" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · emergencia</span>
+      <h2 id="sH">Cooperación en una cuadrícula</h2>
+      <p>En 1992 Martin Nowak y Robert May llevaron el dilema a una cuadrícula. Cada celda juega con sus ocho vecinas y luego copia a la vecina (o a sí misma) que más puntuó. Nadie recuerda nada y, aun así, los grupos de cooperadores pueden sobrevivir, y un solo traidor puede crecer hasta formar un caleidoscopio.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="sq" id="sCv" aria-label="Cuadrícula de cooperadores y traidores"></canvas>
+        <div class="leg">
+          <span><i style="background:var(--accent)"></i>Cooperador</span>
+          <span><i style="background:var(--hot)"></i>Traidor</span>
+          <span><i style="background:var(--good)"></i>Acaba de pasar a cooperar</span>
+          <span><i style="background:var(--gold)"></i>Acaba de pasar a traicionar</span>
+        </div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="sB">Tentación de traicionar <span id="sBV">1.85</span></label><input type="range" id="sB" min="1" max="2.5" step="0.01" value="1.85"></div>
+        <p style="margin:0;font-size:14px;color:var(--muted)">Un cooperador gana 1 por cada vecino que coopera. Un traidor gana esta cantidad por cada vecino que coopera. Todos los demás ganan 0.</p>
+        <div class="bigs">
+          <div class="ro"><div class="k">Generación</div><div class="v" id="sGen">0</div></div>
+          <div class="ro"><div class="k">Cooperadores</div><div class="v you" id="sPct">100%</div></div>
+        </div>
+        <div class="row">
+          <button class="btn" id="sPlay">Pausa</button>
+          <button class="btn ghost" id="sStep">Paso</button>
+        </div>
+        <div class="row">
+          <button class="btn ghost" id="sOne">Un traidor</button>
+          <button class="btn ghost" id="sRand">Mezcla aleatoria</button>
+        </div>
+        <div class="callout"><b>Prueba esto</b>Empieza con un traidor entre 1,8 y 2,0 para ver los famosos patrones simétricos. Por debajo de 1,8 los traidores quedan encerrados; por encima de 2,0 lo invaden todo. En las mezclas aleatorias, los cooperadores sobreviven en grupos porque juegan sobre todo entre ellos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. nash ============ -->
+  <section class="block" id="nash" aria-labelledby="nH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · equilibrio</span>
+      <h2 id="nH">Encuentra el equilibrio de Nash</h2>
+      <p>Un equilibrio de Nash es un conjunto de decisiones en el que nadie puede mejorar cambiando solo su propia jugada. John Nash demostró en 1950 que todo juego finito tiene al menos uno si los jugadores pueden aleatorizar. Elige un juego clásico o escribe tus propios pagos.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="nPre"></div>
+        <div class="nx" id="nM"></div>
+        <p style="margin:0;font-size:13.5px;color:var(--muted)"><span class="you">Azul</span> es el pago del jugador fila, <span class="them">rojo</span> el del jugador columna. Un número recuadrado es la mejor respuesta de ese jugador a la jugada del otro. Donde ambos están recuadrados hay un equilibrio de Nash puro.</p>
+        <div id="nOut" class="stack" style="gap:6px;font-size:14.5px" aria-live="polite"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Mejores respuestas, si los jugadores pueden aleatorizar</span>
+        <canvas class="cv" id="nCv" height="320" aria-label="Curvas de mejor respuesta de ambos jugadores"></canvas>
+        <p style="margin:0;font-size:13.5px;color:var(--muted)">En horizontal: con qué frecuencia el jugador columna elige su primera jugada. En vertical: con qué frecuencia la elige el jugador fila. La línea <span class="you">azul</span> es la mejor respuesta del jugador fila; la <span class="them">roja</span> , la del jugador columna. Cada cruce es un equilibrio.</p>
+        <div class="callout" id="nStory"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. guess ============ -->
+  <section class="block" id="guess" aria-labelledby="gH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · pensar sobre el pensamiento</span>
+      <h2 id="gH">Adivina dos tercios de la media</h2>
+      <p>Todos eligen un número del 0 al 100. Gana quien más se acerque a dos tercios de la media. Si la gente elige al azar, la media es 50, así que dirías 33. Pero si todos piensan eso, deberías decir 22… El único equilibrio de Nash es 0. ¿Gana el 0 contra personas reales?</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="gCv" height="260" aria-label="Histograma de las respuestas del público"></canvas>
+        <div class="leg">
+          <span><i style="background:var(--muted)"></i>Media del público</span>
+          <span><i style="background:var(--gold)"></i>Objetivo (⅔ de la media)</span>
+          <span><i style="background:var(--accent)"></i>Tu número</span>
+        </div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="gG">Tu número <span id="gGV">33</span></label><input type="range" id="gG" min="0" max="100" step="1" value="33"></div>
+        <div class="row"><button class="btn" id="gGo">Juega contra 300 personas</button><button class="btn ghost" id="gReset">Reiniciar</button></div>
+        <div class="bigs" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="ro"><div class="k">Ronda</div><div class="v" id="gRound">1</div></div>
+          <div class="ro"><div class="k">Media</div><div class="v" id="gAvg">–</div></div>
+          <div class="ro"><div class="k">Objetivo</div><div class="v" id="gTgt" style="color:var(--gold)">–</div></div>
+        </div>
+        <p id="gMsg" style="margin:0;font-size:14.5px" aria-live="polite">El público mezcla gente que piensa cero, uno, dos o tres pasos por delante, más unos pocos que van directos al 0. Juega varias rondas: como los grupos reales, aprenden y se acercan al 0.</p>
+        <div class="callout"><b>Niveles de razonamiento</b>El nivel 0 elige al azar. El nivel 1 supone que todos los demás son nivel 0 y dice 33. El nivel 2 dice 22; el nivel 3, unos 15. En los experimentos, la mayoría se detiene tras uno o dos pasos, así que las medias de la primera ronda suelen quedar entre 20 y 40. Ser «perfectamente racional» y decir 0 pierde.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Ideas clave</span>
+      <h2 id="iH">El vocabulario de la estrategia</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+
+  <section class="block" id="wild" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">En el mundo real</span>
+      <h2 id="wH">Dónde aparece la teoría de juegos</h2>
+      <p>De la estrategia de la Guerra Fría a cómo se asignan médicos a hospitales.</p>
+    </div>
+    <div class="cards" id="wildGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>John von Neumann y Oskar Morgenstern, <i>Theory of Games and Economic Behavior</i> (1944)</li>
+    <li>John Nash, «Equilibrium Points in n-Person Games», <i>PNAS</i> (1950)</li>
+    <li>Robert Axelrod, <i>The Evolution of Cooperation</i> (1984)</li>
+    <li>Martin Nowak y Robert May, «Evolutionary Games and Spatial Chaos», <i>Nature</i> (1992)</li>
+    <li>Rosemarie Nagel, «Unraveling in Guessing Games: An Experimental Study», <i>American Economic Review</i> (1995)</li>
+    <li>Thomas Schelling, <i>The Strategy of Conflict</i> (1960)</li>
+  </ul>
+  <p>El torneo y el público son simulaciones; las puntuaciones varían de una ejecución a otra cuando las estrategias o el ruido dependen del azar. Los pagos usan los valores estándar 5, 3, 1 y 0.</p>
+<div class="sitefoot"><span>concepts.how · pronto, más conceptos.</span><span>por <b>Erik</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d||cv._h!==h){cv._w=w;cv._d=d;cv._h=h;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const flip=m=>m==="C"?"D":"C";
+const last=a=>a[a.length-1];
+
+/* ================= strategies ================= */
+const S={
+ tft:{n:"Ojo por ojo",d:"Coopera primero y luego copia lo que hiciste en la ronda anterior.",f:(m,o)=>o.length?last(o):"C"},
+ alld:{n:"Siempre traiciona",d:"Traiciona en todas las rondas, pase lo que pase.",f:()=>"D"},
+ allc:{n:"Siempre coopera",d:"Coopera en todas las rondas, pase lo que pase.",f:()=>"C"},
+ grim:{n:"Grim Trigger",d:"Coopera hasta que traicionas una vez y luego traiciona para siempre.",f:(m,o)=>o.indexOf("D")>=0?"D":"C"},
+ rand:{n:"Aleatoria",d:"Lanza una moneda cada ronda.",f:()=>Math.random()<.5?"C":"D"},
+ tf2t:{n:"Ojo por dos ojos",d:"Solo responde tras dos traiciones seguidas.",f:(m,o)=>o.length>1&&last(o)==="D"&&o[o.length-2]==="D"?"D":"C"},
+ pav:{n:"Pavlov",d:"Gana-repite, pierde-cambia: mantiene su jugada tras un buen resultado y cambia tras uno malo.",f:(m,o)=>!m.length||last(m)===last(o)?"C":"D"},
+ gtft:{n:"Ojo por ojo generoso",d:"Como Ojo por ojo, pero perdona una traición de cada tres.",f:(m,o)=>!o.length||last(o)==="C"||Math.random()<1/3?"C":"D"}
+};
+const KEYS=Object.keys(S);
+const COL=["--accent","--hot","--good","#8B5CF6","--muted","--gold","#0EA5A4","#D946EF"];
+const col=i=>{const v=COL[i%COL.length];return v.startsWith("--")?css(v):v};
+const PAY={CC:[3,3],CD:[0,5],DC:[5,0],DD:[1,1]};
+
+/* ================= 1. play ================= */
+const PD={opp:"tft",me:[],them:[],sm:0,st:0,N:10};
+const OUT={CC:"Los dos cooperasteis: 3 puntos cada uno.",CD:"Cooperaste y te traicionó: tú 0, tu rival 5.",DC:"Traicionaste a un cooperador: tú 5, tu rival 0.",DD:"Los dos traicionasteis: 1 punto cada uno."};
+function pdNew(){let k;do{k=KEYS[Math.floor(Math.random()*KEYS.length)]}while(k===PD.opp&&KEYS.length>1);PD.opp=k;PD.me=[];PD.them=[];PD.sm=PD.st=0;$("#pdMsg").textContent="Elige una jugada. Tu rival elige a la vez.";pdRender("")}
+function pdPlay(mv){if(PD.me.length>=PD.N)return;const o=S[PD.opp].f(PD.them,PD.me);PD.me.push(mv);PD.them.push(o);const k=mv+o,p=PAY[k];PD.sm+=p[0];PD.st+=p[1];
+  let msg=OUT[k];
+  if(PD.me.length===PD.N){const s=S[PD.opp];msg+=` Fin de la partida. Tu rival era <b>${s.n}</b>: ${s.d} ${PD.sm>PD.st?"Le ganaste, ":PD.sm<PD.st?"Te ganó, ":"Empatasteis, "}pero dos jugadores que siempre cooperan habrían sacado 30 cada uno.`}
+  $("#pdMsg").innerHTML=msg;pdRender(k)}
+function pdRender(k){const n=PD.me.length,done=n>=PD.N;
+  $("#pdRound").textContent=done?"Fin de la partida":`Ronda ${n+1} de ${PD.N}`;
+  $("#pdOpp").textContent=done?S[PD.opp].n:"???";
+  $("#pdSm").textContent=PD.sm;$("#pdSt").textContent=PD.st;
+  const dots=a=>a.map(m=>`<i class="dot ${m}"></i>`).join("")+`<i class="dot e"></i>`.repeat(PD.N-a.length);
+  $("#pdMe").innerHTML=dots(PD.me);$("#pdThem").innerHTML=dots(PD.them);
+  document.querySelectorAll("#pdM .c").forEach(c=>c.classList.toggle("on",c.dataset.k===k));
+  $("#pdC").disabled=$("#pdD").disabled=done;$("#pdBtns").style.opacity=done?.4:1}
+$("#pdC").onclick=()=>pdPlay("C");$("#pdD").onclick=()=>pdPlay("D");$("#pdNew").onclick=pdNew;
+
+/* ================= 2. tournament ================= */
+const T={on:new Set(KEYS),res:null,eco:null,anim:0};
+$("#tPick").innerHTML=KEYS.map((k,i)=>`<button class="pill" aria-pressed="true" data-k="${k}"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;background:${COL[i].startsWith("--")?"var("+COL[i]+")":COL[i]}"></span>${S[k].n}</button>`).join("");
+document.querySelectorAll("#tPick .pill").forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(T.on.has(k)){if(T.on.size<=2)return;T.on.delete(k)}else T.on.add(k);b.setAttribute("aria-pressed",T.on.has(k));runT()});
+$("#tDesc").innerHTML=KEYS.map(k=>`<div><b>${S[k].n}.</b> ${S[k].d}</div>`).join("");
+$("#tNoise").oninput=e=>{$("#tNoiseV").textContent=e.target.value+"%"};$("#tNoise").onchange=runT;
+$("#tRun").onclick=runT;
+function match(a,b,R,nz){const ha=[],hb=[];let sa=0,sb=0;for(let t=0;t<R;t++){let x=S[a].f(ha,hb),y=S[b].f(hb,ha);if(nz){if(Math.random()<nz)x=flip(x);if(Math.random()<nz)y=flip(y)}ha.push(x);hb.push(y);const p=PAY[x+y];sa+=p[0];sb+=p[1]}return[sa/R,sb/R]}
+function runT(){const ks=KEYS.filter(k=>T.on.has(k)),n=ks.length,nz=+$("#tNoise").value/100,R=200,reps=5;
+  const M=ks.map(()=>ks.map(()=>0));
+  for(let i=0;i<n;i++)for(let j=i;j<n;j++){let a=0,b=0;for(let r=0;r<reps;r++){const[x,y]=match(ks[i],ks[j],R,nz);a+=x;b+=y}M[i][j]=a/reps;M[j][i]=i===j?(a/reps):b/reps;if(i===j)M[i][i]=(a+b)/(2*reps)}
+  T.res=ks.map((k,i)=>({k,s:M[i].reduce((p,v)=>p+v,0)/n})).sort((a,b)=>b.s-a.s);
+  let x=ks.map(()=>1/n);const hist=[x];for(let g=0;g<150;g++){const f=ks.map((_,i)=>x.reduce((p,xj,j)=>p+xj*M[i][j],0));const avg=x.reduce((p,xi,i)=>p+xi*f[i],0);x=x.map((xi,i)=>xi*f[i]/avg);hist.push(x)}
+  T.eco={ks,hist};
+  $("#tLeg").innerHTML=ks.map(k=>`<span><i style="background:${col(KEYS.indexOf(k))}"></i>${S[k].n}</span>`).join("");
+  cancelAnimationFrame(T.anim);const t0=performance.now();
+  const step=now=>{const p=reduce?1:Math.min(1,(now-t0)/1400);drawT(p);if(p<1)T.anim=requestAnimationFrame(step)};T.anim=requestAnimationFrame(step)}
+function drawT(p=1){if(!T.res)return;const cv=$("#tCv");const n=T.res.length;cv.dataset.h=Math.max(140,n*34+16);cv.style.height=cv.dataset.h+"px";
+  let{c,W,H}=setupCanvas(cv);const ink=css("--ink"),muted=css("--muted"),line=css("--line");
+  const L=Math.min(170,W*.42),R=W-48;c.font="13px "+css("--body");c.textBaseline="middle";
+  c.strokeStyle=line;for(let v=0;v<=5;v++){const x=L+(R-L)*v/5;c.beginPath();c.moveTo(x,6);c.lineTo(x,H-6);c.stroke()}
+  T.res.forEach((r,i)=>{const y=10+i*34+12;c.fillStyle=ink;c.textAlign="right";let nm=S[r.k].n;while(c.measureText(nm).width>L-10&&nm.length>4)nm=nm.slice(0,-2);if(nm!==S[r.k].n)nm+="…";c.fillText(nm,L-8,y);
+    const w=(R-L)*r.s/5*Math.min(1,p*1.6);c.fillStyle=col(KEYS.indexOf(r.k));c.beginPath();c.roundRect(L,y-10,Math.max(2,w),20,4);c.fill();
+    c.fillStyle=muted;c.textAlign="left";c.font="12px "+css("--mono");c.fillText(r.s.toFixed(2),L+w+6,y);c.font="13px "+css("--body")});
+  const e=setupCanvas($("#eCv"));c=e.c;W=e.W;H=e.H;const{ks,hist}=T.eco;const G=hist.length-1,upto=Math.max(1,Math.round(G*p));
+  let top=0;hist.forEach(h=>h.forEach(v=>{if(v>top)top=v}));top=Math.min(1,Math.ceil(top*10+.5)/10);
+  const X=g=>34+(W-44)*g/G,Y=v=>H-22-(H-34)*v/top;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";
+  [0,top/2,top].forEach(v=>{c.beginPath();c.moveTo(34,Y(v));c.lineTo(W-10,Y(v));c.stroke();c.fillText(Math.round(v*100)+"%",30,Y(v))});
+  c.textAlign="center";[0,50,100,150].forEach(g=>c.fillText(g,X(g),H-8));
+  ks.forEach((k,i)=>{c.strokeStyle=col(KEYS.indexOf(k));c.lineWidth=2.2;c.beginPath();for(let g=0;g<=upto;g++){const v=hist[g][i];g?c.lineTo(X(g),Y(v)):c.moveTo(X(g),Y(v))}c.stroke()});c.lineWidth=1}
+
+/* ================= 3. spatial ================= */
+const N=61;const SP={s:new Uint8Array(N*N),p:new Uint8Array(N*N),b:1.85,gen:0,run:!reduce,vis:false,t:0,last:0};
+function spOne(){SP.s.fill(0);SP.s[(N>>1)*N+(N>>1)]=1;SP.p.set(SP.s);SP.gen=0;drawS()}
+function spRand(){for(let i=0;i<N*N;i++)SP.s[i]=Math.random()<.1?1:0;SP.p.set(SP.s);SP.gen=0;drawS()}
+function spStep(){const s=SP.s,b=SP.b,P=new Float32Array(N*N);
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){let cc=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!s[((y+dy+N)%N)*N+(x+dx+N)%N])cc++}P[y*N+x]=s[y*N+x]?cc*b:cc}
+  const nx=new Uint8Array(N*N);
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){const i=y*N+x;let best=P[i],st=s[i];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const j=((y+dy+N)%N)*N+(x+dx+N)%N;if(P[j]>best){best=P[j];st=s[j]}}nx[i]=st}
+  SP.p=s;SP.s=nx;SP.gen++;drawS()}
+function drawS(){const cv=$("#sCv"),d=window.devicePixelRatio||1,w=Math.round(cv.getBoundingClientRect().width);if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=cv.height=w*d}
+  const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);const cs=w/N;const C=[css("--accent"),css("--hot")],sw=[css("--good"),css("--gold")];
+  let coop=0;for(let i=0;i<N*N;i++){const a=SP.s[i],o=SP.p[i];if(!a)coop++;c.fillStyle=a===o?C[a]:(a?sw[1]:sw[0]);c.fillRect((i%N)*cs,Math.floor(i/N)*cs,cs+.6,cs+.6)}
+  $("#sGen").textContent=SP.gen;$("#sPct").textContent=Math.round(coop/(N*N)*100)+"%"}
+function spLoop(now){if(!SP.run||!SP.vis){SP.t=0;return}if(now-SP.last>140){SP.last=now;spStep()}SP.t=requestAnimationFrame(spLoop)}
+function spKick(){if(SP.run&&SP.vis&&!SP.t)SP.t=requestAnimationFrame(spLoop)}
+$("#sB").oninput=e=>{SP.b=+e.target.value;$("#sBV").textContent=SP.b.toFixed(2)};
+$("#sPlay").onclick=()=>{SP.run=!SP.run;$("#sPlay").textContent=SP.run?"Pausa":"Reproducir";spKick()};
+$("#sStep").onclick=()=>{SP.run=false;$("#sPlay").textContent="Reproducir";spStep()};
+$("#sOne").onclick=()=>{spOne();spKick()};$("#sRand").onclick=()=>{spRand();spKick()};
+new IntersectionObserver(es=>{SP.vis=es[0].isIntersecting;spKick()}).observe($("#sCv"));
+
+/* ================= 4. nash ================= */
+const GAMES=[
+ {n:"Dilema del prisionero",r:["Cooperar","Traicionar"],c:["Cooperar","Traicionar"],A:[[3,0],[5,1]],B:[[3,5],[0,1]],t:"Traicionar es una estrategia dominante para ambos, así que el único equilibrio es la traición mutua, aunque cooperar sería mejor para los dos. El equilibrio es estable pero no eficiente."},
+ {n:"Caza del ciervo",r:["Ciervo","Liebre"],c:["Ciervo","Liebre"],A:[[4,0],[3,3]],B:[[4,3],[0,3]],t:"Cazar juntos un ciervo da más, pero solo si puedes fiarte del otro cazador. Cazar una liebre es seguro. Ambas opciones son equilibrios: el juego trata de confianza y coordinación, no de tentación. Los filósofos lo remontan a Rousseau."},
+ {n:"El juego de la gallina",r:["Apartarse","Seguir recto"],c:["Apartarse","Seguir recto"],A:[[0,-1],[1,-10]],B:[[0,1],[-1,-10]],t:"Dos conductores se lanzan el uno contra el otro. Quien se aparta queda como un gallina; si ninguno lo hace, desastre. En los equilibrios puros se aparta exactamente uno, así que cada uno quiere convencer al otro de que no lo hará. Eso es la política del borde del abismo."},
+ {n:"La batalla de los sexos",r:["Ópera","Fútbol"],c:["Ópera","Fútbol"],A:[[3,0],[0,2]],B:[[2,0],[0,3]],t:"Una pareja quiere salir junta pero prefiere planes distintos. Los dos resultados en los que coinciden son equilibrios; solo discrepan en cuál. La coordinación real suele depender de quién se compromete primero."},
+ {n:"Cara o cruz",r:["Cara","Cruz"],c:["Cara","Cruz"],A:[[1,-1],[-1,1]],B:[[-1,1],[1,-1]],t:"Un jugador gana si las monedas coinciden y el otro si no. No hay equilibrio puro: cualquier elección predecible puede explotarse. El único equilibrio es que ambos lancen una moneda equilibrada. Los penaltis funcionan igual."}
+];
+let NG=JSON.parse(JSON.stringify(GAMES[0])),NGi=0;
+$("#nPre").innerHTML=GAMES.map((g,i)=>`<button class="pill" aria-pressed="${i===0}" data-i="${i}">${g.n}</button>`).join("");
+document.querySelectorAll("#nPre .pill").forEach(b=>b.onclick=()=>{NGi=+b.dataset.i;NG=JSON.parse(JSON.stringify(GAMES[NGi]));document.querySelectorAll("#nPre .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));buildN()});
+function buildN(){const g=NG;let h=`<div class="h"></div><div class="h col">${g.c[0]}</div><div class="h col">${g.c[1]}</div>`;
+  for(let r=0;r<2;r++){h+=`<div class="h r row">${g.r[r]}</div>`;for(let c=0;c<2;c++)h+=`<div class="c" data-r="${r}" data-c="${c}"><input class="a" inputmode="numeric" aria-label="Pago de la fila, ${g.r[r]} / ${g.c[c]}" value="${g.A[r][c]}" data-m="A" data-r="${r}" data-c="${c}"><input class="b" inputmode="numeric" aria-label="Pago de la columna, ${g.r[r]} / ${g.c[c]}" value="${g.B[r][c]}" data-m="B" data-r="${r}" data-c="${c}"></div>`}
+  $("#nM").innerHTML=h;
+  $("#nM").querySelectorAll("input").forEach(inp=>inp.oninput=()=>{const v=parseFloat(inp.value);if(isFinite(v)){NG[inp.dataset.m][+inp.dataset.r][+inp.dataset.c]=v;NG.custom=true;updN()}});
+  updN()}
+function eqs(){const{A,B}=NG;const pure=[];
+  const brR=(r,c)=>A[r][c]>=A[1-r][c],brC=(r,c)=>B[r][c]>=B[r][1-c];
+  for(let r=0;r<2;r++)for(let c=0;c<2;c++)if(brR(r,c)&&brC(r,c))pure.push([r,c]);
+  const dq=A[0][0]-A[0][1]-A[1][0]+A[1][1],dp=B[0][0]-B[1][0]-B[0][1]+B[1][1];
+  const q=dq?(A[1][1]-A[0][1])/dq:NaN,p=dp?(B[1][1]-B[1][0])/dp:NaN;
+  const mixed=q>0&&q<1&&p>0&&p<1?[p,q]:null;return{pure,mixed,brR,brC,q,p,dq,dp}}
+function pct(v){return Math.round(v*100)+"%"}
+function updN(){const g=NG,E=eqs();
+  $("#nM").querySelectorAll(".c").forEach(cell=>{const r=+cell.dataset.r,c=+cell.dataset.c;const a=cell.querySelector(".a"),b=cell.querySelector(".b");a.classList.toggle("br",E.brR(r,c));b.classList.toggle("br",E.brC(r,c));const ne=E.brR(r,c)&&E.brC(r,c);cell.classList.toggle("ne",ne);const t=cell.querySelector(".tag");if(ne&&!t)cell.insertAdjacentHTML("beforeend",`<span class="tag">NASH</span>`);if(!ne&&t)t.remove()});
+  let o=[];
+  if(E.pure.length)o.push(`<div><b>Equilibrios puros:</b> ${E.pure.map(([r,c])=>`${g.r[r]} / ${g.c[c]}`).join(" y ")}.</div>`);else o.push(`<div><b>No hay equilibrio puro.</b> En cualquier resultado alguien quiere cambiar.</div>`);
+  if(E.mixed)o.push(`<div><b>Equilibrio mixto:</b> la fila juega ${g.r[0]} el ${pct(E.mixed[0])} de las veces y la columna juega ${g.c[0]} el ${pct(E.mixed[1])} de las veces. Cada mezcla deja <i>al otro</i> jugador indiferente.</div>`);
+  const cells=[[0,0],[0,1],[1,0],[1,1]];
+  E.pure.forEach(([r,c])=>{const bet=cells.find(([x,y])=>g.A[x][y]>g.A[r][c]&&g.B[x][y]>g.B[r][c]);if(bet){const st=E.pure.some(([x,y])=>x===bet[0]&&y===bet[1]);o.push(`<div style="color:var(--hot)"><b>Ineficiente:</b> ambos preferirían ${g.r[bet[0]]} / ${g.c[bet[1]]} a ${g.r[r]} / ${g.c[c]}, ${st?"y eso también es un equilibrio, así que el problema es de coordinación y confianza.":"pero no es estable."}</div>`)}});
+  $("#nOut").innerHTML=o.join("");
+  $("#nStory").innerHTML=g.custom?`<b>Tu juego</b>Cambia cualquier pago y los recuadros, los equilibrios y las curvas se actualizan. Prueba a hacer que cooperar pague 6 en el dilema del prisionero.`:`<b>${g.n}</b>${g.t}`;
+  drawN(E)}
+function drawN(E=eqs()){const{c,W,H}=setupCanvas($("#nCv"));const S0=Math.min(W-60,H-50),x0=(W-S0)/2+12,y0=12;
+  const X=q=>x0+S0*q,Y=p=>y0+S0*(1-p);const ink=css("--ink"),muted=css("--muted"),line=css("--line"),acc=css("--accent"),hot=css("--hot"),gold=css("--gold");
+  c.strokeStyle=line;c.strokeRect(x0,y0,S0,S0);c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="center";c.fillText("0",X(0),y0+S0+14);c.fillText("100%",X(1)-10,y0+S0+14);c.textAlign="right";c.fillText("100%",x0-4,Y(1)+8);c.fillText("0",x0-4,Y(0));
+  const{A,B}=NG;
+  // row best response p(q)
+  const dR=q=>(A[0][0]-A[1][0])*q+(A[0][1]-A[1][1])*(1-q);
+  const dC=p=>(B[0][0]-B[0][1])*p+(B[1][0]-B[1][1])*(1-p);
+  c.lineWidth=4;c.lineCap="round";c.lineJoin="round";
+  c.strokeStyle=acc;c.beginPath();
+  if(E.dq&&E.q>0&&E.q<1){const lo=dR(0)>0?1:0;c.moveTo(X(0),Y(lo));c.lineTo(X(E.q),Y(lo));c.lineTo(X(E.q),Y(1-lo));c.lineTo(X(1),Y(1-lo))}else{const v=dR(.5);if(Math.abs(v)<1e-9&&Math.abs(dR(0))<1e-9){c.globalAlpha=.15;c.fillStyle=acc;c.fillRect(x0,y0,S0,S0);c.globalAlpha=1}else{const pp=v>0?1:0;c.moveTo(X(0),Y(pp));c.lineTo(X(1),Y(pp))}}
+  c.stroke();
+  c.strokeStyle=hot;c.lineWidth=2.5;c.setLineDash([7,5]);c.beginPath();
+  if(E.dp&&E.p>0&&E.p<1){const lo=dC(0)>0?1:0;c.moveTo(X(lo),Y(0));c.lineTo(X(lo),Y(E.p));c.lineTo(X(1-lo),Y(E.p));c.lineTo(X(1-lo),Y(1))}else{const v=dC(.5);if(Math.abs(v)<1e-9&&Math.abs(dC(0))<1e-9){c.setLineDash([]);c.globalAlpha=.15;c.fillStyle=hot;c.fillRect(x0,y0,S0,S0);c.globalAlpha=1}else{const qq=v>0?1:0;c.moveTo(X(qq),Y(0));c.lineTo(X(qq),Y(1))}}
+  c.stroke();c.setLineDash([]);c.lineWidth=1;
+  const pts=E.pure.map(([r,cc])=>[r===0?1:0,cc===0?1:0]);if(E.mixed)pts.push(E.mixed);
+  pts.forEach(([p,q])=>{c.fillStyle=gold;c.strokeStyle=ink;c.lineWidth=2;c.beginPath();c.arc(X(q),Y(p),8,0,7);c.fill();c.stroke()});c.lineWidth=1;
+  c.textAlign="center";c.font="600 11px "+css("--mono");c.fillStyle=hot;c.fillText("Columna: "+NG.c[0]+" →",X(.5),y0+S0+30);
+  c.fillStyle=acc;c.save();c.translate(x0-28,Y(.5));c.rotate(-Math.PI/2);c.fillText("Fila: "+NG.r[0]+" →",0,0);c.restore()}
+
+/* ================= 5. guess ================= */
+const GS={anchor:50,round:1,last:null};
+const randn=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+function crowd(){const a=GS.anchor,out=[];for(let i=0;i<300;i++){const r=Math.random();let g;
+  if(r<.15)g=Math.random()*Math.min(100,a*2);else if(r<.5)g=a*2/3*(1+.15*randn());else if(r<.8)g=a*4/9*(1+.15*randn());else if(r<.92)g=a*8/27*(1+.2*randn());else g=Math.random()*2;
+  out.push(Math.max(0,Math.min(100,Math.round(g))))}return out}
+$("#gG").oninput=e=>{$("#gGV").textContent=e.target.value;if(GS.last)drawG()};
+$("#gGo").onclick=()=>{const me=+$("#gG").value,cr=crowd(),all=cr.concat(me);const avg=all.reduce((p,v)=>p+v,0)/all.length,tgt=avg*2/3;
+  const dist=all.map(v=>Math.abs(v-tgt));const best=Math.min(...dist);const myd=Math.abs(me-tgt);const rank=1+dist.filter(d=>d<myd).length;const winners=all.filter(v=>Math.abs(v-tgt)===best);
+  GS.last={cr,me,avg,tgt};$("#gAvg").textContent=avg.toFixed(1);$("#gTgt").textContent=tgt.toFixed(1);$("#gRound").textContent=GS.round;
+  $("#gMsg").innerHTML=myd===best?`<b>¡Ganas!</b> Tu ${me} fue el más cercano a ${tgt.toFixed(1)}${winners.length>2?` (empatado con ${winners.length-1} más)`:""}.`:`El número ganador fue <b>${winners[0]}</b>. Quedaste en el puesto <b>#${rank}</b> de 301, a ${myd.toFixed(1)} del objetivo.${me===0?" El cero es el equilibrio de Nash, pero solo gana cuando todos los demás también son racionales.":""} Vuelve a jugar la ronda ${GS.round+1}: el público se ajusta hacia el objetivo de esta ronda.`;
+  GS.anchor=tgt;GS.round++;$("#gGo").textContent="Jugar ronda "+GS.round;drawG()};
+$("#gReset").onclick=()=>{GS.anchor=50;GS.round=1;GS.last=null;$("#gGo").textContent="Juega contra 300 personas";$("#gAvg").textContent=$("#gTgt").textContent="–";$("#gRound").textContent=1;$("#gMsg").textContent="El público mezcla gente que piensa cero, uno, dos o tres pasos por delante, más unos pocos que van directos al 0. Juega varias rondas: como los grupos reales, aprenden y se acercan al 0.";drawG()};
+function drawG(){const{c,W,H}=setupCanvas($("#gCv"));const muted=css("--muted"),line=css("--line"),acc=css("--accent"),gold=css("--gold"),ink=css("--ink");
+  const L=10,R=W-10,B=H-24,X=v=>L+(R-L)*v/100;
+  c.strokeStyle=line;c.beginPath();c.moveTo(L,B);c.lineTo(R,B);c.stroke();c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="center";[0,25,50,75,100].forEach(v=>c.fillText(v,Math.min(R-10,Math.max(L+6,X(v))),H-8));
+  if(!GS.last){c.fillText("Elige un número y juega",W/2,H/2);return}
+  const bins=new Array(51).fill(0);GS.last.cr.forEach(v=>bins[Math.round(v/2)]++);const mx=Math.max(...bins);const bw=(R-L)/51;
+  c.fillStyle=css("--line");bins.forEach((n,i)=>{const h=(B-16)*n/mx;c.fillStyle=muted;c.globalAlpha=.55;c.fillRect(L+i*bw+1,B-h,bw-2,h)});c.globalAlpha=1;
+  const vl=(v,colr,w,lab,yy)=>{c.strokeStyle=colr;c.lineWidth=w;c.beginPath();c.moveTo(X(v),8);c.lineTo(X(v),B);c.stroke();c.fillStyle=colr;c.font="600 11px "+css("--mono");c.textAlign=X(v)>W-60?"right":"left";c.fillText(lab,X(v)+(X(v)>W-60?-4:4),yy)};
+  vl(GS.last.avg,muted,2,"avg",14);vl(GS.last.tgt,gold,3,"target",28);vl(+$("#gG").value,acc,3,"you",42);c.lineWidth=1}
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Juegos de suma cero","1928","Lo que gana un jugador lo pierde exactamente el otro, como en el ajedrez o el póquer. John von Neumann demostró el teorema minimax: en los juegos de suma cero entre dos, cada lado tiene una estrategia que le garantiza el mejor resultado en el peor caso."],
+ ["Estrategia dominante","","Una jugada que es la mejor haga lo que haga el resto. En el dilema del prisionero, traicionar domina. Cuando todos tienen una, predecir el resultado es fácil; el problema es que puede ser malo para todos."],
+ ["Equilibrio de Nash","1950","Una combinación de estrategias en la que nadie gana cambiando solo la suya. Predice dónde se asienta el juego, no si ese lugar es bueno. Nash compartió el Nobel de Economía de 1994 con John Harsanyi y Reinhard Selten."],
+ ["Eficiencia de Pareto","","Un resultado en el que nadie puede mejorar sin que otro empeore. Muchos dilemas son justo la distancia entre lo estable (Nash) y lo eficiente (Pareto)."],
+ ["Estrategias mixtas","","A veces lo mejor es ser impredecible a propósito: aleatorizar para que el rival no pueda explotarte. Los estudios de penaltis profesionales hallaron que lanzadores y porteros reparten sus direcciones de forma muy parecida a lo que predice la teoría."],
+ ["Juegos repetidos y la sombra del futuro","","Cuando los mismos jugadores se encuentran una y otra vez, las amenazas y recompensas entre rondas pueden sostener una cooperación que se hundiría en un juego de una sola vez. Si se conoce la fecha final, la lógica puede desmoronarse hacia atrás desde la última ronda."],
+ ["Puntos focales","1960","Thomas Schelling preguntó dónde quedarían con un desconocido en Nueva York sin poder comunicarse. Muchos eligieron la estación Grand Central a mediodía. La cultura compartida permite coordinarse sin hablar."],
+ ["Estrategia evolutivamente estable","1973","John Maynard Smith y George Price llevaron la teoría de juegos a la biología con el juego halcón-paloma. Una estrategia es evolutivamente estable si una población que la usa no puede ser invadida por un mutante raro que juegue otra cosa."],
+ ["El juego del ultimátum","1982","Un jugador propone cómo repartir una suma; el otro acepta o ambos se quedan sin nada. La teoría dice que hay que aceptar cualquier oferta. Las personas reales suelen rechazar ofertas que consideran injustas, aunque les cueste: la justicia importa."],
+ ["Diseño de mecanismos","","La teoría de juegos al revés: diseñar las reglas para que, persiguiendo su propio interés, la gente produzca el resultado deseado. Las subastas, los sistemas de votación y los mercados de emparejamiento son mecanismos."]
+];
+const WILD=[
+ ["La Guerra Fría","1950s","El dilema del prisionero se puso a prueba por primera vez en la RAND Corporation en 1950, de la mano de Merrill Flood y Melvin Dresher, mientras los estrategas estudiaban la disuasión nuclear. Albert Tucker le dio la historia de los presos ese mismo año. La destrucción mutua asegurada es un juego de amenazas creíbles."],
+ ["Guerras de precios y cárteles","","Dos tiendas ganarían ambas con precios altos, pero cada una tiene la tentación de rebajar. Cárteles como la OPEP viven un dilema constante: cada miembro gana bombeando discretamente más de su cuota."],
+ ["La tragedia de los comunes","1968","Garrett Hardin describió pastos compartidos esquilmados porque cada pastor gana con un animal más. Elinor Ostrom mostró que muchas comunidades lo resuelven con sus propias normas y ganó el Nobel en 2009."],
+ ["Médicos y hospitales","1962","David Gale y Lloyd Shapley hallaron un algoritmo que empareja dos lados de modo que ninguna pareja preferiría escaparse junta. Alvin Roth adaptó esas ideas a la asignación de residencias médicas en EE. UU. y a los intercambios de riñones. Roth y Shapley compartieron el Nobel en 2012."],
+ ["Subastas","1961","William Vickrey demostró que, en una subasta a sobre cerrado en la que el ganador paga la segunda puja más alta, lo mejor es pujar tu valor real. Paul Milgrom y Robert Wilson diseñaron nuevos formatos de subasta usados para vender espectro radioeléctrico y ganaron el Nobel en 2020."],
+ ["Acuerdos climáticos","","Todos los países se benefician de reducir las emisiones globales, pero cada uno carga con su propio coste: un dilema del prisionero con muchos jugadores. Los tratados intentan cambiar los pagos con transparencia, reciprocidad y presión."]
+];
+const card=a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`;
+$("#ideaGrid").innerHTML=IDEAS.map(card).join("");
+$("#wildGrid").innerHTML=WILD.map(card).join("");
+
+/* ================= boot ================= */
+pdNew();runT();spOne();buildN();drawG();
+if(!SP.run)$("#sPlay").textContent="Reproducir";
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawT();drawS();drawN();drawG()},120)});
+addEventListener("themechange",()=>{drawT();drawS();drawN();drawG()});
+</script>
+</body>
+</html>

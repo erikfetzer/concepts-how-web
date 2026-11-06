@@ -14,6 +14,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Quantum mechanics | `quantum.html` | Double-slit experiment, Bloch-sphere qubit with gates, Bell/CHSH test, Grover’s search |
 | Dimensions & perception | `dimensions.html` | Rotating tesseract, Flatland slicer, 4D visitor in a sealed room, orbits by dimension, Koch fractal, perception lab |
 | The universe | `universe.html` | Powers-of-ten zoom, cosmic calendar, black-hole size calculator, expanding-space demo, bestiary of weird objects, big open questions |
+| Game theory | `gametheory.html` | Play the prisoner’s dilemma, Axelrod tournament with evolution, Nowak–May spatial game, Nash equilibrium explorer, guess ⅔ of the average |
 
 ## Spanish
 
