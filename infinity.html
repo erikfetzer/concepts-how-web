@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infinity · concepts.how</title>
+<meta name="description" content="Check into Hilbert’s hotel, count every fraction, run Cantor’s diagonal argument, add up endless sums and zoom forever into the Mandelbrot set.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/infinity">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/infinity">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Infinity · concepts.how">
+<meta property="og:description" content="Check into Hilbert’s hotel, count every fraction, run Cantor’s diagonal argument, add up endless sums and zoom forever into the Mandelbrot set.">
+<meta property="og:url" content="https://concepts.how/infinity">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Infinity · concepts.how">
+<meta name="twitter:description" content="Check into Hilbert’s hotel, count every fraction, run Cantor’s diagonal argument, add up endless sums and zoom forever into the Mandelbrot set.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* infinity */
+.diag{display:grid;gap:3px;font-family:var(--mono);font-size:14px;overflow-x:auto}
+.drow{display:flex;gap:3px;align-items:center}
+.drow .ri{width:26px;flex:none;color:var(--muted);font-size:11px;text-align:right;padding-right:4px}
+.drow i{font-style:normal;flex:none;width:22px;height:24px;display:grid;place-items:center;border-radius:4px;background:var(--paper);border:1px solid var(--line)}
+.drow i.dg{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 18%,var(--paper))}
+.drow i.dg.done{background:var(--gold);color:#111}
+.drow i.nw{background:var(--accent);color:#fff;border-color:var(--accent);animation:fin .3s}
+.drow i.q{color:var(--muted);border-style:dashed}
+.drow .dots{color:var(--muted);padding-left:4px}
+.diag.new .drow i{height:28px}
+.sqcv{width:100%;aspect-ratio:1;max-width:560px;margin:0 auto;display:block;border-radius:10px;border:1px solid var(--line);cursor:zoom-in;image-rendering:auto;background:#0e0e12}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
+.qc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;align-content:start}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center}
+.vs b{display:block;font-size:16px}.vs small{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.vs>span{font-family:var(--display);font-weight:800;color:var(--accent)}
+.qc .qopt{grid-template-columns:repeat(3,minmax(0,1fr))}
+.qc .qopt button{text-align:center;font-size:13.5px;padding:8px 6px}
+.qc .ans{margin:0;font-size:14px}
+@media (max-width:420px){.qc .qopt{grid-template-columns:1fr}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html" aria-current="page">Infinity</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="infinity.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/infinity.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Infinity</b> · endless, and then some</div>
+    <h1>Some infinities are <em>bigger than others.</em></h1>
+    <p class="lede">Infinity isn’t a very big number. It’s a different kind of thing, and it breaks the rules that work for ordinary quantities: a full hotel can always take more guests, half of something can be as big as the whole, and you can add up forever and still get a finite answer. Mathematicians took 2,000 years to tame it. Here’s how.</p>
+    <nav class="jump" aria-label="On this page"><a href="#hotel">Hilbert’s hotel</a><a href="#fractions">Counting fractions</a><a href="#diagonal">The diagonal</a><a href="#series">Endless sums</a><a href="#fractal">Infinite detail</a><a href="#quiz">Which is bigger?</a><a href="#ideas">Ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. Hotel ============ -->
+  <section class="block" id="hotel" aria-labelledby="hoH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · a strange hotel</span>
+      <h2 id="hoH">Hilbert’s Grand Hotel</h2>
+      <p>David Hilbert imagined a hotel with infinitely many rooms, every one of them occupied. A new guest arrives. No problem. Then a coach with infinitely many passengers. Still no problem. Try it.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="hoCv" height="240" aria-label="The first rooms of Hilbert's hotel"></canvas>
+        <p id="hoMsg" style="margin:0;font-size:15px;min-height:66px" aria-live="polite"></p>
+      </div>
+      <div class="panel stack">
+        <button class="btn" id="hoOne">One new guest arrives</button>
+        <button class="btn" id="hoBus">A coach with infinitely many guests</button>
+        <button class="btn" id="hoBuses">Infinitely many coaches</button>
+        <button class="btn ghost" id="hoReset">Reset the hotel</button>
+        <div class="callout"><b>The rule that changed</b>For finite things, “full” means no room for more. For infinite sets, a part can be matched one-to-one with the whole. That is the definition of infinite that Richard Dedekind gave in 1888.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. Fractions ============ -->
+  <section class="block" id="fractions" aria-labelledby="frH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · counting</span>
+      <h2 id="frH">You can count every fraction</h2>
+      <p>There are infinitely many fractions between 0 and 1 alone, so surely there are more fractions than counting numbers? No. Georg Cantor showed you can list them all by zigzagging through a grid, skipping repeats like 2/2. Every fraction gets a number, so the two infinities are the same size.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="frCv" height="340" aria-label="Grid of fractions with a zigzag path"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="row"><button class="btn" id="frStep">Next fraction</button><button class="btn" id="frPlay">Play</button><button class="btn ghost" id="frReset">Reset</button></div>
+        <span class="lbl">The list so far</span>
+        <div class="out mono" id="frList" style="font-size:13.5px;line-height:1.8"></div>
+        <div class="callout"><b>Countable</b>Any infinite set you can put into a list like this, first, second, third…, is called countable. Its size is written ℵ₀ (“aleph-null”), the smallest infinity.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. Diagonal ============ -->
+  <section class="block" id="diagonal" aria-labelledby="dH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · a bigger infinity</span>
+      <h2 id="dH">Cantor’s diagonal argument</h2>
+      <p>Now try to list every infinite string of 0s and 1s (each is like a real number written in binary). Cantor’s trick, from 1891: walk down the diagonal and flip every digit. The new string differs from row 1 in digit 1, from row 2 in digit 2, and so on. It can’t be anywhere in the list, however you made the list.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <div class="diag" id="dGrid" aria-label="List of binary strings with the diagonal highlighted"></div>
+        <span class="lbl">The new string</span>
+        <div class="diag new" id="dNew"></div>
+      </div>
+      <div class="panel stack">
+        <div class="row"><button class="btn" id="dStep">Flip the next digit</button><button class="btn ghost" id="dAll">Flip them all</button></div>
+        <div class="row"><button class="btn" id="dAdd">Add it to the list and try again</button><button class="btn ghost" id="dShuffle">New list</button></div>
+        <p id="dMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <div class="callout"><b>Uncountable</b>The real numbers can’t be listed, so their infinity is strictly bigger than the counting numbers. And Cantor proved there is no biggest infinity at all: for any set, the set of all its subsets is always bigger.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Series ============ -->
+  <section class="block" id="series" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · adding forever</span>
+      <h2 id="sH">Endless sums, finite answers (sometimes)</h2>
+      <p>Zeno of Elea argued, around 450 BCE, that you can never cross a room: first you must cover half, then half of what’s left, and so on forever. The answer took two thousand years: infinitely many steps can add up to a finite total. But not always. Pick a sum.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="sPick"></div>
+        <canvas class="cv" id="sCv" height="280" aria-label="Partial sums of the selected series"></canvas>
+        <div class="sl"><label for="sN">Terms added <span id="sNV">10</span></label><input type="range" id="sN" min="1" max="200" value="10"></div>
+      </div>
+      <div class="panel stack">
+        <div class="ro"><div class="k">The sum</div><div id="sFormula" class="mono" style="font-size:15px;overflow-wrap:anywhere"></div></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Total so far</div><div class="v" id="sTot"></div></div>
+          <div class="ro"><div class="k">Heading to</div><div class="v" id="sLim" style="color:var(--gold)"></div></div>
+        </div>
+        <p id="sTxt" style="margin:0;font-size:14.5px"></p>
+        <canvas class="cv" id="sSq" height="180" aria-label="Square filled by halves"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Mandelbrot ============ -->
+  <section class="block" id="fractal" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · infinite detail</span>
+      <h2 id="mH">Zoom forever: the Mandelbrot set</h2>
+      <p>Take a number, square it, add a constant c, and repeat. If the result stays small forever, c is in the Mandelbrot set (black). The rule fits on one line, yet the edge has infinite detail: zoom in anywhere and new spirals, seahorses and tiny copies of the whole set keep appearing. Tap to zoom in.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv sqcv" id="mCv" aria-label="The Mandelbrot set, tap to zoom"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Magnification</div><div class="v" id="mZoom">1×</div></div>
+          <div class="ro"><div class="k">Steps per point</div><div class="v" id="mIter">80</div></div>
+        </div>
+        <div class="row"><button class="btn ghost" id="mOut">Zoom out</button><button class="btn ghost" id="mReset">Start over</button></div>
+        <span class="lbl">Jump to a famous spot</span>
+        <div class="seg" id="mSpots"></div>
+        <div class="callout"><b>Limits of a screen</b>Your browser does maths with about 16 significant digits, so past roughly 10¹³× the picture turns blocky. The set itself keeps going: there is no zoom level where the detail runs out.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. Quiz ============ -->
+  <section class="block" id="quiz" aria-labelledby="qH">
+    <div class="shead">
+      <span class="eyebrow">Demo 6 · test your intuition</span>
+      <h2 id="qH">Which infinity is bigger?</h2>
+      <p>Two infinite sets are the same size if you can pair them up one-to-one with nothing left over. Guess, then see the pairing.</p>
+    </div>
+    <div class="qgrid" id="qGrid"></div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Ideas and history</span>
+      <h2 id="iH">A short history of forever</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Georg Cantor, “Über eine elementare Frage der Mannigfaltigkeitslehre” (1891), the diagonal argument</li>
+    <li>David Hilbert, lectures on the infinite (1924), as retold by George Gamow in <i>One Two Three… Infinity</i> (1947)</li>
+    <li>John D. Barrow, <i>The Infinite Book</i> (2005)</li>
+    <li>Benoît Mandelbrot, <i>The Fractal Geometry of Nature</i> (1982)</li>
+  </ul>
+  <p>Screens are finite, so every picture here shows only the start of something endless.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+
+/* ================= 1. hotel ================= */
+const HO={guests:[],anim:0,t:1,mode:"",msg:""};
+const NR=12;
+function hoInit(){HO.guests=[];for(let r=1;r<=NR+6;r++)HO.guests.push({from:r,to:r,kind:0,label:r});HO.t=1;HO.mode="";$("#hoMsg").textContent="Every room is full: guest 1 in room 1, guest 2 in room 2, and so on forever.";hoDraw()}
+function hoMove(fn,newKind,newRooms,msg){HO.guests.forEach(g=>{g.from=g.to;g.to=fn(g.to)});newRooms.forEach((r,i)=>HO.guests.push({from:r,to:r,kind:newKind,label:i===0&&newKind===1?"new":"",fresh:true}));
+  HO.guests=HO.guests.filter(g=>g.to<=NR+8);HO.t=0;$("#hoMsg").innerHTML=msg;cancelAnimationFrame(HO.anim);const t0=performance.now();
+  const step=now=>{HO.t=reduce?1:Math.min(1,(now-t0)/1200);hoDraw();if(HO.t<1)HO.anim=requestAnimationFrame(step)};HO.anim=requestAnimationFrame(step)}
+function hoDraw(){const{c,W,H}=setupCanvas($("#hoCv"));const ink=css("--ink"),muted=css("--muted"),line=css("--line"),acc=css("--accent"),hot=css("--hot"),gold=css("--gold"),card=css("--card"),good=css("--good");
+  const n=Math.max(6,Math.min(NR,Math.floor((W-30)/46)));const rw=(W-28)/n,y0=40,rh=H-90;
+  c.font="11px "+css("--mono");c.textAlign="center";
+  for(let r=1;r<=n;r++){const x=8+(r-1)*rw;c.fillStyle=card;c.strokeStyle=line;c.fillRect(x+3,y0,rw-6,rh);c.strokeRect(x+3,y0,rw-6,rh);c.fillStyle=muted;c.fillText(r,x+rw/2,y0-8);
+    c.fillStyle=line;c.fillRect(x+rw/2-6,y0+rh-4,12,4)}
+  c.fillStyle=muted;c.font="700 22px "+css("--display");c.fillText("…",W-10,y0+rh/2);
+  const xOf=r=>8+(r-1)*rw+rw/2;const T=ease(HO.t);
+  HO.guests.forEach(g=>{const x=xOf(g.from)+(xOf(g.to)-xOf(g.from))*T;const hop=Math.sin(T*Math.PI)*28*(g.from!==g.to?1:0);const y=y0+rh*.55-hop;if(x>W+20)return;
+    const col=g.kind===0?acc:g.kind===1?hot:g.kind===2?gold:good;const R=Math.min(14,rw*.3);
+    if(g.fresh){c.globalAlpha=Math.min(1,HO.t*2)}c.fillStyle=col;c.beginPath();c.arc(x,y,R,0,7);c.fill();c.globalAlpha=1;
+    c.fillStyle="#fff";c.font="600 "+(R>10?11:9)+"px "+css("--mono");c.fillText(g.kind===0?"●":"★",x,y+4)});
+  c.textAlign="left";c.fillStyle=muted;c.font="11px "+css("--mono");c.fillText("Room →",8,H-14)}
+function primes(k){const out=[];let n=2;while(out.length<k){if(out.every(p=>n%p))out.push(n);n++}return out}
+$("#hoOne").onclick=()=>{hoInit();hoMove(r=>r+1,1,[1],"Everyone moves from room n to room n + 1. Room 1 is now free for the new guest (red), and nobody was turned away.")};
+$("#hoBus").onclick=()=>{hoInit();const odd=[];for(let r=1;r<=NR+8;r+=2)odd.push(r);hoMove(r=>2*r,2,odd,"Everyone moves from room n to room 2n, so the guests fill the even rooms. All the odd rooms, infinitely many, are now free for the coach passengers (gold).")};
+$("#hoBuses").onclick=()=>{hoInit();const P=primes(4);
+  hoMove(r=>2**r,3,[3,9,5,7,11],`Guests already here move to room 2<sup>n</sup>. Coach 1 passengers take rooms 3, 9, 27… (powers of 3), coach 2 takes powers of 5, coach 3 powers of 7, and so on: every coach gets its own prime. No two people ever share a room, and some rooms (like 6) are even left empty.`)};
+$("#hoReset").onclick=hoInit;
+
+/* ================= 2. fractions ================= */
+const FR={k:0,seq:[],timer:0,N:7};
+(function(){const seen=new Set();for(let d=2;d<=40;d++){const cells=[];for(let p=1;p<d;p++){const q=d-p;cells.push([p,q])}if(d%2)cells.reverse();cells.forEach(([p,q])=>{const g=(a,b)=>b?g(b,a%b):a;FR.seq.push({p,q,skip:g(p,q)!==1})})}})();
+function frDraw(){const{c,W,H}=setupCanvas($("#frCv"));const N=FR.N,cs=Math.min((W-30)/N,(H-30)/N),ox=(W-cs*N)/2+8,oy=22;const ink=css("--ink"),muted=css("--muted"),line=css("--line"),acc=css("--accent"),hot=css("--hot"),gold=css("--gold");
+  const pos=(p,q)=>[ox+(q-1)*cs+cs/2,oy+(p-1)*cs+cs/2];
+  c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="center";for(let i=1;i<=N;i++){c.fillText(i,ox+(i-1)*cs+cs/2,oy-8);c.textAlign="right";c.fillText(i,ox-6,oy+(i-1)*cs+cs/2+4);c.textAlign="center"}
+  // path
+  const done=FR.seq.slice(0,FR.k).filter(f=>f.p<=N&&f.q<=N);
+  c.strokeStyle=gold;c.lineWidth=2.5;c.beginPath();let first=true;FR.seq.slice(0,FR.k).forEach(f=>{if(f.p>N||f.q>N){return}const[x,y]=pos(f.p,f.q);first?c.moveTo(x,y):c.lineTo(x,y);first=false});c.stroke();c.lineWidth=1;
+  let num=0;const idx=new Map();FR.seq.slice(0,FR.k).forEach(f=>{if(!f.skip){num++;idx.set(f.p+"/"+f.q,num)}});
+  for(let p=1;p<=N;p++)for(let q=1;q<=N;q++){const[x,y]=pos(p,q);const key=p+"/"+q;const f=FR.seq.find(s=>s.p===p&&s.q===q);const visited=FR.seq.indexOf(f)<FR.k;
+    c.fillStyle=visited?(f.skip?line:acc):css("--card");c.strokeStyle=line;c.beginPath();c.arc(x,y,cs*.36,0,7);c.fill();c.stroke();
+    c.fillStyle=visited&&!f.skip?"#fff":f.skip&&visited?muted:ink;c.font="600 "+Math.round(cs*.24)+"px "+css("--mono");c.fillText(`${p}/${q}`,x,y+cs*.08);
+    if(visited&&!f.skip){c.fillStyle=gold;c.font="700 "+Math.round(cs*.2)+"px "+css("--mono");c.fillText("#"+idx.get(key),x,y-cs*.42+cs*.06)}}
+  const list=FR.seq.slice(0,FR.k).filter(f=>!f.skip).map((f,i)=>`<span><b style="color:var(--gold)">${i+1}</b>→${f.p}/${f.q}</span>`);
+  $("#frList").innerHTML=list.length?list.join("  "):"Press “Next fraction”.";}
+function frStep(){do{FR.k++}while(FR.k<FR.seq.length&&FR.seq[FR.k-1].skip&&false);if(FR.k>=60){clearInterval(FR.timer);FR.timer=0;$("#frPlay").textContent="Play"}frDraw()}
+$("#frStep").onclick=frStep;$("#frReset").onclick=()=>{FR.k=0;clearInterval(FR.timer);FR.timer=0;$("#frPlay").textContent="Play";frDraw()};
+$("#frPlay").onclick=()=>{if(FR.timer){clearInterval(FR.timer);FR.timer=0;$("#frPlay").textContent="Play"}else{FR.timer=setInterval(frStep,reduce?60:380);$("#frPlay").textContent="Pause"}};
+
+/* ================= 3. diagonal ================= */
+const DG={rows:[],k:0,L:12,tries:0};
+function dShuffle(){DG.rows=[...Array(DG.L)].map(()=>[...Array(DG.L)].map(()=>Math.random()<.5?1:0));DG.k=0;DG.tries=0;dDraw()}
+function dDraw(){const n=Math.min(DG.rows.length,DG.L);
+  $("#dGrid").innerHTML=DG.rows.slice(0,DG.L).map((r,i)=>`<div class="drow"><span class="ri">${i+1}</span>${r.map((b,j)=>`<i class="${i===j?(j<DG.k?"dg done":"dg"):""}">${b}</i>`).join("")}<span class="dots">…</span></div>`).join("")+`<div class="drow"><span class="ri">⋮</span></div>`;
+  $("#dNew").innerHTML=`<div class="drow"><span class="ri">★</span>${[...Array(DG.L)].map((_,j)=>j<DG.k?`<i class="nw">${1-DG.rows[j][j]}</i>`:`<i class="q">?</i>`).join("")}<span class="dots">…</span></div>`;
+  const msg=$("#dMsg");if(DG.k===0)msg.textContent="Each row is the start of an endless string. Pretend the list goes on forever.";
+  else if(DG.k<DG.L)msg.innerHTML=`Digit ${DG.k} of row ${DG.k} is ${DG.rows[DG.k-1][DG.k-1]}, so the new string gets ${1-DG.rows[DG.k-1][DG.k-1]}. It already differs from rows 1 to ${DG.k}.`;
+  else msg.innerHTML=`The new string differs from every row in the list${DG.tries?` (attempt ${DG.tries+1})`:""}. However the list continues, it differs from row n in digit n. So no list can contain every string.`;
+  $("#dAdd").disabled=DG.k<DG.L}
+$("#dStep").onclick=()=>{if(DG.k<DG.L){DG.k++;dDraw()}};$("#dAll").onclick=()=>{DG.k=DG.L;dDraw()};$("#dShuffle").onclick=dShuffle;
+$("#dAdd").onclick=()=>{const nw=DG.rows.map((r,j)=>1-r[j]);DG.rows=[nw,...DG.rows].slice(0,DG.L);DG.k=0;DG.tries++;dDraw();$("#dMsg").textContent="The new string is now row 1, and everything else moved down. Flip the diagonal again…"};
+
+/* ================= 4. series ================= */
+const SER=[
+ {n:"½ + ¼ + ⅛ + …",f:"1/2 + 1/4 + 1/8 + 1/16 + …",t:k=>1/2**k,lim:1,limT:"1",txt:"Zeno’s halves. Each step covers half of what’s left, so you never overshoot and the gap shrinks to nothing. The total is exactly 1.",sq:true},
+ {n:"1 + ½ + ⅓ + …",f:"1 + 1/2 + 1/3 + 1/4 + …",t:k=>1/k,lim:Infinity,limT:"∞",txt:"The harmonic series. The terms shrink to zero, yet the total grows forever, just very slowly: after a million terms it is only about 14.4. Shrinking terms are not enough."},
+ {n:"1 + ¼ + ⅑ + …",f:"1/1² + 1/2² + 1/3² + …",t:k=>1/(k*k),lim:Math.PI**2/6,limT:"π²/6",txt:"The Basel problem. Leonhard Euler showed in 1734 that this sum is π²/6 ≈ 1.6449. Nobody expected π, a number about circles, to appear."},
+ {n:"1 − ½ + ⅓ − …",f:"1 − 1/2 + 1/3 − 1/4 + …",t:k=>(k%2?1:-1)/k,lim:Math.LN2,limT:"ln 2",txt:"The alternating harmonic series zigzags toward ln 2 ≈ 0.693. Strangely, rearranging the same terms in a different order can make it add up to any number you like (Riemann’s rearrangement theorem)."}
+];
+let SI=0;
+$("#sPick").innerHTML=SER.map((s,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${s.n}</button>`).join("");
+document.querySelectorAll("#sPick .pill").forEach(b=>b.onclick=()=>{SI=+b.dataset.i;document.querySelectorAll("#sPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));sDraw()});
+$("#sN").oninput=sDraw;
+function sDraw(){const s=SER[SI],N=+$("#sN").value;$("#sNV").textContent=N;const ps=[];let tot=0;for(let k=1;k<=N;k++){tot+=s.t(k);ps.push(tot)}
+  $("#sFormula").textContent=s.f;$("#sTot").textContent=tot.toFixed(tot>100?1:5);$("#sLim").textContent=s.limT;$("#sTxt").textContent=s.txt;
+  const{c,W,H}=setupCanvas($("#sCv"));const acc=css("--accent"),gold=css("--gold"),line=css("--line"),muted=css("--muted");
+  const top=isFinite(s.lim)?Math.max(s.lim*1.15,...ps)*1.02:Math.max(2,...ps)*1.1;const L=38,R=W-10,T=10,B=H-24;const X=k=>L+(R-L)*(k-1)/Math.max(1,N-1||1),Y=v=>B-(B-T)*v/top;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";[0,top/2,top].forEach(v=>{c.beginPath();c.moveTo(L,Y(v));c.lineTo(R,Y(v));c.stroke();c.fillText(v.toFixed(v<10?1:0),L-4,Y(v))});
+  c.textAlign="center";c.textBaseline="alphabetic";c.fillText("1",X(1),H-8);c.fillText(N,X(N),H-8);
+  if(isFinite(s.lim)){c.strokeStyle=gold;c.setLineDash([6,4]);c.lineWidth=2;c.beginPath();c.moveTo(L,Y(s.lim));c.lineTo(R,Y(s.lim));c.stroke();c.setLineDash([]);c.fillStyle=gold;c.textAlign="right";c.fillText(s.limT,R-2,Y(s.lim)-6)}
+  c.strokeStyle=acc;c.lineWidth=2.5;c.beginPath();ps.forEach((v,i)=>{const x=X(i+1),y=Y(v);i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();
+  if(N<=40){c.fillStyle=acc;ps.forEach((v,i)=>{c.beginPath();c.arc(X(i+1),Y(v),3,0,7);c.fill()})}c.lineWidth=1;
+  const sq=$("#sSq");sq.style.display=s.sq?"block":"none";if(s.sq){const r=setupCanvas(sq),cc=r.c;const S=Math.min(r.W-20,r.H-10),x0=(r.W-S)/2,y0=5;let x=x0,y=y0,w=S,h=S;cc.strokeStyle=css("--ink");cc.strokeRect(x0,y0,S,S);
+    for(let k=1;k<=Math.min(N,14);k++){cc.fillStyle=k%2?acc:gold;cc.globalAlpha=.85;if(k%2){const hw=w/2;cc.fillRect(x,y,hw,h);x+=hw;w-=hw}else{const hh=h/2;cc.fillRect(x,y,w,hh);y+=hh;h-=hh}}cc.globalAlpha=1}}
+
+/* ================= 5. Mandelbrot ================= */
+const MB={cx:-0.6,cy:0,span:3.2,job:0};
+const SPOTS=[["Whole set",-0.6,0,3.2],["Seahorse valley",-0.7453,0.1127,0.006],["Elephant valley",0.2925,0.0149,0.012],["Spiral",-0.761574,-0.0847596,0.0006],["Mini Mandelbrot",-1.7549,0,0.045]];
+$("#mSpots").innerHTML=SPOTS.map((s,i)=>`<button class="pill" data-i="${i}">${s[0]}</button>`).join("");
+document.querySelectorAll("#mSpots .pill").forEach(b=>b.onclick=()=>{const s=SPOTS[+b.dataset.i];MB.cx=s[1];MB.cy=s[2];MB.span=s[3];mDraw()});
+function mDraw(){const cv=$("#mCv");const d=Math.min(2,window.devicePixelRatio||1);const W=Math.round(cv.getBoundingClientRect().width),H=W;cv.style.height=H+"px";
+  const pw=Math.round(W*d*.75),ph=Math.round(H*d*.75);if(cv.width!==pw){cv.width=pw;cv.height=ph}const c=cv.getContext("2d");const img=c.createImageData(pw,ph);
+  const zoom=3.2/MB.span;const maxIt=Math.round(80+60*Math.log2(Math.max(1,zoom)));$("#mZoom").textContent=(zoom<1000?zoom.toFixed(zoom<10?1:0):zoom.toExponential(1).replace("e+","×10^"))+"×";$("#mIter").textContent=maxIt;
+  const dark=document.documentElement.dataset.theme==="dark"||(!document.documentElement.dataset.theme&&matchMedia("(prefers-color-scheme: dark)").matches)||document.documentElement.dataset.theme==="system"&&matchMedia("(prefers-color-scheme: dark)").matches;
+  const job=++MB.job;let row=0;const scale=MB.span/pw;
+  const pal=t=>{const a=0.5+0.5*Math.cos(6.283*(t*1.0+0.62)),b=0.5+0.5*Math.cos(6.283*(t*1.0+0.70)),cc=0.5+0.5*Math.cos(6.283*(t*1.0+0.85));return[a*255,b*255,cc*255]};
+  const chunk=()=>{if(job!==MB.job)return;const end=Math.min(ph,row+24);for(;row<end;row++){const y0=MB.cy+(row-ph/2)*scale;for(let col=0;col<pw;col++){const x0=MB.cx+(col-pw/2)*scale;let x=0,y=0,i=0,x2=0,y2=0;
+      while(x2+y2<=16&&i<maxIt){y=2*x*y+y0;x=x2-y2+x0;x2=x*x;y2=y*y;i++}const o=(row*pw+col)*4;
+      if(i>=maxIt){img.data[o]=img.data[o+1]=img.data[o+2]=dark?8:14;img.data[o+3]=255}else{const sm=i+1-Math.log(Math.log(Math.sqrt(x2+y2)))/Math.LN2;const[r,g,b]=pal(Math.sqrt(Math.max(0,sm)/maxIt)*2.2);img.data[o]=r;img.data[o+1]=g;img.data[o+2]=b;img.data[o+3]=255}}}
+    c.putImageData(img,0,0);if(row<ph)setTimeout(chunk,0)};chunk()}
+$("#mCv").addEventListener("click",e=>{const r=$("#mCv").getBoundingClientRect();const fx=(e.clientX-r.left)/r.width-.5,fy=(e.clientY-r.top)/r.height-.5;MB.cx+=fx*MB.span;MB.cy+=fy*MB.span;MB.span/=3;mDraw()});
+$("#mOut").onclick=()=>{MB.span=Math.min(4,MB.span*3);mDraw()};$("#mReset").onclick=()=>{MB.cx=-0.6;MB.cy=0;MB.span=3.2;mDraw()};
+
+/* ================= 6. quiz ================= */
+const QZ=[
+ ["Counting numbers","1, 2, 3, 4, …","Even numbers","2, 4, 6, 8, …",0,"Pair each n with 2n: 1↔2, 2↔4, 3↔6… Every number on each side gets exactly one partner. Galileo noticed this kind of puzzle in 1638 and concluded infinities can’t be compared. Cantor showed they can."],
+ ["Counting numbers","1, 2, 3, …","Fractions","1/2, 3/4, 7/5, …",0,"The zigzag in demo 2 gives every fraction a place in a numbered list, so the pairing works. Both are countable: size ℵ₀."],
+ ["Counting numbers","1, 2, 3, …","Real numbers between 0 and 1","0.5, 0.333…, π − 3, …",2,"The diagonal argument shows any list of real numbers misses some. The reals are uncountable: a strictly bigger infinity."],
+ ["Points on a line segment","1 cm long","Points in a square","1 cm × 1 cm",0,"Surprise: the same. Interleave the digits of the two coordinates, (0.123…, 0.456…) ↦ 0.142536…, to pair points of the square with points of the line. Cantor wrote to Dedekind in 1877: “I see it, but I don’t believe it!”"],
+ ["Whole numbers","0, 1, 2, …","All finite lists of whole numbers","(3), (1, 4), (2, 7, 1), …",0,"Still the same. Encode the list (a, b, c) as 2^(a+1) × 3^(b+1) × 5^(c+1): every list gets its own whole number, thanks to unique prime factorisation."],
+ ["Real numbers","every point on the line","All sets of real numbers","every possible collection of points",2,"Cantor’s theorem: the set of all subsets of anything is always bigger than the thing itself. So there is no largest infinity: you can always go one bigger."]
+];
+const OPT=["Same size","Left is bigger","Right is bigger"];
+$("#qGrid").innerHTML=QZ.map((q,i)=>`<article class="qc" data-i="${i}"><div class="vs"><div><b>${q[0]}</b><small>${q[1]}</small></div><span>vs</span><div><b>${q[2]}</b><small>${q[3]}</small></div></div><div class="qopt">${OPT.map((o,k)=>`<button data-k="${k}">${o}</button>`).join("")}</div><p class="ans" hidden></p></article>`).join("");
+document.querySelectorAll("#qGrid .qc").forEach(card=>{const q=QZ[+card.dataset.i];card.querySelectorAll("button").forEach(b=>b.onclick=()=>{if(card.dataset.done)return;card.dataset.done=1;const k=+b.dataset.k;
+  card.querySelectorAll("button").forEach(x=>{if(+x.dataset.k===q[4])x.classList.add("right");else if(x===b)x.classList.add("wrong")});const a=card.querySelector(".ans");a.hidden=false;a.innerHTML=`<b>${k===q[4]?"Right.":"Not quite."}</b> ${q[5]}`})});
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Zeno’s paradoxes","c. 450 BCE","Achilles can never catch a tortoise, Zeno argued, because each time he reaches where it was, it has moved on. The puzzle was only fully answered with the idea of a limit in the 1800s."],
+ ["Potential vs actual","c. 350 BCE","Aristotle allowed “potential” infinity, a process you can always continue, but rejected a completed, “actual” infinity. That view dominated for two thousand years."],
+ ["The ∞ symbol","1655","John Wallis introduced the lazy-eight symbol in a book on conic sections. Nobody is quite sure why he chose it."],
+ ["Gabriel’s horn","1643","Evangelista Torricelli found a shape with finite volume but infinite surface area: you could fill it with paint, but never paint its inside surface."],
+ ["0.999… = 1","","Not “almost” 1: exactly 1. If they were different, there would be a number between them, and there isn’t. Two decimal expansions can name the same number."],
+ ["Cantor’s paradise","1874–1891","Georg Cantor proved there are different sizes of infinity. Some colleagues attacked the idea fiercely. Hilbert later declared, “No one shall expel us from the paradise that Cantor has created.”"],
+ ["The continuum hypothesis","1940 · 1963","Is there an infinity between the counting numbers and the reals? Kurt Gödel and Paul Cohen showed that the standard rules of maths can neither prove nor disprove it. It is truly undecidable."],
+ ["Infinite monkeys","","A monkey typing at random forever will, with probability 1, eventually type the complete works of Shakespeare. With any realistic number of monkeys and years, though, the odds are effectively zero."],
+ ["Is the universe infinite?","Open","Nobody knows. Measurements show space is very close to flat, which is consistent with an infinite universe, but a finite one that is just very large fits too. We can only see the observable part."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+hoInit();frDraw();dShuffle();sDraw();
+new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting){mDraw();ob.disconnect()}},{rootMargin:"300px"}).observe($("#mCv"));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{hoDraw();frDraw();sDraw();if($("#mCv").width)mDraw()},150)});
+addEventListener("themechange",()=>{hoDraw();frDraw();sDraw();if($("#mCv").width)mDraw()});
+</script>
+</body>
+</html>

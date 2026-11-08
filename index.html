@@ -120,6 +120,7 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .ttm{position:absolute;inset:0;display:grid;place-items:center}.ttm b{display:grid;grid-template-columns:repeat(3,18px);gap:2px;font:600 11px/18px var(--mono,monospace);text-align:center}.ttm i{font-style:normal;border-radius:4px;background:var(--card)}.ttm i.t{color:#1E8A5A}.ttm i.f{color:#E4572E}.ttm i.r{background:var(--accent);color:#fff}
 .dice{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px}.dice b{width:46px;height:46px;border-radius:10px;border:2px solid var(--ink);background:var(--card);position:relative;transform:rotate(-8deg)}.dice b+b{transform:rotate(10deg);background:var(--accent);border-color:var(--accent)}.dice i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--ink)}.dice b+b i{background:#fff}.dice b:first-child i:nth-child(1){left:7px;top:7px}.dice b:first-child i:nth-child(2){left:17px;top:17px}.dice b:first-child i:nth-child(3){right:7px;bottom:7px}.dice b+b i:nth-child(1){left:9px;top:9px}.dice b+b i:nth-child(2){right:9px;bottom:9px}
 .wheel2{position:absolute;inset:0;display:grid;place-content:center;gap:6px;font:600 13px/1 var(--mono,monospace);letter-spacing:.14em;text-align:center}.wheel2 b{padding:6px 10px;border-radius:6px;background:var(--card);border:1px solid var(--line);white-space:nowrap;overflow:hidden;max-width:260px}.wheel2 b+b{color:var(--accent);border-color:var(--accent)}
+.inf{position:absolute;inset:0;display:grid;place-items:center}.inf b{font:800 64px/1 var(--display);color:var(--accent);letter-spacing:-.02em;background:linear-gradient(90deg,var(--accent),#E4572E);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
 footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -257,6 +258,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tags"><span>Ciphers</span><span>Hashing</span><span>RSA</span></div>
       </div>
       <span class="go">Open Codes</span>
+    </a>
+    <a class="tile" href="infinity.html">
+      <div class="no"><span>12</span><span>Endless</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="inf"><b>∞</b></div></div>
+        <h2 style="margin-top:16px">Infinity</h2>
+        <p>Check into Hilbert’s hotel, count every fraction, prove some infinities are bigger than others and zoom forever into the Mandelbrot set.</p>
+        <div class="tags"><span>Hilbert’s hotel</span><span>Cantor</span><span>Fractals</span></div>
+      </div>
+      <span class="go">Open Infinity</span>
     </a>
   </div>
 </main>
