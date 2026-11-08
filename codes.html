@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codes & encryption · concepts.how</title>
+<meta name="description" content="Spin a Caesar cipher wheel, crack a secret with letter counting, try the Vigenère cipher, watch a hash avalanche, share a secret in public and lock a message with RSA.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/codes">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/codes">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Codes & encryption · concepts.how">
+<meta property="og:description" content="Spin a Caesar cipher wheel, crack a secret with letter counting, try the Vigenère cipher, watch a hash avalanche, share a secret in public and lock a message with RSA.">
+<meta property="og:url" content="https://concepts.how/codes">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Codes & encryption · concepts.how">
+<meta name="twitter:description" content="Spin a Caesar cipher wheel, crack a secret with letter counting, try the Vigenère cipher, watch a hash avalanche, share a secret in public and lock a message with RSA.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* codes */
+.out{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 12px;font-size:15px;line-height:1.55;overflow-wrap:anywhere;min-height:44px}
+.out.mono{letter-spacing:.04em}
+.out.win{border-color:var(--good);box-shadow:0 0 0 2px var(--good) inset}
+.hex{font-size:12.5px;letter-spacing:.02em}
+.hex mark{background:color-mix(in srgb,var(--hot) 25%,transparent);color:var(--hot);border-radius:2px;padding:0}
+.fit{display:grid;grid-template-columns:auto auto 1fr;gap:10px;align-items:baseline;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden;white-space:nowrap}
+.fit span:last-child{overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.fit.top{border-color:var(--good)}
+.mixgrid{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 8px;align-items:center;justify-items:center}
+.mixgrid .who2{font-family:var(--display);font-weight:800;font-size:18px}
+.mixgrid .who2.mid{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.blob{display:grid;justify-items:center;gap:2px;text-align:center}
+.blob i{width:58px;height:58px;border-radius:44% 56% 52% 48%/52% 46% 54% 48%;box-shadow:inset 0 -6px 0 rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.12);transition:background .4s}
+.blob.sec i{outline:2px dashed var(--muted);outline-offset:3px}
+.blob.fin i{width:66px;height:66px}
+.blob b{font-size:13px}.blob small{font-size:11px;color:var(--muted)}
+.mixgrid .arrows,.mixgrid .eq{font-size:22px;color:var(--muted);font-weight:700}
+.mixgrid .eq{color:var(--good)}
+.sw{display:flex;gap:6px;flex-wrap:wrap}
+.dotb{width:30px;height:30px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.dotb.on{box-shadow:0 0 0 3px var(--ink)}
+.pubk{color:var(--accent);font-weight:600}.prik{color:var(--hot);font-weight:600}
+#rSteps li{grid-template-columns:28px minmax(0,1fr);overflow-wrap:anywhere}
+.tt th.v{text-align:left}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html" aria-current="page">Codes</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="codes.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/codes.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Codes &amp; encryption</b> · secrets, keys, hashes</div>
+    <h1>Hide a message in plain sight, <em>then break it.</em></h1>
+    <p class="lede">For thousands of years people have scrambled messages so only the right reader can understand them, and for just as long others have tried to break them. Today the same ideas protect every card payment, message and password. Spin a cipher wheel, crack a secret with letter counting, watch a hash explode, and share a secret in front of an eavesdropper.</p>
+    <nav class="jump" aria-label="On this page"><a href="#caesar">Caesar cipher</a><a href="#crack">Cracking it</a><a href="#vigenere">Vigenère</a><a href="#hash">Hashing</a><a href="#keys">Sharing a secret</a><a href="#rsa">Public keys</a><a href="#history">History</a></nav>
+  </header>
+
+  <!-- ============ 1. Caesar ============ -->
+  <section class="block" id="caesar" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · encrypt</span>
+      <h2 id="cH">The Caesar cipher</h2>
+      <p>Julius Caesar shifted every letter three places along the alphabet: A becomes D, B becomes E, and so on. The amount of shift is the <i>key</i>. Turn the inner wheel and type a message.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="wCv" height="300" aria-label="Cipher wheel"></canvas>
+        <div class="sl"><label for="wShift">Shift (the key) <span id="wShiftV">3</span></label><input type="range" id="wShift" min="0" max="25" value="3"></div>
+      </div>
+      <div class="panel stack">
+        <label class="lbl" for="wIn">Your message</label>
+        <textarea class="inp" id="wIn" spellcheck="false">Meet me at the old oak tree at midnight.</textarea>
+        <span class="lbl">Encrypted</span>
+        <div class="out mono" id="wOut"></div>
+        <div class="row"><button class="btn ghost" id="wSwap">Use as message</button><button class="btn ghost" id="wRot">ROT13</button></div>
+        <div class="callout"><b>How strong is it?</b>There are only 25 useful keys, so anyone can try them all in a minute. That’s a <i>brute-force attack</i>. Modern ciphers have more possible keys than there are atoms in the observable universe.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. crack ============ -->
+  <section class="block" id="crack" aria-labelledby="kH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · break</span>
+      <h2 id="kH">Crack it with letter counting</h2>
+      <p>Around 850 CE the Arab scholar al-Kindi described frequency analysis: in any long text some letters are far more common than others. In English, E is the most common. Hide the letters behind a shift and the pattern survives, just slid along. Line up the bars to find the key.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <span class="lbl">Secret message</span>
+        <div class="out mono" id="kCipher"></div>
+        <canvas class="cv" id="kCv" height="240" aria-label="Letter frequencies of the secret message compared with normal text"></canvas>
+        <div class="leg"><span><i style="background:var(--accent)"></i>Letters in the secret message</span><span><i style="background:var(--gold)"></i>Normal English, shifted by your guess</span></div>
+        <div class="sl"><label for="kGuess">Your guess for the shift <span id="kGuessV">0</span></label><input type="range" id="kGuess" min="0" max="25" value="0"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Decrypted with your guess</span>
+        <div class="out" id="kPlain"></div>
+        <div class="row"><button class="btn" id="kAuto">Let the computer try all 25</button><button class="btn ghost" id="kNew">New secret</button></div>
+        <div id="kBest" class="stack" style="gap:4px;font-size:13.5px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. Vigenère ============ -->
+  <section class="block" id="vigenere" aria-labelledby="vH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · a keyword</span>
+      <h2 id="vH">The Vigenère cipher</h2>
+      <p>Use a keyword instead of one shift: each letter of the key sets the shift for one letter of the message, repeating. The same letter can now encrypt to many different letters, which flattens the frequency pattern. It was called “the indecipherable cipher” for three centuries, until Charles Babbage and Friedrich Kasiski broke it in the 1800s.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <label class="lbl" for="vKey">Keyword</label>
+        <input class="inp" id="vKey" value="LEMON" autocomplete="off" spellcheck="false">
+        <label class="lbl" for="vIn">Message</label>
+        <textarea class="inp" id="vIn" spellcheck="false">Attack at dawn. The enemy expects us at dusk, so the element of surprise is ours.</textarea>
+        <span class="lbl">How each letter is shifted</span>
+        <div class="scrollx"><table class="tt" id="vTbl"></table></div>
+        <span class="lbl">Encrypted</span>
+        <div class="out mono" id="vOut"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Letter frequencies: same message, two ciphers</span>
+        <canvas class="cv" id="vCv" height="260" aria-label="Letter frequencies under Caesar and Vigenère"></canvas>
+        <div class="leg"><span><i style="background:var(--hot)"></i>Caesar (spiky: easy to crack)</span><span><i style="background:var(--accent)"></i>Vigenère (flatter: harder)</span></div>
+        <div class="callout"><b>The perfect cipher</b>If the key is truly random, as long as the message, and never reused, the result is a <i>one-time pad</i>. Claude Shannon proved in 1949 that it can’t be broken, even in principle. The catch is sharing all that key safely.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. hashing ============ -->
+  <section class="block" id="hash" aria-labelledby="hH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · fingerprints</span>
+      <h2 id="hH">Hashing: a one-way fingerprint</h2>
+      <p>A hash function turns any input, a word or a whole film, into a fixed-size fingerprint. SHA-256 always gives 256 bits. You can’t run it backwards, and changing a single character changes about half of the bits. That’s how sites check passwords without storing them, and how blockchains link blocks.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <label class="lbl" for="hA">Input A</label>
+        <input class="inp" id="hA" value="concepts.how" autocomplete="off" spellcheck="false">
+        <div class="out mono hex" id="hAo"></div>
+        <label class="lbl" for="hB">Input B (try changing one letter)</label>
+        <input class="inp" id="hB" value="concepts.hoW" autocomplete="off" spellcheck="false">
+        <div class="out mono hex" id="hBo"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">The 256 bits, side by side</span>
+        <canvas class="cv" id="hCv" height="190" aria-label="Bits that differ between the two hashes"></canvas>
+        <div><span class="lbl">Bits that changed</span><div class="verdict" id="hDiff"></div></div>
+        <div class="callout"><b>The avalanche effect</b>Each red square is a bit that flipped. A good hash flips about 128 of 256 for any change, so similar inputs give completely unrelated fingerprints and nobody can work backwards by trial and adjustment.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. key exchange ============ -->
+  <section class="block" id="keys" aria-labelledby="xH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · the impossible trick</span>
+      <h2 id="xH">Agree on a secret while everyone listens</h2>
+      <p>How can two strangers agree on a secret key when every message they send is overheard? In 1976 Whitfield Diffie and Martin Hellman showed how. The classic way to picture it is with paint: mixing is easy, unmixing is practically impossible.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="mixgrid" id="xMix"></div>
+      </div>
+      <div class="panel stack">
+        <div class="row" style="justify-content:space-between"><span class="lbl">Alice’s secret colour</span><div class="sw" id="xA"></div></div>
+        <div class="row" style="justify-content:space-between"><span class="lbl">Bob’s secret colour</span><div class="sw" id="xB"></div></div>
+        <span class="lbl">The real thing uses numbers</span>
+        <div class="sl"><label for="xa">Alice’s secret number a <span id="xaV">6</span></label><input type="range" id="xa" min="1" max="22" value="6"></div>
+        <div class="sl"><label for="xb">Bob’s secret number b <span id="xbV">15</span></label><input type="range" id="xb" min="1" max="22" value="15"></div>
+        <div class="out mono" id="xMath" style="font-size:13.5px;line-height:1.7"></div>
+        <div class="callout"><b>Why the eavesdropper is stuck</b>Eve sees 5, 23 and both public numbers. To get the secret she must find a from 5<sup>a</sup> mod 23. With tiny numbers that’s easy, but real systems use numbers hundreds of digits long, and no known method can do it in any reasonable time.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. RSA ============ -->
+  <section class="block" id="rsa" aria-labelledby="rH">
+    <div class="shead">
+      <span class="eyebrow">Demo 6 · public keys</span>
+      <h2 id="rH">A padlock anyone can close</h2>
+      <p>In 1977 Ron Rivest, Adi Shamir and Leonard Adleman published RSA: a <i>public</i> key that anyone can use to lock a message, and a <i>private</i> key that only you can use to open it. Its security rests on one fact: multiplying two big primes is easy, but splitting the result back into them is fiendishly hard. Here it is with tiny primes.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="row"><label class="lbl" for="rp" style="min-width:110px">Prime p</label><select id="rp"></select></div>
+        <div class="row"><label class="lbl" for="rq" style="min-width:110px">Prime q</label><select id="rq"></select></div>
+        <ol class="steps" id="rSteps"></ol>
+      </div>
+      <div class="panel stack">
+        <label class="lbl" for="rMsg">Message (letters A–Z)</label>
+        <input class="inp" id="rMsg" value="HELLO" autocomplete="off" spellcheck="false" maxlength="12">
+        <div class="scrollx"><table class="tt" id="rTbl"></table></div>
+        <p id="rNote" style="margin:0;font-size:14px"></p>
+        <div class="callout"><b>Real keys</b>Real RSA uses primes over 300 digits long, so n has more than 600 digits. Your browser uses public-key cryptography like this every time you see the padlock next to a web address.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ cards ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Key ideas</span>
+      <h2 id="iH">The rules of the secret game</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+  <section class="block" id="history" aria-labelledby="hiH">
+    <div class="shead">
+      <span class="eyebrow">History</span>
+      <h2 id="hiH">From wax tablets to quantum computers</h2>
+    </div>
+    <div class="cards" id="histGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Simon Singh, <i>The Code Book</i> (1999)</li>
+    <li>Whitfield Diffie and Martin Hellman, “New Directions in Cryptography,” <i>IEEE Transactions on Information Theory</i> (1976)</li>
+    <li>Rivest, Shamir and Adleman, “A Method for Obtaining Digital Signatures and Public-Key Cryptosystems” (1978)</li>
+    <li>NIST, post-quantum cryptography standards FIPS 203, 204 and 205 (2024)</li>
+  </ul>
+  <p>The demos are for learning only. Never use a Caesar cipher, Vigenère or tiny-prime RSA to protect anything real.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+const AB="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toUpperCase();
+const shiftCh=(ch,k)=>{const i=AB.indexOf(ch);return i<0?ch:AB[(i+k+2600)%26]};
+const caesar=(s,k)=>[...norm(s)].map(ch=>shiftCh(ch,k)).join("");
+// letter frequencies of normal text (percent)
+const FREQ=[8.2,1.5,2.8,4.3,12.7,2.2,2.0,6.1,7.0,0.15,0.77,4.0,2.4,6.7,7.5,1.9,0.095,6.0,6.3,9.1,2.8,0.98,2.4,0.15,2.0,0.074];
+const counts=s=>{const c=new Array(26).fill(0);for(const ch of norm(s)){const i=AB.indexOf(ch);if(i>=0)c[i]++}return c};
+function bars(c,W,H,sets,opts={}){const L=6,R=W-6,T=8,B=H-20,bw=(R-L)/26;const mx=Math.max(...sets.flatMap(s=>s.v),1);
+  c.fillStyle=css("--muted");c.font="10px "+css("--mono");c.textAlign="center";for(let i=0;i<26;i++)c.fillText(AB[i],L+bw*(i+.5),H-6);
+  sets.forEach((s,si)=>{c.fillStyle=s.col;c.globalAlpha=s.a||1;s.v.forEach((v,i)=>{const h=(B-T)*v/mx;const w=sets.length>1&&!s.line?bw/sets.length-1:bw-2;const x=L+bw*i+(sets.length>1&&!s.line?si*(bw/sets.length):1);
+    if(s.line){c.globalAlpha=1;c.strokeStyle=s.col;c.lineWidth=2;c.strokeRect(L+bw*i+2,B-h,bw-4,h)}else c.fillRect(x,B-h,Math.max(1,w),h)})});c.globalAlpha=1;c.lineWidth=1}
+
+/* ================= 1. wheel ================= */
+function drawWheel(){const k=+$("#wShift").value;$("#wShiftV").textContent=k;const{c,W,H}=setupCanvas($("#wCv"));
+  const cx=W/2,cy=H/2,R1=Math.min(W,H)/2-8,R2=R1-34,R3=R2-34;const ink=css("--ink"),acc=css("--accent"),card=css("--card"),line=css("--line"),hot=css("--hot"),muted=css("--muted");
+  c.fillStyle=card;c.strokeStyle=line;c.beginPath();c.arc(cx,cy,R1,0,7);c.fill();c.stroke();
+  c.fillStyle=css("--accent-soft")||card;c.beginPath();c.arc(cx,cy,R2,0,7);c.fill();c.stroke();
+  c.fillStyle=card;c.beginPath();c.arc(cx,cy,R3,0,7);c.fill();c.stroke();
+  c.textAlign="center";c.textBaseline="middle";
+  for(let i=0;i<26;i++){const a=-Math.PI/2+i*2*Math.PI/26;
+    c.font="600 15px "+css("--mono");c.fillStyle=i===0?hot:ink;c.fillText(AB[i],cx+Math.cos(a)*(R1-17),cy+Math.sin(a)*(R1-17));
+    c.fillStyle=i===0?hot:acc;c.fillText(AB[(i+k)%26],cx+Math.cos(a)*(R2-17),cy+Math.sin(a)*(R2-17));
+    c.strokeStyle=line;c.beginPath();c.moveTo(cx+Math.cos(a-Math.PI/26)*R3,cy+Math.sin(a-Math.PI/26)*R3);c.lineTo(cx+Math.cos(a-Math.PI/26)*R1,cy+Math.sin(a-Math.PI/26)*R1);c.stroke()}
+  c.fillStyle=ink;c.font="700 "+Math.round(R3*.5)+"px "+css("--display");c.fillText("+"+k,cx,cy-6);c.fillStyle=muted;c.font="11px "+css("--mono");c.fillText(`A → ${AB[k]}`,cx,cy+R3*.38);
+  $("#wOut").textContent=caesar($("#wIn").value,k)}
+$("#wShift").oninput=drawWheel;$("#wIn").oninput=drawWheel;
+$("#wSwap").onclick=()=>{$("#wIn").value=$("#wOut").textContent;$("#wShift").value=(26-+$("#wShift").value)%26;drawWheel()};
+$("#wRot").onclick=()=>{$("#wShift").value=13;drawWheel()};
+
+/* ================= 2. crack ================= */
+const SECRETS=["In cryptography a cipher is a method for hiding the meaning of a message. Frequency analysis works because in any language some letters appear far more often than others, so the most common letter in a long secret message is probably a disguised E.","The secret meeting has been moved to the library on Thursday evening. Please bring the notebook with the green cover and tell nobody else where we are going.","Mathematicians and spies have always been close friends. During the Second World War, codebreakers at Bletchley Park read thousands of enemy messages every day."];
+const K={plain:"",key:0,cipher:"",i:0};
+function kNew(){K.i=(K.i+1)%SECRETS.length;K.plain=SECRETS[K.i];K.key=1+Math.floor(Math.random()*25);K.cipher=caesar(K.plain,K.key);$("#kCipher").textContent=K.cipher;$("#kGuess").value=0;$("#kBest").innerHTML="";kDraw()}
+function chi(c,k){const n=c.reduce((a,b)=>a+b,0);let s=0;for(let i=0;i<26;i++){const e=FREQ[(i-k+26)%26]/100*n;s+=(c[i]-e)**2/(e||.01)}return s}
+function kDraw(){const g=+$("#kGuess").value;$("#kGuessV").textContent=g;const{c,W,H}=setupCanvas($("#kCv"));const cnt=counts(K.cipher),n=cnt.reduce((a,b)=>a+b,0);
+  const exp=AB.split("").map((_,i)=>FREQ[(i-g+26)%26]/100*n);bars(c,W,H,[{v:cnt,col:css("--accent")},{v:exp,col:css("--gold"),line:true}]);
+  const dec=caesar(K.cipher,-g);$("#kPlain").textContent=dec;$("#kPlain").classList.toggle("win",g===K.key)}
+$("#kGuess").oninput=kDraw;$("#kNew").onclick=kNew;
+$("#kAuto").onclick=()=>{const cnt=counts(K.cipher);const sc=[...Array(26).keys()].slice(1).map(k=>({k,s:chi(cnt,k)})).sort((a,b)=>a.s-b.s);
+  $("#kBest").innerHTML=`<span class="lbl">Best fits (lower score = more like normal text)</span>`+sc.slice(0,5).map((x,i)=>`<div class="fit${i===0?" top":""}"><b class="mono">shift ${x.k}</b><span class="mono">score ${Math.round(x.s)}</span><span>${esc(caesar(K.cipher,-x.k).slice(0,26))}…</span></div>`).join("");
+  $("#kGuess").value=sc[0].k;kDraw()};
+
+/* ================= 3. Vigenère ================= */
+function vig(s,key){const kk=[...norm(key)].filter(ch=>AB.includes(ch));if(!kk.length)return{out:norm(s),rows:[]};let j=0;const rows=[];
+  const out=[...norm(s)].map(ch=>{const i=AB.indexOf(ch);if(i<0)return ch;const kc=kk[j%kk.length];const sh=AB.indexOf(kc);j++;const o=AB[(i+sh)%26];if(rows.length<24)rows.push([ch,kc,sh,o]);return o}).join("");return{out,rows}}
+function vDraw(){const{out,rows}=vig($("#vIn").value,$("#vKey").value);$("#vOut").textContent=out;
+  $("#vTbl").innerHTML=`<tr><th class="v">Message</th>${rows.map(r=>`<td>${r[0]}</td>`).join("")}</tr><tr><th class="v">Key</th>${rows.map(r=>`<td style="color:var(--gold)">${r[1]}</td>`).join("")}</tr><tr><th class="v">Shift</th>${rows.map(r=>`<td style="color:var(--muted)">+${r[2]}</td>`).join("")}</tr><tr><th class="v">Result</th>${rows.map(r=>`<td style="color:var(--accent);font-weight:700">${r[3]}</td>`).join("")}</tr>`;
+  const{c,W,H}=setupCanvas($("#vCv"));const msg=$("#vIn").value+" "+SECRETS.join(" ");const a=counts(caesar(msg,3)),b=counts(vig(msg,$("#vKey").value).out);
+  bars(c,W,H,[{v:a,col:css("--hot")},{v:b,col:css("--accent")}])}
+$("#vIn").oninput=vDraw;$("#vKey").oninput=vDraw;
+
+/* ================= 4. hash ================= */
+function sha256(msg){const K=[],H=[];let n=2,c=0;const frac=x=>(x-Math.floor(x))*4294967296|0;
+ while(c<64){let p=true;for(let f=2;f*f<=n;f++)if(n%f===0){p=false;break}if(p){if(c<8)H[c]=frac(Math.pow(n,1/2));K[c]=frac(Math.pow(n,1/3));c++}n++}
+ const l=msg.length,bl=((l+9+63)>>6)<<6;const b=new Uint8Array(bl);b.set(msg);b[l]=0x80;const dv=new DataView(b.buffer);dv.setUint32(bl-4,(l*8)>>>0);dv.setUint32(bl-8,Math.floor(l*8/4294967296));
+ const w=new Int32Array(64);let h=H.slice();
+ for(let i=0;i<bl;i+=64){for(let t=0;t<16;t++)w[t]=dv.getInt32(i+t*4);
+  for(let t=16;t<64;t++){const a=w[t-15],b2=w[t-2];const s0=(a>>>7|a<<25)^(a>>>18|a<<14)^(a>>>3);const s1=(b2>>>17|b2<<15)^(b2>>>19|b2<<13)^(b2>>>10);w[t]=(w[t-16]+s0+w[t-7]+s1)|0}
+  let [A,B,C,D,E,F,G,Hh]=h;
+  for(let t=0;t<64;t++){const S1=(E>>>6|E<<26)^(E>>>11|E<<21)^(E>>>25|E<<7);const ch=(E&F)^(~E&G);const t1=(Hh+S1+ch+K[t]+w[t])|0;const S0=(A>>>2|A<<30)^(A>>>13|A<<19)^(A>>>22|A<<10);const maj=(A&B)^(A&C)^(B&C);const t2=(S0+maj)|0;Hh=G;G=F;F=E;E=(D+t1)|0;D=C;C=B;B=A;A=(t1+t2)|0}
+  h=[A,B,C,D,E,F,G,Hh].map((v,k)=>(v+h[k])|0)}
+ return h.map(v=>(v>>>0).toString(16).padStart(8,"0")).join("")}
+const bits=hex=>[...hex].flatMap(d=>parseInt(d,16).toString(2).padStart(4,"0").split("").map(Number));
+function hDraw(){const enc=new TextEncoder();const a=sha256(enc.encode($("#hA").value)),b=sha256(enc.encode($("#hB").value));
+  const A=bits(a),B=bits(b);let diff=0;A.forEach((v,i)=>{if(v!==B[i])diff++});
+  const mark=(x,y)=>[...x].map((ch,i)=>ch===y[i]?ch:`<mark>${ch}</mark>`).join("");
+  $("#hAo").innerHTML=a;$("#hBo").innerHTML=mark(b,a);$("#hDiff").textContent=`${diff} of 256`;$("#hDiff").className="verdict "+(diff?"no":"ok");
+  const{c,W,H}=setupCanvas($("#hCv"));const gap=14,half=(W-gap)/2,cs=Math.min(half/16,(H-4)/16),ox=(W-(cs*32+gap))/2,oy=(H-cs*16)/2;
+  const ink=css("--ink"),line=css("--line"),hot=css("--hot"),acc=css("--accent");
+  [A,B].forEach((arr,k)=>{const x0=ox+k*(cs*16+gap);arr.forEach((v,i)=>{const x=x0+(i%16)*cs,y=oy+Math.floor(i/16)*cs;c.fillStyle=k===1&&v!==A[i]?hot:v?acc:line;c.globalAlpha=k===1&&v!==A[i]?1:v?.8:.5;c.fillRect(x+.5,y+.5,cs-1,cs-1)})});c.globalAlpha=1}
+$("#hA").oninput=hDraw;$("#hB").oninput=hDraw;
+
+/* ================= 5. key exchange ================= */
+const PAINT=[["#E4572E","red"],["#1D47F0","blue"],["#1E8A5A","green"],["#8B5CF6","purple"],["#0EA5A4","teal"],["#111827","black"]];
+const PUB="#F2C14E";const X={a:0,b:3};
+const hex2=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));const toHex=a=>"#"+a.map(v=>Math.round(v).toString(16).padStart(2,"0")).join("");
+const mix=(...cs)=>toHex([0,1,2].map(k=>cs.reduce((s,c)=>s+hex2(c)[k],0)/cs.length));
+function xSw(id,key){$(id).innerHTML=PAINT.map((p,i)=>`<button class="dotb${X[key]===i?" on":""}" style="background:${p[0]}" data-i="${i}" aria-label="${p[1]}"></button>`).join("");$(id).querySelectorAll("button").forEach(b=>b.onclick=()=>{X[key]=+b.dataset.i;xDraw()})}
+function xDraw(){xSw("#xA","a");xSw("#xB","b");const a=PAINT[X.a][0],b=PAINT[X.b][0];const am=mix(PUB,a),bm=mix(PUB,b),sa=mix(PUB,a,b);
+  const blob=(col,l,sub,cls="")=>`<div class="blob ${cls}"><i style="background:${col}"></i><b>${l}</b><small>${sub}</small></div>`;
+  $("#xMix").innerHTML=`<div class="who2">Alice</div><div class="who2 mid">Public</div><div class="who2">Bob</div>
+  ${blob(a,"Secret","only Alice","sec")}${blob(PUB,"Shared paint","everyone sees")}${blob(b,"Secret","only Bob","sec")}
+  ${blob(am,"Alice’s mix","sent in public")}<div class="arrows">⇄</div>${blob(bm,"Bob’s mix","sent in public")}
+  ${blob(sa,"+ her secret","Alice’s result","fin")}<div class="eq">=</div>${blob(sa,"+ his secret","Bob’s result","fin")}`;
+  const p=23,g=5,A_=+$("#xa").value,B_=+$("#xb").value;$("#xaV").textContent=A_;$("#xbV").textContent=B_;
+  const mp=(b,e,m)=>{let r=1;for(let i=0;i<e;i++)r=r*b%m;return r};const Ap=mp(g,A_,p),Bp=mp(g,B_,p),s1=mp(Bp,A_,p),s2=mp(Ap,B_,p);
+  $("#xMath").innerHTML=`Public: g = 5, p = 23<br>Alice sends 5<sup>${A_}</sup> mod 23 = <b>${Ap}</b><br>Bob sends 5<sup>${B_}</sup> mod 23 = <b>${Bp}</b><br>Alice: ${Bp}<sup>${A_}</sup> mod 23 = <b style="color:var(--good)">${s1}</b><br>Bob: ${Ap}<sup>${B_}</sup> mod 23 = <b style="color:var(--good)">${s2}</b> ← shared secret`}
+$("#xa").oninput=xDraw;$("#xb").oninput=xDraw;
+
+/* ================= 6. RSA ================= */
+const PRIMES=[11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
+["#rp","#rq"].forEach((id,k)=>{$(id).innerHTML=PRIMES.map(p=>`<option${p===(k?53:61)?" selected":""}>${p}</option>`).join("");$(id).onchange=rDraw});
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+function modinv(a,m){let[o,r]=[a,m],[s,t]=[1n,0n];a=BigInt(a);m=BigInt(m);let r0=a,r1=m,s0=1n,s1=0n;while(r1){const q=r0/r1;[r0,r1]=[r1,r0-q*r1];[s0,s1]=[s1,s0-q*s1]}return((s0%m)+m)%m}
+function mpow(b,e,m){b=BigInt(b);e=BigInt(e);m=BigInt(m);let r=1n;b%=m;while(e>0n){if(e&1n)r=r*b%m;b=b*b%m;e>>=1n}return r}
+function rDraw(){let p=+$("#rp").value,q=+$("#rq").value;const st=$("#rSteps");
+  if(p===q){st.innerHTML=`<li>p and q must be different primes. Pick another.</li>`;$("#rTbl").innerHTML="";$("#rNote").textContent="";return}
+  const n=p*q,phi=(p-1)*(q-1);const e=[17,3,5,7,11,13,19,23,29,31,37].find(x=>gcd(x,phi)===1&&x<phi);const d=Number(modinv(e,phi));
+  st.innerHTML=[`Multiply the primes: n = ${p} × ${q} = <b>${n}</b>`,`Count the numbers that share no factor with n: φ = (${p}−1)(${q}−1) = <b>${phi}</b>`,`Pick e with no common factor with φ: <b>e = ${e}</b>`,`Find d so that e × d leaves remainder 1 when divided by φ: <b>d = ${d}</b> (check: ${e} × ${d} = ${e*d} = ${Math.floor(e*d/phi)} × ${phi} + 1)`,`<span class="pubk">Public key: (n = ${n}, e = ${e})</span> · <span class="prik">Private key: d = ${d}</span>`].map(s=>`<li style="animation:none">${s}</li>`).join("");
+  const letters=[...norm($("#rMsg").value)].filter(ch=>AB.includes(ch));
+  const rows=letters.map(ch=>{const m=AB.indexOf(ch)+1;const c=mpow(m,e,n);const back=mpow(c,d,n);return[ch,m,c,back,AB[Number(back)-1]]});
+  $("#rTbl").innerHTML=`<tr><th class="v">Letter</th>${rows.map(r=>`<td>${r[0]}</td>`).join("")}</tr><tr><th class="v">Number m</th>${rows.map(r=>`<td>${r[1]}</td>`).join("")}</tr><tr><th class="v">Locked: m<sup>e</sup> mod n</th>${rows.map(r=>`<td style="color:var(--hot);font-weight:700">${r[2]}</td>`).join("")}</tr><tr><th class="v">Unlocked: c<sup>d</sup> mod n</th>${rows.map(r=>`<td>${r[3]}</td>`).join("")}</tr><tr><th class="v">Letter</th>${rows.map(r=>`<td style="color:var(--good);font-weight:700">${r[4]}</td>`).join("")}</tr>`;
+  $("#rNote").innerHTML=`Anyone can lock with (${n}, ${e}). Only d = ${d} unlocks. To find d, an attacker must split ${n} back into ${p} × ${q}. Easy here, but impossible in practice for numbers 600 digits long.`}
+$("#rMsg").oninput=rDraw;
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Code or cipher?","A code swaps whole words or phrases for other symbols using a codebook. A cipher scrambles individual letters or bits using a rule and a key. Navajo code talkers in World War II used a code; Enigma was a cipher."],
+ ["Kerckhoffs’s principle","In 1883 Auguste Kerckhoffs argued that a system should stay secure even if the enemy knows exactly how it works. Only the key should be secret. Every modern cipher is public."],
+ ["Symmetric vs public key","Symmetric ciphers like AES use one key to lock and unlock, and are very fast. Public-key systems like RSA use a pair of keys. Real systems use public keys to agree on a symmetric key, then switch to it."],
+ ["Hashing is not encryption","Encryption can be reversed with the key; a hash can’t be reversed at all. Sites should store password hashes, with a random “salt” added so identical passwords look different."],
+ ["Brute force","Trying every possible key. A 128-bit key has about 3.4 × 10³⁸ possibilities. Trying a trillion per second would take far longer than the age of the universe."],
+ ["The quantum threat","In 1994 Peter Shor showed that a large quantum computer could split big numbers quickly, which would break RSA. In 2024 NIST published its first post-quantum standards designed to resist that."]
+];
+const HIST=[
+ ["The scytale","c. 400 BCE","Spartans wrapped a strip of leather around a rod and wrote along it. Unwound, the letters were jumbled; only a rod of the same thickness made them readable again."],
+ ["Al-Kindi","c. 850","In Baghdad, al-Kindi wrote the first known description of frequency analysis, ending the reign of simple substitution ciphers."],
+ ["The “indecipherable” cipher","1553","Giovan Battista Bellaso described the keyword cipher later credited to Blaise de Vigenère. It resisted attack until the 1800s."],
+ ["Enigma and Bletchley Park","1939–45","Polish mathematicians first broke Enigma in the 1930s. At Bletchley Park, Alan Turing and thousands of colleagues read German messages daily, which historians believe shortened the war."],
+ ["Public-key cryptography","1976–77","Diffie and Hellman showed how to share a secret in public; RSA followed a year later. Britain’s GCHQ had found similar ideas in secret in the early 1970s, revealed only in 1997."],
+ ["The padlock","Today","Every HTTPS connection combines key exchange, public-key signatures, a symmetric cipher such as AES and hashing. It all happens in a fraction of a second when a page loads."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3></div><p>${a[1]}</p></article>`).join("");
+$("#histGrid").innerHTML=HIST.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3><span class="yr">${a[1]}</span></div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+K.i=-1;kNew();drawWheel();vDraw();hDraw();xDraw();rDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{drawWheel();kDraw();vDraw();hDraw()},120)});
+addEventListener("themechange",()=>{drawWheel();kDraw();vDraw();hDraw()});
+</script>
+</body>
+</html>

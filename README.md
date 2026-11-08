@@ -17,6 +17,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Game theory | `gametheory.html` | Play the prisoner’s dilemma, Axelrod tournament with evolution, Nowak–May spatial game, Nash equilibrium explorer, guess ⅔ of the average |
 | Logic | `logic.html` | Operators with Venn diagrams, truth table builder, argument validity checker, five proofs with a picture proof, full-adder logic gates, knights and knaves, 28 fallacies with a quiz |
 | Probability | `probability.html` | Monty Hall with N doors and 1,000-game simulation, birthday paradox curve and random rooms, animated Galton board, coin-flip law of large numbers, Bayes medical-test grid |
+| Codes & encryption | `codes.html` | Caesar wheel, frequency-analysis cracker, Vigenère with flattened frequencies, SHA-256 avalanche, Diffie–Hellman paint mixing and numbers, toy RSA |
 
 ## Spanish
 
