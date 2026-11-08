@@ -19,6 +19,14 @@
       dimensions: ["A cookie in 3D", "A four-dimensional being could peek without asking. We won’t: analytics cookies only switch on if you accept."],
       universe: ["A very small object", "Each analytics cookie is a few dozen bytes in a very big universe. They help us see which pages get used, and only switch on if you accept."],
       gametheory: ["Your move", "Accept and analytics cookies help us see which pages get used. Decline and nothing switches on. No dilemma: both choices are fine with us."],
+      probability: ["What are the odds?", "Accept and analytics cookies help us see which pages get used. Decline and the chance they switch on is exactly 0%."],
+      codes: ["Nothing encrypted here", "In plain text: analytics cookies help us see which pages get used, and they only switch on if you accept."],
+      infinity: ["A finite request", "Analytics cookies help us see which pages get used. Not infinitely many, just one small yes or no, and they only switch on if you accept."],
+      language: ["Cookie (n.)", "A small file that helps us see which pages get used. Our analytics cookies only switch on if you accept. Not to be confused with galleta."],
+      maps: ["You are here", "Analytics cookies help us see which pages get used, not where you are. They only switch on if you accept."],
+      money: ["Free, no interest", "Analytics cookies cost you nothing and help us see which pages get used. They only switch on if you accept."],
+      light: ["Shedding some light", "Analytics cookies help us see which pages get used. They stay dark unless you accept."],
+      disclaimer: ["The small print", "We use analytics cookies to see which pages get used. They only switch on if you accept, and you can change your mind any time."],
       logic: ["If accept, then cookies", "Accept → analytics cookies help us see which pages get used. ¬Accept → ¬cookies. That’s the whole truth table."]
     },
     es: {
@@ -31,6 +39,14 @@
       dimensions: ["Una cookie en 3D", "Un ser de cuatro dimensiones podría espiar sin pedir permiso. Nosotros no: las cookies de analítica solo se activan si las aceptas."],
       universe: ["Un objeto muy pequeño", "Cada cookie de analítica ocupa unas decenas de bytes en un universo enorme. Nos ayudan a ver qué páginas se usan y solo se activan si las aceptas."],
       gametheory: ["Te toca", "Si aceptas, las cookies de analítica nos ayudan a ver qué páginas se usan. Si rechazas, no se activa nada. Sin dilema: las dos opciones nos parecen bien."],
+      probability: ["¿Qué probabilidades hay?", "Si aceptas, las cookies de analítica nos ayudan a ver qué páginas se usan. Si rechazas, la probabilidad de que se activen es exactamente del 0 %."],
+      codes: ["Aquí no hay nada cifrado", "En texto claro: las cookies de analítica nos ayudan a ver qué páginas se usan, y solo se activan si las aceptas."],
+      infinity: ["Una petición finita", "Las cookies de analítica nos ayudan a ver qué páginas se usan. No infinitas: solo un pequeño sí o no, y solo se activan si las aceptas."],
+      language: ["Cookie (s.)", "Un pequeño archivo que nos ayuda a ver qué páginas se usan. Nuestras cookies de analítica solo se activan si las aceptas. No confundir con galleta."],
+      maps: ["Usted está aquí", "Las cookies de analítica nos ayudan a ver qué páginas se usan, no dónde estás. Solo se activan si las aceptas."],
+      money: ["Gratis y sin intereses", "Las cookies de analítica no te cuestan nada y nos ayudan a ver qué páginas se usan. Solo se activan si las aceptas."],
+      light: ["Arrojando algo de luz", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan a oscuras a menos que las aceptes."],
+      disclaimer: ["La letra pequeña", "Usamos cookies de analítica para ver qué páginas se usan. Solo se activan si las aceptas, y puedes cambiar de opinión cuando quieras."],
       logic: ["Si aceptas, entonces cookies", "Aceptar → las cookies de analítica nos ayudan a ver qué páginas se usan. ¬Aceptar → ¬cookies. Esa es toda la tabla de verdad."]
     }
   };

@@ -48,6 +48,10 @@ npx serve .
 
 Works as-is on Vercel, Netlify or GitHub Pages. No framework or build command; the output directory is the repo root.
 
+## Navigation
+
+Topic links in each page’s header are folded by `theme.js` into a **Topics** button (⋮ on phones) that opens a grid grouped by subject: Maths & logic, Physics & space, People & society, Tech & measurement. To add a page to a group, add its slug to `GROUPS` in `theme.js`. On phones the language and theme switches also move into that menu.
+
 ## Disclaimer
 
 `disclaimer.html` (and `es/disclaimer.html`, “Aviso legal”) covers as-is use, no professional advice, demos, limitation of liability, sources, privacy and cookies (with a button that reopens the cookie banner), content and trademarks, translations and changes. Each page’s footer links to it.
