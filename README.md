@@ -27,6 +27,8 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Biases & the mind | `mind.html` | Adjustable Müller-Lyer/Ebbinghaus/Ponzo illusions, Cognitive Reflection Test, reaction timer, Stroop test, digit span, 22-bias field guide |
 | Music & sound | `music.html` | Live synth with oscilloscope, harmonic builder with instrument presets, playable keyboard with interval ratios, beats, Doppler/Mach-cone animation, hearing-range tones and decibel scale |
 | Evolution | `evolution.html` | Be-the-bird peppered moth selection, Wright–Fisher genetic drift, Dawkins weasel (cumulative selection vs chance), antibiotic resistance colony, tree of life with divergence dates |
+| Internet & networks | `internet.html` | Packet-switching network with breakable routers and TCP resends, protocol layers as nested envelopes, step-by-step DNS lookup, fibre latency between cities on a world map, IPv4 bit decoder and IPv6 scale |
+| Radio & wireless | `wireless.html` | Log-scale radio spectrum explorer with wavelength and antenna size, Wi-Fi wall heat map at 2.4/5/28 GHz, range vs speed comparison (NFC to GPS), ASK/FSK/PSK and QAM constellation with noise, GPS-style trilateration with timing error |
 
 ## Spanish
 

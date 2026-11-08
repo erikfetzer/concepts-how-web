@@ -63,8 +63,8 @@
   var es = (document.documentElement.lang || "").slice(0, 2) === "es";
   var L = es ? { btn: "Temas", menu: "Todos los temas", set: "Idioma y tema" } : { btn: "Topics", menu: "All topics", set: "Language & theme" };
   var GROUPS = es
-    ? [["Matemáticas y lógica", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Física y espacio", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Vida y mente", ["evolution", "mind"]], ["Sociedad", ["voting", "money", "language", "maps"]], ["Tecnología y medida", ["blockchain", "codes", "units"]]]
-    : [["Maths & logic", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Physics & space", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Life & mind", ["evolution", "mind"]], ["People & society", ["voting", "money", "language", "maps"]], ["Tech & measurement", ["blockchain", "codes", "units"]]];
+    ? [["Matemáticas y lógica", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Física y espacio", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Vida y mente", ["evolution", "mind"]], ["Sociedad", ["voting", "money", "language", "maps"]], ["Tecnología y medida", ["internet", "wireless", "blockchain", "codes", "units"]]]
+    : [["Maths & logic", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Physics & space", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Life & mind", ["evolution", "mind"]], ["People & society", ["voting", "money", "language", "maps"]], ["Tech & measurement", ["internet", "wireless", "blockchain", "codes", "units"]]];
   var SM = 640;
   var css = ".site{position:relative}.site a.nl{display:none!important}.site .ctl{margin-left:auto}.site .wrap{flex-wrap:nowrap;padding-bottom:0}" +
     ".kb{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer;font:600 14px/1 var(--body,system-ui)}" +

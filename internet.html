@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internet & networks · concepts.how</title>
+<meta name="description" content="Send packets through a network and break routers, unwrap the layers of a web request, follow a DNS lookup, race light between cities and decode IP addresses.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/internet">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/internet">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Internet & networks · concepts.how">
+<meta property="og:description" content="Send packets through a network and break routers, unwrap the layers of a web request, follow a DNS lookup, race light between cities and decode IP addresses.">
+<meta property="og:url" content="https://concepts.how/internet">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Internet & networks · concepts.how">
+<meta name="twitter:description" content="Send packets through a network and break routers, unwrap the layers of a web request, follow a DNS lookup, race light between cities and decode IP addresses.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+.row2{display:flex;flex-wrap:wrap;gap:8px}
+.ghostb{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.ghostb[aria-pressed=true]{border-color:var(--accent)!important;color:var(--accent)!important}
+.k2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.note{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.note b{color:var(--ink)}
+.wrapseg{flex-wrap:wrap}
+.txt{width:100%;box-sizing:border-box;font:500 15px var(--mono);padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.v.sm{font-size:14px;line-height:1.35;word-break:break-word}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* internet */
+#pCv{touch-action:manipulation;cursor:pointer}
+.slots{display:flex;flex-wrap:wrap;gap:6px}
+.slot{border:1px dashed var(--line);border-radius:8px;padding:4px 7px;display:grid;gap:1px;min-width:46px;font-family:var(--mono)}
+.slot i{font-style:normal;font-size:10px;color:var(--muted)}.slot span{font-size:14px;color:var(--muted)}
+.slot.ok{border-style:solid;border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}.slot.ok span{color:var(--ink);font-weight:600}
+.nest{display:flex}
+.env{flex:1;border:2px solid color-mix(in srgb,var(--accent) calc(30% + var(--d)*12%),var(--line));border-radius:14px;padding:30px 10px 10px;position:relative;cursor:pointer;display:flex;flex-direction:column;background:color-mix(in srgb,var(--accent) calc(var(--d)*3%),transparent);transition:background .2s}
+.env>.lab{position:absolute;top:8px;left:12px;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.env.on{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 10%,transparent)}.env.on>.lab{color:var(--hot)}
+.core{display:block;padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-weight:600;text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{font:500 13px var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--card)}
+.steps{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;line-height:1.45}
+.bits{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.byte{border-top:4px solid var(--c);background:var(--card);border-radius:8px;padding:8px 6px;text-align:center;display:grid;gap:3px;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.byte b{font:600 18px var(--mono)}.byte span{font:12px var(--mono);color:var(--muted)}
+.bits .bad{grid-column:1/-1;color:var(--hot);font-size:14px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cmp>div{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:4px;background:var(--card)}
+.cmp b{font:600 18px var(--mono)}.cmp span{font-size:13px;color:var(--muted)}
+@media (max-width:420px){.byte span{font-size:10px}.byte b{font-size:16px}.cmp{grid-template-columns:1fr}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html">Maps</a>
+    <a class="nl" href="money.html">Money</a>
+    <a class="nl" href="light.html">Light & color</a>
+    <a class="nl" href="algorithms.html">Algorithms</a>
+    <a class="nl" href="mind.html">Biases & the mind</a>
+    <a class="nl" href="music.html">Music & sound</a>
+    <a class="nl" href="evolution.html">Evolution</a>
+    <a class="nl" href="internet.html" aria-current="page">Internet</a>
+    <a class="nl" href="wireless.html">Wireless</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="internet.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/internet.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Internet &amp; networks</b> · how data finds its way</div>
+    <h1>The internet is <em>a giant game of pass-the-parcel.</em></h1>
+    <p class="lede">When you open a web page, your request is chopped into small packets that hop from router to router, sometimes by different routes, and get put back together at the other end. Nobody controls the whole thing: it works because billions of devices follow the same shared rules, called protocols. Send packets, unwrap the layers, follow a name lookup and race light around the planet.</p>
+    <nav class="jump" aria-label="On this page"><a href="#packets">Packets</a><a href="#layers">Layers</a><a href="#dns">Names</a><a href="#latency">Distance</a><a href="#ip">Addresses</a><a href="#ideas">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. packets ============ -->
+  <section class="block" id="packets" aria-labelledby="pH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · packet switching</span>
+      <h2 id="pH">Chop it up, send it, glue it back</h2>
+      <p>Your message is split into numbered packets. Each router passes a packet to whichever neighbour looks best at that moment, so packets can take different paths and arrive out of order. The numbers let the receiver rebuild the message. Tap a router to break it and watch traffic flow around it. Turn on packet loss and TCP, the delivery protocol, notices what’s missing and sends it again.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="pCv" height="300" aria-label="Network of routers carrying packets from your device to a server. Tap a router to break it."></canvas>
+        <div class="sl"><label for="pMsg">Message</label><input type="text" id="pMsg" maxlength="40" value="HELLO ZARA, THIS CAME IN PIECES!" class="txt"></div>
+        <div class="row2"><button class="btn" id="pSend">▶ Send</button><button class="btn ghostb" id="pLoss" aria-pressed="false">Packet loss: off</button><button class="btn ghostb" id="pFix">Fix all routers</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="k2">What the server has received</div>
+        <div class="slots" id="pSlots"></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Packets sent</div><div class="v" id="pSent"></div></div>
+          <div class="ro"><div class="k">Lost and resent</div><div class="v" id="pLost"></div></div>
+          <div class="ro"><div class="k">Arrival order</div><div class="v sm" id="pOrder"></div></div>
+        </div>
+        <div class="callout"><b>Built to survive</b>In the 1960s Paul Baran in the US and Donald Davies in the UK independently came up with packet switching. A network with many possible routes and no central switch keeps working when parts of it fail.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. layers ============ -->
+  <section class="block" id="layers" aria-labelledby="lH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · envelopes inside envelopes</span>
+      <h2 id="lH">The layers of a request</h2>
+      <p>Networking is split into layers, each with one job. Your browser writes the request; each layer below wraps it in its own envelope with the information it needs, like a letter put in a box put in a lorry. The receiver unwraps them in reverse. Tap a layer to see its envelope.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="nest" id="lNest"></div>
+      </div>
+      <div class="panel stack">
+        <div class="k2" id="lName"></div>
+        <p class="note" id="lTxt"></p>
+        <div class="chips" id="lHdr"></div>
+        <div class="callout"><b>Why layers?</b>Each layer only talks to the ones next to it. That’s why the same web page works over Wi-Fi, a phone network or a cable: swap the bottom layer and nothing above it needs to change.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. DNS ============ -->
+  <section class="block" id="dns" aria-labelledby="dH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · the internet’s phone book</span>
+      <h2 id="dH">Turning names into numbers</h2>
+      <p>Computers find each other by number, not by name. The Domain Name System (DNS) translates a name like concepts.how into an IP address by asking a chain of servers, from the top of the tree down. Answers are remembered for a while, so the second lookup is almost instant.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="sl"><label for="dIn">Website name</label><input type="text" id="dIn" value="concepts.how" class="txt" maxlength="40"></div>
+        <canvas class="cv" id="dCv" height="280" aria-label="Messages between your device and DNS servers"></canvas>
+        <div class="row2"><button class="btn" id="dGo">▶ Look it up</button><button class="btn ghostb" id="dClr">Forget cached answers</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Answer</div><div class="v sm" id="dIp">—</div></div>
+          <div class="ro"><div class="k">Time taken</div><div class="v" id="dMs">—</div></div>
+        </div>
+        <ol class="steps" id="dSteps"></ol>
+        <div class="callout"><b>Thirteen names, many copies</b>The top of the tree is the root zone, served under 13 names (a.root-servers.net to m.root-servers.net). Each name is really hundreds of identical copies spread around the world, more than 1,500 in total.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. latency ============ -->
+  <section class="block" id="latency" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · the speed limit</span>
+      <h2 id="tH">Even light is too slow</h2>
+      <p>Data travels through glass fibre at about two-thirds of the speed of light, roughly 200,000 km per second. That sounds instant, but a web page needs several back-and-forth trips before anything appears: find the address, connect, agree on encryption, then ask for the page. Pick two cities and see how distance adds up.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="tCv" height="260" aria-label="World map with the route between the two cities"></canvas>
+        <div class="two"><div class="sl"><label for="tA">From</label><select id="tA" class="txt"></select></div><div class="sl"><label for="tB">To</label><select id="tB" class="txt"></select></div></div>
+        <canvas class="cv" id="tBar" height="150" aria-label="Timeline of the round trips needed to load a page"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Distance</div><div class="v" id="tD"></div></div>
+          <div class="ro"><div class="k">One round trip</div><div class="v" id="tR"></div></div>
+          <div class="ro"><div class="k">Before the page starts</div><div class="v" id="tP"></div></div>
+        </div>
+        <p class="note" id="tNote"></p>
+        <div class="callout"><b>Under the sea</b>More than 500 cables on the ocean floor carry nearly all data between continents. Many are no thicker than a garden hose. Satellites carry only a small share.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. IP ============ -->
+  <section class="block" id="ip" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · every device has a number</span>
+      <h2 id="iH">IP addresses</h2>
+      <p>An IPv4 address is just 32 bits, written as four numbers from 0 to 255. That allows about 4.3 billion addresses, fewer than there are people, and the last free blocks were handed out in 2011. Homes get by with one public address shared by every device inside. The newer IPv6 uses 128 bits. Type an address to see its bits.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="sl"><label for="iIn">IPv4 address</label><input type="text" id="iIn" value="192.168.1.24" class="txt" maxlength="15"></div>
+        <div class="bits" id="iBits"></div>
+        <div class="seg wrapseg" id="iEx"></div>
+        <p class="note" id="iKind"></p>
+      </div>
+      <div class="panel stack">
+        <div class="cmp">
+          <div><div class="k2">IPv4 · 32 bits</div><b>4,294,967,296</b><span>about half an address per person on Earth</span></div>
+          <div><div class="k2">IPv6 · 128 bits</div><b>3.4 × 10<sup>38</sup></b><span>about 40 billion billion billion addresses per person</span></div>
+        </div>
+        <canvas class="cv" id="iCv" height="120" aria-label="IPv4's address space shown as a speck inside IPv6's"></canvas>
+        <div class="callout"><b>Sharing one address</b>Your router uses NAT (network address translation): devices at home get private addresses such as 192.168.x.x, and the router swaps in its single public address on the way out, keeping track of which reply belongs to whom.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="idH">From two letters to billions of devices</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Katie Hafner and Matthew Lyon, <i>Where Wizards Stay Up Late</i> (1996)</li>
+    <li>Andrew Tanenbaum and David Wetherall, <i>Computer Networks</i></li>
+    <li>IETF, RFC 791 (IP), RFC 9293 (TCP), RFC 1034 and 1035 (DNS), RFC 8446 (TLS 1.3)</li>
+    <li>root-servers.org: root server system</li>
+    <li>TeleGeography, <i>Submarine Cable Map</i></li>
+    <li>IANA, IPv4 address space registry</li>
+  </ul>
+  <p>The simulations are simplified. Example addresses in the demos come from ranges reserved for documentation, and real routes and timings vary.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script src="lib/geo.js"></script>
+<script src="lib/world-110m.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ================= 1. packets ================= */
+const NODES=[[.06,.5],[.27,.2],[.27,.8],[.48,.12],[.48,.5],[.48,.88],[.7,.3],[.7,.72],[.93,.5]];
+const EDGES=[[0,1],[0,2],[1,3],[1,4],[2,4],[2,5],[3,6],[4,6],[4,7],[5,7],[6,7],[6,8],[7,8],[3,4],[4,5]];
+const P={down:new Set(),loss:false,pk:[],got:[],order:[],sent:0,lost:0,chunks:[],raf:0,last:0,resend:[]};
+const nb=i=>EDGES.filter(e=>e.includes(i)).map(e=>e[0]===i?e[1]:e[0]);
+function route(){const paths=[];const go=(n,seen)=>{if(n===8){paths.push(seen.slice());return}if(seen.length>6)return;for(const m of nb(n)){if(seen.includes(m)||P.down.has(m))continue;seen.push(m);go(m,seen);seen.pop()}};go(0,[0]);if(!paths.length)return null;const w=paths.map(p=>Math.pow(.35,p.length));const t=w.reduce((a,b)=>a+b,0);let r=Math.random()*t,i=0;while(r>w[i]){r-=w[i];i++}return paths[Math.min(i,paths.length-1)]}
+function pLaunch(seq,delay,resent){const path=route();if(!path){P.pk.push({seq,path:[0],stuck:true,t:0,born:performance.now()+delay});return}const lossHop=P.loss&&Math.random()<.3?1+Math.floor(Math.random()*(path.length-2)):-1;P.pk.push({seq,path,t:-delay/1000,sp:.9+Math.random()*.9,lossHop,resent});P.sent++}
+function pSend(){const msg=($("#pMsg").value||"HI").toUpperCase();P.chunks=[];for(let i=0;i<msg.length;i+=4)P.chunks.push(msg.slice(i,i+4));P.got=P.chunks.map(()=>false);P.order=[];P.pk=[];P.sent=0;P.lost=0;P.resend=[];P.chunks.forEach((c,i)=>pLaunch(i,i*180,false));pSlots();if(!P.raf){P.last=performance.now();P.raf=requestAnimationFrame(pTick)}}
+function pSlots(){$("#pSlots").innerHTML=P.chunks.map((c,i)=>`<div class="slot${P.got[i]?" ok":""}"><i>${i+1}</i><span>${P.got[i]?c.replace(/ /g,"·"):"?"}</span></div>`).join("");$("#pSent").textContent=P.sent;$("#pLost").textContent=P.lost;$("#pOrder").textContent=P.order.length?P.order.map(x=>x+1).join(", "):"—"}
+function pTick(now){const dt=Math.min(.05,(now-P.last)/1000);P.last=now;
+  P.pk.forEach(p=>{if(p.done||p.stuck)return;p.t+=dt*p.sp*(reduce?4:1);const hop=Math.floor(p.t);if(p.lossHop>=0&&hop>=p.lossHop&&!p.dead){p.dead=true;p.deadAt=now;P.lost++;P.resend.push({seq:p.seq,at:now+1100});}
+    if(!p.dead&&p.t>=p.path.length-1){p.done=true;if(!P.got[p.seq]){P.got[p.seq]=true;P.order.push(p.seq)}pSlots()}});
+  P.resend=P.resend.filter(r=>{if(now>=r.at){pLaunch(r.seq,0,true);pSlots();return false}return true});
+  P.pk=P.pk.filter(p=>!(p.done)&&!(p.dead&&now-p.deadAt>600));
+  pDraw(now);if(P.pk.length||P.resend.length)P.raf=requestAnimationFrame(pTick);else{P.raf=0;pDraw(now)}}
+function pDraw(now=0){const{c,W,H}=setupCanvas($("#pCv"));const X=i=>NODES[i][0]*W,Y=i=>NODES[i][1]*H;const ln=css("--line"),ink=css("--ink"),acc=css("--accent"),hot=css("--hot"),mut=css("--muted");
+  EDGES.forEach(([a,b])=>{const dn=P.down.has(a)||P.down.has(b);c.strokeStyle=dn?hot:ln;c.setLineDash(dn?[4,5]:[]);c.lineWidth=2;c.beginPath();c.moveTo(X(a),Y(a));c.lineTo(X(b),Y(b));c.stroke()});c.setLineDash([]);
+  NODES.forEach((n,i)=>{const end=i===0||i===8;c.fillStyle=P.down.has(i)?hot:end?ink:css("--card");c.strokeStyle=P.down.has(i)?hot:ink;c.lineWidth=2;c.beginPath();end?c.roundRect(X(i)-18,Y(i)-14,36,28,6):c.arc(X(i),Y(i),13,0,7);c.fill();c.stroke();
+    c.fillStyle=end?css("--paper"):P.down.has(i)?"#fff":ink;c.font="600 11px "+css("--mono");c.textAlign="center";c.fillText(i===0?(LANGES?"TÚ":"YOU"):i===8?"WEB":P.down.has(i)?"✕":"R"+i,X(i),Y(i)+4)});
+  P.pk.forEach(p=>{if(p.stuck||p.t<0)return;const t=Math.min(p.t,p.path.length-1);const k=Math.min(Math.floor(t),p.path.length-2),f=t-k;const a=p.path[k],b=p.path[k+1];const x=X(a)+(X(b)-X(a))*f,y=Y(a)+(Y(b)-Y(a))*f;
+    c.globalAlpha=p.dead?Math.max(0,1-(now-p.deadAt)/600):1;c.fillStyle=p.dead?hot:p.resent?css("--gold"):acc;c.beginPath();c.roundRect(x-10,y-9,20,18,4);c.fill();c.fillStyle="#fff";c.font="600 10px "+css("--mono");c.fillText(p.dead?"✕":p.seq+1,x,y+4);c.globalAlpha=1});
+  if(P.pk.some(p=>p.stuck)){c.fillStyle=hot;c.font="600 12px "+css("--body");c.textAlign="center";c.fillText(LANGES?"No queda ningún camino: arregla un router":"No route left: fix a router",W/2,H-10)}}
+$("#pCv").addEventListener("pointerdown",e=>{const r=e.currentTarget.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;for(let i=1;i<8;i++){if(Math.hypot(NODES[i][0]*r.width-x,NODES[i][1]*300-y)<22){P.down.has(i)?P.down.delete(i):P.down.add(i);pDraw();return}}});
+$("#pSend").onclick=pSend;$("#pFix").onclick=()=>{P.down.clear();pDraw()};
+$("#pLoss").onclick=e=>{P.loss=!P.loss;e.currentTarget.setAttribute("aria-pressed",P.loss);e.currentTarget.textContent=(LANGES?"Pérdida de paquetes: ":"Packet loss: ")+(P.loss?(LANGES?"sí":"on"):(LANGES?"no":"off"))};
+
+/* ================= 2. layers ================= */
+const LAY=LANGES?[
+ ["Aplicación · HTTP","Tu navegador escribe la petición en lenguaje web: qué página quiere y de qué sitio. Esta es la carta en sí.",["GET /evolution","Host: concepts.how","Idioma: es"]],
+ ["Seguridad · TLS","El contenido se cifra para que nadie por el camino pueda leerlo ni cambiarlo. Es lo que indica el candado del navegador.",["Cifrado","Clave acordada","Certificado del sitio"]],
+ ["Transporte · TCP","Trocea los datos en segmentos numerados, comprueba que llegan todos y vuelve a enviar los que se pierden. Los puertos dicen a qué programa va cada uno.",["Puerto 54012 → 443","Secuencia nº 1","Suma de control"]],
+ ["Red · IP","Pone las direcciones de origen y destino para que los routers sepan hacia dónde pasar el paquete. El contador de saltos impide que un paquete perdido dé vueltas para siempre.",["De 192.168.1.24","A 203.0.113.7","Saltos restantes: 64"]],
+ ["Enlace · Wi-Fi o Ethernet","Lleva el paquete solo hasta el siguiente aparato, normalmente tu router. En cada salto este sobre se cambia por uno nuevo.",["MAC a4:83:… → router","Canal Wi-Fi 36","Comprobación de errores"]]
+]:[
+ ["Application · HTTP","Your browser writes the request in the web’s language: which page it wants, from which site. This is the letter itself.",["GET /evolution","Host: concepts.how","Language: en"]],
+ ["Security · TLS","The contents are encrypted so nobody along the way can read or change them. This is what the padlock in your browser means.",["Encrypted","Agreed key","Site certificate"]],
+ ["Transport · TCP","Chops the data into numbered segments, checks they all arrive and resends any that go missing. Port numbers say which program each one is for.",["Port 54012 → 443","Sequence no. 1","Checksum"]],
+ ["Network · IP","Adds the source and destination addresses so routers know where to pass the packet. A hop counter stops a lost packet circling forever.",["From 192.168.1.24","To 203.0.113.7","Hops left: 64"]],
+ ["Link · Wi-Fi or Ethernet","Carries the packet only as far as the next device, usually your router. At every hop this envelope is swapped for a fresh one.",["MAC a4:83:… → router","Wi-Fi channel 36","Error check"]]
+];
+let lSel=0;
+function lBuild(){let h=`<span class="core">${LANGES?"«¿Me enseñas la página de evolución?»":"“Can I have the evolution page?”"}</span>`;for(let i=0;i<LAY.length;i++){h=`<div class="env${i===lSel?" on":""}" data-i="${i}" style="--d:${i}"><span class="lab">${LAY[i][0]}</span>${h}</div>`}$("#lNest").innerHTML=h;
+  document.querySelectorAll("#lNest .env").forEach(el=>el.onclick=e=>{e.stopPropagation();lSel=+el.dataset.i;lBuild()});
+  $("#lName").textContent=LAY[lSel][0];$("#lTxt").textContent=LAY[lSel][1];$("#lHdr").innerHTML=LAY[lSel][2].map(x=>`<span>${x}</span>`).join("")}
+
+/* ================= 3. DNS ================= */
+const D={cache:{},raf:0};
+const COLS=LANGES?["Tú","Resolutor","Raíz",".tld","Servidor del dominio"]:["You","Resolver","Root","TLD","Domain’s server"];
+function dHash(s){let h=7;for(const ch of s)h=(h*31+ch.charCodeAt(0))>>>0;return h}
+function dIp(name){const h=dHash(name);return`203.0.113.${1+h%254}`}
+function dDraw(msgs,prog){const{c,W,H}=setupCanvas($("#dCv"));const n=COLS.length,cx=i=>W*(i+.5)/n,top=30;const tld="."+(($("#dIn").value.trim().split(".").pop())||"com");
+  c.font="600 11px "+css("--mono");c.textAlign="center";COLS.forEach((t,i)=>{c.fillStyle=css("--ink");const lab=i===3?tld:t;c.fillText(lab.length>12&&W<500?lab.slice(0,10)+"…":lab,cx(i),16);c.strokeStyle=css("--line");c.setLineDash([3,4]);c.beginPath();c.moveTo(cx(i),top-6);c.lineTo(cx(i),H-6);c.stroke();c.setLineDash([])});
+  const rowH=(H-top-10)/Math.max(8,msgs.length);
+  msgs.forEach((m,k)=>{const p=clamp01(prog-k);if(p<=0)return;const y=top+rowH*(k+.6),x1=cx(m[0]),x2=cx(m[1]),x=x1+(x2-x1)*p;c.strokeStyle=m[2]?css("--good"):css("--accent");c.lineWidth=2;c.beginPath();c.moveTo(x1,y);c.lineTo(x,y);c.stroke();
+    if(p>=1){const dir=Math.sign(x2-x1);c.fillStyle=c.strokeStyle;c.beginPath();c.moveTo(x2,y);c.lineTo(x2-8*dir,y-4);c.lineTo(x2-8*dir,y+4);c.fill()}});c.lineWidth=1}
+const clamp01=x=>Math.max(0,Math.min(1,x));
+function dSteps(name){const tld="."+name.split(".").pop();return LANGES?[
+ [0,1,0,`Tu dispositivo pregunta al resolutor (de tu proveedor de internet o uno público): «¿Dónde está ${name}?»`],
+ [1,2,0,`El resolutor pregunta a un servidor raíz, que no lo sabe pero dice quién lleva los nombres ${tld}.`],[2,1,1,""],
+ [1,3,0,`Pregunta al servidor de ${tld}, que responde con los servidores de nombres de ese dominio.`],[3,1,1,""],
+ [1,4,0,`Pregunta al servidor del dominio, que tiene la respuesta de verdad.`],[4,1,1,""],
+ [1,0,1,`El resolutor te da la dirección y la guarda un rato por si alguien la vuelve a pedir.`]]:[
+ [0,1,0,`Your device asks a resolver (run by your internet provider, or a public one): “Where is ${name}?”`],
+ [1,2,0,`The resolver asks a root server, which doesn’t know but says who handles ${tld} names.`],[2,1,1,""],
+ [1,3,0,`It asks the ${tld} server, which replies with the domain’s own name servers.`],[3,1,1,""],
+ [1,4,0,`It asks the domain’s server, which has the real answer.`],[4,1,1,""],
+ [1,0,1,`The resolver hands you the address and remembers it for a while in case anyone asks again.`]]}
+function dGo(){cancelAnimationFrame(D.raf);const name=($("#dIn").value.trim().toLowerCase()||"concepts.how").replace(/[^a-z0-9.-]/g,"");const cached=D.cache[name];
+  const steps=cached?[[0,1,0,LANGES?"El resolutor ya tenía la respuesta guardada: no hace falta preguntar a nadie más.":"The resolver already has the answer saved: no need to ask anyone else."],[1,0,1,""]]:dSteps(name);
+  $("#dSteps").innerHTML=steps.filter(s=>s[3]).map(s=>`<li>${s[3]}</li>`).join("");$("#dIp").textContent="…";$("#dMs").textContent="…";
+  const total=cached?2:steps.length;const ms=cached?1+Math.round(Math.random()*3):60+Math.round(Math.random()*90);let t0=performance.now();
+  const step=now=>{const prog=reduce?total:Math.min(total,(now-t0)/(cached?250:420));dDraw(steps,prog);if(prog<total)D.raf=requestAnimationFrame(step);else{$("#dIp").textContent=dIp(name);$("#dMs").textContent=fmt(ms)+" ms";D.cache[name]=1}};D.raf=requestAnimationFrame(step)}
+$("#dGo").onclick=dGo;$("#dClr").onclick=()=>{D.cache={};dDraw([],0);$("#dIp").textContent="—";$("#dMs").textContent="—";$("#dSteps").innerHTML=""};
+
+/* ================= 4. latency ================= */
+const CITIES=[["Denver",39.74,-104.99],["New York",40.71,-74.0],["London",51.51,-0.13],["Madrid",40.42,-3.7],["São Paulo",-23.55,-46.63],["Mexico City",19.43,-99.13],["Johannesburg",-26.2,28.05],["Mumbai",19.08,72.88],["Tokyo",35.68,139.69],["Sydney",-33.87,151.21]];
+const CNAME=LANGES?{"New York":"Nueva York","London":"Londres","Mexico City":"Ciudad de México","Tokyo":"Tokio","Sydney":"Sídney","Johannesburg":"Johannesburgo","Mumbai":"Bombay"}:{};
+const cn=n=>CNAME[n]||n;
+["#tA","#tB"].forEach((s,j)=>{$(s).innerHTML=CITIES.map((c,i)=>`<option value="${i}"${i===(j?8:0)?" selected":""}>${cn(c[0])}</option>`).join("");$(s).onchange=tUpd});
+const LAND=(window.topojson&&window.WORLD)?topojson.merge(WORLD,WORLD.objects.countries.geometries):null;
+const T={raf:0,t0:0};
+function tGeo(){const a=CITIES[+$("#tA").value],b=CITIES[+$("#tB").value];const km=d3.geoDistance([a[2],a[1]],[b[2],b[1]])*6371;return{a,b,km}}
+function tMap(now){const{c,W,H}=setupCanvas($("#tCv"));const{a,b}=tGeo();const mid=d3.geoInterpolate([a[2],a[1]],[b[2],b[1]])(.5);const pr=d3.geoNaturalEarth1().rotate([-mid[0],0]).fitExtent([[6,6],[W-6,H-6]],{type:"Sphere"});const path=d3.geoPath(pr,c);
+  c.beginPath();path({type:"Sphere"});c.fillStyle=css("--accent-soft");c.fill();c.beginPath();path(LAND);c.fillStyle=css("--line");c.fill();
+  const line={type:"LineString",coordinates:[[a[2],a[1]],[b[2],b[1]]]};c.beginPath();path(line);c.strokeStyle=css("--accent");c.lineWidth=2.5;c.stroke();c.lineWidth=1;
+  [a,b].forEach(p=>{const[x,y]=pr([p[2],p[1]]);c.fillStyle=css("--ink");c.beginPath();c.arc(x,y,4.5,0,7);c.fill()});
+  const f=reduce?1:((now-T.t0)/1400)%1;const ip=d3.geoInterpolate([a[2],a[1]],[b[2],b[1]]);const g=ip(f<.5?f*2:2-f*2);const[x,y]=pr(g);c.fillStyle=css("--hot");c.beginPath();c.arc(x,y,5,0,7);c.fill()}
+function tLoop(now){tMap(now);if(!reduce&&vis.t)T.raf=requestAnimationFrame(tLoop)}
+function tUpd(){const{km}=tGeo();const rtt=Math.max(1,km*1.5*2/200000*1000)+2;$("#tD").textContent=fmt(km)+" km";$("#tR").textContent="≈ "+fmt(rtt)+" ms";$("#tP").textContent="≈ "+fmt(rtt*4)+" ms";
+  $("#tNote").textContent=LANGES?`La luz en el vacío tardaría ${fmt(km/299792*1000,1)} ms en ir. En la fibra va más lenta y los cables no siguen la línea recta, así que hemos sumado un 50%. Para que la página empiece a llegar hacen falta al menos 4 viajes de ida y vuelta.`:`Light in a vacuum would make the one-way trip in ${fmt(km/299792*1000,1)} ms. Fibre is slower and cables don’t follow the straight line, so we’ve added 50%. A page needs at least 4 round trips before it starts arriving.`;
+  const{c,W,H}=setupCanvas($("#tBar"));const lab=LANGES?["Buscar dirección (DNS)","Conectar (TCP)","Cifrado (TLS)","Pedir la página (HTTP)"]:["Find address (DNS)","Connect (TCP)","Encryption (TLS)","Request page (HTTP)"];const cols=[css("--gold"),css("--accent"),css("--good"),css("--hot")];
+  const L=Math.min(170,W*.42),bw=(W-L-10)/4;c.font="12px "+css("--body");lab.forEach((t,i)=>{const y=10+i*34;c.fillStyle=css("--ink");c.textAlign="left";c.fillText(t,0,y+15);c.fillStyle=cols[i];c.fillRect(L+bw*i,y,bw-2,22)});
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";c.fillText(fmt(rtt*4)+" ms",W-2,146);c.textAlign="left";c.fillText("0",L,146)}
+const vis={};new IntersectionObserver(es=>es.forEach(e=>{vis.t=e.isIntersecting;if(e.isIntersecting){T.t0=performance.now();cancelAnimationFrame(T.raf);T.raf=requestAnimationFrame(tLoop)}})).observe($("#tCv"));
+
+/* ================= 5. IP ================= */
+const EX=[["192.168.1.24",LANGES?"Tu casa":"Your home"],["8.8.8.8",LANGES?"DNS público":"Public DNS"],["127.0.0.1",LANGES?"Este equipo":"This computer"],["10.0.0.1",LANGES?"Oficina":"Office"],["203.0.113.7",LANGES?"Ejemplo":"Example"]];
+$("#iEx").innerHTML=EX.map(e=>`<button class="pill" data-v="${e[0]}">${e[1]}</button>`).join("");document.querySelectorAll("#iEx .pill").forEach(b=>b.onclick=()=>{$("#iIn").value=b.dataset.v;iUpd()});
+function iUpd(){const parts=$("#iIn").value.trim().split(".");const ok=parts.length===4&&parts.every(p=>/^\d{1,3}$/.test(p)&&+p<=255);const cols=[css("--accent"),css("--hot"),css("--good"),css("--gold")];
+  if(!ok){$("#iBits").innerHTML=`<span class="bad">${LANGES?"Escribe cuatro números del 0 al 255 separados por puntos":"Type four numbers from 0 to 255 separated by dots"}</span>`;$("#iKind").textContent="";return}
+  const n=parts.map(Number);$("#iBits").innerHTML=n.map((v,i)=>`<div class="byte" style="--c:${cols[i]}"><b>${v}</b><span>${v.toString(2).padStart(8,"0").replace(/(\d{4})/,"$1 ")}</span></div>`).join("");
+  let k;if(n[0]===10||(n[0]===172&&n[1]>=16&&n[1]<=31)||(n[0]===192&&n[1]===168))k=LANGES?"Privada: solo funciona dentro de una red local, como la de tu casa. Millones de hogares usan estas mismas direcciones a la vez.":"Private: only works inside a local network, like your home. Millions of homes use these same addresses at once.";
+  else if(n[0]===127)k=LANGES?"Bucle local (loopback): siempre significa «este mismo equipo».":"Loopback: always means “this very computer”.";
+  else if(n[0]===203&&n[1]===0&&n[2]===113)k=LANGES?"Reservada para documentación y ejemplos, como los de esta página: nunca se usa en internet de verdad.":"Reserved for documentation and examples, like the ones on this page: never used on the real internet.";
+  else if(n[0]>=224)k=LANGES?"Rango especial (multidifusión o reservado), no para un solo aparato.":"Special range (multicast or reserved), not for a single device.";
+  else k=LANGES?"Pública: se puede alcanzar desde cualquier parte de internet.":"Public: reachable from anywhere on the internet.";$("#iKind").textContent=k}
+$("#iIn").oninput=iUpd;
+function iDraw(){const{c,W,H}=setupCanvas($("#iCv"));c.fillStyle=css("--accent-soft");c.fillRect(0,0,W,H);c.fillStyle=css("--hot");c.beginPath();c.arc(W*.5,H*.5,1.2,0,7);c.fill();c.fillStyle=css("--muted");c.font="12px "+css("--body");c.textAlign="center";
+  c.fillText(LANGES?"Si todo IPv6 fuera este rectángulo, IPv4 sería un punto":"If all of IPv6 were this box, IPv4 would be a dot",W/2,H*.5-14);c.fillText(LANGES?"billones de billones de veces más pequeño que el punto rojo":"trillions of trillions of times smaller than the red dot",W/2,H*.5+22)}
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["“LO”","1969","On 29 October 1969 a student at UCLA tried to type LOGIN to a computer at Stanford Research Institute over ARPANET. The system crashed after two letters, so the first message ever sent was “LO”."],
+ ["Packet switching","1960s","Paul Baran at RAND and Donald Davies at Britain’s National Physical Laboratory independently invented the idea of chopping messages into blocks. Davies called them packets."],
+ ["Flag day","1983","On 1 January 1983 ARPANET switched to TCP/IP, the protocols the internet still runs on. Vint Cerf and Bob Kahn had designed them a decade earlier."],
+ ["The web is not the internet","1989–91","Tim Berners-Lee invented the World Wide Web at CERN: pages, links and URLs running on top of the internet. The first website went live in 1991. Email, games and video calls use the internet without the web."],
+ ["Running out of numbers","2011","The pool of free IPv4 addresses ran dry in 2011. Sharing addresses and the slow switch to IPv6 keep everything connected."],
+ ["Six hours offline","2021","On 4 October 2021 a configuration mistake withdrew Facebook’s routes from BGP, the protocol networks use to announce where addresses live. Facebook, Instagram and WhatsApp vanished from the internet for about six hours."],
+ ["The padlock","","HTTPS wraps web traffic in TLS encryption. Today almost all page loads in major browsers use it, so the Wi-Fi owner or anyone in between sees which site you visit but not what’s on the page."],
+ ["The cloud is a building","","“The cloud” is millions of computers in huge data centres, often next to cheap electricity and cooling. When you save a photo to the cloud, it lands on a real disk somewhere."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+pSend();lBuild();dDraw([],0);tUpd();tMap(performance.now());iUpd();iDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{pDraw();dDraw([],0);tUpd();tMap(performance.now());iDraw()},120)});
+addEventListener("themechange",()=>{pDraw();tUpd();tMap(performance.now());iDraw()});
+</script>
+</body>
+</html>

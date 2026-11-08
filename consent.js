@@ -31,6 +31,8 @@
       mind: ["No nudges here", "Analytics cookies help us see which pages get used. They’re off by default, and declining is exactly as easy as accepting."],
       music: ["Turn it up?", "Analytics cookies help us see which pages get used. They stay silent unless you accept."],
       evolution: ["Survival of the tastiest", "Analytics cookies help us see which pages get used. Only the ones you accept survive."],
+      internet: ["Packet incoming", "Analytics cookies help us see which pages get used. Accept and they’re delivered; decline and they’re dropped, no resend."],
+      wireless: ["No signal unless you say so", "Analytics cookies help us see which pages get used. They stay switched off unless you accept."],
       logic: ["If accept, then cookies", "Accept → analytics cookies help us see which pages get used. ¬Accept → ¬cookies. That’s the whole truth table."]
     },
     es: {
@@ -55,6 +57,8 @@
       mind: ["Aquí no hay empujoncitos", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Están desactivadas por defecto, y rechazar es igual de fácil que aceptar."],
       music: ["¿Subimos el volumen?", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan en silencio a menos que las aceptes."],
       evolution: ["La supervivencia de la más rica", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Solo sobreviven las que aceptas."],
+      internet: ["Paquete entrante", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Si aceptas, se entregan; si rechazas, se descartan, sin reenvío."],
+      wireless: ["Sin señal hasta que tú digas", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan apagadas a menos que las aceptes."],
       logic: ["Si aceptas, entonces cookies", "Aceptar → las cookies de analítica nos ayudan a ver qué páginas se usan. ¬Aceptar → ¬cookies. Esa es toda la tabla de verdad."]
     }
   };

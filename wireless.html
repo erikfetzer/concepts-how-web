@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio & wireless · concepts.how</title>
+<meta name="description" content="Tune across the radio spectrum, push Wi-Fi through walls, compare NFC, Bluetooth, 5G and GPS, pack bits into waves with QAM and find yourself the way GPS does.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/wireless">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/wireless">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Radio & wireless · concepts.how">
+<meta property="og:description" content="Tune across the radio spectrum, push Wi-Fi through walls, compare NFC, Bluetooth, 5G and GPS, pack bits into waves with QAM and find yourself the way GPS does.">
+<meta property="og:url" content="https://concepts.how/wireless">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Radio & wireless · concepts.how">
+<meta name="twitter:description" content="Tune across the radio spectrum, push Wi-Fi through walls, compare NFC, Bluetooth, 5G and GPS, pack bits into waves with QAM and find yourself the way GPS does.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+.row2{display:flex;flex-wrap:wrap;gap:8px}
+.ghostb{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.ghostb[aria-pressed=true]{border-color:var(--accent)!important;color:var(--accent)!important}
+.k2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.note{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.note b{color:var(--ink)}
+.wrapseg{flex-wrap:wrap}
+.txt{width:100%;box-sizing:border-box;font:500 15px var(--mono);padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.v.sm{font-size:14px;line-height:1.35;word-break:break-word}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* wireless */
+.demo.one{grid-template-columns:1fr}
+#wCv,#gCv{touch-action:none;cursor:grab}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:5px}.legend i{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);opacity:.8}
+.cmpgrid{display:grid;gap:4px}
+.ch,.crow{display:grid;grid-template-columns:minmax(110px,1.1fr) 2fr 2fr;gap:12px;align-items:center}
+.ch span{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:grid}.ch em{font-style:normal;font-weight:400;text-transform:none;letter-spacing:0}
+.crow{border:1px solid transparent;border-radius:10px;background:none;padding:8px 6px;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.crow:hover{border-color:var(--line)}.crow.on{border-color:var(--accent);background:var(--accent-soft)}
+.crow b{font-size:14px}
+.bar{position:relative;height:22px;background:color-mix(in srgb,var(--line) 45%,transparent);border-radius:6px}
+.bar i{position:absolute;top:3px;bottom:3px;border-radius:4px;background:var(--accent)}.bar.s i{background:var(--hot)}
+.bar small{position:absolute;top:3px;font:11px var(--mono);color:var(--ink);white-space:nowrap}
+@media (max-width:640px){.ch,.crow{grid-template-columns:1fr 1fr;gap:6px}.ch span:first-child{display:none}.crow b{grid-column:1/-1}}
+.bar small.in{color:#fff;font-weight:600}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html">Maps</a>
+    <a class="nl" href="money.html">Money</a>
+    <a class="nl" href="light.html">Light & color</a>
+    <a class="nl" href="algorithms.html">Algorithms</a>
+    <a class="nl" href="mind.html">Biases & the mind</a>
+    <a class="nl" href="music.html">Music & sound</a>
+    <a class="nl" href="evolution.html">Evolution</a>
+    <a class="nl" href="internet.html">Internet</a>
+    <a class="nl" href="wireless.html" aria-current="page">Wireless</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="wireless.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/wireless.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Radio &amp; wireless</b> · invisible waves everywhere</div>
+    <h1>Your phone is <em>a radio station.</em></h1>
+    <p class="lede">Wi-Fi, Bluetooth, 5G, GPS and tap-to-pay are all radio: invisible light waves too long for your eyes to see. They differ in frequency, power and the rules they follow, and those choices decide how far they reach, how much they carry and what gets in their way. Tune across the spectrum, push Wi-Fi through walls, pack bits into waves and find yourself like GPS does.</p>
+    <nav class="jump" aria-label="On this page"><a href="#spectrum">The spectrum</a><a href="#walls">Through walls</a><a href="#compare">Compare</a><a href="#qam">Bits on waves</a><a href="#gps">Finding you</a><a href="#ideas">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. spectrum ============ -->
+  <section class="block" id="spectrum" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · tune the dial</span>
+      <h2 id="sH">The radio spectrum</h2>
+      <p>Every wireless gadget is assigned a slice of frequencies, shared out by governments and international agreements so they don’t drown each other out. Low frequencies have long waves that travel far and slip through walls but carry little data. High frequencies carry lots of data but fade fast and are blocked easily. Slide along to see who lives where.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="sCv" height="300" aria-label="The radio spectrum on a logarithmic scale, with the bands used by common technologies"></canvas>
+        <div class="sl"><label for="sF">Frequency <span id="sFV"></span></label><input type="range" id="sF" min="0" max="1000" value="620"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Waves per second</div><div class="v sm" id="sHz"></div></div>
+          <div class="ro"><div class="k">Wavelength</div><div class="v" id="sL"></div></div>
+          <div class="ro"><div class="k">Simple antenna (¼ wave)</div><div class="v" id="sA"></div></div>
+        </div>
+        <p class="note" id="sTxt"></p>
+        <div class="callout"><b>Same frequency as your microwave</b>Microwave ovens heat food at about 2.45 GHz, right in the middle of the band that Wi-Fi and Bluetooth use. A leaky oven can make Wi-Fi stutter while it runs. Ovens use around a thousand watts inside a metal box; a router uses about a tenth of a watt.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. walls ============ -->
+  <section class="block" id="walls" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · signal strength</span>
+      <h2 id="wH">Why Wi-Fi dies in the bedroom</h2>
+      <p>Radio spreads out and weakens with distance, and every wall soaks some up. Higher frequencies lose more in walls. Drag the router and the phone around this flat and switch bands. Green means a strong signal, red a weak one, and the thick walls are brick. Signal strength is measured in dBm: closer to zero is stronger.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="wCv" height="320" aria-label="Floor plan with a Wi-Fi signal heat map. Drag the router or the phone."></canvas>
+        <div class="seg" id="wBand"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Signal at the phone</div><div class="v" id="wDb"></div></div>
+          <div class="ro"><div class="k">Walls in the way</div><div class="v" id="wN"></div></div>
+          <div class="ro"><div class="k">Rough speed</div><div class="v" id="wSp"></div></div>
+        </div>
+        <div class="legend" id="wLeg"></div>
+        <div class="callout"><b>Best spot for a router</b>High up, central, in the open and away from fish tanks, mirrors and metal. Water and metal absorb or reflect radio much more than plasterboard does. Mesh systems use several routers that pass the signal along.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. compare ============ -->
+  <section class="block" id="compare" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · the family of radios</span>
+      <h2 id="cH">From 4 centimetres to 20,000 kilometres</h2>
+      <p>Each technology is a different trade-off between range, speed and battery life. Both scales go up by ten times at each step, because the differences are enormous: GPS signals travel hundreds of millions of times farther than tap-to-pay reaches, and Wi-Fi can be hundreds of millions of times faster than the data GPS satellites send. Tap a row for details. Figures are typical or best-case.</p>
+    </div>
+    <div class="demo one">
+      <div class="panel stack">
+        <div class="cmpgrid" id="cGrid"></div>
+        <div class="callout" id="cInfo"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. QAM ============ -->
+  <section class="block" id="qam" aria-labelledby="qH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · bits on waves</span>
+      <h2 id="qH">Packing data into a wave</h2>
+      <p>A plain wave carries no information. To send bits, a radio changes the wave: its strength, its frequency or its timing, called phase. Modern Wi-Fi and 5G change strength and phase together, so each symbol is one dot on a grid. More dots means more bits per symbol, but the dots get closer and noise makes the receiver misread them.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="qMod"></div>
+        <canvas class="cv" id="qWave" height="150" aria-label="The bits 1 0 1 1 0 0 1 0 sent as a radio wave"></canvas>
+        <p class="note" id="qWTxt"></p>
+      </div>
+      <div class="panel stack">
+        <div class="seg" id="qOrd"></div>
+        <canvas class="cv" id="qCv" height="260" aria-label="Constellation diagram: received symbols scattered around their ideal positions"></canvas>
+        <div class="sl"><label for="qN">Noise <span id="qNV"></span></label><input type="range" id="qN" min="0" max="100" value="20"></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Bits per symbol</div><div class="v" id="qB"></div></div>
+          <div class="ro"><div class="k">Misread symbols</div><div class="v" id="qE"></div></div>
+        </div>
+        <p class="note">That’s why your phone switches to a simpler grid when the signal is weak: slower, but it still gets through.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. GPS ============ -->
+  <section class="block" id="gps" aria-labelledby="gH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · finding you</span>
+      <h2 id="gH">How GPS knows where you are</h2>
+      <p>GPS satellites constantly broadcast the exact time. Your phone measures how late each signal arrives, and since radio travels at the speed of light, that gives the distance to each one. Where the circles cross is where you are. Radio covers 30 centimetres in a billionth of a second, so a tiny timing error becomes a big position error. Drag the phone and add clock error.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="gCv" height="320" aria-label="Three transmitters with distance circles meeting at the phone. Drag the phone."></canvas>
+        <div class="sl"><label for="gE">Timing error <span id="gEV"></span></label><input type="range" id="gE" min="0" max="100" value="0"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Timing error</div><div class="v" id="gT"></div></div>
+          <div class="ro"><div class="k">Position off by</div><div class="v" id="gO"></div></div>
+        </div>
+        <div class="callout"><b>Four, not three</b>This flat demo needs three signals. Real GPS works in 3D and your phone’s clock isn’t perfect, so it needs at least four satellites: three for position and one to work out the clock error. The satellites, about 20,200 km up, carry atomic clocks.</div>
+        <div class="callout"><b>Einstein in your pocket</b>The satellites’ clocks run about 38 microseconds a day fast compared with clocks on the ground, because of both of Einstein’s theories of relativity. Without correcting for it, positions would drift by roughly 10 km a day.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="idH">From sparks to 5G</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>International Telecommunication Union, Radio Regulations</li>
+    <li>IEEE 802.11 (Wi-Fi) and Bluetooth Core Specification</li>
+    <li>ISO/IEC 14443 and NFC Forum specifications</li>
+    <li>3GPP, 5G NR specifications (TS 38 series)</li>
+    <li>GPS.gov, <i>GPS accuracy</i> and <i>space segment</i></li>
+    <li>Neil Ashby, “Relativity in the Global Positioning System”, <i>Living Reviews in Relativity</i> (2003)</li>
+    <li>World Health Organization, <i>Radiation: 5G mobile networks and health</i></li>
+  </ul>
+  <p>The demos use simplified models. Real ranges and speeds depend on equipment, settings, the building and how many people share the signal.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+const C=299792458;
+function hz(f){return f>=1e9?fmt(f/1e9,f<1e10?2:0)+" GHz":f>=1e6?fmt(f/1e6,f<1e7?2:0)+" MHz":fmt(f/1e3,0)+" kHz"}
+function len(m){return m>=1000?fmt(m/1000,m<1e4?1:0)+" km":m>=1?fmt(m,m<10?1:0)+" m":m>=.01?fmt(m*100,m<.01?1:0)+" cm":fmt(m*1000,1)+" mm"}
+
+/* ================= 1. spectrum ================= */
+const LO=4,HI=11.5;
+const BANDS=LANGES?[
+ [530e3,1.7e6,"Radio AM",0,"--gold"],[13.4e6,13.7e6,"NFC",1,"--hot"],[88e6,108e6,"Radio FM",0,"--gold"],[600e6,960e6,"Móvil banda baja",1,"--accent"],[1.56e9,1.59e9,"GPS",2,"--good"],
+ [1.7e9,2.7e9,"Móvil banda media",1,"--accent"],[2.4e9,2.4835e9,"Wi-Fi y Bluetooth",3,"--hot"],[3.3e9,4.2e9,"5G banda C",1,"--accent"],[5.15e9,5.85e9,"Wi-Fi 5 GHz",3,"--hot"],[5.925e9,7.125e9,"Wi-Fi 6 GHz",2,"--hot"],
+ [6e9,8.5e9,"Banda ultraancha",0,"--good"],[10.7e9,12.7e9,"TV e internet por satélite",2,"--good"],[24e9,47e9,"5G ondas milimétricas",1,"--accent"]
+]:[
+ [530e3,1.7e6,"AM radio",0,"--gold"],[13.4e6,13.7e6,"NFC",1,"--hot"],[88e6,108e6,"FM radio",0,"--gold"],[600e6,960e6,"Phone low band",1,"--accent"],[1.56e9,1.59e9,"GPS",2,"--good"],
+ [1.7e9,2.7e9,"Phone mid band",1,"--accent"],[2.4e9,2.4835e9,"Wi-Fi & Bluetooth",3,"--hot"],[3.3e9,4.2e9,"5G C-band",1,"--accent"],[5.15e9,5.85e9,"Wi-Fi 5 GHz",3,"--hot"],[5.925e9,7.125e9,"Wi-Fi 6 GHz",2,"--hot"],
+ [6e9,8.5e9,"Ultra-wideband",0,"--good"],[10.7e9,12.7e9,"Satellite TV & internet",2,"--good"],[24e9,47e9,"5G millimetre wave",1,"--accent"]
+];
+const sF=()=>Math.pow(10,LO+(HI-LO)*$("#sF").value/1000);
+function sDraw(){const{c,W,H}=setupCanvas($("#sCv"));const f=sF();const X=v=>W*(Math.log10(v)-LO)/(HI-LO);const top=62,rh=(H-top-22)/BANDS.length;const order=BANDS.slice().sort((a,b)=>a[0]-b[0]);
+  // wave
+  const lam=C/f;const cyc=4+ ( (Math.log10(f)-LO)/(HI-LO) )*40;c.strokeStyle=css("--accent");c.lineWidth=2;c.beginPath();for(let x=0;x<=W;x++){const y=30+Math.sin(x/W*cyc*2*Math.PI)*16;x?c.lineTo(x,y):c.moveTo(x,y)}c.stroke();c.lineWidth=1;
+  order.forEach((b,ri)=>{const x1=X(b[0]),x2=Math.max(X(b[1]),x1+3),y=top+ri*rh;c.fillStyle=css(b[4]);c.globalAlpha=f>=b[0]&&f<=b[1]?1:.55;c.fillRect(x1,y+1,x2-x1,rh-3);c.globalAlpha=1;c.fillStyle=css("--ink");c.font="11px "+css("--body");const tw=c.measureText(b[2]).width;let tx=x2+4;if(tx+tw>W-2)tx=x1-4-tw;c.textAlign="left";c.fillText(b[2],tx,y+rh/2+4)});
+  c.fillStyle=css("--muted");c.font="10px "+css("--mono");c.textAlign="center";[1e4,1e5,1e6,1e7,1e8,1e9,1e10,1e11].forEach(v=>c.fillText(hz(v).replace(/[.,]00/,""),Math.min(W-20,Math.max(18,X(v))),H-6));
+  const xm=X(f);c.strokeStyle=css("--ink");c.setLineDash([4,3]);c.beginPath();c.moveTo(xm,52);c.lineTo(xm,H-18);c.stroke();c.setLineDash([])}
+function sUpd(){const f=sF(),lam=C/f;$("#sFV").textContent=hz(f);$("#sHz").textContent=fmt(Math.round(f));$("#sL").textContent=len(lam);$("#sA").textContent=len(lam/4);
+  const here=BANDS.filter(b=>f>=b[0]&&f<=b[1]).map(b=>b[2]);
+  const trend=f<3e7?(LANGES?"Ondas largas: llegan muy lejos, incluso rebotando en la atmósfera, pero transportan pocos datos.":"Long waves: they travel very far, even bouncing off the upper atmosphere, but carry little data."):f<3e9?(LANGES?"Un buen término medio: atraviesan paredes razonablemente bien y llevan bastantes datos. Por eso aquí se amontonan los móviles, el Wi-Fi y el GPS.":"A sweet spot: they get through walls reasonably well and carry plenty of data. That’s why phones, Wi-Fi and GPS crowd in here."):f<2e10?(LANGES?"Ondas más cortas: más datos, pero menos alcance y más problemas con las paredes.":"Shorter waves: more data, but less range and more trouble with walls."):(LANGES?"Ondas milimétricas: muchísimos datos, pero las bloquean paredes, hojas, la lluvia e incluso tu mano.":"Millimetre waves: huge amounts of data, but walls, leaves, rain and even your hand block them.");
+  $("#sTxt").innerHTML=(here.length?`<b>${LANGES?"Aquí":"Here"}:</b> ${here.join(", ")}. `:"")+trend;sDraw()}
+$("#sF").oninput=sUpd;
+
+/* ================= 2. walls ================= */
+const WB=[["2.4",2.4e9,"2,4 GHz",40,[4,10],300],["5",5e9,"5 GHz",46.4,[6,16],1200],["28",28e9,"28 GHz (5G mmWave)",61.4,[10,40],2000]];
+let wBand=0;const WP={r:{x:.2,y:.3},p:{x:.82,y:.75},drag:null};
+// walls: [x1,y1,x2,y2,brick]
+const WALLS=[[.02,.02,.98,.02,1],[.98,.02,.98,.98,1],[.98,.98,.02,.98,1],[.02,.98,.02,.02,1],
+ [.4,.02,.4,.55,0],[.4,.72,.4,.98,0],[.4,.5,.55,.5,0],[.68,.5,.98,.5,0],[.68,.02,.68,.32,1],[.68,.42,.68,.5,1],[.68,.5,.68,.98,0],[.02,.62,.12,.62,0],[.24,.62,.4,.62,0]];
+$("#wBand").innerHTML=WB.map((b,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${LANGES?b[2].replace("2.4","2,4"):b[2].replace("2,4","2.4")}</button>`).join("");
+document.querySelectorAll("#wBand .pill").forEach(b=>b.onclick=()=>{wBand=+b.dataset.i;document.querySelectorAll("#wBand .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));wDraw()});
+function inter(a,b,c,d){const r=(b.x-a.x)*(d.y-c.y)-(b.y-a.y)*(d.x-c.x);if(Math.abs(r)<1e-9)return false;const t=((c.x-a.x)*(d.y-c.y)-(c.y-a.y)*(d.x-c.x))/r,u=((c.x-a.x)*(b.y-a.y)-(c.y-a.y)*(b.x-a.x))/r;return t>0&&t<1&&u>=0&&u<=1}
+function sig(px,py,W,H){const b=WB[wBand];const mW=16,mH=16*H/W;const d=Math.max(.5,Math.hypot((px-WP.r.x)*mW,(py-WP.r.y)*mH));let loss=b[3]+35*Math.log10(d),n=0;
+  for(const w of WALLS.slice(4)){if(inter(WP.r,{x:px,y:py},{x:w[0],y:w[1]},{x:w[2],y:w[3]})){loss+=b[4][w[4]];n++}}return{db:20-loss,n}}
+const LEV=[[-55,"--good"],[-67,"#84cc16"],[-75,"--gold"],[-85,"--hot"]];
+function lvCol(db){for(const[t,c]of LEV)if(db>=t)return c.startsWith("--")?css(c):c;return null}
+function wDraw(){const{c,W,H}=setupCanvas($("#wCv"));const s=8;
+  for(let y=0;y<H;y+=s)for(let x=0;x<W;x+=s){const v=sig((x+s/2)/W,(y+s/2)/H,W,H).db;const col=lvCol(v);if(col){c.fillStyle=col;c.globalAlpha=.42;c.fillRect(x,y,s,s)}}c.globalAlpha=1;
+  WALLS.forEach(w=>{c.strokeStyle=css("--ink");c.lineWidth=w[4]?6:2.5;c.lineCap="round";c.beginPath();c.moveTo(w[0]*W,w[1]*H);c.lineTo(w[2]*W,w[3]*H);c.stroke()});c.lineWidth=1;
+  const rx=WP.r.x*W,ry=WP.r.y*H;c.fillStyle=css("--ink");c.beginPath();c.roundRect(rx-14,ry-9,28,18,5);c.fill();c.strokeStyle=css("--ink");c.lineWidth=2;c.beginPath();c.moveTo(rx-8,ry-9);c.lineTo(rx-11,ry-20);c.moveTo(rx+8,ry-9);c.lineTo(rx+11,ry-20);c.stroke();c.fillStyle=css("--good");c.beginPath();c.arc(rx,ry,2.5,0,7);c.fill();
+  const px=WP.p.x*W,py=WP.p.y*H;c.fillStyle=css("--card");c.strokeStyle=css("--ink");c.beginPath();c.roundRect(px-8,py-14,16,28,4);c.fill();c.stroke();c.fillStyle=css("--accent");c.fillRect(px-5,py-10,10,17);c.lineWidth=1;
+  const r=sig(WP.p.x,WP.p.y,W,H);$("#wDb").textContent=fmt(r.db)+" dBm";$("#wN").textContent=r.n;
+  const q=r.db>=-55?1:r.db>=-67?.75:r.db>=-75?.4:r.db>=-85?.1:0;$("#wSp").textContent=q?(LANGES?"~":"~")+fmt(WB[wBand][5]*q>=1000?WB[wBand][5]*q/1000:WB[wBand][5]*q,WB[wBand][5]*q>=1000?1:0)+(WB[wBand][5]*q>=1000?" Gbit/s":" Mbit/s"):(LANGES?"Sin conexión":"No connection")}
+$("#wLeg").innerHTML=(LANGES?["Excelente","Buena","Regular","Débil","Nada"]:["Excellent","Good","Fair","Weak","None"]).map((t,i)=>`<span><i style="background:${i<4?(LEV[i][1].startsWith("--")?`var(${LEV[i][1]})`:LEV[i][1]):"transparent"}"></i>${t}</span>`).join("");
+(()=>{const cv=$("#wCv");const pos=e=>{const r=cv.getBoundingClientRect();return{x:clamp((e.clientX-r.left)/r.width,.04,.96),y:clamp((e.clientY-r.top)/r.height,.05,.95),w:r.width,h:r.height}};
+  cv.addEventListener("pointerdown",e=>{const p=pos(e);const dr=Math.hypot((p.x-WP.r.x)*p.w,(p.y-WP.r.y)*p.h),dp=Math.hypot((p.x-WP.p.x)*p.w,(p.y-WP.p.y)*p.h);WP.drag=dr<dp?"r":"p";if(Math.min(dr,dp)>40)WP.drag="p";WP[WP.drag]={x:p.x,y:p.y};cv.setPointerCapture(e.pointerId);wDraw()});
+  cv.addEventListener("pointermove",e=>{if(!WP.drag)return;const p=pos(e);WP[WP.drag]={x:p.x,y:p.y};wDraw()});
+  cv.addEventListener("pointerup",()=>WP.drag=null);cv.addEventListener("pointercancel",()=>WP.drag=null)})();
+
+/* ================= 3. compare ================= */
+const TECH=LANGES?[
+ ["NFC",.01,.04,424e3,"13,56 MHz","Pagar con el móvil, tarjetas de transporte, llaves de hotel. El lector alimenta el chip de la tarjeta con su campo, así que la tarjeta no necesita pila. El alcance tan corto es una medida de seguridad."],
+ ["Bluetooth LE",1,100,2e6,"2,4 GHz","Relojes, auriculares, sensores y rastreadores. «Low Energy» puede funcionar meses o años con una pila de botón."],
+ ["Ultra-wideband (UWB)",1,50,27e6,"6–8,5 GHz","Mide el tiempo de los pulsos con tanta precisión que sabe dónde está algo con unos centímetros de margen. Lo usan los rastreadores para encontrar objetos y las llaves digitales de coche."],
+ ["Wi-Fi 6",5,50,9.6e9,"2,4 / 5 / 6 GHz","La red de tu casa. 9,6 Gbit/s es el máximo teórico; en la práctica, unos cientos de Mbit/s por dispositivo."],
+ ["4G LTE",100,30000,50e6,"0,6–2,7 GHz","Una antena puede cubrir kilómetros. 50 Mbit/s es una velocidad típica; el máximo es mucho mayor."],
+ ["5G banda media",100,3000,300e6,"3,3–4,2 GHz","El 5G que más se usa: un buen equilibrio entre alcance y velocidad."],
+ ["5G ondas milimétricas",50,500,2e9,"24–47 GHz","Rapidísimo, pero las paredes, los árboles y hasta tu mano lo bloquean. Se usa en estadios y centros urbanos."],
+ ["Internet por satélite",550e3,550e3,150e6,"10–30 GHz","Satélites en órbita baja, a unos 550 km. Llegan a barcos, aviones y lugares remotos."],
+ ["GPS",20.2e6,20.2e6,50,"1,575 GHz","Solo recibe. La señal de cada satélite llega desde 20 200 km y con muy poca potencia, más débil que el ruido de fondo. Los datos de navegación van a solo 50 bits por segundo."]
+]:[
+ ["NFC",.01,.04,424e3,"13.56 MHz","Tap to pay, transit cards, hotel keys. The reader powers the card’s chip through its field, so the card needs no battery. The tiny range is a security feature."],
+ ["Bluetooth LE",1,100,2e6,"2.4 GHz","Watches, earbuds, sensors and trackers. “Low Energy” can run for months or years on a coin battery."],
+ ["Ultra-wideband (UWB)",1,50,27e6,"6–8.5 GHz","Times its pulses so precisely it can tell where something is to within centimetres. Used by item trackers’ precision finding and digital car keys."],
+ ["Wi-Fi 6",5,50,9.6e9,"2.4 / 5 / 6 GHz","Your home network. 9.6 Gbit/s is the theoretical maximum; in practice a few hundred Mbit/s per device."],
+ ["4G LTE",100,30000,50e6,"0.6–2.7 GHz","One mast can cover kilometres. 50 Mbit/s is a typical speed; the peak is much higher."],
+ ["5G mid-band",100,3000,300e6,"3.3–4.2 GHz","The 5G most people actually use: a good balance of range and speed."],
+ ["5G millimetre wave",50,500,2e9,"24–47 GHz","Blazing fast, but walls, trees and even your hand block it. Used in stadiums and city centres."],
+ ["Satellite internet",550e3,550e3,150e6,"10–30 GHz","Satellites in low orbit, about 550 km up. Reaches ships, planes and remote places."],
+ ["GPS",20.2e6,20.2e6,50,"1.575 GHz","Receive only. Each satellite’s signal comes from 20,200 km away and arrives weaker than the background noise. The navigation data trickles in at just 50 bits per second."]
+];
+let cSel=0;const RLO=-2,RHI=8,SLO=1,SHI=10.5;
+function rateStr(b){return b>=1e9?fmt(b/1e9,1)+" Gbit/s":b>=1e6?fmt(b/1e6,b<1e7?1:0)+" Mbit/s":b>=1e3?fmt(b/1e3)+" kbit/s":fmt(b)+" bit/s"}
+function lab(txt,a,b){txt=txt.replace(" ","&nbsp;");if(b<58)return`<small style="left:${b+1.5}%">${txt}</small>`;if(b-a>30)return`<small class="in" style="right:${100-b+1.5}%">${txt}</small>`;return`<small style="right:${100-a+1.5}%">${txt}</small>`}
+function cBuild(){const pct=(v,lo,hi)=>clamp((Math.log10(v)-lo)/(hi-lo))*100;
+  $("#cGrid").innerHTML=`<div class="ch"><span></span><span>${LANGES?"Alcance":"Range"}<em>1 cm → 100 000 km</em></span><span>${LANGES?"Velocidad":"Speed"}<em>10 bit/s → 30 Gbit/s</em></span></div>`+TECH.map((t,i)=>{const a=pct(t[1],RLO,RHI),b=pct(t[2],RLO,RHI);return`<button class="crow${i===cSel?" on":""}" data-i="${i}"><b>${t[0]}</b><span class="bar"><i style="left:${a}%;width:${Math.max(1.5,b-a)}%"></i>${lab(len(t[2]),a,b)}</span><span class="bar s"><i style="left:0;width:${pct(t[3],SLO,SHI)}%"></i>${lab(rateStr(t[3]),0,pct(t[3],SLO,SHI))}</span></button>`}).join("");
+  document.querySelectorAll("#cGrid .crow").forEach(b=>b.onclick=()=>{cSel=+b.dataset.i;cBuild()});
+  const t=TECH[cSel];$("#cInfo").innerHTML=`<b>${t[0]} · ${t[4]}</b>${t[5]}`}
+
+/* ================= 4. QAM ================= */
+const BITS=[1,0,1,1,0,0,1,0];let qMod=0,qOrd=1;const MODS=LANGES?[["ASK","Cambiar la intensidad (amplitud): fuerte = 1, débil = 0. Así funcionaba la radio AM."],["FSK","Cambiar la frecuencia: ondas más juntas = 1, más separadas = 0. Como la radio FM; Bluetooth usa una versión."],["PSK","Cambiar la fase: la onda da un salto y empieza al revés para marcar un 0. Muy resistente al ruido."]]:[["ASK","Change the strength (amplitude): strong = 1, weak = 0. This is how AM radio works."],["FSK","Change the frequency: tighter waves = 1, looser = 0. Like FM radio; Bluetooth uses a version of this."],["PSK","Change the phase: the wave jumps and starts upside down to mark a 0. Very resistant to noise."]];
+const ORDS=[4,16,64,256];
+$("#qMod").innerHTML=MODS.map((m,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${m[0]}</button>`).join("");
+$("#qOrd").innerHTML=ORDS.map((m,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===1}">${m}-QAM</button>`).join("");
+document.querySelectorAll("#qMod .pill").forEach(b=>b.onclick=()=>{qMod=+b.dataset.i;document.querySelectorAll("#qMod .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));qWave()});
+document.querySelectorAll("#qOrd .pill").forEach(b=>b.onclick=()=>{qOrd=+b.dataset.i;document.querySelectorAll("#qOrd .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));qSim()});
+function qWave(){const{c,W,H}=setupCanvas($("#qWave"));const n=BITS.length,bw=W/n,mid=H/2+10;c.font="600 13px "+css("--mono");c.textAlign="center";
+  BITS.forEach((b,i)=>{c.fillStyle=i%2?css("--accent-soft"):"transparent";c.fillRect(i*bw,0,bw,H);c.fillStyle=css("--ink");c.fillText(b,i*bw+bw/2,16)});
+  c.strokeStyle=css("--accent");c.lineWidth=2;c.beginPath();for(let x=0;x<=W;x++){const i=Math.min(n-1,Math.floor(x/bw)),b=BITS[i];const t=x/bw;let y;
+    if(qMod===0)y=Math.sin(2*Math.PI*3*t)*(b?.42:.12);else if(qMod===1)y=Math.sin(2*Math.PI*(b?4:2)*(x-i*bw)/bw)*.4;else y=Math.sin(2*Math.PI*3*t+(b?0:Math.PI))*.4;
+    const Y=mid-y*(H-30);x?c.lineTo(x,Y):c.moveTo(x,Y)}c.stroke();c.lineWidth=1;$("#qWTxt").textContent=MODS[qMod][1]}
+function qSim(){const M=ORDS[qOrd],k=Math.sqrt(M),noise=+$("#qN").value/100;$("#qNV").textContent=$("#qN").value+"%";
+  const{c,W,H}=setupCanvas($("#qCv"));const S=Math.min(W,H)-20,ox=(W-S)/2,oy=(H-S)/2;const g=i=>-1+2*(i+.5)/k;const P=v=>(v+1)/2*S;
+  c.strokeStyle=css("--line");c.strokeRect(ox,oy,S,S);c.beginPath();c.moveTo(ox+S/2,oy);c.lineTo(ox+S/2,oy+S);c.moveTo(ox,oy+S/2);c.lineTo(ox+S,oy+S/2);c.stroke();
+  let err=0;const N=600,sig=noise*.18;for(let s=0;s<N;s++){const ix=Math.floor(Math.random()*k),iy=Math.floor(Math.random()*k);const x=g(ix)+gauss()*sig,y=g(iy)+gauss()*sig;
+    const dx=clamp(Math.floor((x+1)/2*k),0,k-1),dy=clamp(Math.floor((y+1)/2*k),0,k-1);const bad=dx!==ix||dy!==iy;if(bad)err++;c.fillStyle=bad?css("--hot"):css("--accent");c.globalAlpha=.6;c.beginPath();c.arc(ox+P(clamp(x,-1.05,1.05)),oy+P(clamp(y,-1.05,1.05)),M>64?1.4:2,0,7);c.fill()}
+  c.globalAlpha=1;c.strokeStyle=css("--ink");for(let i=0;i<k;i++)for(let j=0;j<k;j++){c.beginPath();c.arc(ox+P(g(i)),oy+P(g(j)),M>64?1.2:3,0,7);c.stroke()}
+  $("#qB").textContent=Math.log2(M);$("#qE").textContent=fmt(err/N*100,1)+"%"}
+$("#qN").oninput=qSim;
+
+/* ================= 5. GPS ================= */
+const TW=[{x:.12,y:.15},{x:.88,y:.2},{x:.5,y:.92}];const G={p:{x:.45,y:.45},e:[0,0,0],drag:false};const MW=300;
+function gRoll(){const ns=+$("#gE").value;G.e=TW.map(()=>(Math.random()*2-1)*ns*.2998)}
+function gDraw(){const{c,W,H}=setupCanvas($("#gCv"));const mpp=MW/W;const pt=q=>({x:q.x*W,y:q.y*H});const ph=pt(G.p);
+  const d=TW.map((t,i)=>{const q=pt(t);return Math.hypot(q.x-ph.x,q.y-ph.y)+G.e[i]/mpp});
+  TW.forEach((t,i)=>{const q=pt(t);c.strokeStyle=[css("--accent"),css("--hot"),css("--good")][i];c.lineWidth=2;c.globalAlpha=.85;c.beginPath();c.arc(q.x,q.y,Math.max(1,d[i]),0,7);c.stroke();c.globalAlpha=1;
+    c.fillStyle=c.strokeStyle;c.beginPath();c.moveTo(q.x,q.y-10);c.lineTo(q.x-8,q.y+7);c.lineTo(q.x+8,q.y+7);c.fill()});
+  // solve
+  const q=TW.map(pt);const A=[[2*(q[1].x-q[0].x),2*(q[1].y-q[0].y)],[2*(q[2].x-q[0].x),2*(q[2].y-q[0].y)]];const B=[d[0]**2-d[1]**2-q[0].x**2+q[1].x**2-q[0].y**2+q[1].y**2,d[0]**2-d[2]**2-q[0].x**2+q[2].x**2-q[0].y**2+q[2].y**2];
+  const det=A[0][0]*A[1][1]-A[0][1]*A[1][0];const ex=(B[0]*A[1][1]-A[0][1]*B[1])/det,ey=(A[0][0]*B[1]-B[0]*A[1][0])/det;
+  c.fillStyle=css("--card");c.strokeStyle=css("--ink");c.lineWidth=1.5;c.beginPath();c.roundRect(ph.x-7,ph.y-12,14,24,3);c.fill();c.stroke();
+  const off=Math.hypot(ex-ph.x,ey-ph.y)*mpp;if(off>.5){c.strokeStyle=css("--hot");c.lineWidth=3;c.beginPath();c.moveTo(ex-7,ey-7);c.lineTo(ex+7,ey+7);c.moveTo(ex+7,ey-7);c.lineTo(ex-7,ey+7);c.stroke()}c.lineWidth=1;
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="left";c.fillText(`← ${fmt(MW)} m →`,8,H-8);
+  const ns=+$("#gE").value;$("#gEV").textContent=fmt(ns)+" ns";$("#gT").textContent=ns?(LANGES?`±${fmt(ns)} milmillonésimas de s`:`±${fmt(ns)} billionths of a s`):"0";$("#gO").textContent=fmt(off,off<10?1:0)+" m"}
+(()=>{const cv=$("#gCv");const mv=e=>{const r=cv.getBoundingClientRect();G.p={x:clamp((e.clientX-r.left)/r.width,.03,.97),y:clamp((e.clientY-r.top)/r.height,.04,.96)};gDraw()};
+  cv.addEventListener("pointerdown",e=>{G.drag=true;cv.setPointerCapture(e.pointerId);mv(e)});cv.addEventListener("pointermove",e=>{if(G.drag)mv(e)});cv.addEventListener("pointerup",()=>{G.drag=false;gRoll();gDraw()});cv.addEventListener("pointercancel",()=>G.drag=false)})();
+$("#gE").oninput=()=>{gRoll();gDraw()};
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Sparks across a room","1887","Heinrich Hertz made a spark jump in one loop of wire and saw a tiny spark answer in another loop across his lab: the first proof of radio waves, predicted by James Clerk Maxwell’s equations. The unit of frequency, the hertz, is named after him."],
+ ["Across the Atlantic","1901","Guglielmo Marconi’s team picked up the Morse code letter S, three dots, sent from Cornwall in England to Newfoundland in Canada, about 3,500 km away."],
+ ["A film star’s invention","1942","Actress Hedy Lamarr and composer George Antheil patented frequency hopping: jumping between channels in a pattern only sender and receiver know. Bluetooth hops in a similar way, 1,600 times a second."],
+ ["The first mobile call","1973","Martin Cooper of Motorola made the first handheld mobile phone call on a New York street. The phone weighed about a kilogram and its battery lasted around 30 minutes of talking."],
+ ["A king with a blue tooth","","Bluetooth is named after Harald “Bluetooth” Gormsson, a 10th-century Danish king who united warring tribes, just as the technology was meant to unite gadgets. Its logo joins his initials in Viking runes."],
+ ["Wi-Fi means nothing","1997–99","The Wi-Fi standard, IEEE 802.11, arrived in 1997. Two years later a branding firm came up with the name Wi-Fi. Despite the myth, it doesn’t really stand for anything, though an early slogan briefly linked it to “wireless fidelity”."],
+ ["1G to 5G","","Each generation of mobile network arrived about a decade apart: 1G (1980s) carried analogue calls, 2G (1990s) added texts, 3G (2000s) mobile internet, 4G (2010s) video, and 5G (2020s) adds speed and very fast response."],
+ ["Is it safe?","","Radio waves are non-ionising: unlike X-rays or UV light, they don’t have enough energy to damage DNA. The World Health Organization says no adverse health effects have been established from exposure below international limits, which phones and masts must stay under."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+sUpd();wDraw();cBuild();qWave();qSim();gRoll();gDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{sDraw();wDraw();qWave();qSim();gDraw()},120)});
+addEventListener("themechange",()=>{sDraw();wDraw();qWave();qSim();gDraw()});
+</script>
+</body>
+</html>
