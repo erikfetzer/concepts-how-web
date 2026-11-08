@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinero y economía · concepts.how</title>
+<meta name="description" content="Mira cómo crece el interés compuesto, cómo la inflación encoge tu dinero, mueve las curvas de oferta y demanda y descubre cómo crean dinero los bancos.">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Dinero y economía · concepts.how">
+<meta property="og:description" content="Mira cómo crece el interés compuesto, cómo la inflación encoge tu dinero, mueve las curvas de oferta y demanda y descubre cómo crean dinero los bancos.">
+<meta property="og:url" content="https://concepts.how/money">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dinero y economía · concepts.how">
+<meta name="twitter:description" content="Mira cómo crece el interés compuesto, cómo la inflación encoge tu dinero, mueve las curvas de oferta y demanda y descubre cómo crean dinero los bancos.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* money */
+.basket{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.basket span{font-size:clamp(26px,5vw,38px);text-align:center;transition:opacity .4s,filter .4s,transform .4s}
+.basket span.gone{opacity:.15;filter:grayscale(1);transform:scale(.8)}
+#mEvents{margin-top:4px}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <span data-theme-picker></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Dinero y economía</b> · crecimiento, precios, mercados</div>
+    <h1>El dinero es una historia <em>que todos acordamos creer.</em></h1>
+    <p class="lede">Un billete es papel; un saldo bancario, un número en un ordenador. Valen algo solo porque todos esperamos que los demás los acepten. La economía estudia cómo toma decisiones la gente cuando las cosas escasean: por qué suben los precios, cómo crecen los ahorros, de dónde sale el dinero. Juega con las fuerzas que mueven tu cartera.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#compound">Interés compuesto</a><a href="#inflation">Inflación</a><a href="#market">Oferta y demanda</a><a href="#banks">Cómo crean dinero los bancos</a><a href="#ideas">Grandes ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. compound ============ -->
+  <section class="block" id="compound" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · crecimiento</span>
+      <h2 id="cH">Interés compuesto: dinero que genera dinero</h2>
+      <p>Con el interés compuesto ganas intereses sobre tus intereses, así que el crecimiento se acelera cuanto más esperas. Empieza con poco, empieza pronto, y el tiempo hace casi todo el trabajo. Mueve los controles y mira cómo la parte dorada, dinero que nunca pusiste tú, acaba dominando.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="cCv" height="300" aria-label="Crecimiento de los ahorros con el tiempo"></canvas>
+        <div class="leg"><span><i style="background:var(--accent)"></i>Dinero que aportas</span><span><i style="background:var(--gold)"></i>Intereses ganados</span><span><i style="background:var(--hot)"></i>Empezando 10 años después</span></div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="cStart">Cantidad inicial <span id="cStartV"></span></label><input type="range" id="cStart" min="0" max="10000" step="100" value="1000"></div>
+        <div class="sl"><label for="cMonthly">Aportación mensual <span id="cMonthlyV"></span></label><input type="range" id="cMonthly" min="0" max="1000" step="10" value="100"></div>
+        <div class="sl"><label for="cRate">Rentabilidad anual <span id="cRateV"></span></label><input type="range" id="cRate" min="0" max="12" step="0.5" value="7"></div>
+        <div class="sl"><label for="cYears">Años <span id="cYearsV"></span></label><input type="range" id="cYears" min="1" max="50" value="40"></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Aportaste</div><div class="v" id="cIn"></div></div>
+          <div class="ro"><div class="k">Intereses</div><div class="v" id="cInt" style="color:var(--gold)"></div></div>
+          <div class="ro"><div class="k">Total</div><div class="v" id="cTot" style="color:var(--accent)"></div></div>
+        </div>
+        <p id="cMsg" style="margin:0;font-size:14.5px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. inflation ============ -->
+  <section class="block" id="inflation" aria-labelledby="iH2">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · dinero que encoge</span>
+      <h2 id="iH2">Inflación: por qué todo cuesta más cada año</h2>
+      <p>La inflación es una subida general de los precios, lo que significa que cada unidad de dinero compra menos. La mayoría de los bancos centrales buscan alrededor de un 2 % al año: lo bastante bajo para que el dinero conserve su valor y lo bastante alto para evitar que los precios caigan, lo que puede congelar el gasto. Las pequeñas tasas anuales se acumulan, igual que el interés compuesto.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="basket" id="iBasket" aria-label="Cuánto de una cesta de la compra sigue comprando tu dinero"></div>
+        <canvas class="cv" id="iCv" height="220" aria-label="Poder adquisitivo con el tiempo"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="iRate">Inflación anual <span id="iRateV"></span></label><input type="range" id="iRate" min="0" max="15" step="0.5" value="3"></div>
+        <div class="sl"><label for="iYears">Años <span id="iYearsV"></span></label><input type="range" id="iYears" min="1" max="50" value="20"></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Lo que comprarán 100</div><div class="v" id="iBuys" style="color:var(--hot)"></div></div>
+          <div class="ro"><div class="k">Una cesta de 100 costará</div><div class="v" id="iCost"></div></div>
+        </div>
+        <p id="iMsg" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>Hiperinflación</b>Cuando los precios se descontrolan, el dinero pierde su valor muy deprisa. En Hungría, en 1946, los precios se duplicaban aproximadamente cada 15 horas, el peor caso registrado. Zimbabue imprimió un billete de 100 billones de dólares en 2009.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. supply and demand ============ -->
+  <section class="block" id="market" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · mercados</span>
+      <h2 id="mH">Oferta y demanda</h2>
+      <p>Los compradores quieren más de algo cuando es barato (la demanda baja). Los vendedores ofrecen más cuando pueden cobrar más (la oferta sube). Donde se cruzan las dos líneas está el precio de mercado. Desplaza las curvas y mira cómo se mueve el precio; luego prueba a fijar el precio por ley.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="mCv" height="340" aria-label="Curvas de oferta y demanda"></canvas>
+        <div class="leg"><span><i style="background:var(--accent)"></i>Demanda</span><span><i style="background:var(--hot)"></i>Oferta</span><span><i style="background:var(--gold)"></i>Precio fijado por ley</span></div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="mD">Demanda: cuánto lo quiere la gente <span id="mDV"></span></label><input type="range" id="mD" min="-40" max="40" value="0"></div>
+        <div class="sl"><label for="mS">Oferta: lo fácil que es fabricarlo <span id="mSV"></span></label><input type="range" id="mS" min="-40" max="40" value="0"></div>
+        <div class="seg" id="mCap"></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Precio</div><div class="v" id="mP"></div></div>
+          <div class="ro"><div class="k">Cantidad vendida</div><div class="v" id="mQ"></div></div>
+        </div>
+        <p id="mMsg" style="margin:0;font-size:14.5px"></p>
+        <div class="seg" id="mEvents"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. banks ============ -->
+  <section class="block" id="banks" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · de dónde sale el dinero</span>
+      <h2 id="bH">Cómo crean dinero los bancos</h2>
+      <p>La mayor parte del dinero no son monedas ni billetes, sino números en cuentas bancarias. Cuando un banco concede un préstamo, simplemente añade dinero a la cuenta del prestatario. Ese dinero se gasta y se deposita en otro banco, que vuelve a prestar una parte. Recorre el modelo clásico de los libros de texto.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="bCv" height="300" aria-label="Depósitos creados en cada ronda de préstamos"></canvas>
+        <div class="leg"><span><i style="background:var(--gold)"></i>Nuevo depósito en esta ronda</span><span><i style="background:color-mix(in srgb,var(--accent) 35%,transparent)"></i>Total acumulado</span></div>
+        <div class="row"><button class="btn" id="bStep">Siguiente ronda de préstamos</button><button class="btn ghost" id="bAll">Ir hasta el final</button><button class="btn ghost" id="bReset">Reiniciar</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="bR">Parte que cada banco guarda en reserva <span id="bRV"></span></label><input type="range" id="bR" min="5" max="50" step="5" value="10"></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Depósito original</div><div class="v">1000</div></div>
+          <div class="ro"><div class="k">Total en las cuentas</div><div class="v" id="bTot" style="color:var(--accent)"></div></div>
+        </div>
+        <p id="bMsg" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>La realidad es más complicada</b>En la práctica los bancos prestan primero y buscan las reservas después, y cuánto prestan depende de la demanda de préstamos, la regulación y su capital. El Banco de Inglaterra lo explicó en 2014. En Estados Unidos el coeficiente de reservas es del 0 % desde marzo de 2020. La idea principal se mantiene: la mayor parte del dinero lo crean los bancos al prestar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Grandes ideas</span>
+      <h2 id="idH">Cómo piensan los economistas</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+  <section class="block" id="history" aria-labelledby="hH">
+    <div class="shead">
+      <span class="eyebrow">Historia</span>
+      <h2 id="hH">De las conchas a los móviles</h2>
+    </div>
+    <div class="cards" id="histGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Bank of England, “Money creation in the modern economy,” <i>Quarterly Bulletin</i> (2014)</li>
+    <li>Junta de la Reserva Federal, coeficientes de reservas (2020)</li>
+    <li>Steve H. Hanke and Nicholas Krus, “World Hyperinflations” (2012)</li>
+    <li>Tim Harford, <i>El economista camuflado</i> (2005)</li>
+  </ul>
+  <p>Las calculadoras son ilustraciones simplificadas, no asesoramiento financiero. La rentabilidad real varía, no está garantizada y se ve afectada por comisiones e impuestos.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";
+const money=v=>"$"+Math.round(v).toLocaleString(LOC);
+const short=v=>{const a=Math.abs(v);if(a>=1e6)return "$"+(v/1e6).toLocaleString(LOC,{maximumFractionDigits:1})+"M";if(a>=1e3)return "$"+(v/1e3).toLocaleString(LOC,{maximumFractionDigits:0})+"k";return "$"+Math.round(v)};
+const pct=v=>v.toLocaleString(LOC,{maximumFractionDigits:1})+" %";
+
+/* ================= 1. compound ================= */
+function grow(start,monthly,rate,years){const r=rate/100/12;let bal=start,paid=start;const out=[{bal,paid}];for(let y=1;y<=years;y++){for(let m=0;m<12;m++){bal=bal*(1+r)+monthly;paid+=monthly}out.push({bal,paid})}return out}
+function cDraw(){const s=+$("#cStart").value,m=+$("#cMonthly").value,r=+$("#cRate").value,Y=+$("#cYears").value;
+  $("#cStartV").textContent=money(s);$("#cMonthlyV").textContent=money(m);$("#cRateV").textContent=pct(r);$("#cYearsV").textContent=Y;
+  const g=grow(s,m,r,Y),late=Y>10?grow(s,m,r,Y-10):null;const end=g[Y];
+  $("#cIn").textContent=short(end.paid);$("#cInt").textContent=short(end.bal-end.paid);$("#cTot").textContent=short(end.bal);
+  const dbl=r>0?72/r:Infinity;const lateEnd=late?late[Y-10].bal:0;
+  $("#cMsg").innerHTML=(r>0?`Al ${pct(r)} anual, el dinero se duplica más o menos cada <b>${dbl.toFixed(1).replace(".",LANGES?",":".")} años</b> (la regla del 72: 72 ÷ ${r}). `:"")+(late?`Esperar 10 años para empezar te dejaría <b>${short(lateEnd)}</b>, alrededor de un ${Math.round((1-lateEnd/end.bal)*100)} % menos.`:"");
+  const{c,W,H}=setupCanvas($("#cCv"));const acc=css("--accent"),gold=css("--gold"),hot=css("--hot"),line=css("--line"),muted=css("--muted");
+  const L=50,R=W-10,T=10,B=H-24;const top=Math.max(1,end.bal)*1.05;const X=y=>L+(R-L)*y/Y,Yp=v=>B-(B-T)*v/top;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";for(let k=0;k<=4;k++){const v=top*k/4;c.beginPath();c.moveTo(L,Yp(v));c.lineTo(R,Yp(v));c.stroke();c.fillText(short(v),L-4,Yp(v))}
+  c.textAlign="center";c.textBaseline="alphabetic";[0,Math.round(Y/2),Y].forEach(y=>c.fillText(y,X(y),H-8));
+  c.beginPath();c.moveTo(X(0),Yp(0));g.forEach((p,y)=>c.lineTo(X(y),Yp(p.bal)));c.lineTo(X(Y),Yp(0));c.closePath();c.fillStyle=gold;c.globalAlpha=.75;c.fill();
+  c.beginPath();c.moveTo(X(0),Yp(0));g.forEach((p,y)=>c.lineTo(X(y),Yp(p.paid)));c.lineTo(X(Y),Yp(0));c.closePath();c.fillStyle=acc;c.globalAlpha=.85;c.fill();c.globalAlpha=1;
+  if(late){c.strokeStyle=hot;c.lineWidth=2.5;c.setLineDash([6,4]);c.beginPath();late.forEach((p,y)=>{const x=X(y+10),yy=Yp(p.bal);y?c.lineTo(x,yy):c.moveTo(x,yy)});c.stroke();c.setLineDash([]);c.lineWidth=1}}
+["#cStart","#cMonthly","#cRate","#cYears"].forEach(id=>$(id).oninput=cDraw);
+
+/* ================= 2. inflation ================= */
+const ITEMS=["🍎","🥖","🥛","🧀","🥚","🍌","☕","🍝","🥕","🧃"];
+function iDraw(){const r=+$("#iRate").value,Y=+$("#iYears").value;$("#iRateV").textContent=pct(r);$("#iYearsV").textContent=Y;const f=Math.pow(1+r/100,Y);const buys=100/f;
+  $("#iBuys").textContent="$"+buys.toFixed(0);$("#iCost").textContent="$"+(100*f).toFixed(0);
+  const keep=Math.round(10*buys/100);$("#iBasket").innerHTML=ITEMS.map((e,i)=>`<span class="${i<keep?"":"gone"}">${e}</span>`).join("");
+  const half=r>0?Math.log(2)/Math.log(1+r/100):Infinity;
+  $("#iMsg").innerHTML=r>0?`Los precios se duplican más o menos cada <b>${half.toFixed(0)} años</b> al ${pct(r)}. Dentro de ${Y} años, $100 comprarán lo que hoy compran ${"$"+buys.toFixed(0)}.`:"Sin inflación, los precios no cambian y el dinero conserva su valor.";
+  const{c,W,H}=setupCanvas($("#iCv"));const hot=css("--hot"),line=css("--line"),muted=css("--muted"),acc=css("--accent");const L=40,R=W-10,T=10,B=H-24;const X=y=>L+(R-L)*y/Y,Yp=v=>B-(B-T)*v/100;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";[0,50,100].forEach(v=>{c.beginPath();c.moveTo(L,Yp(v));c.lineTo(R,Yp(v));c.stroke();c.fillText("$"+v,L-4,Yp(v))});
+  c.textAlign="center";c.textBaseline="alphabetic";[0,Y].forEach(y=>c.fillText(y,X(y),H-8));
+  c.beginPath();for(let y=0;y<=Y;y+=Y/100){const v=100/Math.pow(1+r/100,y);y?c.lineTo(X(y),Yp(v)):c.moveTo(X(y),Yp(v))}c.lineTo(X(Y),Yp(0));c.lineTo(X(0),Yp(0));c.closePath();c.fillStyle=hot;c.globalAlpha=.25;c.fill();c.globalAlpha=1;
+  c.strokeStyle=hot;c.lineWidth=2.5;c.beginPath();for(let y=0;y<=Y;y+=Y/100){const v=100/Math.pow(1+r/100,y);y?c.lineTo(X(y),Yp(v)):c.moveTo(X(y),Yp(v))}c.stroke();c.lineWidth=1}
+["#iRate","#iYears"].forEach(id=>$(id).oninput=iDraw);
+
+/* ================= 3. supply & demand ================= */
+// demand: P = a - Q ; supply: P = b + Q   (units 0..100)
+const MK={cap:null};
+const CAPS=[["Mercado libre",null],["Precio máximo",-15],["Precio mínimo",15]];
+const EVENTS=[["Lo recomienda un famoso",25,0],["Se incendia una fábrica",0,-25],["Nueva tecnología",0,30],["Una recesión",-25,0]];
+$("#mCap").innerHTML=CAPS.map((c,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${c[0]}</button>`).join("");
+document.querySelectorAll("#mCap .pill").forEach(b=>b.onclick=()=>{MK.cap=CAPS[+b.dataset.i][1];document.querySelectorAll("#mCap .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));mDraw()});
+$("#mEvents").innerHTML=`<span class="lbl" style="width:100%">¿Qué pasa si…</span>`+EVENTS.map((e,i)=>`<button class="pill" data-i="${i}">${e[0]}</button>`).join("");
+document.querySelectorAll("#mEvents .pill").forEach(b=>b.onclick=()=>{const e=EVENTS[+b.dataset.i];$("#mD").value=Math.max(-40,Math.min(40,+$("#mD").value+e[1]));$("#mS").value=Math.max(-40,Math.min(40,+$("#mS").value+e[2]));mDraw()});
+["#mD","#mS"].forEach(id=>$(id).oninput=mDraw);
+function mDraw(){const d=+$("#mD").value,s=+$("#mS").value;$("#mDV").textContent=(d>0?"+":"")+d;$("#mSV").textContent=(s>0?"+":"")+s;
+  const a=100+d,b=10-s;const Qe=(a-b)/2,Pe=(a+b)/2;let msg,Pshow=Pe,Qshow=Qe,gap=null;
+  if(MK.cap!==null){const Pc=Pe+MK.cap;const Qd=Math.max(0,a-Pc),Qs=Math.max(0,Pc-b);Pshow=Pc;Qshow=Math.min(Qd,Qs);gap=[Qd,Qs,Pc];
+    msg=MK.cap<0?`Un máximo legal por debajo del precio de mercado. Los compradores quieren <b>${Qd.toFixed(0)}</b> pero los vendedores solo ofrecen <b>${Qs.toFixed(0)}</b>: una escasez de ${(Qd-Qs).toFixed(0)}. Cabe esperar colas y estanterías vacías, como con el control de alquileres o el racionamiento en tiempos de guerra.`:`Un mínimo legal por encima del precio de mercado. Los vendedores ofrecen <b>${Qs.toFixed(0)}</b> pero los compradores solo quieren <b>${Qd.toFixed(0)}</b>: un excedente de ${(Qs-Qd).toFixed(0)}. Los precios mínimos agrícolas han provocado «montañas de mantequilla» y «lagos de vino».`}
+  else msg=d>0&&s<0?"Más demanda y menos oferta: el precio se dispara.":d<0&&s>0?"Menos demanda y más oferta: el precio baja.":d>0?"Más demanda sube tanto el precio como la cantidad.":d<0?"Menos demanda baja tanto el precio como la cantidad.":s>0?"Producir más barato: precio más bajo y más ventas.":s<0?"Producir más caro: precio más alto y menos ventas.":"El mercado se asienta donde se cruzan las curvas: el equilibrio.";
+  $("#mP").textContent="$"+Math.max(0,Pshow).toFixed(0);$("#mQ").textContent=Math.max(0,Qshow).toFixed(0);$("#mMsg").innerHTML=msg;
+  const{c,W,H}=setupCanvas($("#mCv"));const acc=css("--accent"),hot=css("--hot"),gold=css("--gold"),line=css("--line"),muted=css("--muted"),ink=css("--ink");
+  const L=40,R=W-12,T=12,B=H-30;const X=q=>L+(R-L)*q/110,Y=p=>B-(B-T)*p/140;
+  c.strokeStyle=line;c.beginPath();c.moveTo(L,T);c.lineTo(L,B);c.lineTo(R,B);c.stroke();c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="center";c.fillText("Cantidad →",(L+R)/2,H-8);c.save();c.translate(14,(T+B)/2);c.rotate(-Math.PI/2);c.fillText("Precio →",0,0);c.restore();
+  const seg=(col,f,w=3)=>{c.strokeStyle=col;c.lineWidth=w;c.beginPath();let st=false;for(let q=0;q<=110;q+=1){const p=f(q);if(p<0||p>140){st=false;continue}st?c.lineTo(X(q),Y(p)):c.moveTo(X(q),Y(p));st=true}c.stroke();c.lineWidth=1};
+  // ghost originals
+  c.globalAlpha=.25;seg(acc,q=>100-q,2);seg(hot,q=>10+q,2);c.globalAlpha=1;
+  seg(acc,q=>a-q);seg(hot,q=>b+q);
+  c.setLineDash([4,4]);c.strokeStyle=muted;c.beginPath();c.moveTo(X(Qe),Y(Pe));c.lineTo(X(Qe),B);c.moveTo(X(Qe),Y(Pe));c.lineTo(L,Y(Pe));c.stroke();c.setLineDash([]);
+  c.fillStyle=ink;c.beginPath();c.arc(X(Qe),Y(Pe),6,0,7);c.fill();
+  if(gap){c.strokeStyle=gold;c.lineWidth=3;c.beginPath();c.moveTo(L,Y(gap[2]));c.lineTo(R,Y(gap[2]));c.stroke();c.lineWidth=1;
+    const[qd,qs]=gap;c.fillStyle=gold;c.globalAlpha=.3;c.fillRect(X(Math.min(qd,qs)),Y(gap[2])-8,X(Math.max(qd,qs))-X(Math.min(qd,qs)),16);c.globalAlpha=1;
+    c.fillStyle=ink;c.font="600 12px "+css("--body");c.textAlign="center";c.fillText(MK.cap<0?"Escasez":"Excedente",(X(qd)+X(qs))/2,Y(gap[2])-14)}
+  c.fillStyle=acc;c.font="600 12px "+css("--body");c.textAlign="left";c.fillText("Demanda",X(Math.max(2,a-130)),Y(Math.min(135,a))+16);c.fillStyle=hot;c.textAlign="right";c.fillText("Oferta",X(Math.min(108,130-b)),Y(Math.min(135,b+Math.min(108,130-b)))+16)}
+
+/* ================= 4. banks ================= */
+const BK={rounds:[]};
+function bReset(){BK.rounds=[1000];bDraw()}
+function bStep(){const r=+$("#bR").value/100;const last=BK.rounds[BK.rounds.length-1];if(last<1||BK.rounds.length>=40)return false;BK.rounds.push(last*(1-r));bDraw();return true}
+function bDraw(){const r=+$("#bR").value/100;$("#bRV").textContent=Math.round(r*100)+"%";const tot=BK.rounds.reduce((a,b)=>a+b,0);const max=1000/r;
+  $("#bTot").textContent=Math.round(tot).toLocaleString(LOC);
+  $("#bMsg").innerHTML=`Ronda ${BK.rounds.length}: cada banco guarda un ${Math.round(r*100)} % y presta el resto, que acaba depositado de nuevo. El total puede crecer como mucho hasta 1000 ÷ ${r} = <b>${Math.round(max).toLocaleString(LOC)}</b>, aunque solo se depositaron 1000 en efectivo.`;
+  const{c,W,H}=setupCanvas($("#bCv"));const acc=css("--accent"),gold=css("--gold"),line=css("--line"),muted=css("--muted");const n=Math.max(12,BK.rounds.length);const L=44,R=W-10,T=10,B=H-30;const bw=(R-L)/n;
+  const ymax=max;const Y=v=>B-(B-T)*v/ymax;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";[0,ymax/2,ymax].forEach(v=>{c.beginPath();c.moveTo(L,Y(v));c.lineTo(R,Y(v));c.stroke();c.fillText(Math.round(v),L-4,Y(v))});
+  let cum=0;BK.rounds.forEach((v,i)=>{const x=L+i*bw;c.fillStyle=acc;c.globalAlpha=.3;c.fillRect(x+2,Y(cum),bw-4,B-Y(cum));c.globalAlpha=1;c.fillStyle=gold;c.fillRect(x+2,Y(cum+v),bw-4,Y(cum)-Y(cum+v));cum+=v});
+  c.setLineDash([5,4]);c.strokeStyle=acc;c.beginPath();c.moveTo(L,Y(max));c.lineTo(R,Y(max));c.stroke();c.setLineDash([]);
+  c.textAlign="center";c.textBaseline="alphabetic";c.fillStyle=muted;c.fillText("Ronda →",(L+R)/2,H-8)}
+$("#bStep").onclick=bStep;$("#bAll").onclick=()=>{let k=0;while(bStep()&&k++<60);};$("#bReset").onclick=bReset;$("#bR").oninput=bReset;
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Escasez","Nunca hay suficiente tiempo, dinero ni cosas para todo lo que todos quieren. La economía estudia cómo elegir cuando hay escasez."],
+ ["Coste de oportunidad","El coste real de cualquier cosa es aquello a lo que renuncias para conseguirla. Una hora de videojuegos cuesta una hora que podrías haber dedicado a otra cosa."],
+ ["Incentivos","La gente responde a premios y castigos, a menudo de formas inesperadas. Se cuenta que cuando el Delhi colonial pagaba por cada cobra muerta, la gente empezó a criar cobras para cobrar la recompensa: el «efecto cobra»."],
+ ["Ventaja comparativa","David Ricardo demostró en 1817 que dos países salen ganando con el comercio si cada uno se centra en lo que menos le cuesta producir, aunque uno sea mejor en todo."],
+ ["La mano invisible","Adam Smith defendió en 1776 que las personas que buscan su propio interés en los mercados pueden, sin pretenderlo, producir resultados que benefician a todos. No siempre: la contaminación es la excepción clásica."],
+ ["PIB","El producto interior bruto suma el valor de todo lo que produce un país en un año. Mide la actividad, no el bienestar: limpiar tras una catástrofe lo hace subir."]
+];
+const HIST=[
+ ["Conchas, sal y ganado","Prehistoria","Muchos objetos han servido como dinero. Las conchas de cauri se usaron durante siglos en África, Asia y el Pacífico. Algunos economistas sostienen que el crédito y los pagarés llegaron antes que las monedas y el trueque."],
+ ["Las primeras monedas","h. 600 a. C.","El reino de Lidia, en la actual Turquía, estampaba trozos de electro, una aleación de oro y plata, con una cabeza de león para garantizar su peso."],
+ ["El papel moneda","Siglo XI","Los comerciantes de la China de la dinastía Song empezaron a usar billetes de papel llamados jiaozi, que el gobierno asumió en 1024. Marco Polo se maravilló más tarde del papel moneda chino."],
+ ["Los bancos centrales","1668","El Riksbank sueco, el banco central más antiguo que sigue en funcionamiento, se fundó en 1668. El Banco de Inglaterra llegó en 1694 y la Reserva Federal de EE. UU. en 1913."],
+ ["El fin del patrón oro","1971","El presidente Nixon dejó de cambiar dólares por oro. Desde entonces casi todo el dinero es «fiduciario»: vale porque los gobiernos lo declaran de curso legal y la gente confía en él."],
+ ["Dinero digital","Hoy","Hoy la mayoría de los pagos son digitales, de las tarjetas a las carteras del móvil. Bitcoin (2009) creó dinero sin ningún banco central, y muchos bancos centrales estudian versiones digitales de sus propias monedas."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3></div><p>${a[1]}</p></article>`).join("");
+$("#histGrid").innerHTML=HIST.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3><span class="yr">${a[1]}</span></div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+cDraw();iDraw();mDraw();bReset();for(let i=0;i<5;i++)bStep();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{cDraw();iDraw();mDraw();bDraw()},120)});
+addEventListener("themechange",()=>{cDraw();iDraw();mDraw();bDraw()});
+</script>
+</body>
+</html>
