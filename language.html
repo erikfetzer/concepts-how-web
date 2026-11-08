@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language · concepts.how</title>
+<meta name="description" content="Trace words back to Proto-Indo-European, test Zipf’s law on any text, write your name in Greek, Cyrillic, Braille and Morse, and dodge English–Spanish false friends.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/language">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/language">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Language · concepts.how">
+<meta property="og:description" content="Trace words back to Proto-Indo-European, test Zipf’s law on any text, write your name in Greek, Cyrillic, Braille and Morse, and dodge English–Spanish false friends.">
+<meta property="og:url" content="https://concepts.how/language">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Language · concepts.how">
+<meta name="twitter:description" content="Trace words back to Proto-Indo-European, test Zipf’s law on any text, write your name in Greek, Cyrillic, Braille and Morse, and dodge English–Spanish false friends.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* language */
+.root{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:10px 14px;border:1px dashed var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 10%,var(--card))}
+.root b{font-family:var(--display);font-size:24px;color:var(--gold)}
+.branches{display:grid;gap:10px}
+.br{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px;position:relative;padding-left:14px;border-left:3px solid var(--line)}
+.br .bn{grid-column:1/-1;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lw{border:1px solid var(--line);border-radius:10px;padding:7px 10px;background:var(--paper);display:grid;gap:1px;animation:fin .35s ease}
+.lw span{font-size:11px;color:var(--muted)}
+.lw b{font-size:18px;line-height:1.2}
+.lw small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lw.same{border-left:4px solid var(--accent)}
+.lw.diff{border-left:4px solid var(--hot)}
+.lw.diff b{color:var(--hot)}
+.scripts{display:grid;gap:8px}
+.scr{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 12px;display:grid;gap:4px;min-width:0}
+.scr .sh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.scr .sh small{font-size:11.5px;color:var(--muted)}
+.scr .st{font-size:24px;line-height:1.3;overflow-wrap:anywhere}
+.scr.brl .st{font-size:32px;letter-spacing:.08em}
+.scr.small .st{font-family:var(--mono);font-size:14px;line-height:1.6}
+.bigword{font-family:var(--display);font-weight:800;font-size:clamp(34px,6vw,52px);line-height:1;color:var(--accent);padding:6px 0}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html" aria-current="page">Language</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="language.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/language.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Language</b> · words, roots, writing</div>
+    <h1>Three, tres, drei, trí: <em>a family resemblance.</em></h1>
+    <p class="lede">About 7,000 languages are spoken today, and every one is a complete system that lets people say anything. Many are related: English and Spanish are distant cousins that share a common ancestor spoken some 6,000 years ago. Trace words back to their roots, find the hidden maths in how we use words, write your name in other scripts and dodge the false friends.</p>
+    <nav class="jump" aria-label="On this page"><a href="#family">Language families</a><a href="#zipf">Zipf’s law</a><a href="#scripts">Writing systems</a><a href="#friends">False friends</a><a href="#ideas">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. family ============ -->
+  <section class="block" id="family" aria-labelledby="fH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · roots</span>
+      <h2 id="fH">One word, many languages</h2>
+      <p>In 1786 Sir William Jones noticed that Sanskrit, Greek and Latin were too alike to be a coincidence. They all descend from one lost language, Proto-Indo-European, now reconstructed from its descendants. Pick a word and see how it changed as the family spread from India to Ireland. A star (*) marks a reconstructed word nobody ever wrote down.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <div class="seg" id="cPick"></div>
+        <div class="root" id="cRoot"></div>
+        <div class="branches" id="cTree"></div>
+      </div>
+      <div class="panel stack">
+        <div class="leg"><span><i style="background:var(--accent)"></i>From the same ancestor (a cognate)</span><span><i style="background:var(--hot)"></i>A different root replaced it</span></div>
+        <p id="cNote" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>Grimm’s law</b>Jacob Grimm, of the fairy tales, described in 1822 how Germanic languages shifted certain sounds in regular ways. P became F (Latin <i>pater</i>, English <i>father</i>), T became TH (<i>tres</i>, <i>three</i>), K became H (<i>cornu</i>, <i>horn</i>). Sound changes follow rules, which is how linguists can rebuild lost words.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. Zipf ============ -->
+  <section class="block" id="zipf" aria-labelledby="zH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · hidden maths</span>
+      <h2 id="zH">Zipf’s law: the most common word rules</h2>
+      <p>In almost any long text, the most common word appears about twice as often as the second, three times as often as the third, and so on. George Kingsley Zipf popularised this pattern in the 1930s and 40s. It holds across languages and nobody fully knows why. The text box starts with the words on this page; paste anything you like.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <canvas class="cv" id="zCv" height="300" aria-label="Word frequency against rank on log scales"></canvas>
+        <div class="leg"><span><i style="background:var(--accent)"></i>Your text</span><span><i style="background:var(--gold)"></i>Perfect Zipf: count ∝ 1 / rank</span></div>
+        <label class="lbl" for="zIn">Text</label>
+        <textarea class="inp" id="zIn" spellcheck="false" style="min-height:120px;font-family:var(--body);font-size:14px"></textarea>
+        <div class="row"><button class="btn ghost" id="zPage">Use this page’s text</button><button class="btn ghost" id="zClear">Clear</button></div>
+      </div>
+      <div class="panel stack" style="min-width:0">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Words</div><div class="v" id="zWords">0</div></div>
+          <div class="ro"><div class="k">Different words</div><div class="v" id="zUniq">0</div></div>
+        </div>
+        <div class="scrollx"><table class="tt" id="zTbl"></table></div>
+        <div class="callout"><b>Why it matters</b>A few hundred words make up about half of everyday text, while most words are rare. That’s why learning the 1,000 most common words of a language gets you surprisingly far, and why spell-checkers and predictive keyboards work.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. scripts ============ -->
+  <section class="block" id="scripts" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · writing</span>
+      <h2 id="sH">Your name, written other ways</h2>
+      <p>Writing was invented independently at least three or four times: in Mesopotamia, Egypt (perhaps), China and Mesoamerica. Our alphabet came from Egyptian-inspired signs used by Semitic speakers around 1800 BCE, then passed through Phoenician, Greek and Latin. Type a name to see it in some of the world’s other systems.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <label class="lbl" for="sIn">Name or word</label>
+        <input class="inp" id="sIn" value="Zara" autocomplete="off" spellcheck="false" maxlength="30">
+        <div class="scripts" id="sOut"></div>
+      </div>
+      <div class="panel stack">
+        <button class="btn" id="sPlay">▶ Play it in Morse code</button>
+        <div class="callout"><b>How the letter A got its shape</b>Around 1800 BCE the first alphabet borrowed an Egyptian picture of an ox’s head for the sound at the start of <i>ʾalp</i>, “ox”. The Phoenicians wrote it as <i>aleph</i>, the Greeks turned it into <i>alpha</i>, and over the centuries it rotated until the horns pointed down: A. Tip it upside down and you can still see the ox.</div>
+        <div class="callout"><b>Braille</b>Louis Braille, blinded as a child, published his six-dot system in 1829 at the age of 20. Each letter is a pattern in a 2 × 3 grid of raised dots, read by touch.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. false friends ============ -->
+  <section class="block" id="friends" aria-labelledby="ffH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · watch out</span>
+      <h2 id="ffH">False friends</h2>
+      <p>English and Spanish share thousands of cognates (<i>information</i>, <i>información</i>), but some lookalikes mean something else entirely. Learners call them false friends. Can you spot what each one really means?</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <span class="lbl" id="qLabel">What does this Spanish word mean?</span>
+        <div class="bigword" id="qWord"></div>
+        <div class="qopt" id="qOpts"></div>
+        <p id="qMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <div class="row" style="justify-content:space-between"><button class="btn" id="qNext">Next word</button><span class="lbl" id="qScore">Score 0 / 0</span></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">True friends, too</span>
+        <p style="margin:0;font-size:14.5px">Many English words ending in <b>-tion</b> become <b>-ción</b> in Spanish (<i>nation, nación</i>), <b>-ty</b> often becomes <b>-dad</b> (<i>city, ciudad; reality, realidad</i>), and <b>-ous</b> becomes <b>-oso</b> (<i>famous, famoso</i>). Thousands of words follow these patterns because both languages borrowed heavily from Latin.</p>
+        <div class="callout"><b>Why they drift</b>Words change meaning over centuries. Spanish <i>embarazada</i> once meant “hindered, encumbered”, and narrowed to “pregnant”. English kept <i>embarrassed</i> for social awkwardness. Same root, different journeys.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="iH">What makes language remarkable</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Ethnologue: Languages of the World (SIL International), for language counts</li>
+    <li>David Crystal, <i>The Cambridge Encyclopedia of Language</i> (3rd ed., 2010)</li>
+    <li>J. P. Mallory and D. Q. Adams, <i>The Oxford Introduction to Proto-Indo-European</i> (2006)</li>
+    <li>George Kingsley Zipf, <i>Human Behavior and the Principle of Least Effort</i> (1949)</li>
+  </ul>
+  <p>Word lists use common modern spellings, with a romanisation in brackets for other scripts. Script conversions are rough letter-by-letter transliterations, not translations.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const LANGES=document.documentElement.lang==="es";
+
+/* ================= 1. cognates ================= */
+const BR=[["Germanic",["English","German","Dutch","Swedish"]],["Romance",["Spanish","French","Italian","Portuguese","Romanian"]],["Slavic",["Russian","Polish"]],["Hellenic",["Greek"]],["Indo-Iranian",["Hindi","Persian"]],["Celtic",["Irish","Welsh"]],["Baltic",["Lithuanian"]]];
+// [word, romanisation or "", cognate?]
+const WORDS={
+ three:{en:"three",root:"*tréyes",w:[["three"],["drei"],["drie"],["tre"],["tres"],["trois"],["tre"],["três"],["trei"],["три","tri"],["trzy"],["τρία","tría"],["तीन","tīn"],["سه","se"],["trí"],["tri"],["trys"]],note:"Every branch kept it. Numbers are among the most stable words in any language, which is why they were key evidence for the family."},
+ new:{en:"new",root:"*néwos",w:[["new"],["neu"],["nieuw"],["ny"],["nuevo"],["nouveau"],["nuovo"],["novo"],["nou"],["новый","novyy"],["nowy"],["νέος","néos"],["नया","nayā"],["نو","now"],["nua"],["newydd"],["naujas"]],note:"The N-vowel-W/V pattern survives almost everywhere, from Persian now to Welsh newydd."},
+ night:{en:"night",root:"*nókʷts",w:[["night"],["Nacht"],["nacht"],["natt"],["noche"],["nuit"],["notte"],["noite"],["noapte"],["ночь","noch’"],["noc"],["νύχτα","nýchta"],["रात","rāt",0],["شب","shab",0],["oíche","",0],["nos"],["naktis"]],note:"Most branches kept it, but Hindi, Persian and Irish replaced it with other words. Sanskrit, Hindi’s ancestor, did have nakta, but rātri won out."},
+ mother:{en:"mother",root:"*méh₂tēr",w:[["mother"],["Mutter"],["moeder"],["mor"],["madre"],["mère"],["madre"],["mãe"],["mamă","",0],["мать","mat’"],["matka"],["μητέρα","mitéra"],["माता","mātā"],["مادر","mâdar"],["máthair"],["mam","",0],["motina"]],note:"Romanian and Welsh swapped in the baby-talk word mama, found all over the world because ma is one of the first sounds babies make."},
+ brother:{en:"brother",root:"*bʰréh₂tēr",w:[["brother"],["Bruder"],["broer"],["bror"],["hermano","",0],["frère"],["fratello"],["irmão","",0],["frate"],["брат","brat"],["brat"],["αδελφός","adelfós",0],["भाई","bhāī"],["برادر","barâdar"],["bráthair"],["brawd"],["brolis"]],note:"Spanish hermano and Portuguese irmão come from Latin germanus, “of the same parents”, which pushed out frater. Greek adelfós means “from the same womb”."}
+};
+const LANGNAMES={English:"English",German:"German",Dutch:"Dutch",Swedish:"Swedish",Spanish:"Spanish",French:"French",Italian:"Italian",Portuguese:"Portuguese",Romanian:"Romanian",Russian:"Russian",Polish:"Polish",Greek:"Greek",Hindi:"Hindi",Persian:"Persian",Irish:"Irish",Welsh:"Welsh",Lithuanian:"Lithuanian",Germanic:"Germanic",Romance:"Romance",Slavic:"Slavic",Hellenic:"Hellenic","Indo-Iranian":"Indo-Iranian",Celtic:"Celtic",Baltic:"Baltic"};
+let CW="three";
+$("#cPick").innerHTML=Object.entries(WORDS).map(([k,v])=>`<button class="pill" data-k="${k}" aria-pressed="${k===CW}">${v.en}</button>`).join("");
+document.querySelectorAll("#cPick .pill").forEach(b=>b.onclick=()=>{CW=b.dataset.k;document.querySelectorAll("#cPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));cRender()});
+function cRender(){const W=WORDS[CW];let i=0;$("#cRoot").innerHTML=`<span class="lbl">Proto-Indo-European</span><b>${W.root}</b>`;
+  $("#cTree").innerHTML=BR.map(([br,langs])=>`<div class="br"><div class="bn">${LANGNAMES[br]}</div>${langs.map(l=>{const [w,rom,cog]=W.w[i++];const same=cog!==0;return `<div class="lw ${same?"same":"diff"}"><span>${LANGNAMES[l]}</span><b>${w}</b>${rom?`<small>${rom}</small>`:""}</div>`}).join("")}</div>`).join("");
+  $("#cNote").textContent=W.note}
+
+/* ================= 2. Zipf ================= */
+function pageText(){return [...document.querySelectorAll("main p, main .callout, main h2, #ideaGrid p")].map(e=>e.textContent).join(" ")}
+function zRun(){const words=($("#zIn").value.toLowerCase().match(/[\p{L}’']+/gu)||[]).map(w=>w.replace(/^[’']+|[’']+$/g,"")).filter(Boolean);
+  const cnt=new Map();words.forEach(w=>cnt.set(w,(cnt.get(w)||0)+1));const arr=[...cnt.entries()].sort((a,b)=>b[1]-a[1]);
+  $("#zWords").textContent=words.length.toLocaleString(LANGES?"es-ES":"en-US");$("#zUniq").textContent=arr.length.toLocaleString(LANGES?"es-ES":"en-US");
+  $("#zTbl").innerHTML=`<tr><th>Rank</th><th>Word</th><th>Count</th><th>Zipf predicts</th></tr>`+arr.slice(0,12).map(([w,n],i)=>`<tr><td>${i+1}</td><td style="font-family:var(--body);font-weight:600">${esc(w)}</td><td>${n}</td><td style="color:var(--muted)">${arr.length?Math.round(arr[0][1]/(i+1)):""}</td></tr>`).join("");
+  const{c,W,H}=setupCanvas($("#zCv"));const acc=css("--accent"),gold=css("--gold"),line=css("--line"),muted=css("--muted");
+  if(!arr.length){c.fillStyle=muted;c.font="13px "+css("--body");c.textAlign="center";c.fillText("Add some text",W/2,H/2);return}
+  const maxR=arr.length,maxF=arr[0][1];const L=40,R=W-12,T=12,B=H-28;const lx=Math.log10(Math.max(10,maxR)),ly=Math.log10(Math.max(10,maxF));
+  const X=r=>L+(R-L)*Math.log10(r)/lx,Y=f=>B-(B-T)*Math.log10(f)/ly;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";for(let p=0;p<=Math.ceil(ly);p++){const f=10**p;if(f>maxF*1.5)break;c.beginPath();c.moveTo(L,Y(f));c.lineTo(R,Y(f));c.stroke();c.fillText(f,L-4,Y(f))}
+  c.textAlign="center";c.textBaseline="alphabetic";for(let p=0;p<=Math.ceil(lx);p++){const r=10**p;if(r>maxR*1.5)break;c.fillText(r,X(r),H-10)}
+  c.strokeStyle=gold;c.lineWidth=2;c.setLineDash([6,4]);c.beginPath();c.moveTo(X(1),Y(maxF));c.lineTo(X(Math.min(maxR,maxF)),Y(Math.max(1,maxF/Math.min(maxR,maxF))));c.stroke();c.setLineDash([]);
+  c.fillStyle=acc;arr.forEach(([w,f],i)=>{c.globalAlpha=i<10?1:.55;c.beginPath();c.arc(X(i+1),Y(f),i<10?4:2.4,0,7);c.fill()});c.globalAlpha=1;
+  c.fillStyle=css("--ink");c.font="600 11px "+css("--body");c.textAlign="left";arr.slice(0,4).forEach(([w,f],i)=>c.fillText(w,X(i+1)+6,Y(f)-6));c.lineWidth=1}
+$("#zIn").oninput=zRun;$("#zPage").onclick=()=>{$("#zIn").value=pageText();zRun()};$("#zClear").onclick=()=>{$("#zIn").value="";zRun();$("#zIn").focus()};
+
+/* ================= 3. scripts ================= */
+const strip=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const MORSE={a:".-",b:"-...",c:"-.-.",d:"-..",e:".",f:"..-.",g:"--.",h:"....",i:"..",j:".---",k:"-.-",l:".-..",m:"--",n:"-.",o:"---",p:".--.",q:"--.-",r:".-.",s:"...",t:"-",u:"..-",v:"...-",w:".--",x:"-..-",y:"-.--",z:"--..",0:"-----",1:".----",2:"..---",3:"...--",4:"....-",5:".....",6:"-....",7:"--...",8:"---..",9:"----."};
+const BRL={a:"⠁",b:"⠃",c:"⠉",d:"⠙",e:"⠑",f:"⠋",g:"⠛",h:"⠓",i:"⠊",j:"⠚",k:"⠅",l:"⠇",m:"⠍",n:"⠝",o:"⠕",p:"⠏",q:"⠟",r:"⠗",s:"⠎",t:"⠞",u:"⠥",v:"⠧",w:"⠺",x:"⠭",y:"⠽",z:"⠵"," ":"⠀"};
+const NATO=["Alfa","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","India","Juliett","Kilo","Lima","Mike","November","Oscar","Papa","Quebec","Romeo","Sierra","Tango","Uniform","Victor","Whiskey","X-ray","Yankee","Zulu"];
+const GR_DI={th:"θ",ph:"φ",ch:"χ",ps:"ψ",ks:"ξ",sh:"σ"},GR={a:"α",b:"β",c:"κ",d:"δ",e:"ε",f:"φ",g:"γ",h:"η",i:"ι",j:"ι",k:"κ",l:"λ",m:"μ",n:"ν",o:"ο",p:"π",q:"κ",r:"ρ",s:"σ",t:"τ",u:"ου",v:"β",w:"ω",x:"ξ",y:"υ",z:"ζ","ñ":"νι"};
+const CY_DI={shch:"щ",sh:"ш",ch:"ч",zh:"ж",ts:"ц",ya:"я",yu:"ю",kh:"х"},CY={a:"а",b:"б",c:"к",d:"д",e:"е",f:"ф",g:"г",h:"х",i:"и",j:"дж",k:"к",l:"л",m:"м",n:"н",o:"о",p:"п",q:"к",r:"р",s:"с",t:"т",u:"у",v:"в",w:"в",x:"кс",y:"й",z:"з","ñ":"нь"};
+function translit(s,di,map){s=s.toLowerCase().normalize("NFC").replace(/[áàä]/g,"a").replace(/[éèë]/g,"e").replace(/[íìï]/g,"i").replace(/[óòö]/g,"o").replace(/[úùü]/g,"u");let out="";
+  for(let i=0;i<s.length;){let hit=false;for(const k of Object.keys(di).sort((a,b)=>b.length-a.length)){if(s.startsWith(k,i)){out+=di[k];i+=k.length;hit=true;break}}if(hit)continue;const ch=s[i];out+=map[ch]??ch;i++}
+  return out.replace(/σ(?=[^\p{L}]|$)/gu,"ς").replace(/(^|\s)(\p{L})/gu,(m,a,b)=>a+b.toUpperCase())}
+function sRender(){const v=$("#sIn").value;const plain=strip(v);
+  const rows=[["Greek",translit(v,GR_DI,GR),"Greek alphabet, c. 800 BCE"],["Cyrillic",translit(v,CY_DI,CY),"Used for Russian, Ukrainian, Serbian…"],["Braille",[...plain].map(ch=>BRL[ch]??"").join(""),"Raised dots, read by touch"],["Morse code",[...plain].map(ch=>ch===" "?"/":MORSE[ch]||"").filter(Boolean).join("  "),"Dots and dashes, 1830s–40s"],["NATO alphabet",[...plain].filter(ch=>/[a-z]/.test(ch)).map(ch=>NATO[ch.charCodeAt(0)-97]).join(" · "),"Spelled out over radio"],["Binary (ASCII)",[...v.normalize("NFC")].filter(ch=>ch.charCodeAt(0)<128).map(ch=>ch.charCodeAt(0).toString(2).padStart(8,"0")).join(" "),"How a computer stores it"]];
+  $("#sOut").innerHTML=rows.map(([n,t,d],i)=>`<div class="scr${i===2?" brl":""}${i>=3?" small":""}"><div class="sh"><b>${n}</b><small>${d}</small></div><div class="st">${esc(t)||"–"}</div></div>`).join("")}
+$("#sIn").oninput=sRender;
+let actx;$("#sPlay").onclick=()=>{const plain=strip($("#sIn").value);actx=actx||new (window.AudioContext||window.webkitAudioContext)();const u=.08;let t=actx.currentTime+.05;
+  const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=620;o.connect(g);g.connect(actx.destination);g.gain.value=0;o.start(t);
+  for(const ch of plain){if(ch===" "){t+=u*4;continue}const m=MORSE[ch];if(!m)continue;for(const s of m){const d=s==="."?u:u*3;g.gain.setValueAtTime(.18,t);g.gain.setValueAtTime(0,t+d);t+=d+u}t+=u*2}o.stop(t+.1)};
+
+/* ================= 4. false friends ================= */
+// [word, meaning, trap]
+const FF_EN=[["embarazada","pregnant","embarrassed"],["éxito","success","exit"],["librería","bookshop","library"],["carpeta","folder","carpet"],["constipado","having a cold","constipated"],["actual","current, present-day","actual"],["sensible","sensitive","sensible"],["asistir","to attend","to assist"],["realizar","to carry out","to realise"],["ropa","clothes","rope"],["fábrica","factory","fabric"],["recordar","to remember","to record"],["sopa","soup","soap"],["largo","long","large"],["parientes","relatives","parents"],["discusión","argument","discussion"]];
+const FF_ES=[["embarrassed","avergonzado","embarazada"],["exit","salida","éxito"],["library","biblioteca","librería"],["carpet","alfombra","carpeta"],["constipated","estreñido","constipado"],["actually","en realidad","actualmente"],["sensible","sensato","sensible"],["to assist","ayudar","asistir"],["to realize","darse cuenta","realizar"],["rope","cuerda","ropa"],["fabric","tela","fábrica"],["to record","grabar","recordar"],["soap","jabón","sopa"],["large","grande","largo"],["parents","padres","parientes"],["casualty","víctima","casualidad"]];
+const FF=LANGES?FF_ES:FF_EN;const Q={order:[],i:-1,right:0,tot:0,done:false};
+function qNext(){if(!Q.order.length)Q.order=FF.map((_,i)=>i).sort(()=>Math.random()-.5);Q.i=Q.order.pop();Q.done=false;const f=FF[Q.i];
+  const other=FF.filter((_,i)=>i!==Q.i)[Math.floor(Math.random()*(FF.length-1))][1];const opts=[f[1],f[2],other].sort(()=>Math.random()-.5);
+  $("#qWord").textContent=f[0];$("#qMsg").textContent="";$("#qOpts").innerHTML=opts.map(o=>`<button>${esc(o)}</button>`).join("");
+  document.querySelectorAll("#qOpts button").forEach(b=>b.onclick=()=>{if(Q.done)return;Q.done=true;Q.tot++;const ok=b.textContent===f[1];if(ok)Q.right++;
+    document.querySelectorAll("#qOpts button").forEach(x=>{if(x.textContent===f[1])x.classList.add("right");else if(x===b)x.classList.add("wrong")});
+    $("#qMsg").innerHTML=ok?`<b>Right.</b> <i>${esc(f[0])}</i> means “${esc(f[1])}”.`:`<b>False friend!</b> <i>${esc(f[0])}</i> means “${esc(f[1])}”, not “${esc(f[2])}”.`;$("#qScore").textContent=`Score ${Q.right} / ${Q.tot}`})}
+$("#qNext").onclick=qNext;
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["About 7,000 languages","Ethnologue counts a little over 7,000 living languages. Around 40% are endangered, many with only a few speakers left. About half the world’s people have one of just two dozen or so languages as their first language."],
+ ["Sign languages are languages","There are hundreds of sign languages, with their own grammar and vocabulary. American Sign Language is closer to French Sign Language than to British Sign Language, because of history, not geography."],
+ ["The Rosetta Stone","Found in Egypt in 1799, it carries the same decree in hieroglyphs, Demotic and Greek. Using it, Jean-François Champollion announced in 1822 that he could read hieroglyphs."],
+ ["Whistled Spanish","On La Gomera in the Canary Islands, Silbo Gomero turns Spanish into whistles that carry for kilometres across ravines. UNESCO added it to its intangible heritage list in 2009, and it is taught in local schools."],
+ ["Children are linguistic geniuses","Babies can hear the sound differences of every language, then gradually tune in to the ones around them. Children pick up grammar without being taught it explicitly, which is why language learning is easiest when young."],
+ ["Does language shape thought?","The strong version, that you can’t think what your language can’t say, has little support. A weaker version has some: speakers of languages with many words for blues, like Russian, tell those shades apart slightly faster."],
+ ["Tiny alphabets, huge ones","Hawaiian writes with 13 letters, Rotokas in Papua New Guinea with 12. Khmer has the longest alphabet, with over 70 letters. Chinese uses thousands of characters, each standing for a syllable with meaning."],
+ ["Invented languages","L. L. Zamenhof published Esperanto in 1887 hoping to unite people. Estimates of fluent speakers today range from tens of thousands to a couple of million, and some children have been raised speaking it natively. Klingon and Dothraki were built for fiction."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3></div><p>${a[1]}</p></article>`).join("");
+
+/* ================= boot ================= */
+cRender();sRender();qNext();$("#zIn").value=pageText();zRun();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(zRun,120)});addEventListener("themechange",zRun);
+</script>
+</body>
+</html>

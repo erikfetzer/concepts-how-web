@@ -19,6 +19,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Probability | `probability.html` | Monty Hall with N doors and 1,000-game simulation, birthday paradox curve and random rooms, animated Galton board, coin-flip law of large numbers, Bayes medical-test grid |
 | Codes & encryption | `codes.html` | Caesar wheel, frequency-analysis cracker, Vigenère with flattened frequencies, SHA-256 avalanche, Diffie–Hellman paint mixing and numbers, toy RSA |
 | Infinity | `infinity.html` | Hilbert’s hotel animation, Cantor zigzag through the fractions, interactive diagonal argument, convergent and divergent series, Mandelbrot zoom, “which infinity is bigger” quiz |
+| Language | `language.html` | Indo-European cognate explorer, Zipf’s law on any text, name in Greek/Cyrillic/Braille/Morse/NATO/binary with Morse audio, English–Spanish false friends quiz |
 
 ## Spanish
 
