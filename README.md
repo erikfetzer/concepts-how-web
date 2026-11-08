@@ -25,6 +25,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Light & color | `light.html` | Prism and electromagnetic spectrum, additive vs subtractive mixing, Rayleigh-scattering sky with sun-height slider, cone sensitivity and color-blindness simulation, simultaneous-contrast illusion |
 | Algorithms | `algorithms.html` | Five-way sorting race, binary-search number guesser, BFS/DFS/greedy/A* pathfinding on a drawable grid, Big-O growth table, travelling salesperson with nearest neighbour, 2-opt and brute force |
 | Biases & the mind | `mind.html` | Adjustable Müller-Lyer/Ebbinghaus/Ponzo illusions, Cognitive Reflection Test, reaction timer, Stroop test, digit span, 22-bias field guide |
+| Music & sound | `music.html` | Live synth with oscilloscope, harmonic builder with instrument presets, playable keyboard with interval ratios, beats, Doppler/Mach-cone animation, hearing-range tones and decibel scale |
 
 ## Spanish
 

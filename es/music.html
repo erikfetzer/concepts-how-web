@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Música y sonido · concepts.how</title>
+<meta name="description" content="Crea ondas de sonido y míralas en un osciloscopio, construye instrumentos con armónicos, descubre por qué suenan bien los intervalos, escucha los batidos, mira el efecto Doppler y pon a prueba tu oído.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/music">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/music">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Música y sonido · concepts.how">
+<meta property="og:description" content="Crea ondas de sonido y míralas en un osciloscopio, construye instrumentos con armónicos, descubre por qué suenan bien los intervalos, escucha los batidos, mira el efecto Doppler y pon a prueba tu oído.">
+<meta property="og:url" content="https://concepts.how/music">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Música y sonido · concepts.how">
+<meta name="twitter:description" content="Crea ondas de sonido y míralas en un osciloscopio, construye instrumentos con armónicos, descubre por qué suenan bien los intervalos, escucha los batidos, mira el efecto Doppler y pon a prueba tu oído.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* music */
+.hbars{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;height:170px}
+.hb{display:grid;grid-template-rows:1fr auto;justify-items:center;gap:4px}
+.hb input{writing-mode:vertical-lr;direction:rtl;width:28px;height:100%;accent-color:var(--accent);margin:0}
+.hb span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.keys2{position:relative;display:grid;grid-template-columns:repeat(14,1fr);height:150px;user-select:none;-webkit-user-select:none}
+.keys2 .k{border:1px solid var(--line);cursor:pointer;touch-action:manipulation;padding:0}
+.keys2 .w{background:#fff;border-radius:0 0 6px 6px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}
+.keys2 .w span{font-family:var(--mono);font-size:10px;color:#667}
+.keys2 .b{position:absolute;top:0;width:calc(100% / 14 * .64);height:60%;background:#111827;border-color:#111827;border-radius:0 0 4px 4px;z-index:2}
+.keys2 .k.hl{background:color-mix(in srgb,var(--gold) 45%,#fff)}
+.keys2 .b.hl{background:#a16207}
+.keys2 .k.on{background:var(--accent)!important}
+.tones{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.tn{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:10px;text-align:left;cursor:pointer;display:grid;gap:2px;font:inherit;color:inherit}
+.tn b{font-family:var(--mono);font-size:15px}.tn span{font-size:12px;color:var(--muted)}
+.tn.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.db{display:grid;gap:6px}
+.dbr{display:grid;grid-template-columns:36px 1fr;gap:4px 10px;align-items:center}
+.dbr b{font-family:var(--mono);font-size:13px;text-align:right}
+.dbr div{height:12px;border-radius:999px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.dbr i{display:block;height:100%}
+.dbr span{grid-column:2;font-size:12.5px;color:var(--muted);margin-top:-2px}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <a class="nl" href="money.html">Dinero</a>
+    <a class="nl" href="light.html">Luz y color</a>
+    <a class="nl" href="algorithms.html">Algoritmos</a>
+    <a class="nl" href="mind.html">Sesgos y mente</a>
+    <a class="nl" href="music.html" aria-current="page">Música y sonido</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../music.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="music.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Música y sonido</b> · ondas que se oyen</div>
+    <h1>Toda canción es solo <em>aire que vibra.</em></h1>
+    <p class="lede">El sonido es una onda de presión que viaja por el aire a unos 343 metros por segundo. Lo rápido que vibra marca el tono; lo grandes que son las vibraciones, el volumen; y la mezcla de vibraciones añadidas hace que una flauta suene distinta de un violín. Crea ondas, construye instrumentos con armónicos y descubre por qué algunas notas suenan bien juntas. Activa el sonido, pero con un volumen moderado.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#wave">Crea una onda</a><a href="#harmonics">Armónicos</a><a href="#intervals">Armonía</a><a href="#beats">Batidos</a><a href="#doppler">El efecto Doppler</a><a href="#hearing">El oído</a><a href="#ideas">Grandes ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. wave ============ -->
+  <section class="block" id="wave" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · crea una onda</span>
+      <h2 id="wH">Tono, volumen y forma</h2>
+      <p>El cono de un altavoz empuja el aire adelante y atrás. El número de empujones por segundo es la frecuencia, que se mide en hercios (Hz). Si duplicas la frecuencia, la nota sube una octava. Si cambias la forma de la onda, la misma nota adquiere otro carácter, o timbre.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="wCv" height="220" aria-label="Osciloscopio que muestra la onda de sonido"></canvas>
+        <div class="seg" id="wType"></div>
+        <div class="sl"><label for="wF">Frecuencia <span id="wFV"></span></label><input type="range" id="wF" min="0" max="1000" value="500"></div>
+        <div class="sl"><label for="wV">Volumen <span id="wVV"></span></label><input type="range" id="wV" min="0" max="100" value="40"></div>
+        <button class="btn" id="wPlay">▶ Reproducir</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Nota más cercana</div><div class="v" id="wNote"></div></div>
+          <div class="ro"><div class="k">Vibraciones por segundo</div><div class="v" id="wHz"></div></div>
+          <div class="ro"><div class="k">Longitud de onda en el aire</div><div class="v" id="wLen"></div></div>
+        </div>
+        <div class="callout"><b>El diapasón</b>El La por encima del Do central se afina a 440 Hz, un estándar internacional desde 1955. Las orquestas a veces afinan algo más alto, hacia 442 Hz, para lograr un sonido más brillante.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. harmonics ============ -->
+  <section class="block" id="harmonics" aria-labelledby="hH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · construye un instrumento</span>
+      <h2 id="hH">Armónicos: por qué una flauta no es un violín</h2>
+      <p>Un instrumento real toca una nota principal, la fundamental, más otros armónicos más suaves a 2, 3, 4… veces su frecuencia. La receta de armónicos es la huella del instrumento. En 1822 Joseph Fourier demostró que cualquier onda periódica se puede construir así. Arrastra las barras o elige un ejemplo y escucha.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="hCv" height="160" aria-label="La forma de onda combinada"></canvas>
+        <div class="hbars" id="hBars"></div>
+      </div>
+      <div class="panel stack">
+        <div class="seg" id="hPre"></div>
+        <button class="btn" id="hPlay">▶ Escuchar este sonido</button>
+        <p id="hTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>Solo armónicos impares</b>Un clarinete es un tubo cerrado por un extremo, lo que permite sobre todo armónicos impares: 1, 3, 5, 7… Eso le da su tono hueco y amaderado. Una onda cuadrada tiene la misma receta.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. intervals ============ -->
+  <section class="block" id="intervals" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · armonía</span>
+      <h2 id="iH">Por qué algunas notas suenan bien juntas</h2>
+      <p>Se dice que Pitágoras notó que los intervalos agradables salen de proporciones sencillas entre longitudes de cuerda: 2:1 para una octava, 3:2 para una quinta. Cuando dos frecuencias encajan en una proporción sencilla, sus ondas coinciden a menudo y el dibujo combinado se repite enseguida. Toca el teclado o elige un intervalo.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <div class="keys2" id="kb"></div>
+        <canvas class="cv" id="iCv" height="200" aria-label="Dos ondas y su combinación"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="seg" id="iPick"></div>
+        <button class="btn" id="iPlay">▶ Escuchar el intervalo</button>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Proporción sencilla</div><div class="v" id="iRatio"></div></div>
+          <div class="ro"><div class="k">En un piano</div><div class="v" id="iEq"></div></div>
+        </div>
+        <p id="iTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>El compromiso del piano</b>Las proporciones sencillas no encajan perfectamente al dar la vuelta a todas las teclas. Los pianos modernos usan el temperamento igual: cada semitono multiplica la frecuencia por la raíz duodécima de 2 (unos 1,0595). Todas las tonalidades funcionan igual de bien, y casi todos los intervalos están ligerísimamente desafinados.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. beats ============ -->
+  <section class="block" id="beats" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · interferencia</span>
+      <h2 id="bH">Batidos: dos notas que se pelean</h2>
+      <p>Toca dos notas casi, pero no del todo, iguales. Sus ondas entran y salen de fase, así que el sonido crece y se apaga: «uá-uá-uá». El número de batidos por segundo es la diferencia entre las dos frecuencias. Los músicos afinan haciendo que los batidos vayan más despacio hasta desaparecer.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="bCv" height="200" aria-label="Dos frecuencias cercanas y el patrón de batido"></canvas>
+        <div class="sl"><label for="bD">La segunda nota es más alta en <span id="bDV"></span></label><input type="range" id="bD" min="0" max="12" step="0.5" value="3"></div>
+        <button class="btn" id="bPlay">▶ Escuchar las dos notas</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Notas</div><div class="v" id="bNotes"></div></div>
+          <div class="ro"><div class="k">Batidos por segundo</div><div class="v" id="bBeats" style="color:var(--accent)"></div></div>
+        </div>
+        <p style="margin:0;font-size:14.5px">La misma interferencia hace funcionar los auriculares con cancelación de ruido: reproducen un sonido exactamente opuesto al ruido, y las dos ondas se anulan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Doppler ============ -->
+  <section class="block" id="doppler" aria-labelledby="dH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · sonidos en movimiento</span>
+      <h2 id="dH">El efecto Doppler</h2>
+      <p>La sirena de una ambulancia suena más aguda cuando se acerca y más grave cuando se aleja. Las ondas de delante se aprietan y las de detrás se estiran. Christian Doppler lo predijo en 1842; en 1845 se comprobó con trompetistas en un tren en marcha. Supera la velocidad del sonido y las ondas se amontonan en una onda de choque: un estampido sónico.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="dCv" height="280" aria-label="Frentes de onda de una fuente en movimiento"></canvas>
+        <div class="sl"><label for="dV">Velocidad <span id="dVV"></span></label><input type="range" id="dV" min="0" max="1.6" step="0.02" value="0.5"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Tono de la sirena</div><div class="v">700 Hz</div></div>
+          <div class="ro"><div class="k">Se oye delante</div><div class="v" id="dFront" style="color:var(--hot)"></div></div>
+          <div class="ro"><div class="k">Se oye detrás</div><div class="v" id="dBack" style="color:var(--accent)"></div></div>
+        </div>
+        <p id="dTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>No solo el sonido</b>La luz también lo hace. Las galaxias que se alejan de nosotros se ven más rojas: el corrimiento al rojo que reveló que el universo se expande. Los radares de la policía y los meteorológicos usan el efecto Doppler para medir velocidades.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. hearing ============ -->
+  <section class="block" id="hearing" aria-labelledby="eH">
+    <div class="shead">
+      <span class="eyebrow">Demo 6 · tus oídos</span>
+      <h2 id="eH">¿Hasta dónde oyes?</h2>
+      <p>Los jóvenes oyen desde unos 20 Hz hasta 20 000 Hz. Con la edad y con el ruido fuerte, el límite superior baja. Empieza por abajo y ve subiendo; para cuando no oigas nada. Mantén el volumen bajo: los tonos agudos pueden resultar molestos. Los altavoces de móviles y portátiles quizá no reproduzcan los más agudos.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="tones" id="tones"></div>
+        <p style="margin:0;font-size:13.5px;color:var(--muted)">Cada tono suena un segundo, bajito.</p>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">¿Cuánto es fuerte? (decibelios)</span>
+        <div class="db" id="db"></div>
+        <div class="callout"><b>Los decibelios multiplican</b>Cada 10 dB son diez veces más energía sonora, así que 100 dB es mil millones de veces más intenso que 10 dB. La exposición prolongada a más de unos 85 dB, como el tráfico denso o unos auriculares altos, puede dañar el oído para siempre.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Grandes ideas</span>
+      <h2 id="idH">De las cuerdas que vibran a los MP3</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Hermann von Helmholtz, <i>On the Sensations of Tone</i> (1863)</li>
+    <li>John R. Pierce, <i>The Science of Musical Sound</i> (1983)</li>
+    <li>Organización Internacional de Normalización, ISO 16: frecuencia de afinación estándar (1975)</li>
+    <li>Organización Mundial de la Salud, <i>Make Listening Safe</i> (orientaciones para escuchar sin riesgos)</li>
+  </ul>
+  <p>Los sonidos se generan en directo en tu navegador. Lo que oigas depende de tus altavoces o auriculares; los altavoces pequeños no pueden reproducir notas muy graves ni muy agudas.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const NOTES=["Do","Do♯","Re","Re♯","Mi","Fa","Fa♯","Sol","Sol♯","La","La♯","Si"];
+const noteName=f=>{const n=Math.round(12*Math.log2(f/440)+69);return NOTES[(n%12+12)%12]+(Math.floor(n/12)-1)};
+let AC=null,MASTER=null;function ac(){if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();MASTER=AC.createGain();MASTER.gain.value=.5;MASTER.connect(AC.destination)}if(AC.state==="suspended")AC.resume();return AC}
+function tone(freq,dur=1,type="sine",vol=.15,when=0,wave=null){const a=ac();const o=a.createOscillator(),g=a.createGain();if(wave)o.setPeriodicWave(wave);else o.type=type;o.frequency.value=freq;const t=a.currentTime+when;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.02);g.gain.setValueAtTime(vol,t+dur-.08);g.gain.linearRampToValueAtTime(0,t+dur);o.connect(g);g.connect(MASTER);o.start(t);o.stop(t+dur+.02);return o}
+
+/* ================= 1. wave ================= */
+const WV={type:"sine",osc:null,gain:null,an:null,raf:0};
+const TYPES=[["sine","Senoidal"],["square","Cuadrada"],["sawtooth","Diente de sierra"],["triangle","Triangular"]];
+$("#wType").innerHTML=TYPES.map(([k,l],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join("");
+document.querySelectorAll("#wType .pill").forEach(b=>b.onclick=()=>{WV.type=b.dataset.k;document.querySelectorAll("#wType .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));if(WV.osc)WV.osc.type=WV.type;wUpd()});
+const wFreq=()=>55*Math.pow(2,+$("#wF").value/1000*5);
+function wUpd(){const f=wFreq(),v=+$("#wV").value/100;$("#wFV").textContent=fmt(f)+" Hz";$("#wVV").textContent=Math.round(v*100)+"%";$("#wNote").textContent=noteName(f);$("#wHz").textContent=fmt(f);
+  const L=343/f;$("#wLen").textContent=L>=1?fmt(L,2)+" m":fmt(L*100,1)+" cm";
+  if(WV.osc){WV.osc.frequency.setTargetAtTime(f,AC.currentTime,.02);WV.gain.gain.setTargetAtTime(v*.25,AC.currentTime,.02)}if(!WV.osc)wDraw()}
+function wave(type,x){const p=x-Math.floor(x);switch(type){case"sine":return Math.sin(2*Math.PI*x);case"square":return p<.5?1:-1;case"sawtooth":return 2*p-1;default:return 1-4*Math.abs(p-.5)}}
+function wDraw(){const{c,W,H}=setupCanvas($("#wCv"));const acc=css("--accent"),line=css("--line");c.strokeStyle=line;c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();
+  const f=wFreq(),v=+$("#wV").value/100;c.strokeStyle=acc;c.lineWidth=2.5;c.beginPath();
+  if(WV.an){const buf=new Float32Array(WV.an.fftSize);WV.an.getFloatTimeDomainData(buf);let start=0;for(let i=1;i<buf.length/2;i++){if(buf[i-1]<0&&buf[i]>=0){start=i;break}}const n=Math.min(buf.length-start,Math.round(AC.sampleRate*.01));for(let i=0;i<n;i++){const x=W*i/n,y=H/2-buf[start+i]*H*1.6;i?c.lineTo(x,y):c.moveTo(x,y)}}
+  else{const cycles=Math.max(1,Math.min(30,f*.01));for(let i=0;i<=W;i++){const y=H/2-wave(WV.type,cycles*i/W)*(H*.42)*v*1.6;i?c.lineTo(i,y):c.moveTo(i,y)}}
+  c.stroke();c.lineWidth=1;c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";c.fillText(LANGES?"10 milisegundos":"10 milliseconds",W-6,H-8)}
+function wLoop(){wDraw();WV.raf=requestAnimationFrame(wLoop)}
+$("#wPlay").onclick=()=>{if(WV.osc){WV.gain.gain.setTargetAtTime(0,AC.currentTime,.03);const o=WV.osc;setTimeout(()=>o.stop(),150);WV.osc=null;WV.an=null;cancelAnimationFrame(WV.raf);$("#wPlay").textContent="▶ Reproducir";wDraw();return}
+  const a=ac();WV.osc=a.createOscillator();WV.osc.type=WV.type;WV.osc.frequency.value=wFreq();WV.gain=a.createGain();WV.gain.gain.value=0;WV.an=a.createAnalyser();WV.an.fftSize=4096;
+  WV.osc.connect(WV.gain);WV.gain.connect(WV.an);WV.an.connect(MASTER);WV.osc.start();WV.gain.gain.setTargetAtTime(+$("#wV").value/100*.25,a.currentTime,.03);$("#wPlay").textContent="■ Parar";wLoop()};
+$("#wF").oninput=wUpd;$("#wV").oninput=wUpd;
+
+/* ================= 2. harmonics ================= */
+const NH=8;const HM={amp:[1,0,0,0,0,0,0,0]};
+const PRE=[["Tono puro",[1,0,0,0,0,0,0,0],"Una onda senoidal pura, una sola frecuencia. Electrónica y algo sosa: ningún instrumento real suena así."],["Tipo flauta",[1,.35,.12,.05,0,0,0,0],"Casi todo fundamental con unos pocos armónicos débiles: suave y aireada."],["Tipo clarinete",[1,0,.55,0,.35,0,.2,0],"Solo armónicos impares, de un tubo cerrado por un extremo: hueca y amaderada."],["Tipo violín",[1,.8,.62,.5,.4,.32,.25,.2],"Muchos armónicos fuertes de una cuerda frotada: brillante y rica."],["Onda cuadrada",[1,0,.33,0,.2,0,.14,0],"Armónicos impares a 1, 1/3, 1/5… El sonido de los videojuegos antiguos."],["Diente de sierra",[1,.5,.33,.25,.2,.17,.14,.125],"Todos los armónicos con intensidad 1/n: zumbona y metálica, la favorita de los sintetizadores."]];
+$("#hPre").innerHTML=PRE.map((p,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${p[0]}</button>`).join("");
+document.querySelectorAll("#hPre .pill").forEach(b=>b.onclick=()=>{const p=PRE[+b.dataset.i];HM.amp=p[1].slice();$("#hTxt").textContent=p[2];document.querySelectorAll("#hPre .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));hDraw()});
+function hDraw(){$("#hBars").innerHTML=HM.amp.map((a,i)=>`<label class="hb"><input type="range" orient="vertical" min="0" max="100" value="${Math.round(a*100)}" data-i="${i}" aria-label="Armónico ${i+1}"><span>${i+1}×</span></label>`).join("");
+  document.querySelectorAll("#hBars input").forEach(inp=>inp.oninput=()=>{HM.amp[+inp.dataset.i]=+inp.value/100;document.querySelectorAll("#hPre .pill").forEach(x=>x.setAttribute("aria-pressed","false"));hWave()});hWave()}
+function hWave(){const{c,W,H}=setupCanvas($("#hCv"));const acc=css("--accent"),line=css("--line");const N=400;const ys=[];let mx=0;for(let i=0;i<=N;i++){const x=i/N*2;let y=0;HM.amp.forEach((a,k)=>y+=a*Math.sin(2*Math.PI*(k+1)*x));ys.push(y);mx=Math.max(mx,Math.abs(y))}
+  c.strokeStyle=line;c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();c.strokeStyle=acc;c.lineWidth=2.5;c.beginPath();ys.forEach((y,i)=>{const px=W*i/N,py=H/2-y/(mx||1)*H*.42;i?c.lineTo(px,py):c.moveTo(px,py)});c.stroke();c.lineWidth=1}
+$("#hPlay").onclick=()=>{const a=ac();const real=new Float32Array(NH+1),imag=new Float32Array(NH+1);HM.amp.forEach((v,i)=>imag[i+1]=v);const w=a.createPeriodicWave(real,imag);tone(220,1.6,null,.18,0,w)};
+
+/* ================= 3. intervals ================= */
+const IV=[["Unísono",0,[1,1],"La misma nota dos veces. Perfectamente acompasadas."],["Octava",12,[2,1],"El doble de frecuencia. Suena como la «misma» nota, más aguda. Casi todas las culturas musicales tratan las octavas como equivalentes."],["Quinta justa",7,[3,2],"Muy estable y abierta. La columna vertebral de casi toda la armonía occidental y de los power chords del rock."],["Cuarta justa",5,[4,3],"Estable, algo suspendida. El comienzo de la Marcha nupcial de Wagner."],["Tercera mayor",4,[5,4],"Brillante y alegre: el núcleo de un acorde mayor."],["Tercera menor",3,[6,5],"Más oscura y triste: el núcleo de un acorde menor."],["Tritono",6,[45,32],"Tensa e inquieta. Desde hace mucho la llaman «el diablo en la música»."],["Semitono",1,[16,15],"Dos teclas vecinas: un choque áspero, usado para crear tensión en la música de cine."]];
+let IVI=4,ROOT=261.63;
+$("#iPick").innerHTML=IV.map((v,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===IVI}">${v[0]}</button>`).join("");
+document.querySelectorAll("#iPick .pill").forEach(b=>b.onclick=()=>{IVI=+b.dataset.i;document.querySelectorAll("#iPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));iUpd();iPlay()});
+function iUpd(){const v=IV[IVI];const eq=Math.pow(2,v[1]/12),just=v[2][0]/v[2][1];const cents=1200*Math.log2(eq/just);
+  $("#iRatio").textContent=`${v[2][0]}:${v[2][1]}`;$("#iEq").textContent=fmt(eq,3).replace(/0+$/,"").replace(/[.,]$/,"")+" ×";
+  $("#iTxt").innerHTML=v[3]+(v[1]?` La versión del piano ${Math.abs(cents)<.5?"es exactamente igual":`se desvía ${fmt(Math.abs(cents),0)} cents (centésimas de semitono)`}.`:"");
+  const{c,W,H}=setupCanvas($("#iCv"));const acc=css("--accent"),hot=css("--hot"),ink=css("--ink"),line=css("--line");const rows=[[1,acc],[just,hot]];const cyc=4;
+  rows.forEach(([r,col],k)=>{const y0=H*(k*.22+.13);c.strokeStyle=col;c.lineWidth=2;c.beginPath();for(let i=0;i<=W;i++){const y=y0-Math.sin(2*Math.PI*r*cyc*i/W)*H*.08;i?c.lineTo(i,y):c.moveTo(i,y)}c.stroke()});
+  const y0=H*.74;c.strokeStyle=line;c.beginPath();c.moveTo(0,y0);c.lineTo(W,y0);c.stroke();c.strokeStyle=ink;c.lineWidth=2.4;c.beginPath();for(let i=0;i<=W;i++){const t=cyc*i/W;const y=y0-(Math.sin(2*Math.PI*t)+Math.sin(2*Math.PI*just*t))*H*.1;i?c.lineTo(i,y):c.moveTo(i,y)}c.stroke();c.lineWidth=1;
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="left";c.fillText(LANGES?"juntas":"together",4,H-6);
+  document.querySelectorAll("#kb .k").forEach(k=>k.classList.toggle("hl",+k.dataset.s===0||+k.dataset.s===v[1]))}
+function iPlay(){const v=IV[IVI];const f2=ROOT*Math.pow(2,v[1]/12);tone(ROOT,1.4,"triangle",.14);tone(f2,1.4,"triangle",.14,.5)}
+$("#iPlay").onclick=iPlay;
+(function(){const white=[0,2,4,5,7,9,11,12,14,16,17,19,21,23];const black=[1,3,6,8,10,13,15,18,20,22];let h="";
+  white.forEach((s,i)=>h+=`<button class="k w" data-s="${s}" aria-label="${noteName(ROOT*Math.pow(2,s/12))}"><span>${NOTES[s%12]}</span></button>`);
+  black.forEach(s=>{const before=white.filter(w=>w<s).length;h+=`<button class="k b" data-s="${s}" style="left:calc(${before} * (100% / 14) - (100% / 14) * .32)" aria-label="${noteName(ROOT*Math.pow(2,s/12))}"></button>`});
+  $("#kb").innerHTML=h;document.querySelectorAll("#kb .k").forEach(k=>k.addEventListener("pointerdown",e=>{e.preventDefault();tone(ROOT*Math.pow(2,+k.dataset.s/12),.8,"triangle",.16);k.classList.add("on");setTimeout(()=>k.classList.remove("on"),180)}))})();
+
+/* ================= 4. beats ================= */
+function bDraw(){const d=+$("#bD").value;$("#bDV").textContent=fmt(d,1)+" Hz";$("#bNotes").textContent=`440 + ${fmt(440+d,1)}`;$("#bBeats").textContent=fmt(d,1);
+  const{c,W,H}=setupCanvas($("#bCv"));const acc=css("--accent"),hot=css("--hot"),ink=css("--ink"),gold=css("--gold");const T=2;// seconds shown
+  // envelope only (waves too fast to show): draw carrier as dense fill
+  const y0=H/2;c.fillStyle=acc;c.globalAlpha=.25;c.beginPath();for(let i=0;i<=W;i++){const t=T*i/W;const env=Math.abs(Math.cos(Math.PI*d*t));const y=y0-env*H*.42;i?c.lineTo(i,y):c.moveTo(i,y)}for(let i=W;i>=0;i--){const t=T*i/W;const env=Math.abs(Math.cos(Math.PI*d*t));c.lineTo(i,y0+env*H*.42)}c.closePath();c.fill();c.globalAlpha=1;
+  c.strokeStyle=acc;c.lineWidth=2;c.beginPath();for(let i=0;i<=W;i++){const t=T*i/W;const y=y0-Math.abs(Math.cos(Math.PI*d*t))*H*.42;i?c.lineTo(i,y):c.moveTo(i,y)}c.stroke();c.beginPath();for(let i=0;i<=W;i++){const t=T*i/W;const y=y0+Math.abs(Math.cos(Math.PI*d*t))*H*.42;i?c.lineTo(i,y):c.moveTo(i,y)}c.stroke();c.lineWidth=1;
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="left";c.fillText("0 s",4,H-6);c.textAlign="right";c.fillText("2 s",W-4,H-6)}
+$("#bD").oninput=bDraw;$("#bPlay").onclick=()=>{const d=+$("#bD").value;tone(440,3,"sine",.12);tone(440+d,3,"sine",.12)};
+
+/* ================= 5. Doppler ================= */
+const DP={t:0,raf:0,vis:false,last:0};
+function dDraw(){const v=+$("#dV").value;$("#dVV").textContent=v===0?"parada":`${fmt(v,2)} × la velocidad del sonido`+(v>=1?" (supersonic)":"");
+  const f=700;$("#dFront").textContent=v<1?fmt(f/(1-v))+" Hz":LANGES?"boom":"boom";$("#dBack").textContent=fmt(f/(1+v))+" Hz";
+  $("#dTxt").textContent=v===0?"Parada: las ondas se extienden por igual en todas direcciones.":v<1?"En movimiento: las ondas se apiñan delante (tono más agudo) y se separan detrás (tono más grave).":v<1.02?"A la velocidad del sonido, la fuente alcanza sus propias ondas, que se amontonan en un muro de presión: la «barrera del sonido».":"Más rápido que el sonido: las ondas forman un cono, el cono de Mach. Cuando te pasa por encima, oyes un estampido sónico.";
+  const{c,W,H}=setupCanvas($("#dCv"));const acc=css("--accent"),hot=css("--hot"),ink=css("--ink");const c0=70;// px per second at speed of sound
+  const period=.18;let t=DP.t;let x0=v===0?W/2:W*.12+v*c0*t;if(v>0&&x0>W*.88){DP.t=0;t=0;x0=W*.12}
+  for(let k=0;k<40;k++){const te=t-k*period;if(te<0)break;const age=t-te;const r=age*c0;const ex=(v===0?W/2:W*.12+v*c0*te);if(r>W*1.2)break;c.strokeStyle=acc;c.globalAlpha=Math.max(0,1-age/4);c.lineWidth=1.6;c.beginPath();c.arc(ex,H/2,r,0,7);c.stroke()}
+  c.globalAlpha=1;c.fillStyle=hot;c.beginPath();c.arc(x0,H/2,8,0,7);c.fill();c.lineWidth=1;
+  c.fillStyle=ink;c.font="20px sans-serif";c.textAlign="center";c.fillText("👂",W-22,H/2+7);c.fillText("👂",22,H/2+7)}
+function dLoop(now){if(!DP.vis){DP.raf=0;return}const dt=Math.min(.05,(now-(DP.last||now))/1000);DP.last=now;DP.t+=dt;dDraw();DP.raf=requestAnimationFrame(dLoop)}
+$("#dV").oninput=()=>{DP.t=0;dDraw()};
+new IntersectionObserver(es=>{DP.vis=es[0].isIntersecting;if(DP.vis&&!DP.raf&&!reduce){DP.last=0;DP.raf=requestAnimationFrame(dLoop)}}).observe($("#dCv"));
+
+/* ================= 6. hearing ================= */
+const TONES=[[50,"Zumbido grave"],[250,"Voz grave"],[1000,"Medio"],[4000,"El más sensible"],[8000,"Agudo"],[12000,"Muy agudo"],[15000,"Menores de 40, normalmente"],[17400,"Tono «mosquito», sobre todo adolescentes"],[19000,"Solo oídos jóvenes"]];
+$("#tones").innerHTML=TONES.map(([f,l])=>`<button class="tn" data-f="${f}"><b>${f>=1000?fmt(f/1000,f%1000?1:0)+" kHz":f+" Hz"}</b><span>${l}</span></button>`).join("");
+document.querySelectorAll(".tn").forEach(b=>b.onclick=()=>{const f=+b.dataset.f;tone(f,1,"sine",f>10000?.06:f<100?.25:.08);b.classList.add("on");setTimeout(()=>b.classList.remove("on"),1000)});
+const DB=[[0,"Umbral de audición"],[30,"Susurro"],[60,"Conversación"],[85,"Tráfico denso: riesgo si es prolongado"],[100,"Moto, auriculares altos"],[120,"Concierto de rock junto a los altavoces: empieza el dolor"],[140,"Motor a reacción a 30 m"]];
+$("#db").innerHTML=DB.map(([d,l])=>`<div class="dbr"><b>${d}</b><div><i style="width:${Math.max(3,d/140*100)}%;background:${d>=85?"var(--hot)":d>=60?"var(--gold)":"var(--good)"}"></i></div><span>${l}</span></div>`).join("");
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Pitágoras y las cuerdas","h. 500 a. C.","Los pensadores griegos antiguos relacionaron la armonía musical con proporciones sencillas de números enteros entre longitudes de cuerda, uno de los primeros descubrimientos de que la naturaleza sigue las matemáticas."],
+ ["El temperamento igual","1584 · 1605","Zhu Zaiyu en China y Simon Stevin en los Países Bajos calcularon por separado cómo dividir la octava en 12 pasos iguales. Se convirtió en el estándar de los teclados en el siglo XIX."],
+ ["La velocidad del sonido","","Unos 343 metros por segundo en el aire a 20 °C: más o menos un kilómetro cada tres segundos. Cuenta los segundos entre el rayo y el trueno y divide entre tres para saber a cuántos kilómetros está."],
+ ["El espacio es silencioso","","El sonido necesita algo por donde viajar: aire, agua o roca. En el casi vacío del espacio no hay nada que lo transmita, así que las explosiones de las películas espaciales no deberían sonar."],
+ ["La primera grabación","1877","El fonógrafo de Thomas Edison grababa las ondas de sonido sobre papel de estaño. Las primeras palabras que grabó fueron una canción infantil, «Mary had a little lamb»."],
+ ["El MP3 y tus oídos","1990s","Los archivos MP3 son pequeños porque descartan sonidos que tu oído no notaría, como sonidos suaves tapados por otros más fuertes de tono parecido. El formato aprovecha cómo funciona el oído."],
+ ["La fundamental ausente","","Las antiguas líneas telefónicas cortaban las frecuencias por debajo de unos 300 Hz, eliminando el tono principal de casi todas las voces. Tu cerebro lo reconstruye a partir de los armónicos, así que las voces suenan normales."],
+ ["El sonido más fuerte de la historia","1883","La erupción del Krakatoa, en Indonesia, se oyó a unos 4800 km, en la isla de Rodrigues, en el océano Índico. Su onda de presión dio varias vueltas al planeta."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+wUpd();$("#hTxt").textContent=PRE[0][2];hDraw();iUpd();bDraw();dDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{wDraw();hWave();iUpd();bDraw();dDraw()},120)});
+addEventListener("themechange",()=>{wDraw();hWave();iUpd();bDraw();dDraw()});
+</script>
+</body>
+</html>
