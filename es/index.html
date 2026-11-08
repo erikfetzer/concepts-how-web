@@ -117,7 +117,8 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .hyper i{position:absolute;border:2px solid var(--accent);width:64px;height:64px;transform:rotate(12deg)}
 .orbit{position:absolute;inset:0;display:grid;place-items:center}.orbit i{position:absolute;border-radius:50%;border:1.5px solid var(--accent)}.orbit i:nth-child(1){width:14px;height:14px;background:#E4572E;border-color:#E4572E}.orbit i:nth-child(2){width:44px;height:44px;opacity:.8}.orbit i:nth-child(3){width:78px;height:78px;opacity:.55}.orbit i:nth-child(4){width:116px;height:116px;opacity:.3}
 .payoff{position:absolute;inset:0;display:grid;place-items:center}.payoff b{display:grid;grid-template-columns:30px 30px;gap:4px}.payoff i{width:30px;height:30px;border-radius:5px;border:1.5px solid var(--line);background:var(--card)}.payoff i:nth-child(1){border-color:var(--accent);background:var(--accent-soft,transparent)}.payoff i:nth-child(4){border-color:#E4572E;background:#E4572E}
-.ttm{position:absolute;inset:0;display:grid;place-items:center}.ttm b{display:grid;grid-template-columns:repeat(3,22px);gap:3px;font:600 12px/22px var(--mono,monospace);text-align:center}.ttm i{font-style:normal;border-radius:4px;background:var(--card)}.ttm i.t{color:#1E8A5A}.ttm i.f{color:#E4572E}.ttm i.r{background:var(--accent);color:#fff}
+.ttm{position:absolute;inset:0;display:grid;place-items:center}.ttm b{display:grid;grid-template-columns:repeat(3,18px);gap:2px;font:600 11px/18px var(--mono,monospace);text-align:center}.ttm i{font-style:normal;border-radius:4px;background:var(--card)}.ttm i.t{color:#1E8A5A}.ttm i.f{color:#E4572E}.ttm i.r{background:var(--accent);color:#fff}
+.dice{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px}.dice b{width:46px;height:46px;border-radius:10px;border:2px solid var(--ink);background:var(--card);position:relative;transform:rotate(-8deg)}.dice b+b{transform:rotate(10deg);background:var(--accent);border-color:var(--accent)}.dice i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--ink)}.dice b+b i{background:#fff}.dice b:first-child i:nth-child(1){left:7px;top:7px}.dice b:first-child i:nth-child(2){left:17px;top:17px}.dice b:first-child i:nth-child(3){right:7px;bottom:7px}.dice b+b i:nth-child(1){left:9px;top:9px}.dice b+b i:nth-child(2){right:9px;bottom:9px}
 .hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
 footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -235,6 +236,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tags"><span>Tablas de verdad</span><span>Demostraciones</span><span>Falacias</span></div>
       </div>
       <span class="go">Abrir Lógica</span>
+    </a>
+    <a class="tile" href="probability.html">
+      <div class="no"><span>10</span><span>Azar y riesgo</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="dice"><b><i></i><i></i><i></i></b><b><i></i><i></i></b></div></div>
+        <h2 style="margin-top:16px">Probabilidad</h2>
+        <p>Juega mil veces a Monty Hall, descubre la paradoja del cumpleaños, deja caer bolas por un tablero de Galton y mira por qué un test positivo puede no significar lo que crees.</p>
+        <div class="tags"><span>Monty Hall</span><span>Bayes</span><span>Campana</span></div>
+      </div>
+      <span class="go">Abrir Probabilidad</span>
     </a>
   </div>
 </main>

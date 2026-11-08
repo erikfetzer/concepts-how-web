@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probability · concepts.how</title>
+<meta name="description" content="Play Monty Hall a thousand times, test the birthday paradox, drop balls through a Galton board, flip coins and see why a positive test may not mean what you think.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/probability">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/probability">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Probability · concepts.how">
+<meta property="og:description" content="Play Monty Hall a thousand times, test the birthday paradox, drop balls through a Galton board, flip coins and see why a positive test may not mean what you think.">
+<meta property="og:url" content="https://concepts.how/probability">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Probability · concepts.how">
+<meta name="twitter:description" content="Play Monty Hall a thousand times, test the birthday paradox, drop balls through a Galton board, flip coins and see why a positive test may not mean what you think.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* probability */
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:8px}
+.door{aspect-ratio:3/4;border:2px solid var(--ink);border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 70%,#000) 100%);color:#fff;font:700 clamp(18px,3vw,26px)/1 var(--display);cursor:pointer;display:grid;place-items:center;position:relative;transition:transform .15s}
+.door:hover:not([disabled]){transform:translateY(-3px)}
+.door::after{content:"";position:absolute;right:14%;top:52%;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.door.picked{box-shadow:0 0 0 4px var(--gold)}
+.door.open{background:var(--paper);border-style:dashed;color:var(--ink);cursor:default}
+.door.open::after{display:none}
+.door.win{background:color-mix(in srgb,var(--good) 25%,var(--paper));border-color:var(--good);border-style:solid}
+.door .prize{font-size:clamp(26px,5vw,40px)}
+.bars{display:grid;gap:12px}
+.bar .bl{display:flex;justify-content:space-between;gap:8px;font-size:14px;margin-bottom:4px;flex-wrap:wrap}
+.bar .bl .mono{font-size:12px;color:var(--muted)}
+.bar .bt{position:relative;height:16px;border-radius:999px;background:var(--paper);border:1px solid var(--line);overflow:visible}
+.bar .bt i{position:absolute;inset:0 auto 0 0;border-radius:999px;transition:width .4s}
+.bar .bt b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.bday{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px}
+.bday .bm{display:grid;grid-template-columns:14px 1fr;gap:6px;align-items:center}
+.bday .bm span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.bday .bm div{display:flex;flex-wrap:wrap;gap:2px}
+.bday i{width:7px;height:7px;border-radius:2px;background:var(--line);opacity:.6}
+.bday i.one{background:var(--accent);opacity:1}
+.bday i.dup{background:var(--hot);opacity:1;box-shadow:0 0 0 2px color-mix(in srgb,var(--hot) 35%,transparent)}
+.strip{display:flex;flex-wrap:wrap;gap:3px}
+.strip i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:600 9px/1 var(--mono);font-style:normal;color:#fff}
+.strip i.h{background:var(--accent)}.strip i.t{background:var(--hot)}
+@media (min-width:900px){.bday{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html" aria-current="page">Probability</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="probability.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/probability.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Probability</b> · chance, risk, surprise</div>
+    <h1>Your gut is bad at odds. <em>Let’s prove it.</em></h1>
+    <p class="lede">Probability is the maths of uncertainty: how likely things are, and how to update when you learn something new. It runs weather forecasts, insurance, medicine, games and machine learning. It’s also full of results that feel wrong until you run the experiment yourself, so here you can run them a thousand times.</p>
+    <nav class="jump" aria-label="On this page"><a href="#monty">Monty Hall</a><a href="#birthday">Birthday paradox</a><a href="#galton">Galton board</a><a href="#coins">Coin flips</a><a href="#bayes">Medical tests</a><a href="#ideas">Key ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. Monty Hall ============ -->
+  <section class="block" id="monty" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · play</span>
+      <h2 id="mH">The Monty Hall problem</h2>
+      <p>A car is behind one door, goats behind the others. You pick a door. The host, who knows where the car is, opens another door with a goat. Should you switch? When Marilyn vos Savant said “yes” in 1990, thousands of readers, including mathematicians, wrote in to say she was wrong. She wasn’t.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="doors" id="mDoors"></div>
+        <p id="mMsg" style="margin:0;font-size:15px;min-height:46px" aria-live="polite"></p>
+        <div class="row" id="mAct"></div>
+        <div class="sl"><label for="mN">Number of doors <span id="mNV">3</span></label><input type="range" id="mN" min="3" max="10" value="3"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Your results</span>
+        <div class="bars" id="mBars"></div>
+        <div class="row"><button class="btn" id="mSim">Simulate 1,000 games</button><button class="btn ghost" id="mReset">Reset</button></div>
+        <div class="callout"><b>Why switching wins</b>Your first pick is right 1 time in 3. The host never opens the car, so all the other 2 in 3 chance gets squeezed into the one door he leaves closed. Try 10 doors: you pick one, he opens eight goats. Would you still stay?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. Birthday ============ -->
+  <section class="block" id="birthday" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · surprise</span>
+      <h2 id="bH">The birthday paradox</h2>
+      <p>How many people do you need in a room for a better-than-even chance that two share a birthday? Most people guess around 180. The answer is 23. The trick: you aren’t looking for someone who shares <i>your</i> birthday, but any pair at all, and the number of pairs grows fast.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="bCv" height="250" aria-label="Chance of a shared birthday by group size"></canvas>
+        <div class="sl"><label for="bN">People in the room <span id="bNV">23</span></label><input type="range" id="bN" min="2" max="80" value="23"></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Chance of a match</div><div class="v" id="bP">50.7%</div></div>
+          <div class="ro"><div class="k">Pairs to compare</div><div class="v" id="bPairs">253</div></div>
+        </div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Fill a room with random birthdays</span>
+        <div class="bday" id="bCal" aria-label="Calendar of birthdays in the room"></div>
+        <div class="row"><button class="btn" id="bRoll">New room</button><button class="btn ghost" id="bMany">Try 1,000 rooms</button></div>
+        <p id="bMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. Galton ============ -->
+  <section class="block" id="galton" aria-labelledby="gH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · emergence</span>
+      <h2 id="gH">The Galton board</h2>
+      <p>Each ball bounces left or right at every peg, completely at random. No single ball is predictable, yet thousands of them always pile into the same smooth bell shape. Francis Galton built one in the 1870s to show how order appears from chance: this is the normal distribution.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="gCv" height="420" aria-label="Balls falling through pegs into bins"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="gRows">Rows of pegs <span id="gRowsV">12</span></label><input type="range" id="gRows" min="4" max="20" value="12"></div>
+        <div class="sl"><label for="gBias">Chance of bouncing right <span id="gBiasV">50%</span></label><input type="range" id="gBias" min="10" max="90" value="50"></div>
+        <div class="row"><button class="btn" id="gDrop">Drop 1</button><button class="btn" id="gDrop100">Drop 200</button><button class="btn ghost" id="gClear">Clear</button></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Balls</div><div class="v" id="gCount">0</div></div>
+          <div class="ro"><div class="k">Most common bin</div><div class="v" id="gMode">–</div></div>
+        </div>
+        <div class="callout"><b>The dashed curve</b>is what the maths predicts: the binomial distribution. With many rows it becomes the bell curve, which shows up everywhere sums of many small random effects do: heights, measurement errors, test scores.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Coins ============ -->
+  <section class="block" id="coins" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · the long run</span>
+      <h2 id="cH">Flip a coin a thousand times</h2>
+      <p>The law of large numbers says the share of heads settles toward 50% as flips pile up. But it gets there by averaging, not by “correcting”: a coin has no memory. Watch how long streaks happen far more often than people expect.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="cCv" height="260" aria-label="Running share of heads"></canvas>
+        <div class="strip" id="cStrip" aria-label="Last 60 flips"></div>
+      </div>
+      <div class="panel stack">
+        <div class="row"><button class="btn" id="c1">Flip 1</button><button class="btn" id="c10">Flip 10</button><button class="btn" id="c1000">Flip 1,000</button><button class="btn ghost" id="cReset">Reset</button></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Flips</div><div class="v" id="cN">0</div></div>
+          <div class="ro"><div class="k">Heads</div><div class="v" id="cH2">–</div></div>
+          <div class="ro"><div class="k">Longest streak</div><div class="v" id="cStreak">0</div></div>
+        </div>
+        <div class="callout"><b>The gambler’s fallacy</b>After five heads in a row, tails is <i>not</i> “due”. The next flip is still 50/50. In 100 flips, a streak of six or more of the same side happens most of the time.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Bayes ============ -->
+  <section class="block" id="bayes" aria-labelledby="yH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · updating</span>
+      <h2 id="yH">You tested positive. Should you panic?</h2>
+      <p>A test is 90% accurate and you test positive. Most people say there’s a 90% chance they have the condition. Often the real answer is far lower, because it depends on how rare the condition is. This is Bayes’ theorem, and doctors get it wrong too. Each square below is one of 1,000 people.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="yCv" height="300" aria-label="1,000 people grouped by condition and test result"></canvas>
+        <div class="leg">
+          <span><i style="background:var(--hot)"></i>Has it, tests positive</span>
+          <span><i style="background:var(--gold)"></i>Doesn’t have it, tests positive</span>
+          <span><i style="background:color-mix(in srgb,var(--hot) 35%,var(--paper))"></i>Has it, missed</span>
+          <span><i style="background:var(--line)"></i>Doesn’t have it, negative</span>
+        </div>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="yPrev">How common it is <span id="yPrevV">1%</span></label><input type="range" id="yPrev" min="0" max="100" value="37"></div>
+        <div class="sl"><label for="ySens">Catches real cases (sensitivity) <span id="ySensV">90%</span></label><input type="range" id="ySens" min="50" max="100" value="90"></div>
+        <div class="sl"><label for="ySpec">Clears healthy people (specificity) <span id="ySpecV">90%</span></label><input type="range" id="ySpec" min="50" max="100" step="0.5" value="90"></div>
+        <div><span class="lbl">If you test positive, chance you have it</span><div class="verdict" id="yOut"></div></div>
+        <p id="yWhy" style="margin:0;font-size:14.5px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Key ideas</span>
+      <h2 id="iH">Thinking in probabilities</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+  <section class="block" id="history" aria-labelledby="hH">
+    <div class="shead">
+      <span class="eyebrow">History</span>
+      <h2 id="hH">From dice games to quantum physics</h2>
+    </div>
+    <div class="cards" id="histGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Marilyn vos Savant, “Ask Marilyn,” <i>Parade</i> (1990–1991), and the replies it provoked</li>
+    <li>Gerd Gigerenzer, <i>Calculated Risks</i> (2002), on how to read medical test results</li>
+    <li>Leonard Mlodinow, <i>The Drunkard’s Walk: How Randomness Rules Our Lives</i> (2008)</li>
+    <li>David Spiegelhalter, <i>The Art of Statistics</i> (2019)</li>
+  </ul>
+  <p>All demos use your browser’s random number generator, so every run is different.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const pct=(v,d=1)=>(v*100).toFixed(d).replace(/\.0$/,"")+"%";
+const fmt=n=>n.toLocaleString("en-US");
+
+/* ================= 1. Monty Hall ================= */
+const M={n:3,car:0,pick:-1,open:[],stage:0,stats:{stay:[0,0],sw:[0,0]}};
+function mNew(){M.car=Math.floor(Math.random()*M.n);M.pick=-1;M.open=[];M.stage=0;mRender()}
+function mPick(i){if(M.stage===0){M.pick=i;
+    // host opens all but one other door, never the car
+    const others=[...Array(M.n).keys()].filter(d=>d!==i);let keep=M.car!==i?M.car:others[Math.floor(Math.random()*others.length)];
+    M.open=others.filter(d=>d!==keep);M.keep=keep;M.stage=1;mRender()}
+  else if(M.stage===1&&!M.open.includes(i)){const switched=i!==M.pick;M.pick=i;M.stage=2;const won=i===M.car;const k=switched?"sw":"stay";M.stats[k][1]++;if(won)M.stats[k][0]++;M.last={won,switched};mRender()}}
+function mRender(){const G="🐐",C="🚗";
+  $("#mDoors").innerHTML=[...Array(M.n).keys()].map(i=>{const open=M.open.includes(i)||M.stage===2;const lab=open?(i===M.car?C:G):(i+1);
+    const cls=["door",open?"open":"",i===M.pick?"picked":"",M.stage===2&&i===M.car?"win":""].join(" ");
+    return `<button class="${cls}" data-i="${i}" ${M.stage===2||M.open.includes(i)?"disabled":""} aria-label="Door ${i+1}">${M.stage===2||M.open.includes(i)?`<span class="prize">${lab}</span>`:`<span class="num">${lab}</span>`}</button>`}).join("");
+  document.querySelectorAll("#mDoors .door").forEach(b=>b.onclick=()=>mPick(+b.dataset.i));
+  const msg=$("#mMsg"),act=$("#mAct");
+  if(M.stage===0){msg.textContent="Pick a door.";act.innerHTML=""}
+  else if(M.stage===1){msg.textContent=M.n===3?`You picked door ${M.pick+1}. The host opens door ${M.open[0]+1}: a goat. Stay with ${M.pick+1}, or switch to ${M.keep+1}?`:`You picked door ${M.pick+1}. The host opens ${M.open.length} doors, all goats. Stay with ${M.pick+1}, or switch to ${M.keep+1}?`;
+    act.innerHTML=`<button class="btn ghost" id="mStay">Stay with ${M.pick+1}</button><button class="btn" id="mSw">Switch to ${M.keep+1}</button>`;
+    $("#mStay").onclick=()=>mPick(M.pick);$("#mSw").onclick=()=>mPick(M.keep)}
+  else{msg.innerHTML=`${M.last.won?"<b>You win the car!</b>":"<b>A goat.</b>"} You ${M.last.switched?"switched":"stayed"}. The car was behind door ${M.car+1}.`;act.innerHTML=`<button class="btn" id="mAgain">Play again</button>`;$("#mAgain").onclick=mNew}
+  mBars()}
+function mBars(){const r=(k)=>M.stats[k][1]?M.stats[k][0]/M.stats[k][1]:0;const th={stay:1/M.n,sw:(M.n-1)/M.n};
+  $("#mBars").innerHTML=[["stay","Stayed"],["sw","Switched"]].map(([k,l])=>`<div class="bar"><div class="bl"><span>${l}</span><span class="mono">${M.stats[k][0]} / ${M.stats[k][1]} won${M.stats[k][1]?" · "+pct(r(k)):""}</span></div><div class="bt"><i style="width:${r(k)*100}%;background:var(${k==="sw"?"--good":"--hot"})"></i><b style="left:${th[k]*100}%" title="Theory"></b></div></div>`).join("")+`<p style="margin:0;font-size:13px;color:var(--muted)">The black tick marks the theory: staying wins ${pct(th.stay,0)}, switching wins ${pct(th.sw,0)} with ${M.n} doors.</p>`}
+$("#mSim").onclick=()=>{for(let g=0;g<1000;g++){const car=Math.floor(Math.random()*M.n),pick=Math.floor(Math.random()*M.n);const sw=Math.random()<.5;const won=sw?car!==pick:car===pick;const k=sw?"sw":"stay";M.stats[k][1]++;if(won)M.stats[k][0]++}mBars()};
+$("#mReset").onclick=()=>{M.stats={stay:[0,0],sw:[0,0]};mNew()};
+$("#mN").oninput=e=>{M.n=+e.target.value;$("#mNV").textContent=M.n;M.stats={stay:[0,0],sw:[0,0]};mNew()};
+
+/* ================= 2. Birthday ================= */
+const pMatch=n=>{let p=1;for(let i=0;i<n;i++)p*=(365-i)/365;return 1-p};
+function bDraw(){const n=+$("#bN").value;$("#bNV").textContent=n;$("#bP").textContent=pct(pMatch(n));$("#bPairs").textContent=fmt(n*(n-1)/2);
+  const{c,W,H}=setupCanvas($("#bCv"));const acc=css("--accent"),line=css("--line"),muted=css("--muted"),ink=css("--ink"),gold=css("--gold");
+  const L=36,Rr=W-10,T=10,Bt=H-26,X=k=>L+(Rr-L)*(k-1)/79,Y=p=>Bt-(Bt-T)*p;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";
+  [0,.5,1].forEach(p=>{c.beginPath();c.moveTo(L,Y(p));c.lineTo(Rr,Y(p));c.stroke();c.fillText(pct(p,0),L-4,Y(p))});
+  c.textAlign="center";c.textBaseline="alphabetic";[1,23,40,57,80].forEach(k=>c.fillText(k,X(k),H-8));
+  c.strokeStyle=acc;c.lineWidth=3;c.beginPath();for(let k=1;k<=80;k++){const x=X(k),y=Y(pMatch(k));k===1?c.moveTo(x,y):c.lineTo(x,y)}c.stroke();
+  c.setLineDash([4,4]);c.strokeStyle=gold;c.lineWidth=1.5;c.beginPath();c.moveTo(X(n),Bt);c.lineTo(X(n),Y(pMatch(n)));c.lineTo(L,Y(pMatch(n)));c.stroke();c.setLineDash([]);
+  c.fillStyle=gold;c.beginPath();c.arc(X(n),Y(pMatch(n)),6,0,7);c.fill();c.lineWidth=1}
+const MON=["J","F","M","A","M","J","J","A","S","O","N","D"],DIM=[31,28,31,30,31,30,31,31,30,31,30,31];
+function bRoom(){const n=+$("#bN").value;const days=[...Array(n)].map(()=>Math.floor(Math.random()*365));const cnt={};days.forEach(d=>cnt[d]=(cnt[d]||0)+1);
+  let h="",doy=0;for(let m=0;m<12;m++){h+=`<div class="bm"><span>${MON[m]}</span><div>`;for(let d=0;d<DIM[m];d++,doy++){const k=cnt[doy]||0;h+=`<i class="${k>1?"dup":k?"one":""}"></i>`}h+="</div></div>"}
+  $("#bCal").innerHTML=h;const dups=Object.values(cnt).filter(v=>v>1).length;
+  $("#bMsg").innerHTML=dups?`<b>Match!</b> ${dups===1?"One date is":dups+" dates are"} shared (red) among ${n} people.`:`No shared birthdays among ${n} people this time.`}
+$("#bMany").onclick=()=>{const n=+$("#bN").value;let hit=0;for(let r=0;r<1000;r++){const seen=new Set();let m=false;for(let i=0;i<n;i++){const d=Math.floor(Math.random()*365);if(seen.has(d)){m=true;break}seen.add(d)}if(m)hit++}
+  $("#bMsg").innerHTML=`In 1,000 random rooms of ${n}, <b>${fmt(hit)}</b> had a shared birthday (${pct(hit/1000)}). The formula says ${pct(pMatch(n))}.`};
+$("#bN").oninput=()=>{bDraw();bRoom()};$("#bRoll").onclick=bRoom;
+
+/* ================= 3. Galton ================= */
+const G={rows:12,p:.5,bins:[],balls:[],count:0,raf:0,vis:false};
+function gReset(){G.bins=new Array(G.rows+1).fill(0);G.balls=[];G.count=0;gStats();gDraw()}
+function gGeom(W,H){const top=26,bottom=H*.48,rowH=(bottom-top)/G.rows,sp=Math.min((W-20)/(G.rows+2),rowH*1.25);return{top,bottom,rowH,sp,cx:W/2}}
+function gDrop(n){for(let i=0;i<n;i++){const path=[];let pos=0;for(let r=0;r<G.rows;r++){const right=Math.random()<G.p;path.push(right);if(right)pos++}G.balls.push({path,pos,t:-i*(reduce?0:.06)})}
+  if(reduce){G.balls.forEach(b=>G.bins[b.pos]++);G.count+=G.balls.length;G.balls=[];gStats();gDraw()}else gKick()}
+function gKick(){if(!G.raf)G.raf=requestAnimationFrame(gLoop)}
+let gLast=0;function gLoop(now){const dt=Math.min(.05,(now-(gLast||now))/1000);gLast=now;const spd=G.rows*2.6;
+  G.balls.forEach(b=>b.t+=dt*7);
+  const done=G.balls.filter(b=>b.t>=G.rows+1);done.forEach(b=>{G.bins[b.pos]++;G.count++});if(done.length){G.balls=G.balls.filter(b=>b.t<G.rows+1);gStats()}
+  gDraw();if(G.balls.length){G.raf=requestAnimationFrame(gLoop)}else{G.raf=0;gLast=0}}
+function gStats(){$("#gCount").textContent=fmt(G.count);let m=-1,mi=0;G.bins.forEach((v,i)=>{if(v>m){m=v;mi=i}});$("#gMode").textContent=G.count?`${mi} right`:"–"}
+function binom(n,k,p){let c=1;for(let i=0;i<k;i++)c=c*(n-i)/(i+1);return c*Math.pow(p,k)*Math.pow(1-p,n-k)}
+function gDraw(){const{c,W,H}=setupCanvas($("#gCv"));const g=gGeom(W,H);const ink=css("--ink"),muted=css("--muted"),acc=css("--accent"),line=css("--line"),gold=css("--gold"),hot=css("--hot");
+  const pegX=(r,k)=>g.cx+(k-r/2)*g.sp,pegY=r=>g.top+r*g.rowH;
+  c.fillStyle=muted;for(let r=0;r<G.rows;r++)for(let k=0;k<=r;k++){c.beginPath();c.arc(pegX(r,k),pegY(r)+g.rowH*.5,2.4,0,7);c.fill()}
+  // bins
+  const n=G.rows+1,bw=g.sp,bx=k=>g.cx+(k-G.rows/2)*g.sp,binTop=g.bottom+16,binBot=H-8,bh=binBot-binTop;
+  c.strokeStyle=line;for(let k=0;k<=n;k++){const x=bx(k)-bw/2;c.beginPath();c.moveTo(x,binTop);c.lineTo(x,binBot);c.stroke()}c.beginPath();c.moveTo(bx(0)-bw/2,binBot);c.lineTo(bx(n)-bw/2,binBot);c.stroke();
+  const mx=Math.max(1,...G.bins),expMax=Math.max(...G.bins.map((_,k)=>binom(G.rows,k,G.p)))*Math.max(G.count,1);const scale=Math.max(mx,expMax);
+  G.bins.forEach((v,k)=>{const h=bh*v/scale;c.fillStyle=acc;c.globalAlpha=.85;c.fillRect(bx(k)-bw/2+2,binBot-h,bw-4,h)});c.globalAlpha=1;
+  if(G.count>20){c.strokeStyle=gold;c.lineWidth=2.5;c.setLineDash([6,5]);c.beginPath();for(let k=0;k<n;k++){const y=binBot-bh*binom(G.rows,k,G.p)*G.count/scale;k?c.lineTo(bx(k),y):c.moveTo(bx(k),y)}c.stroke();c.setLineDash([]);c.lineWidth=1}
+  // falling balls
+  c.fillStyle=hot;G.balls.forEach(b=>{if(b.t<0)return;const r=Math.min(G.rows,Math.floor(b.t)),f=b.t-Math.floor(b.t);let k=0;for(let i=0;i<r;i++)if(b.path[i])k++;
+    let x,y;if(b.t>=G.rows){x=bx(k);y=g.bottom+(b.t-G.rows)*(binTop-g.bottom+bh*.5)}else{const k2=k+(b.path[r]?1:0);x=pegX(r,k)+(pegX(r+1,k2)-pegX(r,k))*f;y=pegY(r)+g.rowH*f-Math.sin(f*Math.PI)*g.rowH*.35}
+    c.beginPath();c.arc(x,y,Math.max(2.5,g.sp*.18),0,7);c.fill()})}
+$("#gRows").oninput=e=>{G.rows=+e.target.value;$("#gRowsV").textContent=G.rows;gReset()};
+$("#gBias").oninput=e=>{G.p=+e.target.value/100;$("#gBiasV").textContent=e.target.value+"%";gReset()};
+$("#gDrop").onclick=()=>gDrop(1);$("#gDrop100").onclick=()=>gDrop(200);$("#gClear").onclick=gReset;
+
+/* ================= 4. Coins ================= */
+const C={flips:[],heads:0,streak:0,best:0,run:0,last:null,hist:[]};
+function cFlip(n){for(let i=0;i<n;i++){const h=Math.random()<.5;C.flips.push(h);if(h)C.heads++;if(h===C.last)C.run++;else C.run=1;C.last=h;if(C.run>C.best)C.best=C.run;C.hist.push(C.heads/C.flips.length)}cRender()}
+function cRender(){const n=C.flips.length;$("#cN").textContent=fmt(n);$("#cH2").textContent=n?pct(C.heads/n):"–";$("#cStreak").textContent=C.best;
+  $("#cStrip").innerHTML=C.flips.slice(-60).map(h=>`<i class="${h?"h":"t"}">${h?"H":"T"}</i>`).join("");
+  const{c,W,H}=setupCanvas($("#cCv"));const acc=css("--accent"),line=css("--line"),muted=css("--muted"),gold=css("--gold");
+  const L=38,Rr=W-10,T=10,B=H-24;const N=Math.max(10,n);const X=i=>L+(Rr-L)*Math.log10(i+1)/Math.log10(N+1),Y=p=>B-(B-T)*p;
+  c.strokeStyle=line;c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";[0,.5,1].forEach(p=>{c.beginPath();c.moveTo(L,Y(p));c.lineTo(Rr,Y(p));c.stroke();c.fillText(pct(p,0),L-4,Y(p))});
+  c.textAlign="center";c.textBaseline="alphabetic";[1,10,100,1000,10000].filter(v=>v<=N).forEach(v=>c.fillText(fmt(v),X(v-1),H-8));
+  c.strokeStyle=gold;c.setLineDash([4,4]);c.beginPath();c.moveTo(L,Y(.5));c.lineTo(Rr,Y(.5));c.stroke();c.setLineDash([]);
+  if(n){c.strokeStyle=acc;c.lineWidth=2.5;c.beginPath();const step=Math.max(1,Math.floor(n/1500));for(let i=0;i<n;i+=step){const x=X(i),y=Y(C.hist[i]);i?c.lineTo(x,y):c.moveTo(x,y)}c.lineTo(X(n-1),Y(C.hist[n-1]));c.stroke();c.lineWidth=1}}
+$("#c1").onclick=()=>cFlip(1);$("#c10").onclick=()=>cFlip(10);$("#c1000").onclick=()=>cFlip(1000);$("#cReset").onclick=()=>{Object.assign(C,{flips:[],heads:0,best:0,run:0,last:null,hist:[]});cRender()};
+
+/* ================= 5. Bayes ================= */
+// slider 0..100 maps to prevalence 0.1%..50% on a log scale
+const prevOf=v=>Math.pow(10,-3+v/100*Math.log10(500));
+function yRender(){const prev=prevOf(+$("#yPrev").value),sens=+$("#ySens").value/100,spec=+$("#ySpec").value/100;
+  $("#yPrevV").textContent=prev<.01?(prev*100).toFixed(1)+"%":pct(prev,prev<.1?1:0);$("#ySensV").textContent=pct(sens);$("#ySpecV").textContent=pct(spec);
+  const N=1000,sick=prev*N,tp=sick*sens,fn=sick-tp,fp=(N-sick)*(1-spec),tn=N-sick-fp;const ppv=tp/(tp+fp||1);
+  $("#yOut").textContent=pct(ppv);$("#yOut").className="verdict "+(ppv<.5?"no":"ok");
+  const r=x=>x>=10?Math.round(x):+x.toFixed(1);
+  $("#yWhy").innerHTML=`Out of 1,000 people, about <b>${r(sick)}</b> have it and <b>${r(tp)}</b> of them test positive. But <b>${r(fp)}</b> healthy people also test positive. So of the ${r(tp+fp)} positives, only ${r(tp)} are real: ${pct(ppv)}.`;
+  const{c,W,H}=setupCanvas($("#yCv"));const cols=40,rows=25,cs=Math.min((W-4)/cols,(H-4)/rows),ox=(W-cs*cols)/2,oy=(H-cs*rows)/2;
+  const nTP=Math.round(tp),nFN=Math.round(fn),nFP=Math.round(fp);const hot=css("--hot"),gold=css("--gold"),line=css("--line"),paper=css("--paper");
+  const kinds=[];for(let i=0;i<nTP;i++)kinds.push(hot);for(let i=0;i<nFN;i++)kinds.push("mix");for(let i=0;i<nFP;i++)kinds.push(gold);while(kinds.length<N)kinds.push(line);
+  kinds.forEach((k,i)=>{const col=Math.floor(i/rows),row=i%rows;const x=ox+col*cs,y=oy+row*cs;
+    if(k==="mix"){c.fillStyle=hot;c.globalAlpha=.35}else{c.fillStyle=k;c.globalAlpha=1}c.fillRect(x+1,y+1,cs-2,cs-2)});c.globalAlpha=1}
+["#yPrev","#ySens","#ySpec"].forEach(id=>$(id).oninput=yRender);
+
+/* ================= cards ================= */
+const IDEAS=[
+ ["Independence","Two events are independent if one tells you nothing about the other. Coin flips are; cloudy skies and rain aren’t. Most probability mistakes come from treating linked events as independent, or the reverse."],
+ ["Expected value","Average each outcome by how likely it is. A lottery ticket with a 1 in 10 million chance of 5 million has an expected value of 50 cents, which is why the ticket costs more than that."],
+ ["Conditional probability","The chance of A given that B is true, written P(A | B). The chance a card is a king is 1 in 13; given it’s a face card, it’s 1 in 3. Knowing more changes the odds."],
+ ["Bayes’ theorem","How to update a belief with new evidence: start with how likely something was before (the prior), then weigh how well the evidence fits each possibility. It powers spam filters, medical diagnosis and search."],
+ ["Regression to the mean","An extreme result is usually followed by a more ordinary one, simply by chance. It is why a rookie’s brilliant first season is often followed by a weaker one, without any “curse”."],
+ ["Correlation is not causation","Ice cream sales and shark attacks rise together, because both rise in summer. A hidden third factor, or pure chance, can link two things that don’t affect each other."],
+ ["Simpson’s paradox","A trend can appear in every group yet reverse when the groups are combined. A famous study of Berkeley’s 1973 graduate admissions found an overall gap against women that mostly vanished department by department."],
+ ["Randomness is lumpy","Truly random sequences have streaks and clusters. When Apple’s shuffle played songs by the same artist back to back, people complained it wasn’t random, so it was made less random to feel more random."]
+];
+const HIST=[
+ ["Dice and the first theory","1560s","Gerolamo Cardano, a physician and gambler, wrote the first known analysis of dice odds. His book was only published a century later."],
+ ["Pascal and Fermat","1654","A gambler asked how to split the pot of an unfinished game fairly. Blaise Pascal and Pierre de Fermat solved it in a series of letters, founding probability theory."],
+ ["The law of large numbers","1713","Jacob Bernoulli proved that averages of many trials settle down toward the true probability, published after his death in Ars Conjectandi."],
+ ["The bell curve","1733","Abraham de Moivre found the normal curve as an approximation to coin-toss counts. Gauss and Laplace later made it central to science."],
+ ["Bayes’ essay","1763","Thomas Bayes’ essay on reasoning backwards from evidence was published by his friend Richard Price after Bayes’ death. Laplace developed the idea much further."],
+ ["Rules for everything","1933","Andrey Kolmogorov set out the axioms of probability that mathematicians still use, putting chance on the same footing as geometry."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3></div><p>${a[1]}</p></article>`).join("");
+$("#histGrid").innerHTML=HIST.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3><span class="yr">${a[1]}</span></div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+mNew();bDraw();bRoom();gReset();cRender();yRender();
+new IntersectionObserver(es=>{G.vis=es[0].isIntersecting}).observe($("#gCv"));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{bDraw();gDraw();cRender();yRender()},120)});
+addEventListener("themechange",()=>{bDraw();gDraw();cRender();yRender()});
+</script>
+</body>
+</html>
