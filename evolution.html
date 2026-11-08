@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evolution & natural selection · concepts.how</title>
+<meta name="description" content="Play the hungry bird and watch moths evolve camouflage, see genetic drift by pure luck, evolve a sentence one step at a time, watch bacteria beat antibiotics and explore the tree of life.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/evolution">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/evolution">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Evolution & natural selection · concepts.how">
+<meta property="og:description" content="Play the hungry bird and watch moths evolve camouflage, see genetic drift by pure luck, evolve a sentence one step at a time, watch bacteria beat antibiotics and explore the tree of life.">
+<meta property="og:url" content="https://concepts.how/evolution">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Evolution & natural selection · concepts.how">
+<meta name="twitter:description" content="Play the hungry bird and watch moths evolve camouflage, see genetic drift by pure luck, evolve a sentence one step at a time, watch bacteria beat antibiotics and explore the tree of life.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* evolution */
+.row2{display:flex;flex-wrap:wrap;gap:8px}
+.ghostb{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+#mCv{cursor:crosshair;touch-action:manipulation;border-radius:12px}
+#bCv{border-radius:12px}
+.k2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.phrase{font-family:var(--mono);font-size:clamp(12px,2.6vw,17px);display:flex;flex-wrap:wrap;gap:1px;min-height:1.6em;word-break:break-all}
+.phrase span{display:inline-block;min-width:.75em;text-align:center;padding:2px 1px;border-radius:3px;background:color-mix(in srgb,var(--hot) 14%,transparent);color:var(--muted)}
+.phrase span.ok{background:color-mix(in srgb,var(--good) 22%,transparent);color:var(--ink);font-weight:600}
+.phrase.tgt span{background:var(--accent-soft);color:var(--ink)}
+.wrapseg{flex-wrap:wrap}
+.note{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.note b{color:var(--ink)}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html">Maps</a>
+    <a class="nl" href="money.html">Money</a>
+    <a class="nl" href="light.html">Light & color</a>
+    <a class="nl" href="algorithms.html">Algorithms</a>
+    <a class="nl" href="mind.html">Biases & the mind</a>
+    <a class="nl" href="music.html">Music & sound</a>
+    <a class="nl" href="evolution.html" aria-current="page">Evolution</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="evolution.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/evolution.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Evolution</b> · how life changes</div>
+    <h1>No designer, just <em>survivors.</em></h1>
+    <p class="lede">Living things vary, some of that variation is passed on, and the variants that happen to survive and reproduce more leave more copies of themselves. Repeat for billions of years and you get every creature that has ever lived. Play the hungry bird, watch luck steer small populations, see how tiny steps add up, and find out how long ago you shared a great-great-…-grandparent with a mushroom.</p>
+    <nav class="jump" aria-label="On this page"><a href="#moths">Natural selection</a><a href="#drift">Genetic drift</a><a href="#weasel">Small steps</a><a href="#bugs">Resistance</a><a href="#tree">Tree of life</a><a href="#ideas">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. moths ============ -->
+  <section class="block" id="moths" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · be the bird</span>
+      <h2 id="mH">Natural selection: hide or be eaten</h2>
+      <p>Peppered moths rest on tree bark, where birds hunt them by sight. When soot from factories blackened the trees of industrial Britain, dark moths became far more common; when air got cleaner, pale moths came back. Tap the moths you can spot. Once you’ve eaten half, the survivors breed, and their young look like their parents, with small random differences. Then switch the bark and see what happens.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="mCv" height="300" aria-label="Moths resting on tree bark. Tap a moth to eat it."></canvas>
+        <div class="seg" id="mBark"><button class="pill" data-b="light" aria-pressed="true">Clean bark</button><button class="pill" data-b="dark" aria-pressed="false">Sooty bark</button></div>
+        <div class="row2"><button class="btn" id="mAuto">Let a bird hunt</button><button class="btn ghostb" id="mTen">Hunt 10 generations</button><button class="btn ghostb" id="mReset">Reset</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Generation</div><div class="v" id="mGen"></div></div>
+          <div class="ro"><div class="k">Eaten this round</div><div class="v" id="mEat"></div></div>
+          <div class="ro"><div class="k">Average moth colour</div><div class="v" id="mAvg"></div></div>
+        </div>
+        <canvas class="cv" id="mHist" height="150" aria-label="Average moth shade over the generations, compared with the bark"></canvas>
+        <div class="callout"><b>What really happened</b>The first dark peppered moth was recorded near Manchester in 1848. By 1895 about 98% of moths there were dark. After clean-air laws, pale moths became common again. In the 2000s Michael Majerus released nearly 4,900 moths and confirmed that birds ate more of the easy-to-spot ones.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. drift ============ -->
+  <section class="block" id="drift" aria-labelledby="dH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · pure luck</span>
+      <h2 id="dH">Genetic drift: evolution by accident</h2>
+      <p>Not every change is about survival. Imagine a gene comes in two versions, blue and orange, and neither is better. Each generation, which parents happen to have more children is partly random. In a small population those accidents add up fast: one version can vanish completely and the other takes over. Each line below is a separate population starting at 50% orange.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="dCv" height="260" aria-label="How common the orange version is over 150 generations in eight populations"></canvas>
+        <div class="sl"><label for="dN">Population size <span id="dNV"></span></label><input type="range" id="dN" min="0" max="4" step="1" value="1"></div>
+        <button class="btn" id="dRun">▶ Run 150 generations</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">All orange</div><div class="v" id="dFix"></div></div>
+          <div class="ro"><div class="k">Orange lost</div><div class="v" id="dLost"></div></div>
+          <div class="ro"><div class="k">Still mixed</div><div class="v" id="dMix"></div></div>
+        </div>
+        <div class="callout"><b>Small groups, big swings</b>Drift is strongest when few individuals breed. It helps explain why isolated islands and small founding groups often have unusual traits. Cheetahs are so genetically alike that skin grafts between unrelated cheetahs can take, likely because their numbers crashed long ago.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. weasel ============ -->
+  <section class="block" id="weasel" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · small steps add up</span>
+      <h2 id="wH">Monkeys at a keyboard</h2>
+      <p>People sometimes say evolution is like a monkey typing Shakespeare by chance. But selection isn’t one giant lucky guess. In 1986 Richard Dawkins showed the difference with a toy program. Random typing almost never hits the target. Keeping the best copy each round, and letting it make slightly wrong copies of itself, gets there in a few dozen generations. It’s not a model of real evolution, which has no target, but it shows how keeping small wins changes everything.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="k2">Target</div>
+        <div class="phrase tgt" id="wTgt"></div>
+        <div class="k2">Cumulative selection: keep the best of 100 copies each generation</div>
+        <div class="phrase" id="wSel"></div>
+        <div class="k2">Pure chance: completely new random typing every try</div>
+        <div class="phrase" id="wRnd"></div>
+        <div class="sl"><label for="wM">Copying mistakes <span id="wMV"></span></label><input type="range" id="wM" min="1" max="20" value="5"></div>
+        <div class="row2"><button class="btn" id="wGo">▶ Evolve</button><button class="btn ghostb" id="wReset">Reset</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Generations (selection)</div><div class="v" id="wG"></div></div>
+          <div class="ro"><div class="k">Random tries</div><div class="v" id="wT"></div></div>
+          <div class="ro"><div class="k">Best random match</div><div class="v" id="wB"></div></div>
+        </div>
+        <div class="callout"><b>The odds of chance</b>With 27 possible keys and <span id="wLen"></span> characters, a random guess has about a 1 in <span id="wOdds"></span> chance of being right. Even a computer making a billion guesses a second since the Big Bang would almost certainly still be going.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. resistance ============ -->
+  <section class="block" id="bugs" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · evolution right now</span>
+      <h2 id="bH">How bacteria beat antibiotics</h2>
+      <p>Bacteria can double in under an hour, so evolution happens fast enough to watch. In any large group, a few bacteria are naturally a bit tougher. An antibiotic kills the weak ones and leaves the tough ones with all the space and food. Give a dose, let the survivors regrow, and repeat. Redder dots are more resistant.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="bCv" height="240" aria-label="A colony of bacteria coloured by how resistant each one is"></canvas>
+        <div class="row2"><button class="btn" id="bDose">💊 Give antibiotic</button><button class="btn ghostb" id="bGrow">Let them regrow</button><button class="btn ghostb" id="bReset">Reset</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Bacteria</div><div class="v" id="bN"></div></div>
+          <div class="ro"><div class="k">Average resistance</div><div class="v" id="bR"></div></div>
+          <div class="ro"><div class="k">Antibiotic rounds</div><div class="v" id="bD"></div></div>
+        </div>
+        <p class="note" id="bMsg"></p>
+        <div class="callout"><b>Why it matters</b>Antibiotics don’t work on viruses such as colds and flu, and using them when they aren’t needed gives resistant bacteria more chances to win. Drug-resistant infections are now one of the world’s biggest health threats. If you are prescribed antibiotics, take them exactly as your doctor or pharmacist says.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. tree ============ -->
+  <section class="block" id="tree" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · your extended family</span>
+      <h2 id="tH">The tree of life</h2>
+      <p>Every living thing is related. Pick a creature to see roughly when its ancestors and yours were the same population. Dates come from comparing DNA and fossils, and scientists still refine them, so treat them as rough estimates. The time axis is squashed so recent splits are easier to see.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="tCv" height="380" aria-label="Family tree linking humans with other living things"></canvas>
+        <div class="seg wrapseg" id="tPick"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Last common ancestor</div><div class="v" id="tAgo"></div></div>
+          <div class="ro"><div class="k">If Earth’s history were one day</div><div class="v" id="tDay"></div></div>
+        </div>
+        <p class="note" id="tTxt"></p>
+        <div class="callout"><b>Not from chimps</b>Humans didn’t evolve from chimpanzees. We and chimps are cousins: both descend from an ape that lived in Africa about 6 to 7 million years ago. Chimps have been evolving for exactly as long as we have.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="idH">From Darwin’s notebooks to bacteria in a lab</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Charles Darwin, <i>On the Origin of Species</i> (1859)</li>
+    <li>Richard Dawkins, <i>The Blind Watchmaker</i> (1986)</li>
+    <li>Jerry Coyne, <i>Why Evolution Is True</i> (2009)</li>
+    <li>Peter and Rosemary Grant, <i>40 Years of Evolution</i> (2014)</li>
+    <li>Cook, Grant, Saccheri and Mallet, “Selective bird predation on the peppered moth”, <i>Biology Letters</i> (2012)</li>
+    <li>Kumar et al., “TimeTree 5”, <i>Molecular Biology and Evolution</i> (2022)</li>
+    <li>World Health Organization, <i>Antimicrobial resistance</i> fact sheet</li>
+  </ul>
+  <p>The simulations are simplified toy models meant to show the idea, not to predict real populations. Divergence dates are rounded estimates.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+const grey=s=>{const g=Math.round(30+s*200);return`rgb(${g},${Math.round(g*.97)},${Math.round(g*.9)})`};
+
+/* ================= 1. moths ================= */
+const M={n:40,bark:"light",moths:[],gen:1,eaten:0,hist:[],streaks:[],busy:false};
+const BARK={light:.8,dark:.18};
+function mPlace(){const cv=$("#mCv");const W=cv.getBoundingClientRect().width||600,H=300;M.moths.forEach(m=>{m.x=.06+Math.random()*.88;m.y=.08+Math.random()*.84;m.a=(Math.random()-.5)*.8})}
+function mInit(){M.moths=Array.from({length:M.n},()=>({s:clamp(.72+gauss()*.14),alive:true}));M.gen=1;M.eaten=0;M.hist=[];mPlace();M.streaks=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),l:.05+Math.random()*.25,w:1+Math.random()*4,d:(Math.random()-.5)*.25}));mRec();mDraw()}
+const mAvg=()=>{const a=M.moths.filter(m=>m.alive);return a.reduce((t,m)=>t+m.s,0)/a.length};
+function mRec(){M.hist.push({g:M.gen,s:mAvg(),b:BARK[M.bark]})}
+function mDraw(){const{c,W,H}=setupCanvas($("#mCv"));const B=BARK[M.bark];
+  c.fillStyle=grey(B);c.fillRect(0,0,W,H);
+  M.streaks.forEach((s,i)=>{c.strokeStyle=grey(clamp(B+(i%2?.09:-.09)));c.lineWidth=s.w;c.beginPath();c.moveTo(s.x*W,s.y*H);c.lineTo((s.x+s.d*s.l)*W,(s.y+s.l)*H);c.stroke()});
+  M.moths.forEach(m=>{if(!m.alive)return;const x=m.x*W,y=m.y*H;c.save();c.translate(x,y);c.rotate(m.a);c.fillStyle=grey(m.s);c.strokeStyle=grey(clamp(m.s-.12));c.lineWidth=1;
+    c.beginPath();c.moveTo(0,-4);c.quadraticCurveTo(-16,-10,-15,6);c.quadraticCurveTo(-7,7,0,4);c.quadraticCurveTo(7,7,15,6);c.quadraticCurveTo(16,-10,0,-4);c.fill();c.stroke();
+    c.fillStyle=grey(clamp(m.s-.2));c.beginPath();c.ellipse(0,0,2,7,0,0,7);c.fill();c.restore()});
+  $("#mGen").textContent=fmt(M.gen);$("#mEat").textContent=`${M.eaten} / ${M.n/2}`;const a=mAvg();$("#mAvg").textContent=a>.6?(LANGES?"Clara":"Pale"):a<.4?(LANGES?"Oscura":"Dark"):(LANGES?"Intermedia":"In between");
+  mChart()}
+function mChart(){const{c,W,H}=setupCanvas($("#mHist"));const P=24,h=M.hist,n=Math.max(10,h.length);c.strokeStyle=css("--line");c.strokeRect(P,6,W-P-6,H-P-6);
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";c.fillText(LANGES?"clara":"pale",P+30,18);c.fillText(LANGES?"oscura":"dark",P+34,H-P-6);c.textAlign="center";c.fillText(LANGES?"generaciones →":"generations →",W/2,H-6);
+  const X=i=>P+(W-P-6)*i/(n-1||1),Y=s=>6+(H-P-12)*(1-s);
+  c.setLineDash([4,4]);c.strokeStyle=css("--muted");c.beginPath();h.forEach((p,i)=>{i?c.lineTo(X(i),Y(p.b)):c.moveTo(X(i),Y(p.b))});c.stroke();c.setLineDash([]);
+  c.strokeStyle=css("--accent");c.lineWidth=2.5;c.beginPath();h.forEach((p,i)=>{i?c.lineTo(X(i),Y(p.s)):c.moveTo(X(i),Y(p.s))});c.stroke();c.lineWidth=1}
+function mBreed(){const s=M.moths.filter(m=>m.alive);const kids=[];while(kids.length<M.n){const p=s[kids.length%s.length];kids.push({s:clamp(p.s+gauss()*.07),alive:true})}M.moths=kids;M.gen++;M.eaten=0;mPlace();mRec()}
+function mEat(m){m.alive=false;M.eaten++;if(M.eaten>=M.n/2){mDraw();setTimeout(()=>{mBreed();mDraw()},reduce?0:350)}else mDraw()}
+function mBird(){const B=BARK[M.bark];let need=M.n/2-M.eaten;while(need>0){const a=M.moths.filter(m=>m.alive);const w=a.map(m=>Math.pow(Math.abs(m.s-B),2)+.01);const t=w.reduce((x,y)=>x+y,0);let r=Math.random()*t,i=0;while(r>w[i]){r-=w[i];i++}a[Math.min(i,a.length-1)].alive=false;M.eaten++;need--}}
+$("#mCv").addEventListener("pointerdown",e=>{if(M.busy||M.eaten>=M.n/2)return;const r=e.currentTarget.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/300;let best=null,bd=1e9;M.moths.forEach(m=>{if(!m.alive)return;const d=Math.hypot((m.x-x)*r.width,(m.y-y)*300);if(d<bd){bd=d;best=m}});if(best&&bd<22)mEat(best)});
+$("#mAuto").onclick=()=>{if(M.busy)return;mBird();mDraw();M.busy=true;setTimeout(()=>{mBreed();mDraw();M.busy=false},reduce?0:400)};
+$("#mTen").onclick=()=>{if(M.busy)return;M.busy=true;let k=0;const step=()=>{mBird();mBreed();mDraw();if(++k<10)setTimeout(step,reduce?0:160);else M.busy=false};step()};
+$("#mReset").onclick=()=>{M.busy=false;mInit()};
+document.querySelectorAll("#mBark .pill").forEach(b=>b.onclick=()=>{M.bark=b.dataset.b;document.querySelectorAll("#mBark .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));M.hist.length&&(M.hist[M.hist.length-1].b=BARK[M.bark]);mDraw()});
+
+/* ================= 2. drift ================= */
+const DN=[10,30,100,300,1000];const D={runs:[],raf:0};
+function dLabel(){$("#dNV").textContent=fmt(DN[+$("#dN").value])}
+function dSim(){const N=DN[+$("#dN").value];D.runs=Array.from({length:8},()=>{let p=.5;const r=[p];for(let g=0;g<150;g++){let k=0;for(let i=0;i<N;i++)if(Math.random()<p)k++;p=k/N;r.push(p)}return r})}
+function dDraw(upto=150){const{c,W,H}=setupCanvas($("#dCv"));const P=30,X=g=>P+(W-P-8)*g/150,Y=p=>8+(H-P-14)*(1-p);
+  c.strokeStyle=css("--line");c.strokeRect(P,8,W-P-8,H-P-14);c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";["100%","50%","0%"].forEach((t,i)=>c.fillText(t,P-4,Y(1-i/2)+4));c.textAlign="center";c.fillText(LANGES?"generaciones →":"generations →",W/2,H-6);
+  c.setLineDash([3,4]);c.beginPath();c.moveTo(P,Y(.5));c.lineTo(W-8,Y(.5));c.stroke();c.setLineDash([]);
+  const cols=[css("--accent"),css("--hot"),css("--gold"),css("--good"),"#8b5cf6","#0ea5e9","#ec4899","#64748b"];
+  D.runs.forEach((r,j)=>{c.strokeStyle=cols[j];c.lineWidth=2;c.beginPath();for(let g=0;g<=upto;g++){g?c.lineTo(X(g),Y(r[g])):c.moveTo(X(g),Y(r[g]))}c.stroke()});c.lineWidth=1;
+  const end=D.runs.map(r=>r[upto]);$("#dFix").textContent=end.filter(p=>p>=1).length;$("#dLost").textContent=end.filter(p=>p<=0).length;$("#dMix").textContent=end.filter(p=>p>0&&p<1).length}
+function dRun(){cancelAnimationFrame(D.raf);dSim();if(reduce){dDraw();return}let g=0;const step=()=>{g=Math.min(150,g+3);dDraw(g);if(g<150)D.raf=requestAnimationFrame(step)};step()}
+$("#dN").oninput=()=>{dLabel();dRun()};$("#dRun").onclick=dRun;
+
+/* ================= 3. weasel ================= */
+const TARGET=LANGES?"ME PARECE QUE ES COMO UNA COMADREJA":"METHINKS IT IS LIKE A WEASEL";
+const AB="ABCDEFGHIJKLMNOPQRSTUVWXYZ ";const rch=()=>AB[Math.floor(Math.random()*27)];
+const rstr=()=>Array.from(TARGET,rch).join("");const score=s=>{let k=0;for(let i=0;i<s.length;i++)if(s[i]===TARGET[i])k++;return k};
+const W2={cur:"",gen:0,tries:0,best:"",bs:0,run:false,raf:0};
+function wShow(el,s){el.innerHTML=Array.from(s,(ch,i)=>`<span class="${ch===TARGET[i]?"ok":""}">${ch===" "?"&nbsp;":ch}</span>`).join("")}
+function wUpd(){wShow($("#wSel"),W2.cur);wShow($("#wRnd"),W2.best);$("#wG").textContent=fmt(W2.gen);$("#wT").textContent=fmt(W2.tries);$("#wB").textContent=`${W2.bs} / ${TARGET.length}`;$("#wMV").textContent=$("#wM").value+"%"}
+function wReset(){W2.run=false;cancelAnimationFrame(W2.raf);W2.cur=rstr();W2.gen=0;W2.tries=0;W2.best=rstr();W2.bs=score(W2.best);$("#wGo").textContent=LANGES?"▶ Evolucionar":"▶ Evolve";wUpd()}
+function wStep(){const mu=+$("#wM").value/100;if(score(W2.cur)<TARGET.length){let best=W2.cur,bs=score(best);for(let k=0;k<100;k++){const c=Array.from(W2.cur,ch=>Math.random()<mu?rch():ch).join("");const s=score(c);if(s>bs){bs=s;best=c}}W2.cur=best;W2.gen++}
+  for(let k=0;k<3000;k++){const s=rstr(),sc=score(s);if(sc>W2.bs){W2.bs=sc;W2.best=s}}W2.tries+=3000}
+function wLoop(){if(!W2.run)return;wStep();wUpd();if(score(W2.cur)===TARGET.length){W2.run=false;$("#wGo").textContent=LANGES?"✓ ¡Conseguido!":"✓ Got there!";return}W2.raf=setTimeout(wLoop,reduce?0:70)}
+$("#wGo").onclick=()=>{if(score(W2.cur)===TARGET.length)wReset();W2.run=!W2.run;$("#wGo").textContent=W2.run?(LANGES?"❚❚ Pausa":"❚❚ Pause"):(LANGES?"▶ Evolucionar":"▶ Evolve");if(W2.run)wLoop()};
+$("#wReset").onclick=wReset;$("#wM").oninput=wUpd;
+wShow($("#wTgt"),TARGET);$("#wLen").textContent=TARGET.length;{const e=TARGET.length*Math.log10(27);$("#wOdds").innerHTML=`${fmt(Math.pow(10,e%1),1)} × 10<sup>${Math.floor(e)}</sup>`}
+
+/* ================= 4. bacteria ================= */
+const BC={cells:[],doses:0,cap:400};
+function bInit(){BC.cells=Array.from({length:BC.cap},()=>({r:Math.pow(Math.random(),5)*.6,x:Math.random(),y:Math.random()}));BC.doses=0;bMsg(LANGES?"Una colonia normal: casi todas las bacterias son fáciles de matar, pero unas pocas son algo más duras.":"A normal colony: almost all the bacteria are easy to kill, but a few are a bit tougher.");bDraw()}
+function bMsg(t){$("#bMsg").textContent=t}
+function bCol(r){const a=[[34,160,90],[234,179,8],[228,87,46]];const t=clamp(r)*2,i=Math.min(1,Math.floor(t)),f=t-i;const m=a[i].map((v,k)=>Math.round(v+(a[i+1][k]-v)*f));return`rgb(${m})`}
+function bDraw(){const{c,W,H}=setupCanvas($("#bCv"));c.fillStyle=css("--accent-soft")||"#eef";c.fillRect(0,0,W,H);BC.cells.forEach(b=>{c.fillStyle=bCol(b.r);c.beginPath();c.ellipse(b.x*(W-12)+6,b.y*(H-12)+6,5,3,b.x*6,0,7);c.fill()});
+  $("#bN").textContent=fmt(BC.cells.length);const a=BC.cells.length?BC.cells.reduce((t,b)=>t+b.r,0)/BC.cells.length:0;$("#bR").textContent=BC.cells.length?fmt(a*100)+"%":"—";$("#bD").textContent=BC.doses}
+$("#bDose").onclick=()=>{if(!BC.cells.length)return;BC.doses++;const before=BC.cells.length;BC.cells=BC.cells.filter(b=>Math.random()<Math.pow(b.r,1.6)*.97+.02);
+  if(BC.cells.length<8&&BC.cells.every(b=>b.r<.5)){BC.cells=[];bMsg(LANGES?"¡Eliminadas! Con tan pocas supervivientes, el sistema inmunitario acaba con el resto.":"Cleared! With so few survivors left, the immune system mops up the rest.")}
+  else bMsg((LANGES?`El antibiótico mató a ${fmt(before-BC.cells.length)} de ${fmt(before)}. Las supervivientes son sobre todo las más resistentes.`:`The antibiotic killed ${fmt(before-BC.cells.length)} of ${fmt(before)}. The survivors are mostly the tough ones.`));bDraw()};
+$("#bGrow").onclick=()=>{if(!BC.cells.length){bMsg(LANGES?"No queda nada que pueda volver a crecer.":"There’s nothing left to regrow.");return}const s=BC.cells.slice();let i=0;while(BC.cells.length<BC.cap){const p=s[i++%s.length];BC.cells.push({r:clamp(p.r+gauss()*.05),x:clamp(p.x+gauss()*.08),y:clamp(p.y+gauss()*.08)})}
+  bMsg(LANGES?"Las supervivientes se dividieron hasta llenar el espacio. Sus hijas heredan su resistencia.":"The survivors divided until they filled the space again. Their offspring inherit their toughness.");bDraw()};
+$("#bReset").onclick=bInit;
+
+/* ================= 5. tree ================= */
+const TREE=LANGES?[
+ ["Chimpancé",6.4,"Un simio de África. Los chimpancés y los bonobos son nuestros parientes vivos más cercanos; compartimos en torno al 99% de nuestro ADN."],
+ ["Ratón",87,"Un pequeño mamífero peludo que vivía entre los dinosaurios. Los ratones y los humanos tenemos casi los mismos genes, por eso se usan tanto en medicina."],
+ ["Perro",94,"Otro pequeño mamífero de la época de los dinosaurios. Los perros son más primos lejanos nuestros que los ratones."],
+ ["Gallina",319,"Uno de los primeros animales que pusieron huevos con cáscara en tierra firme. Las aves son dinosaurios supervivientes."],
+ ["Rana",352,"Uno de los primeros animales de cuatro patas que salieron del agua."],
+ ["Pez cebra",429,"Un pez con esqueleto de hueso. Tus brazos y piernas vienen de sus aletas."],
+ ["Mosca de la fruta",694,"Un pequeño animal parecido a un gusano, con cabeza y cola. Muchos de los genes que construyen el cuerpo de una mosca también construyen el tuyo."],
+ ["Levadura",1105,"Un ser unicelular. Los hongos están más emparentados con los animales que con las plantas."],
+ ["Roble",1500,"Una célula con núcleo, antes de que unos linajes se volvieran plantas y otros animales y hongos."],
+ ["Bacteria E. coli",4000,"LUCA, el último antepasado común universal: un microbio de las primeras épocas de la Tierra, antepasado de todo ser vivo."]
+]:[
+ ["Chimpanzee",6.4,"An ape in Africa. Chimps and bonobos are our closest living relatives; we share about 99% of our DNA."],
+ ["Mouse",87,"A small furry mammal living among the dinosaurs. Mice and humans have nearly the same set of genes, which is why mice are used so much in medical research."],
+ ["Dog",94,"Another small mammal from the age of dinosaurs. Dogs are slightly more distant cousins than mice."],
+ ["Chicken",319,"One of the first animals to lay shelled eggs on land. Birds are surviving dinosaurs."],
+ ["Frog",352,"One of the first four-legged animals to crawl out of the water."],
+ ["Zebrafish",429,"A fish with a bony skeleton. Your arms and legs come from its fins."],
+ ["Fruit fly",694,"A small worm-like animal with a head and a tail end. Many of the genes that lay out a fly’s body also lay out yours."],
+ ["Yeast",1105,"A single-celled creature. Fungi are more closely related to animals than to plants."],
+ ["Oak tree",1500,"A single cell with a nucleus, before some lineages became plants and others became animals and fungi."],
+ ["E. coli bacteria",4000,"LUCA, the last universal common ancestor: a microbe from early in Earth’s history and the ancestor of everything alive today."]
+];
+const HUMAN=LANGES?"Humano":"Human";let tSel=0;
+$("#tPick").innerHTML=TREE.map((t,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${t[0]}</button>`).join("");
+document.querySelectorAll("#tPick .pill").forEach(b=>b.onclick=()=>{tSel=+b.dataset.i;document.querySelectorAll("#tPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));tUpd()});
+function tDraw(){const{c,W,H}=setupCanvas($("#tCv"));c.font="600 13px "+css("--body");const n=TREE.length+1,LBL=Math.min(W*.42,Math.max(...TREE.map(t=>c.measureText(t[0]).width))+14),L=20,R=W-LBL-8,top=14,bot=H-30,rowH=(bot-top)/(n-1);
+  const X=t=>R-(R-L)*Math.sqrt(t/4000),Y=i=>top+i*rowH;const acc=css("--accent"),mut=css("--muted"),ink=css("--ink"),ln=css("--line");
+  c.font="11px "+css("--mono");c.fillStyle=mut;c.textAlign="center";(W<500?[0,100,1000,4000]:[0,100,500,1000,2000,4000]).forEach(t=>{c.strokeStyle=ln;c.beginPath();c.moveTo(X(t),top-6);c.lineTo(X(t),bot+6);c.stroke();c.textAlign=t===4000?"left":"center";c.fillText(t>=1000?fmt(t/1000)+(LANGES?" mil M":" bn"):t?fmt(t)+" M":(LANGES?"hoy":"now"),X(t),H-10)});
+  let yC=Y(0),xP=R;const sel=tSel;
+  for(let k=0;k<TREE.length;k++){const xN=X(TREE[k][1]),yl=Y(k+1),onT=k<=sel,isS=k===sel;
+    c.strokeStyle=onT?acc:ink;c.lineWidth=onT?3:1.5;c.beginPath();c.moveTo(xP,yC);c.lineTo(xN,yC);c.stroke();
+    c.strokeStyle=isS?acc:ink;c.lineWidth=isS?3:1.5;c.beginPath();c.moveTo(xN,yC);c.lineTo(xN,yl);c.lineTo(R,yl);c.stroke();
+    if(isS){c.fillStyle=css("--hot");c.beginPath();c.arc(xN,yC,6,0,7);c.fill()}
+    xP=xN;yC=(yC+yl)/2}
+  c.lineWidth=1;
+  c.textAlign="left";c.font="13px "+css("--body");for(let i=0;i<n;i++){const isH=i===0,isS=i===sel+1;c.fillStyle=isH||isS?ink:mut;c.font=(isH||isS?"600 ":"")+"13px "+css("--body");c.fillText(i?TREE[i-1][0]:HUMAN,R+8,Y(i)+4)}
+}
+function tUpd(){const t=TREE[tSel];const my=t[1];$("#tAgo").textContent=my>=1000?(LANGES?`hace unos ${fmt(my/1000,1)} mil millones de años`:`about ${fmt(my/1000,1)} billion years ago`):(LANGES?`hace unos ${fmt(my,my<10?1:0)} millones de años`:`about ${fmt(my,my<10?1:0)} million years ago`);
+  const sec=my/4540*86400;const hh=Math.floor(sec/3600),mm=Math.floor(sec%3600/60),ss=Math.round(sec%60);$("#tDay").textContent=(hh?`${hh} h ${mm} min`:mm?`${mm} min ${ss} s`:`${ss} s`)+(LANGES?" antes de medianoche":" before midnight");
+  $("#tTxt").innerHTML=`<b>${LANGES?"Cómo era ese antepasado:":"What that ancestor was like:"}</b> ${t[2]}`;tDraw()}
+$("#tCv").addEventListener("pointerdown",e=>{const r=e.currentTarget.getBoundingClientRect();const n=TREE.length+1,top=14,bot=380-30,rowH=(bot-top)/(n-1);const i=Math.round((e.clientY-r.top-top)/rowH);if(i>=1&&i<n){tSel=i-1;document.querySelectorAll("#tPick .pill").forEach((x,j)=>x.setAttribute("aria-pressed",j===tSel));tUpd()}});
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Darwin’s big book","1859","Charles Darwin spent more than 20 years gathering evidence, from Galápagos birds to pigeon breeding, before publishing On the Origin of Species. The first printing sold out to booksellers on the day it was released."],
+ ["Wallace got there too","1858","Alfred Russel Wallace, working in what is now Indonesia, came up with the same idea independently and wrote to Darwin. Their papers were presented together in London in July 1858."],
+ ["Mendel’s peas","1866","Gregor Mendel, a monk, bred thousands of pea plants and found that traits are passed on in separate units, now called genes. Almost nobody noticed until 1900."],
+ ["The double helix","1953","James Watson and Francis Crick, using X-ray images made by Rosalind Franklin and Raymond Gosling, worked out the structure of DNA: the molecule that carries the instructions copied from parent to child."],
+ ["Darwin’s finches, live","1977","Peter and Rosemary Grant measured finches on the tiny Galápagos island of Daphne Major for 40 years. After a drought in 1977 left only big, hard seeds, the next generation had measurably deeper beaks."],
+ ["Evolution in a flask","1988","Richard Lenski’s team has grown 12 populations of E. coli since 1988, for more than 75,000 generations. Around generation 31,500 one population evolved the ability to eat citrate, something E. coli normally can’t do."],
+ ["Same answer, different paths","","Wings evolved separately in insects, birds and bats. Dolphins and the extinct ichthyosaurs evolved the same fish-like shape. When problems are similar, evolution often lands on similar solutions: convergent evolution."],
+ ["No goal, no ladder","","Evolution doesn’t aim for anything, and no species is “more evolved”. A bacterium alive today has been evolving exactly as long as you. Being well suited only means suited to the conditions right now."],
+ ["Not “just a theory”","","In science a theory is a well-tested explanation that ties many facts together, like the theory of gravity. Evolution is backed by fossils, DNA, anatomy and experiments you can watch."],
+ ["Selection needs variation","","Natural selection can only choose from differences that already exist. New variation comes from random mutations, small copying errors in DNA, and from genes being shuffled when parents reproduce."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+mInit();dLabel();dSim();dDraw();wReset();bInit();tUpd();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{mDraw();dDraw();bDraw();tDraw()},120)});
+addEventListener("themechange",()=>{mDraw();dDraw();bDraw();tDraw()});
+</script>
+</body>
+</html>

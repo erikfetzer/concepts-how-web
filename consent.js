@@ -27,6 +27,10 @@
       money: ["Free, no interest", "Analytics cookies cost you nothing and help us see which pages get used. They only switch on if you accept."],
       light: ["Shedding some light", "Analytics cookies help us see which pages get used. They stay dark unless you accept."],
       disclaimer: ["The small print", "We use analytics cookies to see which pages get used. They only switch on if you accept, and you can change your mind any time."],
+      algorithms: ["Sorted: one quick question", "Analytics cookies help us see which pages get used. Accept runs in O(1). Decline does too."],
+      mind: ["No nudges here", "Analytics cookies help us see which pages get used. They’re off by default, and declining is exactly as easy as accepting."],
+      music: ["Turn it up?", "Analytics cookies help us see which pages get used. They stay silent unless you accept."],
+      evolution: ["Survival of the tastiest", "Analytics cookies help us see which pages get used. Only the ones you accept survive."],
       logic: ["If accept, then cookies", "Accept → analytics cookies help us see which pages get used. ¬Accept → ¬cookies. That’s the whole truth table."]
     },
     es: {
@@ -47,6 +51,10 @@
       money: ["Gratis y sin intereses", "Las cookies de analítica no te cuestan nada y nos ayudan a ver qué páginas se usan. Solo se activan si las aceptas."],
       light: ["Arrojando algo de luz", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan a oscuras a menos que las aceptes."],
       disclaimer: ["La letra pequeña", "Usamos cookies de analítica para ver qué páginas se usan. Solo se activan si las aceptas, y puedes cambiar de opinión cuando quieras."],
+      algorithms: ["Ordenado: una pregunta rápida", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Aceptar se ejecuta en O(1). Rechazar, también."],
+      mind: ["Aquí no hay empujoncitos", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Están desactivadas por defecto, y rechazar es igual de fácil que aceptar."],
+      music: ["¿Subimos el volumen?", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan en silencio a menos que las aceptes."],
+      evolution: ["La supervivencia de la más rica", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Solo sobreviven las que aceptas."],
       logic: ["Si aceptas, entonces cookies", "Aceptar → las cookies de analítica nos ayudan a ver qué páginas se usan. ¬Aceptar → ¬cookies. Esa es toda la tabla de verdad."]
     }
   };
