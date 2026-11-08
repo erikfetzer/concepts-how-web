@@ -83,9 +83,9 @@
     ".kbm .set{border-top:1px solid var(--line);margin-top:4px;padding:10px 10px 6px;display:grid;gap:8px}" +
     ".kbm .set .ctl{display:flex!important;gap:8px;margin:0!important;flex-wrap:wrap}" +
     
-    "@media (max-width:" + SM + "px){.wrap{padding-left:12px!important;padding-right:12px!important}.kbm{right:12px;left:12px;width:auto}.kbm .grp{grid-template-columns:1fr 1fr}" +
+    "@media (max-width:" + SM + "px){.wrap{padding-left:12px!important;padding-right:12px!important}.kbm{right:12px;left:12px;width:auto;padding:6px 8px}.kbm .grp{display:block;columns:2;column-gap:8px}.kbm .col{break-inside:avoid;margin-bottom:6px}.kbm .h{padding:8px 10px 2px}.kbm a{padding:7px 10px}" +
     ".kb{width:40px;padding:0;justify-content:center}.kb .lbl2,.kb .grid{display:none}.kb .dots{display:block}}" +
-    "@media (max-width:360px){.kbm .grp{grid-template-columns:1fr}}";
+    "@media (max-width:330px){.kbm .grp{columns:1}}";
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   function init() {
