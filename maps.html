@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maps & projections · concepts.how</title>
+<meta name="description" content="Compare Mercator, Gall–Peters, Robinson and more with distortion circles, drag countries to see their true size, and find out why flight paths curve.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/maps">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/maps">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Maps & projections · concepts.how">
+<meta property="og:description" content="Compare Mercator, Gall–Peters, Robinson and more with distortion circles, drag countries to see their true size, and find out why flight paths curve.">
+<meta property="og:url" content="https://concepts.how/maps">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Maps & projections · concepts.how">
+<meta name="twitter:description" content="Compare Mercator, Gall–Peters, Robinson and more with distortion circles, drag countries to see their true size, and find out why flight paths curve.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* maps */
+@media (min-width:980px){.demo.wide{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr)}}
+.cv.map{border-radius:10px;background:var(--card)}
+.maps2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:700px){.maps2{grid-template-columns:1fr}}
+.tog2{display:inline-flex;align-items:center;gap:6px;font-size:14px;cursor:pointer}
+.tog2 input{width:18px;height:18px;accent-color:var(--accent)}
+.keeps{display:flex;flex-wrap:wrap;gap:6px}
+.kp{font-family:var(--mono);font-size:12px;border-radius:999px;padding:4px 10px;border:1px solid var(--line)}
+.kp.ok{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+.kp.no{color:var(--hot);border-color:color-mix(in srgb,var(--hot) 45%,var(--line))}
+.ti{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.ti i{width:14px;height:14px;border-radius:4px;margin-top:4px}
+.ti b{display:block;font-size:15px}.ti span{display:block;font-size:13px;color:var(--muted)}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html" aria-current="page">Maps</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="maps.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/maps.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Maps &amp; projections</b> · flattening a round world</div>
+    <h1>Every flat map <em>is lying to you.</em></h1>
+    <p class="lede">You can’t flatten an orange peel without stretching or tearing it, and you can’t flatten the Earth without distorting something either. In 1827 Carl Friedrich Gauss proved it’s mathematically impossible. So every world map makes a choice: keep shapes, keep areas, keep distances or keep directions, but never all of them. Spin the globe, drag countries around and see what each choice costs.</p>
+    <nav class="jump" aria-label="On this page"><a href="#gallery">Projections</a><a href="#truesize">True size</a><a href="#routes">Shortest routes</a><a href="#ideas">History</a></nav>
+  </header>
+
+  <!-- ============ 1. gallery ============ -->
+  <section class="block" id="gallery" aria-labelledby="gH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · compare</span>
+      <h2 id="gH">One world, many maps</h2>
+      <p>Each projection is a different recipe for turning the globe into a flat picture. The red circles are Tissot’s indicatrices: identical circles drawn on the globe, so you can see exactly where a map stretches, squashes or skews. Drag the map to spin the world.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <div class="seg" id="pPick"></div>
+        <canvas class="cv map" id="pCv" height="420" aria-label="World map in the selected projection"></canvas>
+        <div class="row"><label class="tog2"><input type="checkbox" id="pTissot" checked> Distortion circles</label><label class="tog2"><input type="checkbox" id="pGrat" checked> Grid lines</label><button class="btn ghost" id="pReset">Reset rotation</button></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Projection</span><div class="verdict" id="pName" style="font-size:clamp(22px,2.6vw,30px)"></div></div>
+        <div class="keeps" id="pKeeps"></div>
+        <p id="pDesc" style="margin:0;font-size:14.5px"></p>
+        <p id="pUse" style="margin:0;font-size:14px;color:var(--muted)"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. true size ============ -->
+  <section class="block" id="truesize" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · drag</span>
+      <h2 id="tH">The true size of countries</h2>
+      <p>On the Mercator map used by most web maps, things get bigger the further they are from the equator. Drag a country toward the equator and watch it shrink to its real size; drag it north and it balloons. Its true area never changes.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <canvas class="cv map" id="tCv" height="420" aria-label="Mercator map with draggable countries" style="touch-action:none;cursor:grab"></canvas>
+        <div class="seg" id="tPick"></div>
+      </div>
+      <div class="panel stack">
+        <div class="stack" id="tInfo" style="gap:8px"></div>
+        <button class="btn ghost" id="tClear">Clear the countries</button>
+        <div class="callout"><b>Greenland vs Africa</b>On Mercator, Greenland looks about as big as Africa. In reality Africa is about 14 times bigger: you could fit the United States, China, India and most of Europe inside it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. routes ============ -->
+  <section class="block" id="routes" aria-labelledby="rH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · navigate</span>
+      <h2 id="rH">Why flights curve</h2>
+      <p>The shortest path between two places on a sphere is a <i>great circle</i>, a slice through the Earth’s centre. On a flat map it looks curved, often bending toward the pole. The straight line on a Mercator map is a <i>rhumb line</i>, a route that keeps one compass heading: easy to steer, but longer.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <div class="seg" id="rPick"></div>
+        <div class="maps2"><canvas class="cv map" id="rCv" height="360" aria-label="Routes on a Mercator map"></canvas><canvas class="cv map" id="rGlobe" height="360" aria-label="Routes on a globe"></canvas></div>
+        <div class="leg"><span><i style="background:var(--hot)"></i>Great circle (shortest)</span><span><i style="background:var(--gold)"></i>Rhumb line (constant heading)</span></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Great circle</div><div class="v" id="rGC" style="color:var(--hot)"></div></div>
+          <div class="ro"><div class="k">Rhumb line</div><div class="v" id="rRH" style="color:var(--gold)"></div></div>
+        </div>
+        <p id="rTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>Mercator’s real purpose</b>Gerardus Mercator designed his 1569 map for sailors, not classrooms. Because it keeps angles true, a straight line drawn on it is a constant compass bearing. Sailors could plot a course with a ruler and follow it with a compass.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">History and ideas</span>
+      <h2 id="iH">Two thousand years of map-making</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>John P. Snyder, <i>Flattening the Earth: Two Thousand Years of Map Projections</i> (1993)</li>
+    <li>Mark Monmonier, <i>How to Lie with Maps</i> (3rd ed., 2018)</li>
+    <li>Natural Earth, public-domain map data, via the world-atlas package</li>
+    <li>Map drawing with d3-geo and d3-geo-projection by Mike Bostock and contributors</li>
+  </ul>
+  <p>Country outlines are simplified for speed (1:110 million scale). Areas are computed on a sphere with radius 6,371 km, so they differ slightly from official figures.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script src="lib/geo.js"></script>
+<script src="lib/world-110m.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const LANGES=document.documentElement.lang==="es";
+const fmt=n=>Math.round(n).toLocaleString(LANGES?"es-ES":"en-US");
+const R_EARTH=6371;
+function sizeCanvas(cv,ratio,maxH){const d=window.devicePixelRatio||1;const W=Math.round(cv.getBoundingClientRect().width);const H=Math.round(Math.min(maxH||9999,W*ratio));cv.style.height=H+"px";if(cv._w!==W||cv._h!==H||cv._d!==d){cv._w=W;cv._h=H;cv._d=d;cv.width=W*d;cv.height=H*d}const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,W,H);return{c,W,H}}
+const world=topojson.feature(WORLD,WORLD.objects.countries);
+const land=topojson.merge(WORLD,WORLD.objects.countries.geometries);
+const borders=topojson.mesh(WORLD,WORLD.objects.countries,(a,b)=>a!==b);
+const sphere={type:"Sphere"},grat=d3.geoGraticule10();
+const tissot=[];for(let lat=-60;lat<=60;lat+=30)for(let lon=-150;lon<=180;lon+=30)tissot.push(d3.geoCircle().center([lon,lat]).radius(5.5)());
+tissot.push(d3.geoCircle().center([0,80]).radius(5.5)(),d3.geoCircle().center([0,-75]).radius(5.5)());
+function colors(){return{ocean:css("--paper"),land:css("--accent"),ink:css("--ink"),line:css("--line"),muted:css("--muted"),hot:css("--hot"),gold:css("--gold"),card:css("--card"),good:css("--good")}}
+function drawWorld(c,path,K,opt={}){c.save();c.beginPath();path(sphere);c.fillStyle=K.card;c.fill();c.clip();
+  if(opt.grat!==false){c.beginPath();path(grat);c.strokeStyle=K.line;c.lineWidth=.7;c.stroke()}
+  c.beginPath();path(land);c.fillStyle=K.land;c.globalAlpha=.22;c.fill();c.globalAlpha=.55;c.strokeStyle=K.land;c.lineWidth=.8;c.stroke();c.globalAlpha=1;
+  c.beginPath();path(borders);c.strokeStyle=K.land;c.globalAlpha=.25;c.lineWidth=.5;c.stroke();c.globalAlpha=1;
+  if(opt.tissot){c.beginPath();tissot.forEach(t=>path(t));c.fillStyle=K.hot;c.globalAlpha=.42;c.fill();c.globalAlpha=1}
+  c.restore();c.beginPath();path(sphere);c.strokeStyle=K.muted;c.lineWidth=1;c.stroke()}
+
+/* ================= 1. gallery ================= */
+const MERC_BOX={type:"MultiPoint",coordinates:[[-179.9,-80],[179.9,84]]};
+const PROJ=[
+ {k:"mercator",n:"Mercator",make:()=>d3.geoMercator(),box:MERC_BOX,ratio:.86,keeps:["shapes","directions"],loses:["areas"],d:"Keeps angles and local shapes true, so a compass bearing is a straight line. The price: areas balloon toward the poles. Greenland looks the size of Africa, and the poles can never be shown at all.",u:"Used by Google Maps, Apple Maps and almost every web map (as “Web Mercator”), because zooming into any city keeps streets at right angles."},
+ {k:"equirect",n:"Equirectangular",make:()=>d3.geoEquirectangular(),ratio:.5,keeps:["simplicity"],loses:["areas","shapes"],d:"Longitude and latitude become simple x and y. Invented around 100 CE and probably the simplest map possible. It stretches everything sideways near the poles.",u:"The default for computer graphics and satellite image mosaics, because each pixel is one step of latitude and longitude."},
+ {k:"gallpeters",n:"Gall–Peters",make:()=>d3.geoCylindricalEqualArea().parallel(45),ratio:.64,keeps:["areas"],loses:["shapes"],d:"An equal-area map: every country is shown at its true relative size. To do it, shapes near the equator are stretched tall and those near the poles squashed flat.",u:"Promoted by Arno Peters in 1973 as fairer to the Global South. Boston’s public schools switched to it in 2017."},
+ {k:"robinson",n:"Robinson",make:()=>d3.geoRobinson(),ratio:.51,keeps:["balance"],loses:["exactness"],d:"A compromise: it isn’t exactly right about anything, but it isn’t badly wrong about anything either. Arthur Robinson designed it in 1963 by eye, adjusting it until it looked right.",u:"National Geographic’s standard world map from 1988 to 1998."},
+ {k:"winkel",n:"Winkel tripel",make:()=>d3.geoWinkel3(),ratio:.62,keeps:["balance"],loses:["exactness"],d:"Another compromise, designed by Oswald Winkel in 1921 to minimise three kinds of distortion together: area, direction and distance.",u:"National Geographic’s world map since 1998, and widely used in atlases and textbooks."},
+ {k:"mollweide",n:"Mollweide",make:()=>d3.geoMollweide(),ratio:.5,keeps:["areas"],loses:["shapes"],d:"An oval equal-area map. Areas are true everywhere, but shapes shear near the edges.",u:"Popular for maps of global data, like climate or population, and for pictures of the whole sky in astronomy."},
+ {k:"homolosine",n:"Goode homolosine",make:()=>d3.geoInterruptedHomolosine(),ratio:.5,keeps:["areas","shapes (mostly)"],loses:["oceans"],d:"Cut the peel instead of stretching it. John Paul Goode’s 1923 map interrupts the oceans so the continents keep both true area and fairly true shape.",u:"Used for global land data such as forest cover, where nobody minds the oceans being sliced."},
+ {k:"ortho",n:"Orthographic globe",make:()=>d3.geoOrthographic().clipAngle(90),ratio:1,maxH:520,keeps:["the look of a globe"],loses:["the far side"],d:"What the Earth looks like from deep space. Shapes near the centre are true, but you only ever see half the world. Drag to spin it.",u:"Used for illustrations and for showing a region in context on the globe."},
+ {k:"azeq",n:"Azimuthal equidistant",make:()=>d3.geoAzimuthalEquidistant().clipAngle(179.9),ratio:1,maxH:520,keeps:["distances from the centre"],loses:["everything else"],d:"Every point is shown at its true distance and direction from the centre. The point opposite the centre is smeared around the entire outer edge. Drag to move the centre.",u:"The emblem of the United Nations is drawn this way, centred on the North Pole. Radio operators use it to aim antennas."}
+];
+const P={i:0,rot:[0,0,0]};
+$("#pPick").innerHTML=PROJ.map((p,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${p.n}</button>`).join("");
+document.querySelectorAll("#pPick .pill").forEach(b=>b.onclick=()=>{P.i=+b.dataset.i;P.rot=[0,PROJ[P.i].k==="ortho"?-20:PROJ[P.i].k==="azeq"?-90:0,0];document.querySelectorAll("#pPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));pDraw()});
+function pDraw(){const p=PROJ[P.i];const cv=$("#pCv");const{c,W,H}=sizeCanvas(cv,p.ratio,p.maxH);const K=colors();
+  const proj=p.make().rotate(P.rot).fitExtent([[6,6],[W-6,H-6]],p.box||sphere);const path=d3.geoPath(proj,c);
+  if(p.k==="mercator"){c.save();c.beginPath();c.rect(0,0,W,H);c.fillStyle=K.card;c.fill();c.restore()}
+  drawWorld(c,path,K,{tissot:$("#pTissot").checked,grat:$("#pGrat").checked});
+  $("#pName").textContent=p.n;$("#pDesc").textContent=p.d;$("#pUse").textContent=p.u;
+  $("#pKeeps").innerHTML=p.keeps.map(k=>`<span class="kp ok">✓ ${k}</span>`).join("")+p.loses.map(k=>`<span class="kp no">✗ ${k}</span>`).join("")}
+$("#pTissot").onchange=pDraw;$("#pGrat").onchange=pDraw;$("#pReset").onclick=()=>{P.rot=[0,PROJ[P.i].k==="ortho"?-20:PROJ[P.i].k==="azeq"?-90:0,0];pDraw()};
+(function(){const cv=$("#pCv");let drag=null;cv.style.touchAction="none";cv.style.cursor="grab";
+  cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,r:P.rot.slice()};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
+  cv.addEventListener("pointermove",e=>{if(!drag)return;const W=cv.getBoundingClientRect().width;const k=PROJ[P.i].k;const s=(k==="ortho"||k==="azeq")?180/W:360/W;
+    P.rot=[drag.r[0]+(e.clientX-drag.x)*s,(k==="ortho"||k==="azeq")?Math.max(-90,Math.min(90,drag.r[1]-(e.clientY-drag.y)*s)):drag.r[1],0];pDraw()});
+  const up=()=>{drag=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= 2. true size ================= */
+const AF=["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cameroon","Central African Rep.","Chad","Congo","Dem. Rep. Congo","Côte d'Ivoire","Djibouti","Egypt","Eq. Guinea","Eritrea","eSwatini","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali","Mauritania","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda","S. Sudan","Senegal","Sierra Leone","Somalia","Somaliland","South Africa","Sudan","Tanzania","Togo","Tunisia","Uganda","W. Sahara","Zambia","Zimbabwe"];
+const byName=n=>world.features.find(f=>f.properties.name===n);
+const CHOICES=[["Greenland","Greenland"],["Africa","__africa"],["Russia","Russia"],["Antarctica","Antarctica"],["United States","United States of America"],["Canada","Canada"],["Brazil","Brazil"],["China","China"],["India","India"],["Australia","Australia"],["Mexico","Mexico"],["United Kingdom","United Kingdom"],["DR Congo","Dem. Rep. Congo"]];
+const PALETTE=["--hot","--good","--gold","#8B5CF6","#0EA5A4","#D946EF"];
+function featureFor(key){if(key==="__africa")return{type:"Feature",geometry:topojson.merge(WORLD,WORLD.objects.countries.geometries.filter(g=>AF.includes(g.properties.name)))};const f=byName(key);return f}
+const TS={items:[],drag:null};
+function moveTo(f,from,to){const r1=d3.geoRotation([-from[0],-from[1]]),r2=d3.geoRotation([-to[0],-to[1]]);
+  const tr=pt=>r2.invert(r1(pt));const mapc=(co,depth)=>depth===0?tr(co):co.map(x=>mapc(x,depth-1));const g=f.geometry;
+  const depth=g.type==="Polygon"?2:g.type==="MultiPolygon"?3:1;return{type:"Feature",geometry:{type:g.type,coordinates:mapc(g.coordinates,depth)}}}
+function tAdd(i,at){const [label,key]=CHOICES[i];if(TS.items.some(t=>t.label===label))return;const f=featureFor(key);const cen=d3.geoCentroid(f);
+  TS.items.push({label,f,cen,pos:at||[cen[0],cen[1]],col:PALETTE[TS.items.length%PALETTE.length],area:d3.geoArea(f)*R_EARTH*R_EARTH});tDraw()}
+$("#tPick").innerHTML=CHOICES.map((c,i)=>`<button class="pill" data-i="${i}">${c[0]}</button>`).join("");
+document.querySelectorAll("#tPick .pill").forEach(b=>b.onclick=()=>{tAdd(+b.dataset.i);});
+$("#tClear").onclick=()=>{TS.items=[];tDraw()};
+let tProj,tPaths=[];
+function tDraw(){const cv=$("#tCv");const{c,W,H}=sizeCanvas(cv,.86,600);const K=colors();tProj=d3.geoMercator().fitExtent([[0,0],[W,H]],MERC_BOX);const path=d3.geoPath(tProj,c);
+  c.fillStyle=K.card;c.fillRect(0,0,W,H);drawWorld(c,path,K,{grat:true});const sp=d3.geoPath(tProj);tPaths=[];
+  TS.items.forEach(t=>{const g=moveTo(t.f,t.cen,t.pos);const p2=new Path2D(sp(g)||"");tPaths.push(p2);const col=t.col.startsWith("--")?css(t.col):t.col;
+    c.fillStyle=col;c.globalAlpha=.55;c.fill(p2);c.globalAlpha=1;c.strokeStyle=col;c.lineWidth=1.6;c.stroke(p2);
+    const [x,y]=tProj(t.pos);c.fillStyle=K.ink;c.font="600 12px "+css("--body");c.textAlign="center";c.fillText(t.label,x,y)});c.lineWidth=1;
+  // info
+  $("#tInfo").innerHTML=(TS.items.length?`<p style="margin:0;font-size:14px;color:var(--muted)">Drag the shapes on the map.</p>`:"")+(TS.items.length?TS.items.map(t=>{const lat=t.pos[1];const k=1/Math.cos(lat*Math.PI/180)**2;const col=t.col.startsWith("--")?`var(${t.col})`:t.col;
+    return `<div class="ti"><i style="background:${col}"></i><div><b>${t.label}</b><span>True area: ${(t.area/1e6).toFixed(2)} million km²</span><span>Drawn ${k<1.15?"close to true size":`about ${k<10?k.toFixed(1):Math.round(k)}× too big`} at ${Math.abs(Math.round(lat))}°${lat>=0?"N":"S"}</span></div></div>`}).join(""):`<p style="margin:0;font-size:14.5px;color:var(--muted)">Pick a country below, then drag it around the map.</p>`)}
+(function(){const cv=$("#tCv");
+  cv.addEventListener("pointerdown",e=>{const r=cv.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;const c=cv.getContext("2d");const d=window.devicePixelRatio||1;
+    for(let i=tPaths.length-1;i>=0;i--){c.setTransform(d,0,0,d,0,0);if(c.isPointInPath(tPaths[i],x*d,y*d)||c.isPointInPath(tPaths[i],x,y)){const ll=tProj.invert([x,y]);TS.drag={i,off:[TS.items[i].pos[0]-ll[0],TS.items[i].pos[1]-ll[1]]};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing";e.preventDefault();return}}});
+  cv.addEventListener("pointermove",e=>{if(!TS.drag)return;const r=cv.getBoundingClientRect();const ll=tProj.invert([e.clientX-r.left,e.clientY-r.top]);if(!ll)return;const t=TS.items[TS.drag.i];
+    t.pos=[ll[0]+TS.drag.off[0],Math.max(-78,Math.min(82,ll[1]+TS.drag.off[1]))];tDraw()});
+  const up=()=>{TS.drag=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= 3. routes ================= */
+const CITIES={ny:["New York",[-74.0,40.7]],ld:["London",[-0.13,51.5]],tk:["Tokyo",[139.7,35.7]],la:["Los Angeles",[-118.2,34.05]],db:["Dubai",[55.3,25.2]],md:["Madrid",[-3.7,40.4]],ba:["Buenos Aires",[-58.4,-34.6]],sy:["Sydney",[151.2,-33.9]],sc:["Santiago",[-70.7,-33.45]],bj:["Beijing",[116.4,39.9]],dn:["Denver",[-104.99,39.74]],jb:["Johannesburg",[28.05,-26.2]]};
+const ROUTES=[["ny","bj"],["ld","la"],["la","db"],["md","ba"],["sy","sc"],["dn","tk"],["ld","jb"]];
+let RI=0;
+$("#rPick").innerHTML=ROUTES.map((r,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===0}">${CITIES[r[0]][0]} → ${CITIES[r[1]][0]}</button>`).join("");
+document.querySelectorAll("#rPick .pill").forEach(b=>b.onclick=()=>{RI=+b.dataset.i;document.querySelectorAll("#rPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));rDraw()});
+function rhumb(a,b){const toR=Math.PI/180;const φ1=a[1]*toR,φ2=b[1]*toR;let Δλ=(b[0]-a[0])*toR;if(Math.abs(Δλ)>Math.PI)Δλ=Δλ>0?-(2*Math.PI-Δλ):2*Math.PI+Δλ;
+  const Δψ=Math.log(Math.tan(Math.PI/4+φ2/2)/Math.tan(Math.PI/4+φ1/2));const Δφ=φ2-φ1;const q=Math.abs(Δψ)>1e-12?Δφ/Δψ:Math.cos(φ1);return Math.sqrt(Δφ*Δφ+q*q*Δλ*Δλ)*R_EARTH}
+function rDraw(){const[a,b]=ROUTES[RI].map(k=>CITIES[k]);const K=colors();let dl=b[1][0]-a[1][0];if(dl>180)dl-=360;if(dl<-180)dl+=360;const mid=a[1][0]+dl/2;
+  const gc=d3.geoDistance(a[1],b[1])*R_EARTH,rh=rhumb(a[1],b[1]);
+  // mercator
+  {const{c,W,H}=sizeCanvas($("#rCv"),.86,480);const proj=d3.geoMercator().rotate([-mid,0]).fitExtent([[0,0],[W,H]],MERC_BOX);const path=d3.geoPath(proj,c);c.fillStyle=K.card;c.fillRect(0,0,W,H);drawWorld(c,path,K);
+    const pa=proj(a[1]),pb=proj(b[1]);c.strokeStyle=K.gold;c.lineWidth=3;c.setLineDash([7,5]);c.beginPath();c.moveTo(pa[0],pa[1]);c.lineTo(pb[0],pb[1]);c.stroke();c.setLineDash([]);
+    c.strokeStyle=K.hot;c.lineWidth=3.2;c.beginPath();path({type:"LineString",coordinates:[a[1],b[1]]});c.stroke();c.lineWidth=1;
+    [[a,pa],[b,pb]].forEach(([ct,p])=>{c.fillStyle=K.ink;c.beginPath();c.arc(p[0],p[1],5,0,7);c.fill();c.font="600 12px "+css("--body");c.textAlign=p[0]>W-80?"right":"left";c.fillText(ct[0],p[0]+(p[0]>W-80?-8:8),p[1]-8)})}
+  // globe
+  {const cv=$("#rGlobe");const{c,W,H}=sizeCanvas(cv,1,360);const ip=d3.geoInterpolate(a[1],b[1])(.5);const proj=d3.geoOrthographic().rotate([-ip[0],-ip[1]]).fitExtent([[8,8],[W-8,H-8]],sphere).clipAngle(90);const path=d3.geoPath(proj,c);drawWorld(c,path,K);
+    const pts=[];for(let i=0;i<=100;i++){const t=i/100;const lon=a[1][0]+dl*t;const ψ1=Math.log(Math.tan(Math.PI/4+a[1][1]*Math.PI/360)),ψ2=Math.log(Math.tan(Math.PI/4+b[1][1]*Math.PI/360));const ψ=ψ1+(ψ2-ψ1)*t;pts.push([lon,(2*Math.atan(Math.exp(ψ))-Math.PI/2)*180/Math.PI])}
+    c.strokeStyle=K.gold;c.lineWidth=3;c.setLineDash([7,5]);c.beginPath();path({type:"LineString",coordinates:pts});c.stroke();c.setLineDash([]);
+    c.strokeStyle=K.hot;c.lineWidth=3.2;c.beginPath();path({type:"LineString",coordinates:[a[1],b[1]]});c.stroke();c.lineWidth=1;
+    [a,b].forEach(ct=>{const p=proj(ct[1]);c.fillStyle=K.ink;c.beginPath();c.arc(p[0],p[1],5,0,7);c.fill();c.font="600 12px "+css("--body");c.textAlign="center";c.fillText(ct[0],p[0],p[1]-10)})}
+  $("#rGC").textContent=fmt(gc)+" km";$("#rRH").textContent=fmt(rh)+" km";
+  const extra=rh-gc;$("#rTxt").innerHTML=`Following one compass heading from ${a[0]} to ${b[0]} adds <b>${fmt(extra)} km</b> (${Math.round(extra/gc*100)}%). On the globe the great circle is clearly the direct route; on the flat map it looks like a detour.`}
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Ptolemy’s Geography","c. 150 CE","Claudius Ptolemy listed about 8,000 places by latitude and longitude and described how to draw a curved grid on a flat map. Rediscovered in Europe around 1400, it shaped mapmaking for centuries."],
+ ["Mercator’s map","1569","Gerardus Mercator stretched latitudes so that compass bearings would be straight lines. Brilliant for navigation, misleading for comparing sizes."],
+ ["The proof it can’t be done","1827","Gauss’s Theorema Egregium (“remarkable theorem”) shows a sphere’s curvature can’t be flattened without distortion. Every flat map must give something up."],
+ ["Tissot’s circles","1859","Nicolas Auguste Tissot found a way to measure distortion at any point: imagine a tiny circle on the globe and see what shape the map turns it into."],
+ ["The Earth isn’t a sphere","","It bulges at the equator: the equatorial radius is about 21 km longer than the polar radius. GPS uses a precise ellipsoid model called WGS 84, adopted in 1984."],
+ ["The coastline paradox","1967","How long is Britain’s coast? It depends on your ruler: the shorter the ruler, the longer the coast, without limit. Benoît Mandelbrot used this puzzle to introduce fractals."],
+ ["Web Mercator","2005","When Google Maps launched, it chose a version of Mercator because it keeps streets at right angles at every zoom. Nearly every web map followed."],
+ ["Which way is up?","","Putting north at the top is a convention, not a fact. Many medieval European maps put east at the top, toward the rising sun, which is where the word “orient” comes from."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+pDraw();tAdd(0);tAdd(1);rDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{pDraw();tDraw();rDraw()},150)});
+addEventListener("themechange",()=>{pDraw();tDraw();rDraw()});
+</script>
+</body>
+</html>

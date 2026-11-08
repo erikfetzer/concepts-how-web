@@ -20,6 +20,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Codes & encryption | `codes.html` | Caesar wheel, frequency-analysis cracker, Vigenère with flattened frequencies, SHA-256 avalanche, Diffie–Hellman paint mixing and numbers, toy RSA |
 | Infinity | `infinity.html` | Hilbert’s hotel animation, Cantor zigzag through the fractions, interactive diagonal argument, convergent and divergent series, Mandelbrot zoom, “which infinity is bigger” quiz |
 | Language | `language.html` | Indo-European cognate explorer, Zipf’s law on any text, name in Greek/Cyrillic/Braille/Morse/NATO/binary with Morse audio, English–Spanish false friends quiz |
+| Maps & projections | `maps.html` | Nine projections with Tissot circles and drag-to-rotate, draggable true-size countries (incl. Africa), great circle vs rhumb line on Mercator and globe. Uses `lib/geo.js` (d3-geo bundle) and `lib/world-110m.js` |
 
 ## Spanish
 
