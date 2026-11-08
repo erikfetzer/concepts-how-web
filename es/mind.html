@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesgos y mente · concepts.how</title>
+<meta name="description" content="Déjate engañar por ilusiones ópticas, pon a prueba el pensamiento rápido y el lento, mide tu tiempo de reacción, haz el test de Stroop, estira tu memoria y aprende 22 sesgos cognitivos.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/mind">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/mind">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Sesgos y mente · concepts.how">
+<meta property="og:description" content="Déjate engañar por ilusiones ópticas, pon a prueba el pensamiento rápido y el lento, mide tu tiempo de reacción, haz el test de Stroop, estira tu memoria y aprende 22 sesgos cognitivos.">
+<meta property="og:url" content="https://concepts.how/mind">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sesgos y mente · concepts.how">
+<meta name="twitter:description" content="Déjate engañar por ilusiones ópticas, pon a prueba el pensamiento rápido y el lento, mide tu tiempo de reacción, haz el test de Stroop, estira tu memoria y aprende 22 sesgos cognitivos.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* mind */
+.crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
+.qc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;align-content:start}
+.qc .q{margin:0;font-size:15.5px}
+.qc .unit{font-size:14px;color:var(--muted)}
+.qc .ans{margin:0;font-size:14px}
+.okc{color:var(--good)}.noc{color:var(--hot)}
+.react{width:100%;min-height:230px;border-radius:16px;border:0;font:700 clamp(20px,3vw,28px)/1.2 var(--display);color:#fff;cursor:pointer;background:var(--accent);transition:background .15s;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.react.wait{background:#b42318}.react.go{background:#16a34a}.react.early{background:#d97706}.react.done{background:var(--accent)}
+.strip2{display:flex;align-items:flex-end;gap:4px;height:60px;border-bottom:1px solid var(--line)}
+.strip2 i{flex:1;max-width:22px;background:var(--accent);border-radius:3px 3px 0 0;opacity:.8}
+.stroopw{min-height:120px;display:grid;place-items:center;font:800 clamp(38px,7vw,60px)/1 var(--display);letter-spacing:.02em;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.stroopw.shake{animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.stbtns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stb{height:56px;border-radius:12px;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);cursor:pointer;touch-action:manipulation}
+.stb:active{transform:scale(.96)}
+.digits{min-height:110px;display:grid;place-items:center;font:800 clamp(44px,8vw,72px)/1 var(--mono);letter-spacing:.08em;border:1px solid var(--line);border-radius:14px;background:var(--paper);overflow-wrap:anywhere;text-align:center;padding:8px}
+.digits.pop{animation:pop .3s}
+@keyframes pop{from{transform:scale(.7);opacity:.2}to{transform:none;opacity:1}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <a class="nl" href="money.html">Dinero</a>
+    <a class="nl" href="light.html">Luz y color</a>
+    <a class="nl" href="algorithms.html">Algoritmos</a>
+    <a class="nl" href="mind.html" aria-current="page">Sesgos y mente</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../mind.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="mind.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Sesgos y mente</b> · atajos, ilusiones, puntos ciegos</div>
+    <h1>Tu cerebro toma atajos. <em>Píllalo con las manos en la masa.</em></h1>
+    <p class="lede">Tu cerebro maneja un torrente de información con reglas rápidas. Casi siempre funcionan de maravilla; a veces te despistan de formas predecibles. Los psicólogos llaman sesgos cognitivos a estos errores sistemáticos. Pon a prueba tus ojos, tus reflejos y tu razonamiento, y aprende los nombres de los trucos que te juega la mente.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#illusions">Ilusiones</a><a href="#reflect">Pensamiento rápido y lento</a><a href="#reaction">Tiempo de reacción</a><a href="#stroop">El test de Stroop</a><a href="#memory">Memoria</a><a href="#biases">Guía de campo</a></nav>
+  </header>
+
+  <!-- ============ 1. illusions ============ -->
+  <section class="block" id="illusions" aria-labelledby="ilH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · ver</span>
+      <h2 id="ilH">Iguálalos</h2>
+      <p>Usa el control para que la figura azul tenga exactamente el mismo tamaño que la gris. Luego descubre cuánto te has equivocado. Casi todo el mundo cae, incluso sabiendo el truco, porque la ilusión ocurre antes de que el pensamiento consciente pueda opinar.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="ilPick"></div>
+        <canvas class="cv" id="ilCv" height="280" aria-label="Ilusión óptica"></canvas>
+        <div class="sl"><label for="ilS">Ajusta la azul</label><input type="range" id="ilS" min="0" max="100" value="50"></div>
+        <div class="row"><button class="btn" id="ilReveal">Descubrir</button><button class="btn ghost" id="ilAgain">Otra vez</button></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Tu error</span><div class="verdict" id="ilErr">?</div></div>
+        <p id="ilTxt" style="margin:0;font-size:14.5px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. reflection ============ -->
+  <section class="block" id="reflect" aria-labelledby="rH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · pensar</span>
+      <h2 id="rH">Pensamiento rápido y pensamiento lento</h2>
+      <p>El psicólogo Daniel Kahneman describió dos modos de pensar: el Sistema 1 es rápido, automático e intuitivo; el Sistema 2 es lento, costoso y lógico. Estos tres acertijos, del Test de Reflexión Cognitiva de Shane Frederick (2005), tienen cada uno una respuesta que salta a la mente al instante y que es incorrecta.</p>
+    </div>
+    <div class="crt" id="crt"></div>
+  </section>
+
+  <!-- ============ 3. reaction ============ -->
+  <section class="block" id="reaction" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · velocidad</span>
+      <h2 id="tH">¿Qué tan rápido eres?</h2>
+      <p>Toca el panel en cuanto se ponga verde. La luz llega a tu ojo, las señales viajan al cerebro, decides y una orden baja hasta tu dedo. Incluso toda esa cadena dura solo un cuarto de segundo para la mayoría de la gente.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <button class="react" id="rtBox">Toca para empezar</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Último</div><div class="v" id="rtLast">–</div></div>
+          <div class="ro"><div class="k">Media</div><div class="v" id="rtAvg">–</div></div>
+          <div class="ro"><div class="k">Mejor</div><div class="v" id="rtBest">–</div></div>
+        </div>
+        <div class="strip2" id="rtList"></div>
+        <div class="callout"><b>Lo habitual</b>Los tiempos de reacción visual simples suelen rondar los 200 a 300 milisegundos. Con sonidos se reacciona un poco más rápido. El cansancio, las distracciones y el alcohol te ralentizan, y por eso hablar por teléfono al conducir es peligroso incluso con manos libres.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Stroop ============ -->
+  <section class="block" id="stroop" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · interferencia</span>
+      <h2 id="sH">El test de Stroop</h2>
+      <p>Toca el botón del <b>color de la tinta</b> de cada palabra, sin hacer caso de lo que dice. Primera ronda: las palabras coinciden con su color. Segunda ronda: no coinciden. Leer es tan automático que no puedes apagarlo, y el choque te frena. John Ridley Stroop lo publicó en 1935, y sigue siendo uno de los experimentos más repetidos de la psicología.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="stroopw" id="stWord">¿Listo?</div>
+        <div class="stbtns" id="stBtns"></div>
+        <button class="btn" id="stGo">Empezar la ronda 1</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Ronda 1: coinciden</div><div class="v" id="st1">–</div></div>
+          <div class="ro"><div class="k">Ronda 2: chocan</div><div class="v" id="st2">–</div></div>
+        </div>
+        <p id="stMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. memory ============ -->
+  <section class="block" id="memory" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · recordar</span>
+      <h2 id="mH">¿Cuántas cifras puedes retener?</h2>
+      <p>Mira las cifras y luego escríbelas en orden. Cada vez que aciertes, la lista crece en una. En 1956 George Miller escribió un famoso artículo titulado «El mágico número siete, más o menos dos» sobre los límites de la memoria a corto plazo.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="digits" id="dShow">–</div>
+        <input class="inp" id="dIn" inputmode="numeric" autocomplete="off" placeholder="Escribe las cifras" disabled>
+        <div class="row"><button class="btn" id="dGo">Empezar</button><button class="btn ghost" id="dCheck" disabled>Comprobar</button></div>
+        <p id="dMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Longitud actual</div><div class="v" id="dLen">4</div></div>
+          <div class="ro"><div class="k">Tu mejor marca</div><div class="v" id="dBest">–</div></div>
+        </div>
+        <div class="callout"><b>Agrupar</b>Investigaciones más recientes sitúan el límite real cerca de cuatro «bloques». El truco es que un bloque puede ser grande: 1-9-1-4 son cuatro elementos, pero «1914» es uno. Por eso los números de teléfono se dividen en grupos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. biases ============ -->
+  <section class="block" id="biases" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Guía de campo</span>
+      <h2 id="bH">Sesgos cognitivos</h2>
+      <p>Los sesgos no son señal de estupidez: son efectos secundarios de atajos que normalmente nos sirven bien. Conocer sus nombres ayuda a detectarlos, aunque la investigación sugiere que no te hace inmune. Algunos hallazgos famosos de este campo no se han podido replicar, así que indicamos la solidez de las pruebas donde importa.</p>
+    </div>
+    <div class="row" style="gap:10px;margin-bottom:6px"><div class="seg" id="bCats"></div><input class="search" id="bSearch" type="search" placeholder="Buscar sesgos" aria-label="Buscar sesgos" style="max-width:280px"></div>
+    <div class="fl" id="bList"></div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Grandes ideas</span>
+      <h2 id="iH">Cómo aprendimos sobre nuestra propia mente</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Daniel Kahneman, <i>Pensar rápido, pensar despacio</i> (2011)</li>
+    <li>Amos Tversky and Daniel Kahneman, “Judgment under Uncertainty: Heuristics and Biases,” <i>Science</i> (1974)</li>
+    <li>Shane Frederick, “Cognitive Reflection and Decision Making,” <i>Journal of Economic Perspectives</i> (2005)</li>
+    <li>J. Ridley Stroop, “Studies of Interference in Serial Verbal Reactions” (1935)</li>
+    <li>George A. Miller, “The Magical Number Seven, Plus or Minus Two” (1956)</li>
+  </ul>
+  <p>Son demostraciones, no pruebas clínicas. Los resultados dependen de tu dispositivo, tu pantalla y lo despierto que estés. Nada de lo que hagas aquí se guarda ni se envía a ninguna parte.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+
+/* ================= 1. illusions ================= */
+const IL={k:"ml",revealed:false,target:0};
+const ILS=[["ml","Líneas de Müller-Lyer"],["eb","Círculos de Ebbinghaus"],["po","Raíles de Ponzo"]];
+const ILT={ml:"La ilusión de Müller-Lyer (1889). Las aletas hacia fuera hacen que una línea parezca más larga; las aletas hacia dentro, más corta. Curiosamente, algunos estudios encontraron que a las personas de culturas con menos edificios de esquinas rectas les afecta menos, aunque aún se debate.",eb:"La ilusión de Ebbinghaus. Un círculo rodeado de círculos grandes parece más pequeño que el mismo círculo rodeado de pequeños. Tu cerebro juzga el tamaño comparando con lo que hay alrededor.",po:"La ilusión de Ponzo (1911). Las líneas que convergen parecen una carretera que se aleja, así que tu cerebro supone que la barra de arriba está más lejos y agranda su tamaño, como haría con objetos reales."};
+$("#ilPick").innerHTML=ILS.map(([k,l],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join("");
+document.querySelectorAll("#ilPick .pill").forEach(b=>b.onclick=()=>{IL.k=b.dataset.k;document.querySelectorAll("#ilPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));ilNew()});
+function ilNew(){IL.revealed=false;$("#ilS").value=Math.random()<.5?15+Math.random()*20:65+Math.random()*20;$("#ilErr").textContent="?";$("#ilErr").className="verdict";$("#ilTxt").textContent="Mueve el control hasta que los dos parezcan del mismo tamaño y pulsa Descubrir.";ilDraw()}
+function ilDraw(){const{c,W,H}=setupCanvas($("#ilCv"));const v=+$("#ilS").value/100;const ink=css("--ink"),acc=css("--accent"),muted=css("--muted"),hot=css("--hot");const card=css("--card");c.fillStyle=card;c.fillRect(0,0,W,H);
+  let ref,adj;
+  if(IL.k==="ml"){const L=Math.min(W*.42,220);ref=L;adj=L*(.6+.8*v);const y1=H*.32,y2=H*.7,cx=W/2,f=Math.min(26,L*.13);
+    const line=(len,y,out,col)=>{const x1=cx-len/2,x2=cx+len/2;c.strokeStyle=col;c.lineWidth=3;c.beginPath();c.moveTo(x1,y);c.lineTo(x2,y);const d=out?-1:1;
+      c.moveTo(x1,y);c.lineTo(x1+d*f,y-f);c.moveTo(x1,y);c.lineTo(x1+d*f,y+f);c.moveTo(x2,y);c.lineTo(x2-d*f,y-f);c.moveTo(x2,y);c.lineTo(x2-d*f,y+f);c.stroke()};
+    line(ref,y1,false,muted);line(adj,y2,true,acc);
+    if(IL.revealed){c.setLineDash([4,4]);c.strokeStyle=hot;c.lineWidth=1.5;[cx-ref/2,cx+ref/2].forEach(x=>{c.beginPath();c.moveTo(x,y1-30);c.lineTo(x,y2+30);c.stroke()});c.setLineDash([])}}
+  else if(IL.k==="eb"){const r=Math.min(W*.5,H)*.12;ref=r;adj=r*(.6+.8*v);const A=[W*.27,H/2],B=[W*.73,H/2];
+    c.fillStyle=muted;for(let i=0;i<6;i++){const a=i*Math.PI/3;c.beginPath();c.arc(A[0]+Math.cos(a)*r*2.75,A[1]+Math.sin(a)*r*2.75,r*1.2,0,7);c.fill()}
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;c.beginPath();c.arc(B[0]+Math.cos(a)*adj*1.9,B[1]+Math.sin(a)*adj*1.9,r*.45,0,7);c.fill()}
+    c.fillStyle=css("--ink");c.globalAlpha=.55;c.beginPath();c.arc(A[0],A[1],ref,0,7);c.fill();c.globalAlpha=1;c.fillStyle=acc;c.beginPath();c.arc(B[0],B[1],adj,0,7);c.fill();
+    if(IL.revealed){c.strokeStyle=hot;c.setLineDash([4,4]);c.lineWidth=1.5;c.beginPath();c.arc(B[0],B[1],ref,0,7);c.stroke();c.setLineDash([])}}
+  else{const L=Math.min(W*.3,150);ref=L;adj=L*(.6+.8*v);const cx=W/2;c.strokeStyle=muted;c.lineWidth=3;c.beginPath();c.moveTo(cx-W*.32,H-10);c.lineTo(cx-18,12);c.moveTo(cx+W*.32,H-10);c.lineTo(cx+18,12);c.stroke();
+    for(let y=30;y<H;y+=24){const k=(y-12)/(H-22);const half=18+k*(W*.32-18);c.strokeStyle=css("--line");c.lineWidth=2;c.beginPath();c.moveTo(cx-half,y);c.lineTo(cx+half,y);c.stroke()}
+    c.lineWidth=7;c.strokeStyle=acc;c.beginPath();c.moveTo(cx-adj/2,H*.3);c.lineTo(cx+adj/2,H*.3);c.stroke();c.strokeStyle=css("--ink");c.globalAlpha=.6;c.beginPath();c.moveTo(cx-ref/2,H*.78);c.lineTo(cx+ref/2,H*.78);c.stroke();c.globalAlpha=1;
+    if(IL.revealed){c.setLineDash([4,4]);c.strokeStyle=hot;c.lineWidth=1.5;[cx-ref/2,cx+ref/2].forEach(x=>{c.beginPath();c.moveTo(x,H*.2);c.lineTo(x,H*.88);c.stroke()});c.setLineDash([])}}
+  c.lineWidth=1;IL.err=(adj-ref)/ref}
+$("#ilS").oninput=()=>{if(IL.revealed){IL.revealed=false;$("#ilErr").textContent="?";$("#ilErr").className="verdict"}ilDraw()};
+$("#ilReveal").onclick=()=>{IL.revealed=true;ilDraw();const e=IL.err*100;$("#ilErr").textContent=(e>0?"+":"")+e.toFixed(0)+"%";$("#ilErr").className="verdict "+(Math.abs(e)<4?"ok":"no");
+  $("#ilTxt").innerHTML=(Math.abs(e)<4?"<b>¡Impresionante!</b> A pocos puntos del valor real. ":`Hiciste la azul un <b>${Math.abs(e).toFixed(0)} % ${e>0?"más grande":"más pequeña"}</b> que la gris. `)+ILT[IL.k]};
+$("#ilAgain").onclick=ilNew;
+
+/* ================= 2. CRT ================= */
+const CRT=[["Un bate y una pelota cuestan 1,10 $ en total. El bate cuesta 1,00 $ más que la pelota. ¿Cuánto cuesta la pelota, en centavos?",5,10,"centavos","Si la pelota costara 10 centavos, el bate costaría 1,10 $ y el total sería 1,20 $. Pelota x + bate (x + 100) = 110, así que 2x = 10 y x = 5 centavos."],
+ ["Si 5 máquinas tardan 5 minutos en fabricar 5 piezas, ¿cuántos minutos tardarían 100 máquinas en fabricar 100 piezas?",5,100,"minutos","Cada máquina tarda 5 minutos en fabricar una pieza. 100 máquinas trabajando a la vez fabrican 100 piezas en los mismos 5 minutos."],
+ ["Una mancha de nenúfares duplica su tamaño cada día. Tarda 48 días en cubrir todo el lago. ¿Cuántos días tarda en cubrir la mitad?",47,24,"días","Se duplica cada día, así que el día antes de cubrir todo el lago, cubría la mitad: el día 47."]];
+$("#crt").innerHTML=CRT.map((q,i)=>`<article class="qc crtq" data-i="${i}"><p class="q"><b>${i+1}.</b> ${q[0]}</p><div class="row"><input class="inp" inputmode="numeric" aria-label="Your answer" style="max-width:140px"><span class="unit">${q[3]}</span><button class="btn">Comprobar</button></div><p class="ans" hidden></p></article>`).join("");
+document.querySelectorAll(".crtq").forEach(card=>{const q=CRT[+card.dataset.i];const inp=card.querySelector("input"),btn=card.querySelector("button"),ans=card.querySelector(".ans");
+  const check=()=>{const v=parseFloat(inp.value.replace(",","."));if(!isFinite(v))return;ans.hidden=false;
+    ans.innerHTML=v===q[1]?`<b class="okc">¡Correcto!</b> Tu Sistema 2 ha intervenido. ${q[4]}`:v===q[2]?`<b class="noc">Esa es la respuesta intuitiva, ${q[2]}, y es incorrecta.</b> La respuesta correcta es <b>${q[1]}</b>. ${q[4]}`:`<b class="noc">No exactamente.</b> La respuesta correcta es <b>${q[1]}</b>; la respuesta incorrecta habitual es ${q[2]}. ${q[4]}`};
+  btn.onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()}});
+
+/* ================= 3. reaction ================= */
+const RT={state:"idle",t0:0,timer:0,list:[]};
+function rtSet(state,txt){const b=$("#rtBox");b.className="react "+state;b.textContent=txt;RT.state=state}
+$("#rtBox").addEventListener("pointerdown",e=>{e.preventDefault();
+  if(RT.state==="idle"||RT.state==="done"||RT.state==="early"){rtSet("wait","Espera al verde…");RT.timer=setTimeout(()=>{rtSet("go","¡Toca!");RT.t0=performance.now()},1200+Math.random()*2500)}
+  else if(RT.state==="wait"){clearTimeout(RT.timer);rtSet("early","¡Demasiado pronto! Toca para volver a intentarlo")}
+  else if(RT.state==="go"){const ms=Math.round(performance.now()-RT.t0);RT.list.push(ms);rtSet("done",`${ms} ms · toca para repetir`);
+    const avg=Math.round(RT.list.reduce((a,b)=>a+b,0)/RT.list.length);$("#rtLast").textContent=ms+" ms";$("#rtAvg").textContent=avg+" ms";$("#rtBest").textContent=Math.min(...RT.list)+" ms";
+    $("#rtList").innerHTML=RT.list.slice(-12).map(v=>`<i style="height:${Math.min(100,v/6)}%" title="${v} ms"></i>`).join("")}});
+
+/* ================= 4. Stroop ================= */
+const COLORS=[["ROJO","#e3342f"],["AZUL","#2563eb"],["VERDE","#16a34a"],["AMARILLO","#eab308"]];
+const ST={round:0,items:[],i:0,t0:0,err:0,res:[null,null]};
+$("#stBtns").innerHTML=COLORS.map(([n,h],i)=>`<button class="stb" data-i="${i}" style="background:${h}" aria-label="${n}"></button>`).join("");
+function stItems(match){const out=[];for(let k=0;k<12;k++){const w=Math.floor(Math.random()*4);let ink=w;if(!match){do{ink=Math.floor(Math.random()*4)}while(ink===w)}out.push([w,ink])}return out}
+function stShow(){const[w,ink]=ST.items[ST.i];const el=$("#stWord");el.textContent=COLORS[w][0];el.style.color=COLORS[ink][1]}
+$("#stGo").onclick=()=>{ST.round=ST.res[0]===null||ST.res[1]!==null?1:2;if(ST.round===1)ST.res=[null,null];ST.items=stItems(ST.round===1);ST.i=0;ST.err=0;ST.t0=performance.now();stShow();$("#stGo").disabled=true;$("#stMsg").textContent=`Ronda ${ST.round}: toca el color de la TINTA.`};
+document.querySelectorAll(".stb").forEach(b=>b.onclick=()=>{if(!ST.round||$("#stGo").disabled===false)return;const ink=ST.items[ST.i][1];if(+b.dataset.i!==ink){ST.err++;$("#stWord").classList.remove("shake");void $("#stWord").offsetWidth;$("#stWord").classList.add("shake");return}
+  ST.i++;if(ST.i<ST.items.length){stShow();return}
+  const t=(performance.now()-ST.t0)/1000;ST.res[ST.round-1]=t;$("#st"+ST.round).textContent=t.toFixed(1)+" s";$("#stWord").textContent="¡Hecho!";$("#stWord").style.color="";$("#stGo").disabled=false;
+  if(ST.round===1){$("#stGo").textContent="Empezar la ronda 2";$("#stMsg").textContent=`La ronda 1 te llevó ${t.toFixed(1)} segundos con ${ST.err} errores. Ahora las palabras no coincidirán con sus colores.`}
+  else{const d=ST.res[1]-ST.res[0];$("#stGo").textContent="Otra vez";$("#stMsg").innerHTML=d>0?`Las palabras que chocan te frenaron <b>${d.toFixed(1)} segundos</b> (un ${Math.round(d/ST.res[0]*100)} % más lento), con ${ST.err} errores. Es el efecto Stroop: tu cerebro leyó las palabras aunque intentaste no hacerlo.`:`Increíble: no fuiste más lento con las palabras que chocan. La mayoría pierde un segundo o más. Prueba otra vez para comprobar que no fue suerte.`}});
+
+/* ================= 5. digit span ================= */
+const DS={len:4,seq:"",best:0,timer:0};
+function dRun(){clearTimeout(DS.timer);DS.seq=[...Array(DS.len)].map(()=>Math.floor(Math.random()*10)).join("");$("#dLen").textContent=DS.len;$("#dIn").value="";$("#dIn").disabled=true;$("#dCheck").disabled=true;$("#dGo").disabled=true;$("#dMsg").textContent="Mira…";
+  let k=0;const show=()=>{if(k<DS.seq.length){$("#dShow").textContent=DS.seq[k];$("#dShow").classList.remove("pop");void $("#dShow").offsetWidth;$("#dShow").classList.add("pop");k++;DS.timer=setTimeout(()=>{$("#dShow").textContent="";DS.timer=setTimeout(show,250)},750)}
+    else{$("#dShow").textContent="?";$("#dIn").disabled=false;$("#dCheck").disabled=false;$("#dIn").focus();$("#dMsg").textContent="Ahora escríbelas en orden."}};show()}
+function dCheck(){const v=$("#dIn").value.replace(/\D/g,"");if(!v)return;$("#dCheck").disabled=true;$("#dIn").disabled=true;$("#dGo").disabled=false;$("#dShow").textContent=DS.seq;
+  if(v===DS.seq){DS.best=Math.max(DS.best,DS.len);$("#dBest").textContent=DS.best;$("#dMsg").innerHTML=`<b>¡Correcto!</b> Siguiente: ${DS.len+1} cifras.`;DS.len++;$("#dGo").textContent="Next"}
+  else{$("#dMsg").innerHTML=`<b>No exactamente.</b> Escribiste ${esc(v)}. ${DS.best?`Tu mejor marca es ${DS.best} cifras. `:""}La mayoría de los adultos llega a unas 7. Vuelve a probar desde ${Math.max(4,DS.len-1)}.`;DS.len=Math.max(4,DS.len-1);$("#dGo").textContent="Otra vez"}}
+$("#dGo").onclick=dRun;$("#dCheck").onclick=dCheck;$("#dIn").onkeydown=e=>{if(e.key==="Enter")dCheck()};
+
+/* ================= 6. biases ================= */
+const CATS={dec:["Decisiones","--accent"],mem:["Memoria","--good"],soc:["Social","--gold"],num:["Números y azar","--hot"]};
+const BIAS=[
+ ["dec","Sesgo de confirmación","Fijarse en, buscar y recordar la información que apoya lo que ya crees, y quitar valor al resto.","Alguien convencido de que la luna llena provoca caos recuerda todas las noches locas de luna llena y olvida las tranquilas."],
+ ["dec","Anclaje","Depender demasiado del primer número que oyes al hacer una estimación.","Una camiseta «rebajada de 120 $ a 60 $» parece una ganga, aunque nunca haya valido 120 $."],
+ ["dec","Aversión a la pérdida","Las pérdidas duelen más o menos el doble de lo que alegran las ganancias equivalentes, así que la gente asume riesgos raros para evitarlas.","Mucha gente rechaza una moneda al aire en la que gana 110 $ o pierde 100 $, aunque de media es una buena apuesta."],
+ ["dec","Efecto marco","Elegir de forma distinta según cómo se presentan los mismos hechos.","«Sobrevive el 90 %» suena mejor que «muere el 10 %», aunque dicen exactamente lo mismo."],
+ ["dec","Falacia del costo hundido","Seguir con algo por lo que ya has gastado, no por lo que está por venir.","Terminarte una comida malísima porque la has pagado, aunque comértela te siente peor."],
+ ["dec","Sesgo del statu quo","Preferir que las cosas sigan como están, aunque cambiar sería mejor.","Las tasas de donación de órganos son mucho más altas en los países donde hay que negarse expresamente que en los que hay que apuntarse."],
+ ["dec","Sobrecarga de opciones","Demasiadas opciones pueden hacer que elegir sea más difícil y menos satisfactorio. El efecto existe, pero es menor y menos fiable de lo que se dijo al principio.","En un famoso estudio, los compradores a los que se ofrecían 24 tipos de mermelada compraban menos que aquellos a los que se ofrecían 6."],
+ ["mem","Sesgo retrospectivo","Después de que algo pase, creer que «ya lo sabías».","Tras un partido, los aficionados insisten en que el resultado era evidente, aunque antes del pitido inicial dudaban."],
+ ["mem","Heurística de disponibilidad","Juzgar lo probable que es algo por lo fácil que te vienen ejemplos a la mente.","Tras la noticia de un accidente de avión, la gente exagera el peligro de volar, que es mucho más seguro que conducir."],
+ ["mem","Retrospección rosa","Recordar el pasado como mejor de lo que fue en su momento.","Unas vacaciones llenas de retrasos y lluvia se recuerdan después como «maravillosas»."],
+ ["mem","Efecto de desinformación","Los recuerdos cambian para incluir detalles sugeridos después.","En un estudio clásico de 1974, a quienes se preguntó a qué velocidad iban los coches cuando «se estrellaron» recordaban haber visto cristales rotos que no existían."],
+ ["soc","Efecto arrastre","Adoptar creencias o comportamientos porque muchos otros lo hacen.","Un restaurante con cola en la puerta parece mejor que el vacío de al lado."],
+ ["soc","Efecto halo","Dejar que un rasgo positivo tiña tu juicio sobre todo lo demás de una persona.","A las personas atractivas se las suele valorar como más inteligentes y fiables, sin ninguna prueba."],
+ ["soc","Error fundamental de atribución","Explicar la conducta de los demás por su carácter, pero la tuya por las circunstancias.","«Llega tarde porque es un vago.» «Yo llego tarde por el tráfico.»"],
+ ["soc","Efecto foco","Sobrestimar cuánto se fijan en ti los demás.","Unos estudiantes obligados a llevar una camiseta vergonzosa creían que la mitad de la sala se había fijado; lo hicieron muchos menos."],
+ ["soc","La maldición del conocimiento","Cuando sabes algo, cuesta imaginar no saberlo.","Expertos que explican cosas con jerga, o que tamborilean el ritmo de una canción y esperan que los demás la adivinen."],
+ ["soc","Efecto Dunning-Kruger","La idea de que las personas poco hábiles sobrestiman su capacidad. Es objeto de debate: parte del patrón puede surgir solo de la estadística.","Alguien que acaba de aprender aperturas de ajedrez se siente capaz de ganar a jugadores fuertes."],
+ ["num","Desatención de la tasa base","Ignorar lo común que es algo en general al juzgar un caso concreto.","Suponer que un test positivo significa que seguro tienes una enfermedad rara. Mira la página de probabilidad."],
+ ["num","Falacia del jugador","Creer que los resultados aleatorios pasados cambian la probabilidad de otros futuros independientes.","«Ha salido rojo cinco veces; ya toca negro.»"],
+ ["num","Sesgo de supervivencia","Sacar conclusiones solo de los casos que superaron un filtro.","En la Segunda Guerra Mundial, Abraham Wald señaló que los agujeros de bala de los aviones que volvían mostraban dónde podía recibir impactos un avión y sobrevivir; el blindaje debía ir donde esos aviones no tenían ninguno."],
+ ["num","Exceso de confianza","Estar más seguro de tus juicios de lo que justifica tu acierto.","La mayoría de los conductores se consideran por encima de la media, algo que no puede ser cierto para la mayoría."],
+ ["num","Sesgo optimista","Esperar que te pasen más cosas buenas, y menos malas, que a los demás.","La mayoría de la gente subestima cuánto tardarán sus propios proyectos, aunque los anteriores se retrasaran."]
+];
+const BF={cat:"all",q:""};
+$("#bCats").innerHTML=`<button class="pill" data-c="all" aria-pressed="true">Todos</button>`+Object.entries(CATS).map(([k,v])=>`<button class="pill" data-c="${k}" aria-pressed="false">${v[0]}</button>`).join("");
+document.querySelectorAll("#bCats .pill").forEach(b=>b.onclick=()=>{BF.cat=b.dataset.c;document.querySelectorAll("#bCats .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));bRender()});
+$("#bSearch").oninput=e=>{BF.q=e.target.value.toLowerCase();bRender()};
+function bRender(){const L=BIAS.filter(b=>(BF.cat==="all"||b[0]===BF.cat)&&(!BF.q||(b[1]+" "+b[2]+" "+b[3]).toLowerCase().includes(BF.q)));
+  $("#bList").innerHTML=L.map(b=>`<article class="fc"><div class="top"><h3>${b[1]}</h3><span class="cat" style="color:var(${CATS[b[0]][1]})">${CATS[b[0]][0]}</span></div><p>${b[2]}</p><p class="ex">${b[3]}</p></article>`).join("")||`<p style="color:var(--muted)">Sin resultados.</p>`}
+
+const IDEAS=[
+ ["Heurísticas y sesgos","1974","Amos Tversky y Daniel Kahneman mostraron que la gente usa reglas sencillas para juzgar probabilidades y que estas llevan a errores predecibles. En un experimento, una ruleta trucada influía en las estimaciones de cuántos países africanos había en la ONU."],
+ ["Teoría de las perspectivas","1979","El modelo de Kahneman y Tversky de cómo elige realmente la gente cuando hay riesgo: juzgamos ganancias y pérdidas desde un punto de referencia, y las pérdidas pesan más. Kahneman ganó el Nobel de Economía en 2002; Tversky había muerto en 1996."],
+ ["Pequeños empujones (nudges)","2008","Richard Thaler y Cass Sunstein defendieron que pequeños cambios en cómo se presentan las opciones, como las opciones por defecto, pueden orientar la conducta sin prohibir nada. Thaler ganó el Nobel en 2017."],
+ ["La crisis de replicación","2010s","Cuando los investigadores intentaron repetir experimentos famosos de psicología, muchos efectos se encogieron o desaparecieron. El agotamiento del ego y las «posturas de poder» son casos conocidos. Hoy el campo prerregistra más estudios y comparte más datos."],
+ ["El presupuesto del cerebro","","El cerebro es alrededor del 2 % del peso corporal, pero usa cerca del 20 % de la energía del cuerpo en reposo. Los atajos que ahorran esfuerzo tienen sentido evolutivo."],
+ ["Un cerebro que predice","","Muchos neurocientíficos creen hoy que el cerebro predice constantemente lo que va a percibir y procesa sobre todo las sorpresas. Las ilusiones son lo que pasa cuando sus predicciones se equivocan con total seguridad."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+ilNew();bRender();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(ilDraw,120)});addEventListener("themechange",ilDraw);
+</script>
+</body>
+</html>

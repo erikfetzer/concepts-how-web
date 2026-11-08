@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biases & the mind · concepts.how</title>
+<meta name="description" content="Get fooled by optical illusions, test fast and slow thinking, measure your reaction time, take the Stroop test, stretch your memory span and learn 22 cognitive biases.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/mind">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/mind">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Biases & the mind · concepts.how">
+<meta property="og:description" content="Get fooled by optical illusions, test fast and slow thinking, measure your reaction time, take the Stroop test, stretch your memory span and learn 22 cognitive biases.">
+<meta property="og:url" content="https://concepts.how/mind">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Biases & the mind · concepts.how">
+<meta name="twitter:description" content="Get fooled by optical illusions, test fast and slow thinking, measure your reaction time, take the Stroop test, stretch your memory span and learn 22 cognitive biases.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* mind */
+.crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
+.qc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;align-content:start}
+.qc .q{margin:0;font-size:15.5px}
+.qc .unit{font-size:14px;color:var(--muted)}
+.qc .ans{margin:0;font-size:14px}
+.okc{color:var(--good)}.noc{color:var(--hot)}
+.react{width:100%;min-height:230px;border-radius:16px;border:0;font:700 clamp(20px,3vw,28px)/1.2 var(--display);color:#fff;cursor:pointer;background:var(--accent);transition:background .15s;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.react.wait{background:#b42318}.react.go{background:#16a34a}.react.early{background:#d97706}.react.done{background:var(--accent)}
+.strip2{display:flex;align-items:flex-end;gap:4px;height:60px;border-bottom:1px solid var(--line)}
+.strip2 i{flex:1;max-width:22px;background:var(--accent);border-radius:3px 3px 0 0;opacity:.8}
+.stroopw{min-height:120px;display:grid;place-items:center;font:800 clamp(38px,7vw,60px)/1 var(--display);letter-spacing:.02em;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.stroopw.shake{animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.stbtns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stb{height:56px;border-radius:12px;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);cursor:pointer;touch-action:manipulation}
+.stb:active{transform:scale(.96)}
+.digits{min-height:110px;display:grid;place-items:center;font:800 clamp(44px,8vw,72px)/1 var(--mono);letter-spacing:.08em;border:1px solid var(--line);border-radius:14px;background:var(--paper);overflow-wrap:anywhere;text-align:center;padding:8px}
+.digits.pop{animation:pop .3s}
+@keyframes pop{from{transform:scale(.7);opacity:.2}to{transform:none;opacity:1}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html">Maps</a>
+    <a class="nl" href="money.html">Money</a>
+    <a class="nl" href="light.html">Light & color</a>
+    <a class="nl" href="algorithms.html">Algorithms</a>
+    <a class="nl" href="mind.html" aria-current="page">Biases & the mind</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="mind.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/mind.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Biases &amp; the mind</b> · shortcuts, illusions, blind spots</div>
+    <h1>Your brain takes shortcuts. <em>Catch it in the act.</em></h1>
+    <p class="lede">Your brain handles a flood of information with quick rules of thumb. Most of the time they work brilliantly; sometimes they lead you astray in predictable ways. Psychologists call these systematic errors cognitive biases. Test your eyes, your reflexes and your reasoning, then learn the names of the tricks your mind plays.</p>
+    <nav class="jump" aria-label="On this page"><a href="#illusions">Illusions</a><a href="#reflect">Fast vs slow thinking</a><a href="#reaction">Reaction time</a><a href="#stroop">The Stroop test</a><a href="#memory">Memory span</a><a href="#biases">Field guide</a></nav>
+  </header>
+
+  <!-- ============ 1. illusions ============ -->
+  <section class="block" id="illusions" aria-labelledby="ilH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · seeing</span>
+      <h2 id="ilH">Make them match</h2>
+      <p>Use the slider to make the blue shape exactly the same size as the gray one. Then reveal how far off you were. Almost everyone is fooled, even after they know the trick, because the illusion happens before conscious thought gets a say.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="ilPick"></div>
+        <canvas class="cv" id="ilCv" height="280" aria-label="Optical illusion"></canvas>
+        <div class="sl"><label for="ilS">Adjust the blue one</label><input type="range" id="ilS" min="0" max="100" value="50"></div>
+        <div class="row"><button class="btn" id="ilReveal">Reveal</button><button class="btn ghost" id="ilAgain">Try again</button></div>
+      </div>
+      <div class="panel stack">
+        <div><span class="lbl">Your error</span><div class="verdict" id="ilErr">?</div></div>
+        <p id="ilTxt" style="margin:0;font-size:14.5px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. reflection ============ -->
+  <section class="block" id="reflect" aria-labelledby="rH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · thinking</span>
+      <h2 id="rH">Fast thinking vs slow thinking</h2>
+      <p>Psychologist Daniel Kahneman described two modes of thought: System 1 is fast, automatic and intuitive; System 2 is slow, effortful and logical. These three puzzles, from Shane Frederick’s 2005 Cognitive Reflection Test, each have an answer that springs to mind instantly, and is wrong.</p>
+    </div>
+    <div class="crt" id="crt"></div>
+  </section>
+
+  <!-- ============ 3. reaction ============ -->
+  <section class="block" id="reaction" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · speed</span>
+      <h2 id="tH">How fast are you?</h2>
+      <p>Tap the panel as soon as it turns green. Light hits your eye, signals travel to your brain, you decide, and a command runs down to your finger. Even that whole chain takes only about a quarter of a second for most people.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <button class="react" id="rtBox">Tap to start</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Last</div><div class="v" id="rtLast">–</div></div>
+          <div class="ro"><div class="k">Average</div><div class="v" id="rtAvg">–</div></div>
+          <div class="ro"><div class="k">Best</div><div class="v" id="rtBest">–</div></div>
+        </div>
+        <div class="strip2" id="rtList"></div>
+        <div class="callout"><b>What’s typical</b>Simple visual reaction times are usually around 200 to 300 milliseconds. Sounds are a little faster. Tiredness, distraction and alcohol all slow you down, which is why a phone call while driving is dangerous even hands-free.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Stroop ============ -->
+  <section class="block" id="stroop" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · interference</span>
+      <h2 id="sH">The Stroop test</h2>
+      <p>Tap the button for the <b>ink color</b> of each word, ignoring what the word says. First round: the words match their colors. Second round: they don’t. Reading is so automatic you can’t switch it off, and the clash slows you down. John Ridley Stroop published this in 1935, and it is still one of the most repeated experiments in psychology.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="stroopw" id="stWord">Ready?</div>
+        <div class="stbtns" id="stBtns"></div>
+        <button class="btn" id="stGo">Start round 1</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Round 1: matching</div><div class="v" id="st1">–</div></div>
+          <div class="ro"><div class="k">Round 2: clashing</div><div class="v" id="st2">–</div></div>
+        </div>
+        <p id="stMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. memory ============ -->
+  <section class="block" id="memory" aria-labelledby="mH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · remembering</span>
+      <h2 id="mH">How many digits can you hold?</h2>
+      <p>Watch the digits, then type them back in order. Each time you get it right, the list grows by one. In 1956 George Miller wrote a famous paper called “The Magical Number Seven, Plus or Minus Two” about the limits of short-term memory.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="digits" id="dShow">–</div>
+        <input class="inp" id="dIn" inputmode="numeric" autocomplete="off" placeholder="Type the digits" disabled>
+        <div class="row"><button class="btn" id="dGo">Start</button><button class="btn ghost" id="dCheck" disabled>Check</button></div>
+        <p id="dMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Current length</div><div class="v" id="dLen">4</div></div>
+          <div class="ro"><div class="k">Your best</div><div class="v" id="dBest">–</div></div>
+        </div>
+        <div class="callout"><b>Chunking</b>More recent research puts the true limit nearer four “chunks”. The trick is that a chunk can be big: 1-9-1-4 is four items, but “1914” is one. Phone numbers are split into groups for exactly this reason.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. biases ============ -->
+  <section class="block" id="biases" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Field guide</span>
+      <h2 id="bH">Cognitive biases</h2>
+      <p>Biases aren’t a sign of stupidity: they are side effects of shortcuts that usually serve us well. Knowing their names helps you notice them, though research suggests it doesn’t make you immune. Some famous findings in this field have failed to replicate, so the strength of the evidence is noted where it matters.</p>
+    </div>
+    <div class="row" style="gap:10px;margin-bottom:6px"><div class="seg" id="bCats"></div><input class="search" id="bSearch" type="search" placeholder="Search biases" aria-label="Search biases" style="max-width:280px"></div>
+    <div class="fl" id="bList"></div>
+  </section>
+
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="iH">How we learned about our own minds</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Daniel Kahneman, <i>Thinking, Fast and Slow</i> (2011)</li>
+    <li>Amos Tversky and Daniel Kahneman, “Judgment under Uncertainty: Heuristics and Biases,” <i>Science</i> (1974)</li>
+    <li>Shane Frederick, “Cognitive Reflection and Decision Making,” <i>Journal of Economic Perspectives</i> (2005)</li>
+    <li>J. Ridley Stroop, “Studies of Interference in Serial Verbal Reactions” (1935)</li>
+    <li>George A. Miller, “The Magical Number Seven, Plus or Minus Two” (1956)</li>
+  </ul>
+  <p>These are demonstrations, not clinical tests. Results depend on your device, screen and how awake you are. Nothing you do here is stored or sent anywhere.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+
+/* ================= 1. illusions ================= */
+const IL={k:"ml",revealed:false,target:0};
+const ILS=[["ml","Müller-Lyer lines"],["eb","Ebbinghaus circles"],["po","Ponzo rails"]];
+const ILT={ml:"The Müller-Lyer illusion (1889). Fins pointing outward make a line look longer; fins pointing inward make it look shorter. Interestingly, studies found people from some cultures with fewer straight-edged buildings are less affected, though this is still debated.",eb:"The Ebbinghaus illusion. A circle surrounded by big circles looks smaller than the same circle surrounded by small ones. Your brain judges size by comparison with neighbours.",po:"The Ponzo illusion (1911). Converging lines look like a road going into the distance, so your brain assumes the upper bar is further away and inflates its size, just as it should for real objects."};
+$("#ilPick").innerHTML=ILS.map(([k,l],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join("");
+document.querySelectorAll("#ilPick .pill").forEach(b=>b.onclick=()=>{IL.k=b.dataset.k;document.querySelectorAll("#ilPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));ilNew()});
+function ilNew(){IL.revealed=false;$("#ilS").value=Math.random()<.5?15+Math.random()*20:65+Math.random()*20;$("#ilErr").textContent="?";$("#ilErr").className="verdict";$("#ilTxt").textContent="Move the slider until the two look the same size, then press Reveal.";ilDraw()}
+function ilDraw(){const{c,W,H}=setupCanvas($("#ilCv"));const v=+$("#ilS").value/100;const ink=css("--ink"),acc=css("--accent"),muted=css("--muted"),hot=css("--hot");const card=css("--card");c.fillStyle=card;c.fillRect(0,0,W,H);
+  let ref,adj;
+  if(IL.k==="ml"){const L=Math.min(W*.42,220);ref=L;adj=L*(.6+.8*v);const y1=H*.32,y2=H*.7,cx=W/2,f=Math.min(26,L*.13);
+    const line=(len,y,out,col)=>{const x1=cx-len/2,x2=cx+len/2;c.strokeStyle=col;c.lineWidth=3;c.beginPath();c.moveTo(x1,y);c.lineTo(x2,y);const d=out?-1:1;
+      c.moveTo(x1,y);c.lineTo(x1+d*f,y-f);c.moveTo(x1,y);c.lineTo(x1+d*f,y+f);c.moveTo(x2,y);c.lineTo(x2-d*f,y-f);c.moveTo(x2,y);c.lineTo(x2-d*f,y+f);c.stroke()};
+    line(ref,y1,false,muted);line(adj,y2,true,acc);
+    if(IL.revealed){c.setLineDash([4,4]);c.strokeStyle=hot;c.lineWidth=1.5;[cx-ref/2,cx+ref/2].forEach(x=>{c.beginPath();c.moveTo(x,y1-30);c.lineTo(x,y2+30);c.stroke()});c.setLineDash([])}}
+  else if(IL.k==="eb"){const r=Math.min(W*.5,H)*.12;ref=r;adj=r*(.6+.8*v);const A=[W*.27,H/2],B=[W*.73,H/2];
+    c.fillStyle=muted;for(let i=0;i<6;i++){const a=i*Math.PI/3;c.beginPath();c.arc(A[0]+Math.cos(a)*r*2.75,A[1]+Math.sin(a)*r*2.75,r*1.2,0,7);c.fill()}
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;c.beginPath();c.arc(B[0]+Math.cos(a)*adj*1.9,B[1]+Math.sin(a)*adj*1.9,r*.45,0,7);c.fill()}
+    c.fillStyle=css("--ink");c.globalAlpha=.55;c.beginPath();c.arc(A[0],A[1],ref,0,7);c.fill();c.globalAlpha=1;c.fillStyle=acc;c.beginPath();c.arc(B[0],B[1],adj,0,7);c.fill();
+    if(IL.revealed){c.strokeStyle=hot;c.setLineDash([4,4]);c.lineWidth=1.5;c.beginPath();c.arc(B[0],B[1],ref,0,7);c.stroke();c.setLineDash([])}}
+  else{const L=Math.min(W*.3,150);ref=L;adj=L*(.6+.8*v);const cx=W/2;c.strokeStyle=muted;c.lineWidth=3;c.beginPath();c.moveTo(cx-W*.32,H-10);c.lineTo(cx-18,12);c.moveTo(cx+W*.32,H-10);c.lineTo(cx+18,12);c.stroke();
+    for(let y=30;y<H;y+=24){const k=(y-12)/(H-22);const half=18+k*(W*.32-18);c.strokeStyle=css("--line");c.lineWidth=2;c.beginPath();c.moveTo(cx-half,y);c.lineTo(cx+half,y);c.stroke()}
+    c.lineWidth=7;c.strokeStyle=acc;c.beginPath();c.moveTo(cx-adj/2,H*.3);c.lineTo(cx+adj/2,H*.3);c.stroke();c.strokeStyle=css("--ink");c.globalAlpha=.6;c.beginPath();c.moveTo(cx-ref/2,H*.78);c.lineTo(cx+ref/2,H*.78);c.stroke();c.globalAlpha=1;
+    if(IL.revealed){c.setLineDash([4,4]);c.strokeStyle=hot;c.lineWidth=1.5;[cx-ref/2,cx+ref/2].forEach(x=>{c.beginPath();c.moveTo(x,H*.2);c.lineTo(x,H*.88);c.stroke()});c.setLineDash([])}}
+  c.lineWidth=1;IL.err=(adj-ref)/ref}
+$("#ilS").oninput=()=>{if(IL.revealed){IL.revealed=false;$("#ilErr").textContent="?";$("#ilErr").className="verdict"}ilDraw()};
+$("#ilReveal").onclick=()=>{IL.revealed=true;ilDraw();const e=IL.err*100;$("#ilErr").textContent=(e>0?"+":"")+e.toFixed(0)+"%";$("#ilErr").className="verdict "+(Math.abs(e)<4?"ok":"no");
+  $("#ilTxt").innerHTML=(Math.abs(e)<4?"<b>Impressive!</b> Within a few percent. ":`You made the blue one <b>${Math.abs(e).toFixed(0)}% ${e>0?"bigger":"smaller"}</b> than the gray one. `)+ILT[IL.k]};
+$("#ilAgain").onclick=ilNew;
+
+/* ================= 2. CRT ================= */
+const CRT=[["A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost, in cents?",5,10,"cents","If the ball cost 10¢, the bat would cost $1.10 and the total would be $1.20. Ball x + bat (x + 100) = 110, so 2x = 10 and x = 5¢."],
+ ["If it takes 5 machines 5 minutes to make 5 widgets, how many minutes would it take 100 machines to make 100 widgets?",5,100,"minutes","Each machine takes 5 minutes to make one widget. 100 machines working at once make 100 widgets in the same 5 minutes."],
+ ["A patch of lily pads doubles in size every day. It takes 48 days to cover the whole lake. How many days does it take to cover half the lake?",47,24,"days","It doubles every day, so the day before the lake is fully covered, it was half covered: day 47."]];
+$("#crt").innerHTML=CRT.map((q,i)=>`<article class="qc crtq" data-i="${i}"><p class="q"><b>${i+1}.</b> ${q[0]}</p><div class="row"><input class="inp" inputmode="numeric" aria-label="Your answer" style="max-width:140px"><span class="unit">${q[3]}</span><button class="btn">Check</button></div><p class="ans" hidden></p></article>`).join("");
+document.querySelectorAll(".crtq").forEach(card=>{const q=CRT[+card.dataset.i];const inp=card.querySelector("input"),btn=card.querySelector("button"),ans=card.querySelector(".ans");
+  const check=()=>{const v=parseFloat(inp.value.replace(",","."));if(!isFinite(v))return;ans.hidden=false;
+    ans.innerHTML=v===q[1]?`<b class="okc">Correct!</b> Your System 2 stepped in. ${q[4]}`:v===q[2]?`<b class="noc">That’s the intuitive answer, ${q[2]}, and it’s wrong.</b> The right answer is <b>${q[1]}</b>. ${q[4]}`:`<b class="noc">Not quite.</b> The right answer is <b>${q[1]}</b>; the common wrong answer is ${q[2]}. ${q[4]}`};
+  btn.onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()}});
+
+/* ================= 3. reaction ================= */
+const RT={state:"idle",t0:0,timer:0,list:[]};
+function rtSet(state,txt){const b=$("#rtBox");b.className="react "+state;b.textContent=txt;RT.state=state}
+$("#rtBox").addEventListener("pointerdown",e=>{e.preventDefault();
+  if(RT.state==="idle"||RT.state==="done"||RT.state==="early"){rtSet("wait","Wait for green…");RT.timer=setTimeout(()=>{rtSet("go","Tap!");RT.t0=performance.now()},1200+Math.random()*2500)}
+  else if(RT.state==="wait"){clearTimeout(RT.timer);rtSet("early","Too soon! Tap to try again")}
+  else if(RT.state==="go"){const ms=Math.round(performance.now()-RT.t0);RT.list.push(ms);rtSet("done",`${ms} ms · tap to go again`);
+    const avg=Math.round(RT.list.reduce((a,b)=>a+b,0)/RT.list.length);$("#rtLast").textContent=ms+" ms";$("#rtAvg").textContent=avg+" ms";$("#rtBest").textContent=Math.min(...RT.list)+" ms";
+    $("#rtList").innerHTML=RT.list.slice(-12).map(v=>`<i style="height:${Math.min(100,v/6)}%" title="${v} ms"></i>`).join("")}});
+
+/* ================= 4. Stroop ================= */
+const COLORS=[["RED","#e3342f"],["BLUE","#2563eb"],["GREEN","#16a34a"],["YELLOW","#eab308"]];
+const ST={round:0,items:[],i:0,t0:0,err:0,res:[null,null]};
+$("#stBtns").innerHTML=COLORS.map(([n,h],i)=>`<button class="stb" data-i="${i}" style="background:${h}" aria-label="${n}"></button>`).join("");
+function stItems(match){const out=[];for(let k=0;k<12;k++){const w=Math.floor(Math.random()*4);let ink=w;if(!match){do{ink=Math.floor(Math.random()*4)}while(ink===w)}out.push([w,ink])}return out}
+function stShow(){const[w,ink]=ST.items[ST.i];const el=$("#stWord");el.textContent=COLORS[w][0];el.style.color=COLORS[ink][1]}
+$("#stGo").onclick=()=>{ST.round=ST.res[0]===null||ST.res[1]!==null?1:2;if(ST.round===1)ST.res=[null,null];ST.items=stItems(ST.round===1);ST.i=0;ST.err=0;ST.t0=performance.now();stShow();$("#stGo").disabled=true;$("#stMsg").textContent=`Round ${ST.round}: tap the INK color.`};
+document.querySelectorAll(".stb").forEach(b=>b.onclick=()=>{if(!ST.round||$("#stGo").disabled===false)return;const ink=ST.items[ST.i][1];if(+b.dataset.i!==ink){ST.err++;$("#stWord").classList.remove("shake");void $("#stWord").offsetWidth;$("#stWord").classList.add("shake");return}
+  ST.i++;if(ST.i<ST.items.length){stShow();return}
+  const t=(performance.now()-ST.t0)/1000;ST.res[ST.round-1]=t;$("#st"+ST.round).textContent=t.toFixed(1)+" s";$("#stWord").textContent="Done!";$("#stWord").style.color="";$("#stGo").disabled=false;
+  if(ST.round===1){$("#stGo").textContent="Start round 2";$("#stMsg").textContent=`Round 1 took ${t.toFixed(1)} seconds with ${ST.err} mistakes. Now the words won’t match their colors.`}
+  else{const d=ST.res[1]-ST.res[0];$("#stGo").textContent="Try again";$("#stMsg").innerHTML=d>0?`Clashing words slowed you down by <b>${d.toFixed(1)} seconds</b> (${Math.round(d/ST.res[0]*100)}% slower), with ${ST.err} mistakes. That’s the Stroop effect: your brain read the words even though you tried not to.`:`Remarkable: you were no slower with clashing words. Most people lose a second or more. Try again to check it wasn’t luck.`}});
+
+/* ================= 5. digit span ================= */
+const DS={len:4,seq:"",best:0,timer:0};
+function dRun(){clearTimeout(DS.timer);DS.seq=[...Array(DS.len)].map(()=>Math.floor(Math.random()*10)).join("");$("#dLen").textContent=DS.len;$("#dIn").value="";$("#dIn").disabled=true;$("#dCheck").disabled=true;$("#dGo").disabled=true;$("#dMsg").textContent="Watch…";
+  let k=0;const show=()=>{if(k<DS.seq.length){$("#dShow").textContent=DS.seq[k];$("#dShow").classList.remove("pop");void $("#dShow").offsetWidth;$("#dShow").classList.add("pop");k++;DS.timer=setTimeout(()=>{$("#dShow").textContent="";DS.timer=setTimeout(show,250)},750)}
+    else{$("#dShow").textContent="?";$("#dIn").disabled=false;$("#dCheck").disabled=false;$("#dIn").focus();$("#dMsg").textContent="Now type them in order."}};show()}
+function dCheck(){const v=$("#dIn").value.replace(/\D/g,"");if(!v)return;$("#dCheck").disabled=true;$("#dIn").disabled=true;$("#dGo").disabled=false;$("#dShow").textContent=DS.seq;
+  if(v===DS.seq){DS.best=Math.max(DS.best,DS.len);$("#dBest").textContent=DS.best;$("#dMsg").innerHTML=`<b>Correct!</b> Next: ${DS.len+1} digits.`;DS.len++;$("#dGo").textContent="Next"}
+  else{$("#dMsg").innerHTML=`<b>Not quite.</b> You typed ${esc(v)}. ${DS.best?`Your best is ${DS.best} digits. `:""}Most adults manage about 7. Try again from ${Math.max(4,DS.len-1)}.`;DS.len=Math.max(4,DS.len-1);$("#dGo").textContent="Try again"}}
+$("#dGo").onclick=dRun;$("#dCheck").onclick=dCheck;$("#dIn").onkeydown=e=>{if(e.key==="Enter")dCheck()};
+
+/* ================= 6. biases ================= */
+const CATS={dec:["Decisions","--accent"],mem:["Memory","--good"],soc:["Social","--gold"],num:["Numbers & chance","--hot"]};
+const BIAS=[
+ ["dec","Confirmation bias","Noticing, seeking and remembering information that supports what you already believe, and discounting the rest.","Someone convinced a full moon causes chaos remembers every wild full-moon night and forgets the quiet ones."],
+ ["dec","Anchoring","Relying too heavily on the first number you hear when making an estimate.","A shirt “reduced from $120 to $60” feels like a bargain, even if it was never worth $120."],
+ ["dec","Loss aversion","Losses feel roughly twice as painful as equal gains feel good, so people take odd risks to avoid them.","Many people refuse a coin flip that wins $110 or loses $100, though it is a good bet on average."],
+ ["dec","Framing effect","Choosing differently depending on how the same facts are presented.","“90% survive” sounds better than “10% die”, though they say exactly the same thing."],
+ ["dec","Sunk cost fallacy","Continuing because of what you have already spent rather than what lies ahead.","Finishing a terrible meal because you paid for it, even though eating it makes you feel worse."],
+ ["dec","Status quo bias","Preferring things to stay as they are, even when change would be better.","Organ donation rates are much higher in countries where you have to opt out rather than opt in."],
+ ["dec","Choice overload","Too many options can make choosing harder and less satisfying. The effect is real but smaller and less reliable than first reported.","In one famous study, shoppers offered 24 kinds of jam were less likely to buy any than those offered 6."],
+ ["mem","Hindsight bias","After something happens, believing you “knew it all along”.","After a match, fans insist the result was obvious, though they were unsure before kick-off."],
+ ["mem","Availability heuristic","Judging how likely something is by how easily examples come to mind.","After news of a plane crash, people overestimate the danger of flying, which is far safer than driving."],
+ ["mem","Rosy retrospection","Remembering the past as better than it felt at the time.","A holiday full of delays and rain is later recalled as “wonderful”."],
+ ["mem","Misinformation effect","Memories change to include details suggested afterwards.","In a classic 1974 study, people asked how fast cars “smashed” recalled seeing broken glass that wasn’t there."],
+ ["soc","Bandwagon effect","Adopting beliefs or behaviours because many others do.","A restaurant with a queue outside seems better than the empty one next door."],
+ ["soc","Halo effect","Letting one good trait colour your judgment of everything else about a person.","Attractive people are often rated as more intelligent and trustworthy, with no evidence."],
+ ["soc","Fundamental attribution error","Explaining other people’s behaviour by their character, but your own by circumstances.","“He’s late because he’s lazy.” “I’m late because of traffic.”"],
+ ["soc","Spotlight effect","Overestimating how much other people notice you.","Students made to wear an embarrassing T-shirt thought half the room noticed; far fewer did."],
+ ["soc","Curse of knowledge","Once you know something, finding it hard to imagine not knowing it.","Experts explaining things with jargon, or tapping a song’s rhythm and expecting listeners to name it."],
+ ["soc","Dunning–Kruger effect","The idea that people with low skill overestimate their ability. Debated: part of the pattern can arise from statistics alone.","Someone who has just learned chess openings feels ready to beat strong players."],
+ ["num","Base-rate neglect","Ignoring how common something is overall when judging a specific case.","Assuming a positive test means you surely have a rare disease. See the probability page."],
+ ["num","Gambler’s fallacy","Believing past random events change the odds of independent future ones.","“Red came up five times; black is due.”"],
+ ["num","Survivorship bias","Drawing conclusions only from the cases that made it through a filter.","In World War II, Abraham Wald pointed out that bullet holes on returning planes showed where a plane could be hit and survive; the armour belonged where those planes had none."],
+ ["num","Overconfidence","Being more sure of your judgments than your accuracy justifies.","Most drivers rate themselves above average, which can’t be true for most of them."],
+ ["num","Optimism bias","Expecting good things to happen to you more, and bad things less, than to others.","Most people underestimate how long their own projects will take, even when past ones ran late."]
+];
+const BF={cat:"all",q:""};
+$("#bCats").innerHTML=`<button class="pill" data-c="all" aria-pressed="true">All</button>`+Object.entries(CATS).map(([k,v])=>`<button class="pill" data-c="${k}" aria-pressed="false">${v[0]}</button>`).join("");
+document.querySelectorAll("#bCats .pill").forEach(b=>b.onclick=()=>{BF.cat=b.dataset.c;document.querySelectorAll("#bCats .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));bRender()});
+$("#bSearch").oninput=e=>{BF.q=e.target.value.toLowerCase();bRender()};
+function bRender(){const L=BIAS.filter(b=>(BF.cat==="all"||b[0]===BF.cat)&&(!BF.q||(b[1]+" "+b[2]+" "+b[3]).toLowerCase().includes(BF.q)));
+  $("#bList").innerHTML=L.map(b=>`<article class="fc"><div class="top"><h3>${b[1]}</h3><span class="cat" style="color:var(${CATS[b[0]][1]})">${CATS[b[0]][0]}</span></div><p>${b[2]}</p><p class="ex">${b[3]}</p></article>`).join("")||`<p style="color:var(--muted)">No matches.</p>`}
+
+const IDEAS=[
+ ["Heuristics and biases","1974","Amos Tversky and Daniel Kahneman showed that people use simple rules of thumb to judge probability, and that these lead to predictable errors. In one experiment, a rigged wheel of fortune swayed people’s estimates of how many African countries were in the UN."],
+ ["Prospect theory","1979","Kahneman and Tversky’s model of how people actually make risky choices: we judge gains and losses from a reference point, and losses loom larger. Kahneman won the 2002 Nobel Prize in economics; Tversky had died in 1996."],
+ ["Nudges","2008","Richard Thaler and Cass Sunstein argued that small changes in how choices are presented, such as default options, can steer behaviour without banning anything. Thaler won the 2017 Nobel Prize."],
+ ["The replication crisis","2010s","When researchers tried to repeat famous psychology experiments, many effects shrank or vanished. Ego depletion and power posing are well-known casualties. The field now pre-registers studies and shares data more often."],
+ ["Your brain’s budget","","The brain is about 2% of body weight but uses about 20% of the body’s energy at rest. Shortcuts that save effort make evolutionary sense."],
+ ["Predictive brain","","Many neuroscientists now think the brain constantly predicts what it will sense next and mostly processes the surprises. Illusions are what happens when its predictions are confidently wrong."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+ilNew();bRender();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(ilDraw,120)});addEventListener("themechange",ilDraw);
+</script>
+</body>
+</html>
