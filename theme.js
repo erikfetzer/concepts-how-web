@@ -63,8 +63,8 @@
   var es = (document.documentElement.lang || "").slice(0, 2) === "es";
   var L = es ? { btn: "Temas", menu: "Todos los temas", set: "Idioma y tema" } : { btn: "Topics", menu: "All topics", set: "Language & theme" };
   var GROUPS = es
-    ? [["Matemáticas y lógica", ["logic", "probability", "infinity", "gametheory"]], ["Física y espacio", ["quantum", "light", "universe", "time", "dimensions"]], ["Sociedad", ["voting", "money", "language", "maps"]], ["Tecnología y medida", ["blockchain", "codes", "units"]]]
-    : [["Maths & logic", ["logic", "probability", "infinity", "gametheory"]], ["Physics & space", ["quantum", "light", "universe", "time", "dimensions"]], ["People & society", ["voting", "money", "language", "maps"]], ["Tech & measurement", ["blockchain", "codes", "units"]]];
+    ? [["Matemáticas y lógica", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Física y espacio", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Vida y mente", ["evolution", "mind"]], ["Sociedad", ["voting", "money", "language", "maps"]], ["Tecnología y medida", ["blockchain", "codes", "units"]]]
+    : [["Maths & logic", ["logic", "probability", "infinity", "gametheory", "algorithms"]], ["Physics & space", ["quantum", "light", "music", "universe", "time", "dimensions"]], ["Life & mind", ["evolution", "mind"]], ["People & society", ["voting", "money", "language", "maps"]], ["Tech & measurement", ["blockchain", "codes", "units"]]];
   var SM = 640;
   var css = ".site{position:relative}.site a.nl{display:none!important}.site .ctl{margin-left:auto}.site .wrap{flex-wrap:nowrap;padding-bottom:0}" +
     ".kb{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer;font:600 14px/1 var(--body,system-ui)}" +
@@ -73,7 +73,7 @@
     ".kbm{position:absolute;right:clamp(16px,4vw,40px);top:calc(100% + 6px);z-index:900;width:min(780px,calc(100vw - 32px));max-height:calc(100vh - 90px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.18);padding:10px;display:grid;gap:4px}" +
     ".kbm[hidden]{display:none}" +
     ".kbm .h{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}" +
-    ".kbm .grp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 12px}" +
+    ".kbm .grp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px}" +
     ".kbm .col{display:grid;align-content:start;gap:1px}" +
     ".kbm a{display:block;padding:9px 10px;border-radius:9px;color:var(--ink);text-decoration:none;font-size:15px}" +
     ".kbm a:hover,.kbm a:focus-visible{background:var(--paper)}" +
@@ -82,7 +82,7 @@
     ".kbm .home a{font-size:14px;color:var(--muted)}" +
     ".kbm .set{border-top:1px solid var(--line);margin-top:4px;padding:10px 10px 6px;display:grid;gap:8px}" +
     ".kbm .set .ctl{display:flex!important;gap:8px;margin:0!important;flex-wrap:wrap}" +
-    "@media (max-width:860px){.kbm .grp{grid-template-columns:repeat(2,minmax(0,1fr))}}" +
+    
     "@media (max-width:" + SM + "px){.wrap{padding-left:12px!important;padding-right:12px!important}.kbm{right:12px;left:12px;width:auto}.kbm .grp{grid-template-columns:1fr 1fr}" +
     ".kb{width:40px;padding:0;justify-content:center}.kb .lbl2,.kb .grid{display:none}.kb .dots{display:block}}" +
     "@media (max-width:360px){.kbm .grp{grid-template-columns:1fr}}";

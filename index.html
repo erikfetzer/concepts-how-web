@@ -126,6 +126,7 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .globe2{position:absolute;inset:0;display:grid;place-items:center}.globe2 b{width:70px;height:70px;border-radius:50%;border:2px solid var(--accent);background:repeating-linear-gradient(90deg,transparent 0 12px,color-mix(in srgb,var(--accent) 35%,transparent) 12px 13px),repeating-linear-gradient(0deg,transparent 0 12px,color-mix(in srgb,var(--accent) 35%,transparent) 12px 13px),var(--card);box-shadow:inset -10px -8px 0 color-mix(in srgb,var(--accent) 18%,transparent)}
 .bars3{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:6px;padding-bottom:16px}.bars3 i{width:14px;border-radius:3px 3px 0 0;background:var(--accent)}.bars3 i:nth-child(1){height:10px}.bars3 i:nth-child(2){height:14px}.bars3 i:nth-child(3){height:20px}.bars3 i:nth-child(4){height:30px}.bars3 i:nth-child(5){height:44px;background:#D99A0B}.bars3 i:nth-child(6){height:64px;background:#D99A0B}
 .rgb3{position:absolute;inset:0}.rgb3 i{position:absolute;width:56px;height:56px;border-radius:50%;mix-blend-mode:multiply;opacity:.9}.rgb3 i:nth-child(1){background:#00c8ff;left:calc(50% - 46px);top:calc(50% - 40px)}.rgb3 i:nth-child(2){background:#ff3fb5;left:calc(50% - 10px);top:calc(50% - 40px)}.rgb3 i:nth-child(3){background:#ffd400;left:calc(50% - 28px);top:calc(50% - 10px)}
+.sortbars{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:4px;padding-bottom:16px}.sortbars i{width:10px;border-radius:2px;background:var(--accent)}.sortbars i:nth-child(1){height:12px}.sortbars i:nth-child(2){height:20px}.sortbars i:nth-child(3){height:28px}.sortbars i:nth-child(4){height:36px}.sortbars i:nth-child(5){height:60px;background:#E4572E}.sortbars i:nth-child(6){height:44px;background:#E4572E}.sortbars i:nth-child(7){height:52px}.sortbars i:nth-child(8){height:68px}
 .hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
 footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -313,6 +314,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tags"><span>Spectrum</span><span>Mixing</span><span>Vision</span></div>
       </div>
       <span class="go">Open Light &amp; color</span>
+    </a>
+    <a class="tile" href="algorithms.html">
+      <div class="no"><span>17</span><span>Recipes for computers</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="sortbars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <h2 style="margin-top:16px">Algorithms</h2>
+        <p>Race five sorting methods, let binary search guess your number, watch A* solve a maze and take on the travelling salesperson.</p>
+        <div class="tags"><span>Sorting</span><span>Search</span><span>Big-O</span></div>
+      </div>
+      <span class="go">Open Algorithms</span>
     </a>
   </div>
 </main>

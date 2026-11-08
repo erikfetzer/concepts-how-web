@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algoritmos · concepts.how</title>
+<meta name="description" content="Organiza una carrera entre cinco algoritmos de ordenación, deja que la búsqueda binaria adivine tu número, mira cómo A* encuentra el camino en un laberinto, descubre cómo explota el crecimiento Big-O y enfréntate al problema del viajante.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/algorithms">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/algorithms">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Algoritmos · concepts.how">
+<meta property="og:description" content="Organiza una carrera entre cinco algoritmos de ordenación, deja que la búsqueda binaria adivine tu número, mira cómo A* encuentra el camino en un laberinto, descubre cómo explota el crecimiento Big-O y enfréntate al problema del viajante.">
+<meta property="og:url" content="https://concepts.how/algorithms">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Algoritmos · concepts.how">
+<meta name="twitter:description" content="Organiza una carrera entre cinco algoritmos de ordenación, deja que la búsqueda binaria adivine tu número, mira cómo A* encuentra el camino en un laberinto, descubre cómo explota el crecimiento Big-O y enfréntate al problema del viajante.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* algorithms */
+@media (min-width:980px){.demo.wide{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr)}}
+.race{display:grid;gap:10px}
+.lane{display:grid;gap:4px}
+.lane .lh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:14px}
+.lane .lh .mono{font-size:12px;color:var(--muted)}
+.lane canvas{border-radius:8px;background:var(--paper)}
+.tt td small{font-size:11.5px;line-height:1.3;display:block;white-space:normal}
+#oTbl td,#oTbl th{white-space:nowrap}
+#oTbl td.v{white-space:normal;min-width:150px}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <a class="nl" href="money.html">Dinero</a>
+    <a class="nl" href="light.html">Luz y color</a>
+    <a class="nl" href="algorithms.html" aria-current="page">Algoritmos</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../algorithms.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="algorithms.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Algoritmos</b> · recetas para ordenadores</div>
+    <h1>Una receta ingeniosa gana a <em>un ordenador más rápido.</em></h1>
+    <p class="lede">Un algoritmo es una lista precisa de pasos para resolver un problema: una receta que un ordenador puede seguir sin pensar. Dos recetas pueden llegar a la misma respuesta, una en un parpadeo y la otra en mil millones de años. Organiza una carrera de métodos de ordenación, encuentra la salida de un laberinto, adivina un número en diez intentos y conoce un problema que nadie sabe resolver rápido.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#sorting">Carrera de ordenación</a><a href="#search">Búsqueda binaria</a><a href="#paths">Encontrar caminos</a><a href="#bigo">¿Qué es rápido?</a><a href="#tsp">Un problema difícil</a><a href="#ideas">Historia</a></nav>
+  </header>
+
+  <!-- ============ 1. sorting ============ -->
+  <section class="block" id="sorting" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · carrera</span>
+      <h2 id="sH">La gran carrera de ordenación</h2>
+      <p>Poner cosas en orden es uno de los trabajos más habituales de un ordenador. Cinco métodos clásicos reciben las mismas barras desordenadas. Mira lo distinto que trabajan y cuenta cuántas comparaciones necesita cada uno. Luego prueba con datos ya ordenados o al revés: algunos métodos que parecen rápidos tienen un peor caso muy feo.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <div class="race" id="sRace"></div>
+      </div>
+      <div class="panel stack">
+        <div class="seg" id="sInput"></div>
+        <div class="sl"><label for="sN">Número de barras <span id="sNV">60</span></label><input type="range" id="sN" min="10" max="200" step="10" value="60"></div>
+        <div class="sl"><label for="sSpeed">Velocidad <span id="sSpeedV">4</span></label><input type="range" id="sSpeed" min="1" max="40" value="4"></div>
+        <div class="row"><button class="btn" id="sGo">Empezar la carrera</button><button class="btn ghost" id="sShuffle">Nuevas barras</button></div>
+        <div class="callout"><b>Por qué ganan merge sort y quicksort</b>Bubble sort, insertion sort y selection sort comparan casi todas las parejas: unos n² pasos. Merge sort y quicksort parten el trabajo por la mitad una y otra vez, y necesitan unos n × log₂ n. Para un millón de elementos son unos 20 millones de pasos en lugar de un billón.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. binary search ============ -->
+  <section class="block" id="search" aria-labelledby="bH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · dividir por la mitad</span>
+      <h2 id="bH">Adivino tu número en 10 intentos</h2>
+      <p>Piensa un número entero del 1 al 1000. Cada intento divide las posibilidades por la mitad, así que 10 intentos siempre bastan, porque 2¹⁰ = 1024. Es la búsqueda binaria: así encuentra un ordenador una palabra en un diccionario de un millón de entradas en unos 20 pasos.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="bCv" height="150" aria-label="El rango de números posibles se va reduciendo"></canvas>
+        <div><span class="lbl">Mi intento</span><div class="verdict" id="bGuess"></div></div>
+        <div class="row" id="bBtns"><button class="btn" id="bLow">Más alto</button><button class="btn" id="bHigh">Más bajo</button><button class="btn ghost" id="bYes">¡Ese es!</button></div>
+        <p id="bMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <button class="btn ghost" id="bReset">Empezar de nuevo</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Intentos</div><div class="v" id="bCount">0</div></div>
+          <div class="ro"><div class="k">Números aún posibles</div><div class="v" id="bLeft">1000</div></div>
+        </div>
+        <div class="callout"><b>Buscar uno por uno</b>Probar 1, 2, 3… podría llevar hasta 1000 intentos. Dividir por la mitad lleva como mucho 10. Con mil millones de números son 30 frente a mil millones. La pega: la búsqueda binaria solo funciona si los datos ya están ordenados.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. pathfinding ============ -->
+  <section class="block" id="paths" aria-labelledby="pH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · encuentra el camino</span>
+      <h2 id="pH">Encontrar el camino más corto</h2>
+      <p>Los navegadores, los videojuegos y los robots de reparto necesitan encontrar rutas. Toca o arrastra sobre la cuadrícula para dibujar muros; luego elige un método y míralo explorar. La búsqueda en anchura se extiende por igual como una onda; A* («A estrella») usa una pista sobre dónde está la meta, así que explora mucho menos para encontrar el mismo camino más corto.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <canvas class="cv" id="gCv" height="360" aria-label="Un laberinto en cuadrícula, toca para añadir muros" style="touch-action:none;cursor:crosshair"></canvas>
+        <div class="leg"><span><i style="background:var(--good)"></i>Salida</span><span><i style="background:var(--hot)"></i>Meta</span><span><i style="background:color-mix(in srgb,var(--accent) 35%,transparent)"></i>Explorado</span><span><i style="background:var(--gold)"></i>Camino encontrado</span></div>
+      </div>
+      <div class="panel stack">
+        <div class="seg" id="gAlgo"></div>
+        <div class="row"><button class="btn" id="gRun">Buscar el camino</button><button class="btn ghost" id="gMaze">Muros al azar</button><button class="btn ghost" id="gClear">Borrar</button></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Casillas exploradas</div><div class="v" id="gExp">–</div></div>
+          <div class="ro"><div class="k">Longitud del camino</div><div class="v" id="gLen">–</div></div>
+        </div>
+        <p id="gMsg" style="margin:0;font-size:14.5px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. big O ============ -->
+  <section class="block" id="bigo" aria-labelledby="oH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · crecimiento</span>
+      <h2 id="oH">¿Qué es rápido? La notación Big-O</h2>
+      <p>Los informáticos describen los algoritmos según cómo crece su trabajo al crecer los datos, con la notación «Big-O» (O grande). Los detalles de la máquina importan poco: lo que importa es la forma del crecimiento. Imagina un ordenador que hace mil millones de pasos por segundo y mueve el tamaño de los datos.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack" style="min-width:0">
+        <div class="sl"><label for="oN">Tamaño de los datos n <span id="oNV"></span></label><input type="range" id="oN" min="1" max="7" step="0.05" value="3"></div>
+        <div class="scrollx"><table class="tt" id="oTbl"></table></div>
+      </div>
+      <div class="panel stack">
+        <canvas class="cv" id="oCv" height="300" aria-label="Crecimiento de distintas clases de complejidad"></canvas>
+        <p style="margin:0;font-size:14px;color:var(--muted)">Pasos necesarios para datos de 1 a 30. El crecimiento exponencial se sale del gráfico casi enseguida.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. TSP ============ -->
+  <section class="block" id="tsp" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · un problema difícil</span>
+      <h2 id="tH">El problema del viajante</h2>
+      <p>Visita cada ciudad una vez y vuelve a casa por la ruta más corta. Es fácil de plantear, pero nadie conoce un método rápido que siempre encuentre la mejor respuesta, y el número de rutas posibles se dispara. Toca el mapa para añadir ciudades y compara una suposición rápida y codiciosa, una mejora inteligente y la comprobación de todas las rutas.</p>
+    </div>
+    <div class="demo wide">
+      <div class="panel stack" style="min-width:0">
+        <canvas class="cv" id="tCv" height="360" aria-label="Ciudades en un mapa, toca para añadir" style="cursor:copy"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="row"><button class="btn" id="tNN">Vecino más cercano</button><button class="btn" id="t2opt">Mejorar (2-opt)</button><button class="btn" id="tBF">Comprobar todas las rutas</button></div>
+        <div class="row"><button class="btn ghost" id="tRand">8 ciudades al azar</button><button class="btn ghost" id="tClear">Borrar</button></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Ciudades</div><div class="v" id="tN">0</div></div>
+          <div class="ro"><div class="k">Rutas posibles</div><div class="v" id="tRoutes">–</div></div>
+        </div>
+        <p id="tMsg" style="margin:0;font-size:14.5px" aria-live="polite"></p>
+        <div class="callout"><b>P vs NP</b>Comprobar si una ruta es más corta que cierta longitud es rápido; encontrar la más corta parece exigir una búsqueda. Si todo problema cuyas respuestas se comprueban rápido también se puede resolver rápido es la famosa pregunta P frente a NP. El Clay Mathematics Institute ofrece un millón de dólares por la respuesta.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="iH">
+    <div class="shead">
+      <span class="eyebrow">Historia e ideas</span>
+      <h2 id="iH">De Euclides a los buscadores</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Thomas Cormen et al., <i>Introduction to Algorithms</i> (4.ª ed., 2022)</li>
+    <li>Edsger W. Dijkstra, “A Note on Two Problems in Connexion with Graphs,” <i>Numerische Mathematik</i> (1959)</li>
+    <li>Brian Christian y Tom Griffiths, <i>Algoritmos para vivir</i> (2016)</li>
+    <li>Clay Mathematics Institute, Problemas del Milenio (2000)</li>
+  </ul>
+  <p>Los recuentos de pasos y los tiempos están idealizados para mostrar el crecimiento, no medidos en hardware real.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=n=>Math.round(n).toLocaleString(LOC);
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ================= 1. sorting ================= */
+const ALG=[["Bubble sort","bubble"],["Insertion sort","insertion"],["Selection sort","selection"],["Merge sort","merge"],["Quicksort","quick"]];
+const GEN={
+ bubble:function*(a){const n=a.length;for(let i=0;i<n-1;i++){let sw=false;for(let j=0;j<n-1-i;j++){yield{c:[j,j+1]};if(a[j]>a[j+1]){[a[j],a[j+1]]=[a[j+1],a[j]];sw=true;yield{s:[j,j+1]}}}if(!sw)break}},
+ insertion:function*(a){for(let i=1;i<a.length;i++){let j=i;while(j>0){yield{c:[j-1,j]};if(a[j-1]>a[j]){[a[j-1],a[j]]=[a[j],a[j-1]];yield{s:[j-1,j]};j--}else break}}},
+ selection:function*(a){const n=a.length;for(let i=0;i<n-1;i++){let m=i;for(let j=i+1;j<n;j++){yield{c:[m,j]};if(a[j]<a[m])m=j}if(m!==i){[a[i],a[m]]=[a[m],a[i]];yield{s:[i,m]}}}},
+ merge:function*(a){const n=a.length,aux=a.slice();for(let w=1;w<n;w*=2){for(let lo=0;lo<n-w;lo+=2*w){const mid=lo+w,hi=Math.min(lo+2*w,n);for(let k=lo;k<hi;k++)aux[k]=a[k];let i=lo,j=mid;for(let k=lo;k<hi;k++){if(i>=mid){a[k]=aux[j++]}else if(j>=hi){a[k]=aux[i++]}else{yield{c:[i,j]};a[k]=aux[i]<=aux[j]?aux[i++]:aux[j++]}yield{w:[k]}}}}},
+ quick:function*(a){function* qs(lo,hi){if(lo>=hi)return;const p=a[hi];let i=lo;for(let j=lo;j<hi;j++){yield{c:[j,hi]};if(a[j]<p){[a[i],a[j]]=[a[j],a[i]];yield{s:[i,j]};i++}}[a[i],a[hi]]=[a[hi],a[i]];yield{s:[i,hi]};yield* qs(lo,i-1);yield* qs(i+1,hi)}yield* qs(0,a.length-1)}
+};
+const SR={base:[],runs:[],raf:0,input:"random"};
+const INPUTS=[["random","Desordenado"],["nearly","Casi ordenado"],["reversed","Al revés"]];
+$("#sInput").innerHTML=INPUTS.map(([k,l],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join("");
+document.querySelectorAll("#sInput .pill").forEach(b=>b.onclick=()=>{SR.input=b.dataset.k;document.querySelectorAll("#sInput .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));sNew()});
+$("#sRace").innerHTML=ALG.map(([n,k])=>`<div class="lane"><div class="lh"><b>${n}</b><span class="mono" id="sc_${k}">0 comparaciones</span></div><canvas class="cv" id="cv_${k}" height="90"></canvas></div>`).join("");
+function sNew(){cancelAnimationFrame(SR.raf);SR.raf=0;const n=+$("#sN").value;$("#sNV").textContent=n;let a=[...Array(n)].map((_,i)=>i+1);
+  if(SR.input==="random")for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  else if(SR.input==="reversed")a.reverse();else{for(let k=0;k<Math.max(1,n/15);k++){const i=Math.floor(Math.random()*(n-1));[a[i],a[i+1]]=[a[i+1],a[i]]}}
+  SR.base=a;SR.runs=ALG.map(([n,k])=>({k,a:a.slice(),g:null,cmp:0,done:false,hl:null,place:0}));SR.runs.forEach(sDraw);$("#sGo").textContent="Empezar la carrera";SR.finish=0}
+function sDraw(r){const{c,W,H}=setupCanvas($("#cv_"+r.k));const n=r.a.length,bw=W/n;const acc=css("--accent"),hot=css("--hot"),good=css("--good"),gold=css("--gold");
+  r.a.forEach((v,i)=>{const h=(H-4)*v/n;c.fillStyle=r.done?good:(r.hl&&r.hl.includes(i)?(r.sw?hot:gold):acc);c.fillRect(i*bw+(bw>3?.5:0),H-h,Math.max(1,bw-(bw>3?1:0)),h)});
+  $("#sc_"+r.k).textContent=`${fmt(r.cmp)} comparaciones`+(r.done?` · #${r.place}`:"")}
+function sLoop(){const sp=+$("#sSpeed").value;let alive=false;
+  SR.runs.forEach(r=>{if(r.done)return;alive=true;for(let s=0;s<sp;s++){const st=r.g.next();if(st.done){r.done=true;r.place=++SR.finish;r.hl=null;break}const v=st.value;if(v.c){r.cmp++;r.hl=v.c;r.sw=false}else if(v.s){r.hl=v.s;r.sw=true}else{r.hl=v.w;r.sw=true}}sDraw(r)});
+  if(alive)SR.raf=requestAnimationFrame(sLoop);else{SR.raf=0;$("#sGo").textContent="Otra carrera"}}
+$("#sGo").onclick=()=>{if(SR.runs.some(r=>r.done||r.g)){SR.runs=ALG.map(([n,k])=>({k,a:SR.base.slice(),g:null,cmp:0,done:false,hl:null}));SR.finish=0}
+  SR.runs.forEach(r=>r.g=GEN[r.k](r.a));cancelAnimationFrame(SR.raf);$("#sGo").textContent="En marcha…";SR.raf=requestAnimationFrame(sLoop)};
+$("#sShuffle").onclick=sNew;$("#sN").oninput=sNew;$("#sSpeed").oninput=e=>$("#sSpeedV").textContent=e.target.value;
+
+/* ================= 2. binary search ================= */
+const BS={lo:1,hi:1000,g:500,n:1,done:false,hist:[]};
+function bReset(){Object.assign(BS,{lo:1,hi:1000,n:1,done:false,hist:[]});BS.g=Math.floor((BS.lo+BS.hi)/2);$("#bMsg").textContent="Piensa un número del 1 al 1000. ¿Es más alto o más bajo que mi intento?";bDraw()}
+function bDraw(){$("#bGuess").textContent=BS.done?BS.g+" ✓":BS.g;$("#bCount").textContent=BS.n;$("#bLeft").textContent=fmt(BS.hi-BS.lo+1);
+  ["#bLow","#bHigh","#bYes"].forEach(id=>$(id).disabled=BS.done);$("#bBtns").style.opacity=BS.done?.4:1;
+  const{c,W,H}=setupCanvas($("#bCv"));const L=10,R=W-10,X=v=>L+(R-L)*(v-1)/999;const line=css("--line"),acc=css("--accent"),muted=css("--muted"),gold=css("--gold"),ink=css("--ink");
+  BS.hist.concat([[BS.lo,BS.hi]]).forEach(([lo,hi],i,arr)=>{const y=14+i*12;if(y>H-30)return;c.fillStyle=i===arr.length-1?acc:line;c.fillRect(X(lo),y,Math.max(2,X(hi)-X(lo)),8)});
+  c.fillStyle=gold;c.beginPath();c.moveTo(X(BS.g),H-26);c.lineTo(X(BS.g)-6,H-16);c.lineTo(X(BS.g)+6,H-16);c.closePath();c.fill();
+  c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="left";c.fillText("1",L,H-4);c.textAlign="right";c.fillText("1000",R,H-4);c.textAlign="center";c.fillStyle=ink;c.fillText(BS.g,X(BS.g),H-4)}
+function bStep(dir){if(BS.done)return;BS.hist.push([BS.lo,BS.hi]);if(dir>0)BS.lo=BS.g+1;else BS.hi=BS.g-1;
+  if(BS.lo>BS.hi){$("#bMsg").textContent="Vaya, esas respuestas se contradicen. ¿Has cambiado de número? Empieza de nuevo.";BS.done=true;bDraw();return}
+  BS.g=Math.floor((BS.lo+BS.hi)/2);BS.n++;$("#bMsg").textContent=BS.lo===BS.hi?"Solo queda un número: ¡tiene que ser este!":`Está entre ${fmt(BS.lo)} y ${fmt(BS.hi)}. Siempre digo el del medio.`;bDraw()}
+$("#bLow").onclick=()=>bStep(1);$("#bHigh").onclick=()=>bStep(-1);$("#bYes").onclick=()=>{BS.done=true;$("#bMsg").innerHTML=`Acertado en <b>${BS.n}</b> ${BS.n===1?"intento":"intentos"}. La búsqueda binaria nunca necesita más de 10 para 1000 números.`;bDraw()};$("#bReset").onclick=bReset;
+
+/* ================= 3. pathfinding ================= */
+const GR={cols:0,rows:15,walls:new Set(),vis:[],path:[],algo:"astar",anim:0,drawMode:null};
+const GALGO=[["bfs","En anchura"],["dfs","En profundidad"],["greedy","Voraz"],["astar","A*"]];
+const GMSG={bfs:"La búsqueda en anchura explora en anillos de igual distancia. Siempre encuentra un camino más corto, pero mira por todas partes.",dfs:"La búsqueda en profundidad se mete por una ruta todo lo que puede antes de retroceder. Encuentra un camino, a menudo largo y retorcido.",greedy:"La búsqueda voraz va siempre hacia la casilla que parece más cercana a la meta. Es rápida, pero los muros pueden engañarla y llevarla por un camino más largo.",astar:"A* suma la distancia recorrida hasta ahora a una estimación de la que falta. Encuentra un camino más corto explorando mucho menos. Peter Hart, Nils Nilsson y Bertram Raphael lo publicaron en 1968."};
+$("#gAlgo").innerHTML=GALGO.map(([k,l])=>`<button class="pill" data-k="${k}" aria-pressed="${k===GR.algo}">${l}</button>`).join("");
+document.querySelectorAll("#gAlgo .pill").forEach(b=>b.onclick=()=>{GR.algo=b.dataset.k;document.querySelectorAll("#gAlgo .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#gMsg").textContent=GMSG[GR.algo];gRun()});
+function gGeom(){const cv=$("#gCv");const W=cv.getBoundingClientRect().width;const cs=Math.max(14,Math.min(28,Math.floor(W/34)));const cols=Math.floor(W/cs);const rows=GR.rows;return{cs,cols,rows,ox:(W-cols*cs)/2}}
+const key=(x,y)=>x+","+y;
+function gSize(){const g=gGeom();const H=g.rows*g.cs;$("#gCv").dataset.h=H;$("#gCv").style.height=H+"px";$("#gCv")._w=0;if(g.cols!==GR.cols){GR.cols=g.cols;GR.start=[1,Math.floor(g.rows/2)];GR.goal=[g.cols-2,Math.floor(g.rows/2)];}return g}
+function gDraw(k=Infinity){const g=gSize();const{c,W,H}=setupCanvas($("#gCv"));const line=css("--line"),ink=css("--ink"),acc=css("--accent"),gold=css("--gold"),good=css("--good"),hot=css("--hot"),card=css("--card");
+  c.fillStyle=card;c.fillRect(0,0,W,H);const cell=(x,y,col,a=1)=>{c.globalAlpha=a;c.fillStyle=col;c.fillRect(g.ox+x*g.cs+1,y*g.cs+1,g.cs-2,g.cs-2);c.globalAlpha=1};
+  for(let y=0;y<g.rows;y++)for(let x=0;x<g.cols;x++)cell(x,y,line,.35);
+  GR.vis.slice(0,k).forEach(([x,y])=>cell(x,y,acc,.32));
+  if(k>=GR.vis.length)GR.path.forEach(([x,y])=>cell(x,y,gold,1));
+  GR.walls.forEach(s=>{const[x,y]=s.split(",").map(Number);if(x<g.cols)cell(x,y,ink,.9)});
+  cell(...GR.start,good);cell(...GR.goal,hot)}
+function gSolve(){const g=gGeom();const[sx,sy]=GR.start,[tx,ty]=GR.goal;const open=[[sx,sy]];const prev=new Map([[key(sx,sy),null]]);const cost=new Map([[key(sx,sy),0]]);const vis=[];const h=(x,y)=>Math.abs(x-tx)+Math.abs(y-ty);const closed=new Set();
+  while(open.length){let i=0;if(GR.algo==="dfs")i=open.length-1;else if(GR.algo==="greedy"){let b=1e9;open.forEach((p,j)=>{const v=h(...p);if(v<b){b=v;i=j}})}else if(GR.algo==="astar"){let b=1e9;open.forEach((p,j)=>{const v=cost.get(key(...p))+h(...p);if(v<b||(v===b&&h(...p)<h(...open[i]))){b=v;i=j}})}
+    const [x,y]=open.splice(i,1)[0];const kk=key(x,y);if(closed.has(kk))continue;closed.add(kk);vis.push([x,y]);if(x===tx&&y===ty)break;
+    const nb=GR.algo==="dfs"?[[0,-1],[-1,0],[0,1],[1,0]]:[[1,0],[0,1],[-1,0],[0,-1]];
+    for(const[dx,dy]of nb){const nx=x+dx,ny=y+dy,nk=key(nx,ny);if(nx<0||ny<0||nx>=g.cols||ny>=g.rows||GR.walls.has(nk)||closed.has(nk))continue;const nc=cost.get(kk)+1;
+      if(GR.algo==="dfs"||GR.algo==="greedy"){if(!prev.has(nk)){prev.set(nk,kk);cost.set(nk,nc);open.push([nx,ny])}else if(GR.algo==="dfs"){prev.set(nk,kk);cost.set(nk,nc);open.push([nx,ny])}}
+      else if(!cost.has(nk)||nc<cost.get(nk)){cost.set(nk,nc);prev.set(nk,kk);open.push([nx,ny])}}}
+  const path=[];let cur=key(tx,ty);if(closed.has(cur)){while(cur){path.push(cur.split(",").map(Number));cur=prev.get(cur)}path.reverse()}return{vis,path}}
+function gRun(){cancelAnimationFrame(GR.anim);const{vis,path}=gSolve();GR.vis=vis;GR.path=path;let k=0;const step=Math.max(2,Math.ceil(vis.length/90));
+  const tick=()=>{k+=step;gDraw(k);if(k<vis.length)GR.anim=requestAnimationFrame(tick);else{gDraw();$("#gExp").textContent=fmt(vis.length);$("#gLen").textContent=path.length?path.length-1:"Sin camino"}};
+  $("#gExp").textContent="…";$("#gLen").textContent="…";if(reduce){k=vis.length;tick()}else GR.anim=requestAnimationFrame(tick)}
+function gMaze(){gSize();const keep=GR.algo;for(let tries=0;tries<40;tries++){GR.walls.clear();for(let y=0;y<GR.rows;y++)for(let x=0;x<GR.cols;x++){if(Math.random()<.26)GR.walls.add(key(x,y))}
+  const mid=Math.floor(GR.cols/2);for(let y=0;y<GR.rows-3;y++)GR.walls.add(key(mid,y));
+  [GR.start,GR.goal].forEach(([x,y])=>{for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)GR.walls.delete(key(x+dx,y+dy))});GR.algo="bfs";const ok=gSolve().path.length>0;GR.algo=keep;if(ok)break}GR.vis=[];GR.path=[];gRun()}
+$("#gMaze").onclick=gMaze;$("#gClear").onclick=()=>{GR.walls.clear();GR.vis=[];GR.path=[];gDraw();$("#gExp").textContent="–";$("#gLen").textContent="–"};$("#gRun").onclick=gRun;
+(function(){const cv=$("#gCv");const at=e=>{const g=gGeom();const r=cv.getBoundingClientRect();return[Math.floor((e.clientX-r.left-g.ox)/g.cs),Math.floor((e.clientY-r.top)/g.cs)]};
+  const paint=(x,y)=>{if(x<0||y<0||x>=GR.cols||y>=GR.rows)return;const k=key(x,y);if(k===key(...GR.start)||k===key(...GR.goal))return;if(GR.drawMode)GR.walls.add(k);else GR.walls.delete(k);GR.vis=[];GR.path=[];gDraw()};
+  cv.addEventListener("pointerdown",e=>{const[x,y]=at(e);GR.drawMode=!GR.walls.has(key(x,y));paint(x,y);cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener("pointermove",e=>{if(GR.drawMode===null)return;paint(...at(e))});
+  const up=()=>{if(GR.drawMode!==null){GR.drawMode=null;gRun()}};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= 4. Big O ================= */
+const CL=[["O(1)","Constante: consultar un elemento por su posición",n=>1,"--good"],["O(log n)","Logarítmica: búsqueda binaria",n=>Math.max(1,Math.log2(n)),"#0EA5A4"],["O(n)","Lineal: leer cada elemento una vez",n=>n,"--accent"],["O(n log n)","Merge sort, quicksort (normalmente)",n=>n*Math.max(1,Math.log2(n)),"#8B5CF6"],["O(n²)","Cuadrática: bubble sort, comparar todas las parejas",n=>n*n,"--gold"],["O(2ⁿ)","Exponencial: probar todos los subconjuntos",n=>Math.pow(2,n),"--hot"]];
+const colOf=v=>v.startsWith("--")?css(v):v;
+function tfmt(steps){const s=steps/1e9;if(!isFinite(s)||s>4.35e17)return"más que la edad del universo";if(s<1e-6)return(s*1e9).toFixed(0)+" ns";if(s<1e-3)return(s*1e6).toFixed(1)+" µs";if(s<1)return(s*1e3).toFixed(1)+" ms";if(s<60)return s.toFixed(1)+" s";if(s<3600)return(s/60).toFixed(1).replace(".",",")+" min";if(s<86400)return(s/3600).toFixed(1).replace(".",",")+" horas";if(s<3.156e7)return(s/86400).toFixed(1).replace(".",",")+" días";const y=s/3.156e7;return y<1e6?fmt(y)+" años":y.toExponential(1).replace("e+","×10^")+" años"}
+function oDraw(){const n=Math.round(Math.pow(10,+$("#oN").value));$("#oNV").textContent=fmt(n);
+  $("#oTbl").innerHTML=`<tr><th class="v">Clase</th><th>Pasos</th><th>Tiempo a 10⁹ pasos/s</th></tr>`+CL.map(([k,d,f,col])=>{const st=f(n);return `<tr><td class="v" style="text-align:left"><b style="color:${colOf(col)}">${k}</b><br><small style="color:var(--muted);font-family:var(--body)">${d}</small></td><td>${st>1e15?(isFinite(st)?st.toExponential(1):"∞"):fmt(st)}</td><td>${tfmt(st)}</td></tr>`}).join("");
+  const{c,W,H}=setupCanvas($("#oCv"));const L=36,R=W-10,T=10,B=H-24,N=30,top=200;const X=n=>L+(R-L)*(n-1)/(N-1),Y=v=>B-(B-T)*Math.min(v,top*1.1)/top;
+  c.strokeStyle=css("--line");c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";c.textBaseline="middle";[0,100,200].forEach(v=>{c.beginPath();c.moveTo(L,Y(v));c.lineTo(R,Y(v));c.stroke();c.fillText(v,L-4,Y(v))});c.textAlign="center";c.textBaseline="alphabetic";[1,10,20,30].forEach(v=>c.fillText(v,X(v),H-8));
+  c.save();c.beginPath();c.rect(L,T-2,R-L,B-T+2);c.clip();CL.forEach(([k,d,f,col])=>{c.strokeStyle=colOf(col);c.lineWidth=2.6;c.beginPath();for(let n=1;n<=N;n+=.25){const y=Y(f(n));n===1?c.moveTo(X(n),y):c.lineTo(X(n),y)}c.stroke()});c.restore();
+  c.font="600 11px "+css("--mono");c.textAlign="left";CL.forEach(([k,d,f,col],i)=>{let n=N;while(n>1&&f(n)>top)n-=.25;c.fillStyle=colOf(col);c.fillText(k,Math.min(X(n)+4,R-60),Y(f(n))-(i===0?6:4))});c.lineWidth=1}
+$("#oN").oninput=oDraw;
+
+/* ================= 5. TSP ================= */
+const TS={pts:[],tour:null,label:""};
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);const tourLen=t=>t.reduce((s,i,k)=>s+dist(TS.pts[i],TS.pts[t[(k+1)%t.length]]),0);
+const fact=n=>{let f=1;for(let i=2;i<=n;i++)f*=i;return f};
+function tRoutes(n){if(n<3)return"–";const r=fact(n-1)/2;return r>1e15?r.toExponential(1).replace("e+","×10^"):fmt(r)}
+function tDraw(){const{c,W,H}=setupCanvas($("#tCv"));const acc=css("--accent"),hot=css("--hot"),ink=css("--ink"),card=css("--card"),line=css("--line");
+  c.fillStyle=card;c.fillRect(0,0,W,H);c.strokeStyle=line;for(let x=0;x<W;x+=40){c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke()}for(let y=0;y<H;y+=40){c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke()}
+  const P=TS.pts.map(p=>[p[0]*W,p[1]*H]);
+  if(TS.tour&&TS.tour.length>1){c.strokeStyle=acc;c.lineWidth=3;c.beginPath();TS.tour.forEach((i,k)=>{k?c.lineTo(...P[i]):c.moveTo(...P[i])});c.closePath();c.stroke();c.lineWidth=1}
+  P.forEach((p,i)=>{c.fillStyle=i===0?hot:ink;c.beginPath();c.arc(p[0],p[1],i===0?8:6,0,7);c.fill()});
+  if(!P.length){c.fillStyle=css("--muted");c.font="14px "+css("--body");c.textAlign="center";c.fillText("Toca para añadir ciudades",W/2,H/2)}
+  $("#tN").textContent=TS.pts.length;$("#tRoutes").textContent=tRoutes(TS.pts.length);$("#tBF").disabled=TS.pts.length>10||TS.pts.length<3}
+function scaleLen(){const cv=$("#tCv").getBoundingClientRect();return 1}
+function tLenTxt(t){const r=$("#tCv").getBoundingClientRect();const L=t.reduce((s,i,k)=>{const a=TS.pts[i],b=TS.pts[t[(k+1)%t.length]];return s+Math.hypot((a[0]-b[0])*r.width,(a[1]-b[1])*r.height)},0);return Math.round(L/10)}
+$("#tCv").addEventListener("click",e=>{if(TS.pts.length>=14){$("#tMsg").textContent="Ya son muchas ciudades para un solo viajante.";return}const r=$("#tCv").getBoundingClientRect();TS.pts.push([(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]);TS.tour=null;$("#tMsg").textContent="";tDraw()});
+$("#tRand").onclick=()=>{TS.pts=[...Array(8)].map(()=>[.06+Math.random()*.88,.08+Math.random()*.84]);TS.tour=null;$("#tMsg").textContent="";tDraw()};
+$("#tClear").onclick=()=>{TS.pts=[];TS.tour=null;$("#tMsg").textContent="";tDraw()};
+function nn(){const n=TS.pts.length;const t=[0],used=new Set([0]);while(t.length<n){const last=TS.pts[t[t.length-1]];let b=-1,bd=1e9;for(let i=0;i<n;i++)if(!used.has(i)){const d=dist(last,TS.pts[i]);if(d<bd){bd=d;b=i}}t.push(b);used.add(b)}return t}
+$("#tNN").onclick=()=>{if(TS.pts.length<3)return;TS.tour=nn();$("#tMsg").innerHTML=`Vecino más cercano: ve siempre a la ciudad más próxima sin visitar. Longitud de la ruta <b>${tLenTxt(TS.tour)}</b>. Rápido, pero a menudo un 20–25 % más largo que lo mejor.`;tDraw()};
+$("#t2opt").onclick=()=>{if(TS.pts.length<3)return;let t=TS.tour||nn();let improved=true,swaps=0;while(improved){improved=false;for(let i=1;i<t.length-1;i++)for(let k=i+1;k<t.length;k++){const nt=t.slice(0,i).concat(t.slice(i,k+1).reverse(),t.slice(k+1));if(tourLen(nt)<tourLen(t)-1e-9){t=nt;improved=true;swaps++}}}
+  TS.tour=t;$("#tMsg").innerHTML=`2-opt: busca dos carreteras que se cruzan y descrúzalas, hasta que ningún cambio ayude. Mejoras hechas: ${swaps}; longitud <b>${tLenTxt(t)}</b>. Normalmente a pocos puntos porcentuales de lo mejor.`;tDraw()};
+$("#tBF").onclick=()=>{const n=TS.pts.length;if(n<3||n>10)return;const rest=[...Array(n-1)].map((_,i)=>i+1);let best=null,bl=1e9,count=0;
+  const perm=(a,k)=>{if(k===a.length){if(a[0]<a[a.length-1]){count++;const t=[0,...a];const l=tourLen(t);if(l<bl){bl=l;best=t}}return}for(let i=k;i<a.length;i++){[a[k],a[i]]=[a[i],a[k]];perm(a,k+1);[a[k],a[i]]=[a[i],a[k]]}};perm(rest,0);
+  TS.tour=best;$("#tMsg").innerHTML=`Comprobadas las <b>${fmt(count)}</b> rutas: la más corta mide <b>${tLenTxt(best)}</b>. Con 20 ciudades habría unos 6 × 10¹⁶ rutas; con 70, más que átomos en el universo observable.`;tDraw()};
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["El algoritmo de Euclides","h. 300 a. C.","Para hallar el máximo común divisor de dos números, sustituye una y otra vez el mayor por el resto de dividirlo entre el menor. Es uno de los algoritmos más antiguos que se siguen usando a diario, también dentro del cifrado."],
+ ["Al-Khwarizmi","c. 820","El sabio persa Muhammad ibn Musa al-Juarismi escribió en Bagdad libros de aritmética y álgebra. Las traducciones latinas de su nombre nos dieron la palabra «algoritmo»."],
+ ["El primer programa","1843","Ada Lovelace publicó un método para que la Máquina Analítica que planeaba Charles Babbage calculara los números de Bernoulli. Se suele considerar el primer programa informático, escrito para una máquina que nunca llegó a construirse."],
+ ["¿Qué se puede calcular?","1936","Alan Turing describió una sencilla máquina imaginaria capaz de ejecutar cualquier algoritmo, y demostró que algunos problemas no los puede resolver ningún algoritmo."],
+ ["El camino más corto de Dijkstra","1956","Edsger Dijkstra diseñó su algoritmo del camino más corto en unos veinte minutos en una cafetería de Ámsterdam, sin papel ni lápiz. Versiones suyas siguen guiando el tráfico de internet y los navegadores."],
+ ["Quicksort","1959","Tony Hoare inventó quicksort mientras trabajaba en traducción automática en Moscú. Sigue siendo uno de los métodos de ordenación de uso general más rápidos."],
+ ["PageRank","1998","Larry Page y Sergey Brin clasificaron las páginas web según cuántas páginas importantes las enlazan, tratando la web como un enorme grafo. Así nació Google."],
+ ["Algoritmos por todas partes","Hoy","Los algoritmos recomiendan vídeos, fijan precios, emparejan conductores con pasajeros y comprimen fotos. Como toman decisiones sobre personas, las preguntas sobre justicia y transparencia importan tanto como la velocidad."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3><span class="yr">${a[1]}</span></div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+sNew();bReset();gSize();gMaze();$("#gMsg").textContent=GMSG[GR.algo];oDraw();$("#tRand").click();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{SR.runs.forEach(sDraw);bDraw();GR.cols=0;gSize();gDraw();oDraw();tDraw()},150)});
+addEventListener("themechange",()=>{SR.runs.forEach(sDraw);bDraw();gDraw();oDraw();tDraw()});
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Maps & projections | `maps.html` | Nine projections with Tissot circles and drag-to-rotate, draggable true-size countries (incl. Africa), great circle vs rhumb line on Mercator and globe. Uses `lib/geo.js` (d3-geo bundle) and `lib/world-110m.js` |
 | Money & economics | `money.html` | Compound interest with “start 10 years later” comparison, inflation basket, supply & demand with price controls and events, money-multiplier rounds |
 | Light & color | `light.html` | Prism and electromagnetic spectrum, additive vs subtractive mixing, Rayleigh-scattering sky with sun-height slider, cone sensitivity and color-blindness simulation, simultaneous-contrast illusion |
+| Algorithms | `algorithms.html` | Five-way sorting race, binary-search number guesser, BFS/DFS/greedy/A* pathfinding on a drawable grid, Big-O growth table, travelling salesperson with nearest neighbour, 2-opt and brute force |
 
 ## Spanish
 
