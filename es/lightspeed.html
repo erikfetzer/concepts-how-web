@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velocidad de la luz · concepts.how</title>
+<meta name="description" content="Haz una carrera con la luz por el sistema solar, mídela con la rueda dentada de Fizeau, mira el cielo nocturno tal como era, viaja en el reloj de luz de Einstein y frena la luz dentro de un diamante.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/lightspeed">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/lightspeed">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Velocidad de la luz · concepts.how">
+<meta property="og:description" content="Haz una carrera con la luz por el sistema solar, mídela con la rueda dentada de Fizeau, mira el cielo nocturno tal como era, viaja en el reloj de luz de Einstein y frena la luz dentro de un diamante.">
+<meta property="og:url" content="https://concepts.how/lightspeed">
+<meta property="og:image" content="https://concepts.how/og.png?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Velocidad de la luz · concepts.how">
+<meta name="twitter:description" content="Haz una carrera con la luz por el sistema solar, mídela con la rueda dentada de Fizeau, mira el cielo nocturno tal como era, viaja en el reloj de luz de Einstein y frena la luz dentro de un diamante.">
+<meta name="twitter:image" content="https://concepts.how/og.png?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+.row2{display:flex;flex-wrap:wrap;gap:8px}
+.ghostb{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.ghostb[aria-pressed=true]{border-color:var(--accent)!important;color:var(--accent)!important}
+.k2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.note{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.note b{color:var(--ink)}
+.wrapseg{flex-wrap:wrap}
+.txt{width:100%;box-sizing:border-box;font:500 15px var(--mono);padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.v.sm{font-size:14px;line-height:1.35;word-break:break-word}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* lightspeed */
+.others{display:grid;gap:6px}.others>div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:6px 0;font-size:14px}.others b{font-family:var(--mono);white-space:nowrap}
+.others span{color:var(--muted)}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <a class="nl" href="money.html">Dinero</a>
+    <a class="nl" href="light.html">Luz y color</a>
+    <a class="nl" href="lightspeed.html" aria-current="page">Velocidad de la luz</a>
+    <a class="nl" href="algorithms.html">Algoritmos</a>
+    <a class="nl" href="mind.html">Sesgos y mente</a>
+    <a class="nl" href="music.html">Música y sonido</a>
+    <a class="nl" href="evolution.html">Evolución</a>
+    <a class="nl" href="internet.html">Internet</a>
+    <a class="nl" href="wireless.html">Inalámbrico</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../lightspeed.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="lightspeed.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Velocidad de la luz</b> · el límite de velocidad del universo</div>
+    <h1>Tan rápida que daría la vuelta a la Tierra <em>7 veces y media en un segundo.</em></h1>
+    <p class="lede">La luz viaja exactamente a 299 792 458 metros por segundo en el espacio vacío. Nada que lleve información va más rápido, y cuanto más se acerca algo a esa velocidad, más raro se comportan el tiempo y el espacio. Haz una carrera con la luz por el sistema solar, mídela con una rueda giratoria como un físico del siglo XIX, mira al pasado en el cielo nocturno y viaja en un reloj de luz cerca del límite.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#race">Carrera de luz</a><a href="#wheel">Medirla</a><a href="#past">Ver el pasado</a><a href="#clock">Relatividad</a><a href="#slow">Luz lenta</a><a href="#ideas">Grandes ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. race ============ -->
+  <section class="block" id="race" aria-labelledby="rH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · carrera contra la luz</span>
+      <h2 id="rH">¿Cuánto tarda la luz?</h2>
+      <p>Elige un destino y envía un pulso de luz. Los viajes cortos se ven en tiempo real; los largos, acelerados, y el contador muestra el tiempo real. Luego mira cuánto se tardaría en coche, en avión y en la nave más rápida jamás construida.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg wrapseg" id="rPick"></div>
+        <canvas class="cv" id="rCv" height="140" aria-label="Un pulso de luz que viaja de la Tierra al destino elegido"></canvas>
+        <div class="row2"><button class="btn" id="rGo">▶ Enviar luz</button><span class="note" id="rSpd"></span></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Distancia</div><div class="v sm" id="rD"></div></div>
+          <div class="ro"><div class="k">La luz tarda</div><div class="v" id="rT"></div></div>
+        </div>
+        <div class="others" id="rO"></div>
+        <div class="callout" id="voy"><b>Un día luz</b><span id="voyTxt"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. Fizeau ============ -->
+  <section class="block" id="wheel" aria-labelledby="fH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · mídela tú</span>
+      <h2 id="fH">La rueda giratoria de Fizeau</h2>
+      <p>En 1849, Hippolyte Fizeau hizo pasar la luz de una lámpara por los huecos de una rueda dentada hasta un espejo a 8,6 km y de vuelta. Con la rueda quieta, la luz vuelve por el mismo hueco. Si gira lo bastante rápido, mientras la luz está fuera un diente se pone delante del hueco y la luz queda bloqueada. Con la velocidad de la rueda en la primera oscuridad calculó la velocidad de la luz. Acelera la rueda hasta que desaparezca la luz que vuelve.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="fCv" height="240" aria-label="Una rueda dentada, una lámpara y un espejo lejano. El haz que vuelve se apaga a medida que la rueda gira más rápido."></canvas>
+        <div class="sl"><label for="fS">Velocidad de la rueda <span id="fSV"></span></label><input type="range" id="fS" min="0" max="3000" value="600"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Luz que vuelve</div><div class="v" id="fB"></div></div>
+          <div class="ro"><div class="k">Ida y vuelta</div><div class="v" id="fR"></div></div>
+          <div class="ro"><div class="k">Tu medida</div><div class="v sm" id="fC"></div></div>
+        </div>
+        <p class="note" id="fTip"></p>
+        <div class="callout"><b>El montaje</b>720 dientes y un espejo a 8633 m. En la primera oscuridad, la rueda gira medio diente y hueco (1/1440 de vuelta) mientras la luz hace los 17,3 km de ida y vuelta, así que velocidad de la luz = 4 × distancia × dientes × vueltas por segundo. Fizeau obtuvo unos 313 000 km/s, solo un 4% de más.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. past ============ -->
+  <section class="block" id="past" aria-labelledby="pH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · una máquina del tiempo sobre tu cabeza</span>
+      <h2 id="pH">Todo lo que ves está en el pasado</h2>
+      <p>La luz tarda en llegar a tus ojos, así que ves cada cosa como era cuando la luz salió de ella. Para un amigo al otro lado de la habitación son unas milmillonésimas de segundo. Para las estrellas, pueden ser siglos. Elige algo del cielo para ver cuándo salió su luz.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg wrapseg" id="pPick"></div>
+        <canvas class="cv" id="pCv" height="170" aria-label="Línea de tiempo que muestra hace cuánto salió la luz del objeto elegido"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">La luz salió</div><div class="v sm" id="pAgo"></div></div>
+        </div>
+        <p class="note" id="pTxt"></p>
+        <div class="callout"><b>Los años luz miden distancias</b>Un año luz es lo que recorre la luz en un año: unos 9,46 billones de km. Es una distancia, no un tiempo, pero te dice lo vieja que es la luz.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. light clock ============ -->
+  <section class="block" id="clock" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · el reloj de luz de Einstein</span>
+      <h2 id="cH">Los relojes en movimiento atrasan</h2>
+      <p>Un reloj de luz hace tic cada vez que un pulso de luz rebota entre dos espejos. Ahora ponlo en una nave muy rápida. Visto desde la Tierra, el pulso tiene que recorrer un camino más largo e inclinado para seguir a la nave. La luz no puede ir más rápido para compensarlo, así que cada tic dura más: el tiempo de la nave va más lento. La nave también se ve más corta en la dirección en que se mueve. Lleva la velocidad hacia el límite.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="cCv" height="300" aria-label="Dos relojes de luz: uno quieto y otro en movimiento. El que se mueve hace tic más despacio."></canvas>
+        <div class="sl"><label for="cV">Velocidad de la nave <span id="cVV"></span></label><input type="range" id="cV" min="0" max="1000" value="600"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">El tiempo se ralentiza</div><div class="v" id="cG"></div></div>
+          <div class="ro"><div class="k">1 hora en la nave</div><div class="v sm" id="cH1"></div></div>
+        </div>
+        <div class="k2">Viaje a Próxima Centauri, a 4,24 años luz</div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Calendario de la Tierra</div><div class="v" id="cE"></div></div>
+          <div class="ro"><div class="k">Relojes de la tripulación</div><div class="v" id="cS"></div></div>
+        </div>
+        <div class="callout"><b>Es real</b>Los muones que crean los rayos cósmicos en lo alto de la atmósfera deberían desintegrarse mucho antes de llegar al suelo, pero van tan rápido que sus relojes se ralentizan y muchos llegan. Los satélites GPS tienen que corregir este mismo efecto cada día.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. slow light ============ -->
+  <section class="block" id="slow" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · la luz frena dentro de las cosas</span>
+      <h2 id="sH">Luz lenta</h2>
+      <p>La famosa velocidad es la de la luz en el espacio vacío. En el agua, el vidrio o el diamante, el campo eléctrico de la luz hace vibrar los electrones del material, que emiten sus propias ondas pequeñas, y la onda combinada avanza más despacio. Cuánto más lenta es lo que mide el índice de refracción del material. Ese frenazo es también la razón de que las lentes desvíen la luz y de que los diamantes brillen.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg wrapseg" id="sPick"></div>
+        <canvas class="cv" id="sCv" height="170" aria-label="Dos pulsos compiten: uno por el vacío y otro por el material elegido"></canvas>
+        <button class="btn" id="sGo">▶ Carrera</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Índice de refracción</div><div class="v" id="sN"></div></div>
+          <div class="ro"><div class="k">Velocidad de la luz aquí</div><div class="v sm" id="sV"></div></div>
+        </div>
+        <div class="callout"><b>Más rápido que la luz, más o menos</b>Algunas partículas pueden moverse por el agua más rápido que la luz en el agua. Cuando lo hacen, emiten un resplandor azul llamado radiación de Cherenkov, el equivalente luminoso de un estampido sónico. Se ve en las piscinas que rodean los reactores nucleares.</div>
+        <div class="callout"><b>A velocidad de bici</b>En 1999, el equipo de Lene Hau frenó la luz hasta unos 17 metros por segundo, la velocidad de un ciclista rápido, haciéndola pasar por una nube de átomos de sodio ultrafría.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Grandes ideas</span>
+      <h2 id="idH">De los faroles en las colinas a la definición del metro</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>BIPM, <i>El Sistema Internacional de Unidades (folleto del SI)</i>: definición del metro</li>
+    <li>NASA/JPL, estado de la misión Voyager y la marca del día luz (2026)</li>
+    <li>H. Fizeau, <i>Comptes rendus de l’Académie des sciences</i> (1849)</li>
+    <li>L. V. Hau et al., “Light speed reduction to 17 metres per second in an ultracold atomic gas”, <i>Nature</i> (1999)</li>
+    <li>Albert Einstein, “On the electrodynamics of moving bodies” (1905)</li>
+    <li>Brian Greene, <i>The Elegant Universe</i> (1999), capítulo 2</li>
+  </ul>
+  <p>Las distancias a los planetas cambian a medida que orbitan y las de las estrellas son estimaciones; las cifras están redondeadas.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const C=299792.458; // km/s
+const LY=9.4607e12;
+function dur(s){const U=LANGES?[["millones de años",3.156e13],["años",3.156e7],["días",86400],["h",3600],["min",60],["s",1]]:[["million years",3.156e13],["years",3.156e7],["days",86400],["h",3600],["min",60],["s",1]];
+  if(s<1)return fmt(s,s<.01?4:s<.1?3:2)+" s";if(s<60)return fmt(s,s<10?2:1)+" s";
+  if(s<3600){const m=Math.floor(s/60),r=Math.round(s%60);return`${m} min ${r} s`}
+  if(s<86400*2){const h=Math.floor(s/3600),m=Math.round(s%3600/60);return`${h} h ${m} min`}
+  if(s<3.156e7*2)return fmt(s/86400,s<86400*30?1:0)+" "+U[2][0];
+  if(s<3.156e13)return fmt(s/3.156e7,s<3.156e8?1:0)+" "+U[1][0];
+  return fmt(s/3.156e13,1)+" "+U[0][0]}
+function km(k){return k>=1e12?fmt(k/LY,k/LY<10?2:0)+(LANGES?" años luz":" light-years"):k>=1e9?fmt(k/1e9,1)+(LANGES?" mil millones de km":" billion km"):k>=1e6?fmt(k/1e6,1)+(LANGES?" millones de km":" million km"):fmt(k)+" km"}
+
+/* ================= 1. race ================= */
+const DEST=LANGES?[["Vuelta a la Tierra",40075],["La Luna",384400],["El Sol",149.6e6],["Marte",225e6,"De media. Según dónde estén los dos planetas en sus órbitas, la luz tarda entre unos 3 y 22 minutos, así que no se puede manejar un róver en directo."],["Júpiter",778e6,"De media; varía entre unos 33 y 54 minutos."],["Plutón",5.9e9],["Voyager 1",25.9e9,"La nave más lejana jamás lanzada."],["Próxima Centauri",4.24*LY,"La estrella más cercana después del Sol."],["Centro de la galaxia",26000*LY],["Andrómeda",2.5e6*LY,"La gran galaxia más cercana."]]
+:[["Around Earth",40075],["The Moon",384400],["The Sun",149.6e6],["Mars",225e6,"On average. Depending on where the two planets are in their orbits, light takes between about 3 and 22 minutes, so nobody can drive a rover live."],["Jupiter",778e6,"On average; it varies from about 33 to 54 minutes."],["Pluto",5.9e9],["Voyager 1",25.9e9,"The most distant spacecraft ever launched."],["Proxima Centauri",4.24*LY,"The nearest star after the Sun."],["Galaxy’s centre",26000*LY],["Andromeda",2.5e6*LY,"The nearest big galaxy."]];
+const VEH=LANGES?[["Coche a 100 km/h",100/3600],["Avión a 900 km/h",900/3600],["Sonda Parker, a unos 690 000 km/h (lo más rápido que hemos construido)",191.7]]:[["Car at 100 km/h",100/3600],["Jet at 900 km/h",900/3600],["Parker Solar Probe at about 690,000 km/h (the fastest thing we’ve built)",191.7]];
+let rSel=1;const R={t0:0,raf:0,run:false,f:0};
+$("#rPick").innerHTML=DEST.map((d,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===rSel}">${d[0]}</button>`).join("");
+document.querySelectorAll("#rPick .pill").forEach(b=>b.onclick=()=>{rSel=+b.dataset.i;document.querySelectorAll("#rPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));cancelAnimationFrame(R.raf);R.run=false;R.f=0;rUpd()});
+function rUpd(){const d=DEST[rSel],t=d[1]/C;$("#rD").textContent=km(d[1]);$("#rT").textContent=dur(t);
+  $("#rO").innerHTML=VEH.map(v=>`<div><span>${v[0]}</span><b>${dur(d[1]/v[1])}</b></div>`).join("")+(d[2]?`<p class="note">${d[2]}</p>`:"");
+  const show=t<=12?t:6;$("#rSpd").textContent=t<=12?(LANGES?"En tiempo real":"Real time"):(LANGES?`Acelerado ${fmt(t/show)} veces`:`Sped up ${fmt(t/show)} times`);rDraw()}
+function rDraw(){const{c,W,H}=setupCanvas($("#rCv"));const L=34,Rr=W-34,y=H/2;
+  c.strokeStyle=css("--line");c.setLineDash([3,5]);c.beginPath();c.moveTo(L,y);c.lineTo(Rr,y);c.stroke();c.setLineDash([]);
+  c.fillStyle=css("--accent");c.beginPath();c.arc(L,y,14,0,7);c.fill();c.fillStyle="#fff";c.font="600 10px "+css("--mono");c.textAlign="center";c.fillText(LANGES?"TÚ":"YOU",L,y+4);
+  c.fillStyle=css("--ink");c.beginPath();c.arc(Rr,y,10,0,7);c.fill();c.fillStyle=css("--ink");c.font="12px "+css("--body");c.textAlign="right";c.fillText(DEST[rSel][0],Rr,y+30);
+  const x=L+(Rr-L)*R.f;if(R.f>0){const g=c.createLinearGradient(x-80,0,x,0);g.addColorStop(0,"rgba(245,190,40,0)");g.addColorStop(1,css("--gold"));c.strokeStyle=g;c.lineWidth=4;c.beginPath();c.moveTo(Math.max(L,x-80),y);c.lineTo(x,y);c.stroke();c.lineWidth=1;c.fillStyle=css("--gold");c.beginPath();c.arc(x,y,6,0,7);c.fill()}
+  const t=DEST[rSel][1]/C;c.fillStyle=css("--muted");c.font="600 13px "+css("--mono");c.textAlign="left";c.fillText(dur(t*R.f),L-14,22)}
+$("#rGo").onclick=()=>{cancelAnimationFrame(R.raf);const t=DEST[rSel][1]/C,show=reduce?0:(t<=12?t:6);R.t0=performance.now();const step=now=>{R.f=show?clamp((now-R.t0)/1000/show):1;rDraw();if(R.f<1)R.raf=requestAnimationFrame(step)};R.raf=requestAnimationFrame(step)};
+function voy(){const T=Date.UTC(2026,10,18,6,16,7),now=Date.now(),d=(T-now)/1000;
+  if(d>0){const dd=Math.floor(d/86400),hh=Math.floor(d%86400/3600),mm=Math.floor(d%3600/60),ss=Math.floor(d%60);
+    $("#voyTxt").textContent=LANGES?`Voyager 1, lanzada en 1977, está a punto de ser el primer objeto hecho por humanos a un día luz de la Tierra: una señal de radio tardará 24 horas en llegar. La NASA calcula que cruzará esa marca el 18 de noviembre de 2026. Faltan ${dd} d ${hh} h ${mm} min ${ss} s.`:`Voyager 1, launched in 1977, is about to become the first human-made object one light-day from Earth: a radio signal will take 24 hours to reach it. NASA calculates it crosses that line on 18 November 2026. Time left: ${dd} d ${hh} h ${mm} min ${ss} s.`}
+  else $("#voyTxt").textContent=LANGES?"El 18 de noviembre de 2026, Voyager 1, lanzada en 1977, se convirtió en el primer objeto hecho por humanos a un día luz de la Tierra: una señal de radio tarda más de 24 horas en llegar hasta ella.":"On 18 November 2026 Voyager 1, launched in 1977, became the first human-made object one light-day from Earth: a radio signal now takes more than 24 hours to reach it."}
+voy();setInterval(voy,1000);
+
+/* ================= 2. Fizeau ================= */
+const FZ={N:720,d:8.633,ang:0,raf:0,last:0};
+const fRps=()=>+$("#fS").value/100; // 0..30 turns per second
+function fBright(){const f=fRps();const rt=2*FZ.d/C;const k=rt*f*FZ.N; // teeth periods moved during round trip
+  const ph=k%1;return Math.abs(1-2*ph)}// 1 at 0, 0 at 0.5
+function fUpd(){const f=fRps();$("#fSV").textContent=fmt(f,2)+(LANGES?" vueltas/s":" turns/s");const b=fBright();$("#fB").textContent=fmt(b*100)+"%";$("#fR").textContent=fmt(2*FZ.d/C*1e6,1)+" µs";
+  const k=2*FZ.d/C*f*FZ.N;
+  if(b<.06&&f>0){const est=4*FZ.d*FZ.N*f/(Math.round(k-.5)*2+1);$("#fC").textContent="≈ "+fmt(est)+" km/s";$("#fTip").textContent=LANGES?"¡Oscuridad! La luz se bloquea al volver. Así se calcula la velocidad con la velocidad de la rueda.":"Darkness! The returning light is blocked. That’s how the wheel’s speed gives the speed of light."}
+  else{$("#fC").textContent="—";$("#fTip").textContent=f<1?(LANGES?"Con la rueda casi quieta, la luz vuelve por el mismo hueco.":"With the wheel almost still, light comes back through the same gap."):(LANGES?"Ajusta la velocidad hasta que la luz que vuelve llegue casi a 0%. La primera oscuridad está cerca de 12 vueltas por segundo.":"Adjust the speed until the returning light is almost 0%. The first darkness is near 12 turns per second.")}}
+function fDraw(){const{c,W,H}=setupCanvas($("#fCv"));const wx=Math.min(110,W*.24),wy=H/2,Rw=Math.min(70,H*.3),mx=W-24,b=fBright();
+  // beams
+  c.strokeStyle="rgba(245,190,40,.9)";c.lineWidth=5;c.beginPath();c.moveTo(14,wy-8);c.lineTo(mx,wy-8);c.stroke();
+  c.strokeStyle=`rgba(245,190,40,${.08+.9*b})`;c.beginPath();c.moveTo(mx,wy+8);c.lineTo(wx-Rw-30,wy+8);c.stroke();c.lineWidth=1;
+  // lamp & eye
+  c.fillStyle=css("--gold");c.beginPath();c.arc(14,wy-8,8,0,7);c.fill();
+  c.strokeStyle=css("--ink");c.lineWidth=2;c.beginPath();c.ellipse(wx-Rw-36,wy+8,11,7,0,0,7);c.stroke();c.fillStyle=css("--ink");c.beginPath();c.arc(wx-Rw-36,wy+8,3+3*b,0,7);c.fill();
+  // mirror
+  c.fillStyle=css("--accent");c.fillRect(mx,wy-40,8,80);c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="right";c.fillText(LANGES?"espejo · 8,6 km":"mirror · 8.6 km",mx-6,wy-48);
+  // wheel (drawn with 24 teeth for visibility)
+  const n=24;c.save();c.translate(wx,wy);c.rotate(FZ.ang);c.fillStyle=css("--ink");for(let i=0;i<n;i++){c.beginPath();const a0=i*2*Math.PI/n,a1=a0+Math.PI/n;c.moveTo(0,0);c.arc(0,0,Rw,a0,a1);c.closePath();c.fill()}c.fillStyle=css("--card");c.beginPath();c.arc(0,0,Rw*.72,0,7);c.fill();c.strokeStyle=css("--ink");c.lineWidth=2;c.beginPath();c.arc(0,0,Rw*.72,0,7);c.stroke();c.restore();c.lineWidth=1;
+  c.fillStyle=css("--muted");c.textAlign="center";c.fillText(LANGES?"rueda dentada":"toothed wheel",wx,wy+Rw+20)}
+function fLoop(now){const dt=Math.min(.05,(now-FZ.last)/1000);FZ.last=now;FZ.ang+=Math.min(fRps(),1.2)*2*Math.PI*dt*(fRps()>1.2?1:1);fDraw();if(!reduce&&vis.f)FZ.raf=requestAnimationFrame(fLoop)}
+$("#fS").oninput=()=>{fUpd();if(reduce)fDraw()};
+
+/* ================= 3. past ================= */
+const SKY=LANGES?[["La Luna",1.28/3.156e7,"Ves la Luna como era hace poco más de un segundo."],["El Sol",499/3.156e7,"Si el Sol desapareciera de repente, seguiríamos viéndolo y notando su calor durante más de 8 minutos."],["Sirio",8.6,"La estrella más brillante del cielo nocturno. Su luz salió hacia 2018."],["Vega",25,"Su luz salió hacia el año 2001."],["Betelgeuse",550,"El hombro rojo de Orión. Su distancia es incierta, unos 400 a 650 años luz: su luz salió más o menos en la época del joven Leonardo da Vinci."],["Nebulosa de Orión",1344,"Una guardería de estrellas que se ve con prismáticos. Su luz salió hacia el año 680."],["Centro de la galaxia",26000,"Su luz salió durante la última glaciación, cuando había mamuts."],["Andrómeda",2.5e6,"El objeto más lejano que se ve a simple vista. Su luz salió cuando nuestros antepasados empezaban a fabricar las primeras herramientas de piedra."],["Fondo cósmico de microondas",13.8e9,"El resplandor del Big Bang, que salió unos 380 000 años después del comienzo, antes de que existieran las estrellas. Es la luz más antigua que hay."]]
+:[["The Moon",1.28/3.156e7,"You see the Moon as it was just over a second ago."],["The Sun",499/3.156e7,"If the Sun suddenly vanished, we’d keep seeing it and feeling its warmth for more than 8 minutes."],["Sirius",8.6,"The brightest star in the night sky. Its light left around 2018."],["Vega",25,"Its light left around 2001."],["Betelgeuse",550,"Orion’s red shoulder. Its distance is uncertain, roughly 400 to 650 light-years: its light left around the time Leonardo da Vinci was a young man."],["Orion Nebula",1344,"A star nursery you can see with binoculars. Its light left around the year 680."],["Galaxy’s centre",26000,"Its light left during the last ice age, when mammoths roamed."],["Andromeda",2.5e6,"The most distant thing you can see with your eyes alone. Its light left as our ancestors were making the first stone tools."],["Cosmic microwave background",13.8e9,"The afterglow of the Big Bang, released about 380,000 years after the beginning, before any stars existed. It’s the oldest light there is."]];
+let pSel=2;
+$("#pPick").innerHTML=SKY.map((d,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===pSel}">${d[0]}</button>`).join("");
+document.querySelectorAll("#pPick .pill").forEach(b=>b.onclick=()=>{pSel=+b.dataset.i;document.querySelectorAll("#pPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));pUpd()});
+function pUpd(){const y=SKY[pSel][1];$("#pAgo").textContent=y<1/365?dur(y*3.156e7)+(LANGES?" atrás":" ago"):y>=1e9?(LANGES?`hace ${fmt(y/1e9,1)} mil millones de años`:`${fmt(y/1e9,1)} billion years ago`):y>=1e6?(LANGES?`hace ${fmt(y/1e6,1)} millones de años`:`${fmt(y/1e6,1)} million years ago`):(LANGES?`hace unos ${fmt(y,y<10?1:0)} años`:`about ${fmt(y,y<10?1:0)} years ago`);
+  $("#pTxt").textContent=SKY[pSel][2];pDraw()}
+function pDraw(){const{c,W,H}=setupCanvas($("#pCv"));const L=16,Rr=W-16,y=H/2+10;const X=v=>Rr-(Rr-L)*Math.log10(1+v*3.156e7)/Math.log10(1+13.8e9*3.156e7);
+  c.strokeStyle=css("--line");c.lineWidth=2;c.beginPath();c.moveTo(L,y);c.lineTo(Rr,y);c.stroke();c.lineWidth=1;
+  c.font="11px "+css("--mono");c.fillStyle=css("--muted");c.textAlign="center";
+  const T=LANGES?[[1/3.156e7,"1 s"],[60/3.156e7,"1 min"],[1/365,"1 día"],[1,"1 año"],[1000,"1000 años"],[1e6,"1 millón"],[1e9,"mil mill."]]:[[1/3.156e7,"1 s"],[60/3.156e7,"1 min"],[1/365,"1 day"],[1,"1 yr"],[1000,"1,000 yr"],[1e6,"1 million"],[1e9,"1 billion"]];
+  T.forEach(t=>{const x=X(t[0]);c.strokeStyle=css("--line");c.beginPath();c.moveTo(x,y-6);c.lineTo(x,y+6);c.stroke();if(W>480||[0,3,5].includes(T.indexOf(t)))c.fillText(t[1],x,y+22)});
+  c.textAlign="right";c.fillStyle=css("--ink");c.fillText(LANGES?"ahora":"now",Rr,y-14);c.textAlign="left";c.fillText(LANGES?"← más antiguo":"← older",L,y-14);
+  SKY.forEach((s,i)=>{const x=X(s[1]);c.fillStyle=i===pSel?css("--hot"):css("--accent");c.globalAlpha=i===pSel?1:.45;c.beginPath();c.arc(x,y,i===pSel?8:4.5,0,7);c.fill();c.globalAlpha=1});
+  const x=X(SKY[pSel][1]);c.fillStyle=css("--ink");c.font="600 13px "+css("--body");c.textAlign=x>W*.7?"right":x<W*.3?"left":"center";c.fillText(SKY[pSel][0],x,y-30)}
+
+/* ================= 4. light clock ================= */
+const CL={raf:0,last:0,t:0,te:0,ts:0,x:0};
+function cB(){const s=+$("#cV").value/1000;return Math.min(.9999,1-Math.pow(1-s,2.2)*1)}// eased toward 1
+function cUpd(){const b=cB(),g=1/Math.sqrt(1-b*b);$("#cVV").textContent=fmt(b*100,b>.99?2:1)+(LANGES?" % de la luz":"% of light speed");
+  $("#cG").textContent=(LANGES?"× ":"× ")+fmt(g,g<10?2:1);const h=g;$("#cH1").textContent=LANGES?`= ${dur(h*3600)} en la Tierra`:`= ${dur(h*3600)} on Earth`;
+  if(b<.0005){$("#cE").textContent="—";$("#cS").textContent="—"}else{const ye=4.24/b;$("#cE").textContent=fmt(ye,ye<100?1:0)+(LANGES?" años":" years");$("#cS").textContent=fmt(ye/g,ye/g<100?1:0)+(LANGES?" años":" years")}}
+function cDraw(){const{c,W,H}=setupCanvas($("#cCv"));const b=cB(),g=1/Math.sqrt(1-b*b);const h=86,top1=26,top2=top1+h+70;const box=48;
+  c.font="11px "+css("--mono");c.fillStyle=css("--muted");c.textAlign="left";c.fillText(LANGES?"RELOJ EN LA TIERRA":"CLOCK ON EARTH",8,14);c.fillText(LANGES?"RELOJ EN LA NAVE (VISTO DESDE LA TIERRA)":"CLOCK ON THE SHIP (SEEN FROM EARTH)",8,top2-12);
+  // rest clock
+  const rx=40;const per=1.0; // seconds per tick at rest (animation)
+  const ph=(CL.te%per)/per;const py=ph<.5?top1+h*(ph*2):top1+h*(2-ph*2);
+  mir(c,rx,top1,box);mir(c,rx,top1+h,box);c.fillStyle=css("--gold");c.beginPath();c.arc(rx+box/2,py,5,0,7);c.fill();
+  c.fillStyle=css("--ink");c.font="600 13px "+css("--mono");c.fillText((LANGES?"tics: ":"ticks: ")+Math.floor(CL.te/per*2/2),rx+box+20,top1+h/2+4);
+  // moving clock
+  const wbox=box/g;const span=W-wbox-20;const mxp=10+((CL.x%span)+span)%span;
+  const ps=(CL.ts%per)/per;const pys=ps<.5?top2+h*(ps*2):top2+h*(2-ps*2);
+  // trail
+  c.strokeStyle="rgba(245,190,40,.5)";c.lineWidth=1.5;c.beginPath();const steps=60;for(let k=0;k<=steps;k++){const tt=CL.ts-k*per/steps*1;const ppp=((tt%per)+per)%per/per;const yy=ppp<.5?top2+h*(ppp*2):top2+h*(2-ppp*2);const xx=mxp+wbox/2-k*(per/steps)*g*b*(span/6)/1;k?c.lineTo(xx,yy):c.moveTo(xx,yy)}c.stroke();c.lineWidth=1;
+  mir(c,mxp,top2,wbox);mir(c,mxp,top2+h,wbox);c.fillStyle=css("--gold");c.beginPath();c.arc(mxp+wbox/2,pys,5,0,7);c.fill();
+  c.fillStyle=css("--ink");c.font="600 13px "+css("--mono");c.textAlign="right";c.fillText((LANGES?"tics: ":"ticks: ")+Math.floor(CL.ts/per),W-8,top2+h+26)}
+function mir(c,x,y,w){c.fillStyle=css("--accent");c.fillRect(x,y-3,w,6)}
+function cLoop(now){const dt=Math.min(.05,(now-CL.last)/1000);CL.last=now;const b=cB(),g=1/Math.sqrt(1-b*b);const W=$("#cCv").getBoundingClientRect().width;
+  CL.te+=dt;CL.ts+=dt/g;CL.x+=dt*b*(W/6)*1;cDraw();if(!reduce&&vis.c)CL.raf=requestAnimationFrame(cLoop)}
+$("#cV").oninput=()=>{cUpd();CL.te=0;CL.ts=0;if(reduce)cDraw()};
+
+/* ================= 5. slow light ================= */
+const MAT=LANGES?[["Vacío",1],["Aire",1.0003],["Agua",1.333],["Vidrio",1.5],["Diamante",2.42]]:[["Vacuum",1],["Air",1.0003],["Water",1.333],["Glass",1.5],["Diamond",2.42]];
+let sSel=2;const S={raf:0,t0:0,f:0};
+$("#sPick").innerHTML=MAT.map((m,i)=>`<button class="pill" data-i="${i}" aria-pressed="${i===sSel}">${m[0]}</button>`).join("");
+document.querySelectorAll("#sPick .pill").forEach(b=>b.onclick=()=>{sSel=+b.dataset.i;document.querySelectorAll("#sPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));S.f=0;sUpd()});
+function sUpd(){const n=MAT[sSel][1];$("#sN").textContent=fmt(n,n===1.0003?4:n===1?0:3);$("#sV").textContent=fmt(C/n)+" km/s";sDraw()}
+function sDraw(){const{c,W,H}=setupCanvas($("#sCv"));const L=14,Rr=W-14,y1=50,y2=120,n=MAT[sSel][1];
+  c.fillStyle=css("--accent-soft");c.fillRect(L,y2-26,Rr-L,52);c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="left";c.fillText(LANGES?"vacío":"vacuum",L,y1-18);c.fillText(MAT[sSel][0].toLowerCase(),L,y2-32);
+  c.strokeStyle=css("--line");[y1,y2].forEach(y=>{c.beginPath();c.moveTo(L,y);c.lineTo(Rr,y);c.stroke()});
+  const x1=L+(Rr-L)*clamp(S.f),x2=L+(Rr-L)*clamp(S.f/n);c.fillStyle=css("--gold");[[x1,y1],[x2,y2]].forEach(p=>{c.beginPath();c.arc(p[0],p[1],7,0,7);c.fill()});
+  c.strokeStyle=css("--ink");c.setLineDash([3,3]);c.beginPath();c.moveTo(Rr,y1-20);c.lineTo(Rr,y2+20);c.stroke();c.setLineDash([])}
+$("#sGo").onclick=()=>{cancelAnimationFrame(S.raf);const n=MAT[sSel][1];S.t0=performance.now();const step=now=>{S.f=reduce?n:(now-S.t0)/1500;sDraw();if(S.f<n)S.raf=requestAnimationFrame(step)};S.raf=requestAnimationFrame(step)};
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Faroles en las colinas","1638","Galileo describió un intento de medir el tiempo de la luz con dos personas que destapaban faroles en colinas lejanas. No detectó ningún retraso: la luz era demasiado rápida para los reflejos humanos."],
+ ["La luna de Júpiter llega tarde","1676","Ole Rømer vio que los eclipses de Ío, una luna de Júpiter, llegaban antes cuando la Tierra estaba más cerca de Júpiter y más tarde cuando estaba más lejos. La diferencia era el tiempo que tardaba la luz en recorrer la distancia extra: la primera prueba de que la velocidad de la luz es finita."],
+ ["La luz es una onda de electricidad y magnetismo","1865","James Clerk Maxwell descubrió que sus ecuaciones predecían ondas que viajaban a una velocidad que podía calcular a partir de medidas de electricidad y magnetismo. Coincidía con la velocidad de la luz. La luz, la radio y los rayos X son lo mismo."],
+ ["Igual para todos","1905","Albert Einstein se tomó en serio los experimentos que mostraban que la velocidad de la luz es la misma vayas a la velocidad que vayas. Mantenerla fija obligaba a que el tiempo y el espacio se estiraran: la relatividad especial y, unos meses después, E = mc²."],
+ ["El metro se define con la luz","1983","La velocidad de la luz es ahora exactamente 299 792 458 m/s por definición. Un metro es la distancia que recorre la luz en 1/299 792 458 de segundo, así que la cifra nunca puede cambiar; solo mejoran nuestras medidas de las distancias."],
+ ["Láseres a la Luna","1969","Los astronautas del Apolo dejaron espejos en la Luna. Los observatorios aún les disparan láseres y miden el eco, unos 2,5 segundos, para saber la distancia con precisión de milímetros. Así se ve que la Luna se aleja unos 3,8 cm al año."],
+ ["¿Por qué c?","","Los físicos escriben la velocidad de la luz como c, que según se suele decir viene del latín celeritas, «rapidez»."],
+ ["La masa no puede alcanzarla","","Cualquier cosa con masa necesita cada vez más energía para acelerar, e infinita para llegar a la velocidad de la luz. Los aceleradores de partículas llevan los protones al 99,999999% de c, y de ahí no pasan."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+const vis={};
+new IntersectionObserver(es=>es.forEach(e=>{const k=e.target.id==="fCv"?"f":"c";vis[k]=e.isIntersecting;if(e.isIntersecting&&!reduce){if(k==="f"){FZ.last=performance.now();cancelAnimationFrame(FZ.raf);FZ.raf=requestAnimationFrame(fLoop)}else{CL.last=performance.now();cancelAnimationFrame(CL.raf);CL.raf=requestAnimationFrame(cLoop)}}})).observe($("#fCv"));
+new IntersectionObserver(es=>es.forEach(e=>{vis.c=e.isIntersecting;if(e.isIntersecting&&!reduce){CL.last=performance.now();cancelAnimationFrame(CL.raf);CL.raf=requestAnimationFrame(cLoop)}})).observe($("#cCv"));
+rUpd();fUpd();fDraw();pUpd();cUpd();cDraw();sUpd();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{rDraw();fDraw();pDraw();cDraw();sDraw()},120)});
+addEventListener("themechange",()=>{rDraw();fDraw();pDraw();cDraw();sDraw()});
+</script>
+</body>
+</html>

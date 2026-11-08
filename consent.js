@@ -33,6 +33,7 @@
       evolution: ["Survival of the tastiest", "Analytics cookies help us see which pages get used. Only the ones you accept survive."],
       internet: ["Packet incoming", "Analytics cookies help us see which pages get used. Accept and they’re delivered; decline and they’re dropped, no resend."],
       wireless: ["No signal unless you say so", "Analytics cookies help us see which pages get used. They stay switched off unless you accept."],
+      lightspeed: ["Faster than light? No, just faster than reading this", "Analytics cookies help us see which pages get used. Decide at your own speed."],
       logic: ["If accept, then cookies", "Accept → analytics cookies help us see which pages get used. ¬Accept → ¬cookies. That’s the whole truth table."]
     },
     es: {
@@ -59,6 +60,7 @@
       evolution: ["La supervivencia de la más rica", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Solo sobreviven las que aceptas."],
       internet: ["Paquete entrante", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Si aceptas, se entregan; si rechazas, se descartan, sin reenvío."],
       wireless: ["Sin señal hasta que tú digas", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan apagadas a menos que las aceptes."],
+      lightspeed: ["¿Más rápido que la luz? No, pero casi", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Decide a tu ritmo."],
       logic: ["Si aceptas, entonces cookies", "Aceptar → las cookies de analítica nos ayudan a ver qué páginas se usan. ¬Aceptar → ¬cookies. Esa es toda la tabla de verdad."]
     }
   };
