@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light & color · concepts.how</title>
+<meta name="description" content="Split white light with a prism, mix lights and paints, set the sun to see why skies turn blue and red, look through other eyes and fool your brain with color.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/light">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/light">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Light & color · concepts.how">
+<meta property="og:description" content="Split white light with a prism, mix lights and paints, set the sun to see why skies turn blue and red, look through other eyes and fool your brain with color.">
+<meta property="og:url" content="https://concepts.how/light">
+<meta property="og:image" content="https://concepts.how/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how — how they work. Interactive explainers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Light & color · concepts.how">
+<meta name="twitter:description" content="Split white light with a prism, mix lights and paints, set the sun to see why skies turn blue and red, look through other eyes and fool your brain with color.">
+<meta name="twitter:image" content="https://concepts.how/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+/* light */
+.swatch{height:70px;border-radius:12px;border:1px solid var(--line);transition:background .2s}
+.mixeq{display:grid;gap:8px}
+.mixeq div{display:flex;align-items:center;gap:6px}
+.mixeq i{width:22px;height:22px;border-radius:50%;border:1px solid var(--line)}
+.mixeq span{color:var(--muted)}
+.mixeq small{font-size:13.5px;margin-left:6px}
+.cones{display:grid;gap:6px}
+.cn{display:grid;grid-template-columns:110px 1fr 44px;gap:8px;align-items:center;font-size:13px}
+.cn div{height:14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.cn div i{display:block;height:100%;transition:width .2s}
+.cn b{font-family:var(--mono);font-size:12px;text-align:right}
+.cn.sw div{height:22px;border-radius:6px}
+.cbgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cbs{display:grid;gap:4px;justify-items:center;text-align:center}
+.cbs i{width:100%;aspect-ratio:1;border-radius:10px;border:1px solid var(--line);transition:background .3s}
+.cbs small{font-size:11.5px;color:var(--muted);line-height:1.2}
+@media (max-width:420px){.cbgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cn{grid-template-columns:90px 1fr 40px}}
+</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="concepts.how home">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Units</a>
+    <a class="nl" href="voting.html">Voting</a>
+    <a class="nl" href="time.html">Time</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Quantum</a>
+    <a class="nl" href="dimensions.html">Dimensions</a>
+    <a class="nl" href="universe.html">Universe</a>
+    <a class="nl" href="gametheory.html">Game theory</a>
+    <a class="nl" href="logic.html">Logic</a>
+    <a class="nl" href="probability.html">Probability</a>
+    <a class="nl" href="codes.html">Codes</a>
+    <a class="nl" href="infinity.html">Infinity</a>
+    <a class="nl" href="language.html">Language</a>
+    <a class="nl" href="maps.html">Maps</a>
+    <a class="nl" href="money.html">Money</a>
+    <a class="nl" href="light.html" aria-current="page">Light & color</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Language"><a href="light.html" lang="en" hreflang="en" aria-current="true" title="English">EN</a><a href="es/light.html" lang="es" hreflang="es" aria-current="false" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Light &amp; color</b> · waves, eyes, brains</div>
+    <h1>Color isn’t out there. <em>It’s made in your head.</em></h1>
+    <p class="lede">Light is a wave of electric and magnetic fields, and the tiny slice our eyes can detect is what we call visible light. Different wavelengths look like different colors, but “color” only happens when three kinds of cells in your eye and a lot of processing in your brain get involved. Split white light, mix lights and paints, set the sun and see through other eyes.</p>
+    <nav class="jump" aria-label="On this page"><a href="#spectrum">The spectrum</a><a href="#mixing">Mixing color</a><a href="#sky">Why the sky is blue</a><a href="#eyes">How eyes see</a><a href="#illusion">Your brain’s edits</a><a href="#ideas">Big ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. spectrum ============ -->
+  <section class="block" id="spectrum" aria-labelledby="spH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · the rainbow</span>
+      <h2 id="spH">Splitting white light</h2>
+      <p>In 1666 Isaac Newton passed sunlight through a prism and saw it fan out into a rainbow, then recombined the colors back into white. White light is a mix of every visible wavelength; glass bends short (blue) waves more than long (red) ones, so they separate. Pick a wavelength and see where it sits among all the light we can’t see.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="pCv" height="260" aria-label="A prism splitting white light into a spectrum"></canvas>
+        <canvas class="cv" id="emCv" height="120" aria-label="The electromagnetic spectrum"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="wl">Wavelength <span id="wlV"></span></label><input type="range" id="wl" min="380" max="750" value="520"></div>
+        <div class="swatch" id="wlSw"></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Color</div><div class="v" id="wlName"></div></div>
+          <div class="ro"><div class="k">Frequency</div><div class="v" id="wlF"></div></div>
+          <div class="ro"><div class="k">Waves per mm</div><div class="v" id="wlN"></div></div>
+        </div>
+        <div class="callout"><b>A thin slice</b>Visible light runs from about 380 to 750 nanometres. Radio waves can be kilometres long; gamma rays are smaller than an atomic nucleus. All of them are the same thing, electromagnetic waves, travelling at 299,792,458 metres per second.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. mixing ============ -->
+  <section class="block" id="mixing" aria-labelledby="mxH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · mix</span>
+      <h2 id="mxH">Mixing light vs mixing paint</h2>
+      <p>Lights <i>add</i>: red, green and blue light together make white, which is how every screen works. Paints and inks <i>subtract</i>: each one absorbs some light, so cyan, magenta and yellow together make near-black, which is how printers work. Drag the circles to overlap them.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="seg" id="mxMode"></div>
+        <canvas class="cv" id="mxCv" height="340" aria-label="Overlapping colored circles" style="touch-action:none;cursor:grab"></canvas>
+      </div>
+      <div class="panel stack">
+        <p id="mxTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="mixeq" id="mxEq"></div>
+        <div class="callout"><b>Look closely at a screen</b>Every pixel on your phone is three tiny lights, red, green and blue. Nothing yellow is ever lit up: “yellow” is just red and green shining together, and your eyes can’t tell the difference.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. sky ============ -->
+  <section class="block" id="sky" aria-labelledby="skH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · the atmosphere</span>
+      <h2 id="skH">Why is the sky blue and the sunset red?</h2>
+      <p>Air molecules scatter short wavelengths far more than long ones: blue light about five times more than red. This is Rayleigh scattering. At noon, scattered blue light reaches you from every direction, so the whole sky glows blue. At sunset, sunlight crosses up to 40 times more air, the blue is scattered away before it reaches you, and only reds and oranges get through.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="skCv" height="320" aria-label="Sky colors for the chosen sun height"></canvas>
+      </div>
+      <div class="panel stack">
+        <div class="sl"><label for="sun">Height of the sun <span id="sunV"></span></label><input type="range" id="sun" min="-2" max="70" step="0.5" value="45"></div>
+        <div class="bigs" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="ro"><div class="k">Air the sunlight crosses</div><div class="v" id="am"></div></div>
+          <div class="ro"><div class="k">Blue light that survives</div><div class="v" id="bs"></div></div>
+        </div>
+        <p id="skTxt" style="margin:0;font-size:14.5px"></p>
+        <div class="callout"><b>Then why isn’t the sky violet?</b>Violet scatters even more than blue, but sunlight has less violet to begin with, some is absorbed high in the atmosphere, and our eyes are much less sensitive to it. The mix we see comes out sky blue.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. eyes ============ -->
+  <section class="block" id="eyes" aria-labelledby="eyH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · three sensors</span>
+      <h2 id="eyH">How your eyes see color</h2>
+      <p>Your retina has three kinds of cone cells, tuned to short, medium and long wavelengths (roughly blue, green and red). Every color you see is your brain comparing how strongly the three respond. About 1 in 12 men and 1 in 200 women of Northern European ancestry have a red–green color vision deficiency, usually because one cone type works differently.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="eyCv" height="240" aria-label="Sensitivity of the three cone types"></canvas>
+        <div class="sl"><label for="eyWl">Light hitting your eye <span id="eyWlV"></span></label><input type="range" id="eyWl" min="400" max="700" value="580"></div>
+        <div class="cones" id="eyBars"></div>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">See it through other eyes</span>
+        <div class="seg" id="cbPick"></div>
+        <div class="cbgrid" id="cbGrid"></div>
+        <p id="cbTxt" style="margin:0;font-size:14px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. illusion ============ -->
+  <section class="block" id="illusion" aria-labelledby="ilH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · brain edits</span>
+      <h2 id="ilH">The same color, twice</h2>
+      <p>Your brain doesn’t report the light hitting your eye; it guesses what the surface is really like, and it judges every color against its surroundings. The two small squares below are exactly the same gray. Don’t believe it? Take the backgrounds away.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="ilCv" height="260" aria-label="Two identical gray squares on different backgrounds"></canvas>
+        <div class="row"><button class="btn" id="ilBtn">Remove the backgrounds</button></div>
+      </div>
+      <div class="panel stack">
+        <p style="margin:0;font-size:14.5px">This is <b>simultaneous contrast</b>. The same effect explains “the dress” that split the internet in 2015: people’s brains made different guesses about the lighting, so they saw blue and black or white and gold in the same photo.</p>
+        <div class="callout"><b>Magenta isn’t in the rainbow</b>There is no single wavelength for magenta. When your red and blue cones fire but green doesn’t, your brain invents a color to fill the gap, joining the two ends of the spectrum into a wheel.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Big ideas</span>
+      <h2 id="idH">From rainbows to lasers</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Sources and further reading</b>
+  <ul>
+    <li>Isaac Newton, “A New Theory about Light and Colors,” <i>Philosophical Transactions</i> (1672)</li>
+    <li>Machado, Oliveira and Fernandes, “A Physiologically-based Model for Simulation of Color Vision Deficiency” (2009), for the simulation matrices</li>
+    <li>Craig F. Bohren, <i>Clouds in a Glass of Beer</i> (1987), on why the sky is blue</li>
+    <li>Margaret Livingstone, <i>Vision and Art: The Biology of Seeing</i> (2002)</li>
+  </ul>
+  <p>Colors on your screen are approximations: no monitor can show every color the eye can see. The sky and cone models are simplified.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · more concepts to come. · </span><a href="disclaimer.html">Disclaimer</a></span><span>Made by <b>Dad</b> for <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+// wavelength (nm) → [r,g,b] 0..255, after Dan Bruton
+function wl2rgb(w){let r=0,g=0,b=0;if(w>=380&&w<440){r=-(w-440)/60;b=1}else if(w<490){g=(w-440)/50;b=1}else if(w<510){g=1;b=-(w-510)/20}else if(w<580){r=(w-510)/70;g=1}else if(w<645){r=1;g=-(w-645)/65}else if(w<=750){r=1}
+  let f=1;if(w<420)f=.3+.7*(w-380)/40;else if(w>700)f=.3+.7*(750-w)/50;const gm=.8;return[r,g,b].map(v=>Math.round(255*Math.pow(v*f,gm)))}
+const rgbs=a=>`rgb(${a[0]},${a[1]},${a[2]})`;
+const NAMES=[[450,"Violet"],[495,"Blue"],[520,"Cyan"],[565,"Green"],[590,"Yellow"],[625,"Orange"],[751,"Red"]];
+const nameOf=w=>NAMES.find(n=>w<n[0])[1];
+
+/* ================= 1. prism ================= */
+let pT=0,pRaf=0,pVis=false;
+function pDraw(){const{c,W,H}=setupCanvas($("#pCv"));const w=+$("#wl").value;const card=css("--card"),ink=css("--ink"),line=css("--line"),muted=css("--muted");
+  c.fillStyle=card;c.fillRect(0,0,W,H);
+  // table line
+  c.strokeStyle=line;c.beginPath();c.moveTo(0,H-26);c.lineTo(W,H-26);c.stroke();
+  // lamp
+  const ly=H*.42;c.fillStyle=muted;c.fillRect(8,ly-14,26,28);c.fillStyle="#f6e7a8";c.fillRect(34,ly-6,6,12);
+  // prism: a square-based glass block seen from above, pointing down
+  const cx=W*.40,cy=H*.48,s=Math.min(W*.13,H*.32);const A=[cx,cy+s*.75],B=[cx-s*.7,cy-s*.55],C=[cx+s*.7,cy-s*.55];
+  const entry=[(A[0]+B[0])/2,(A[1]+B[1])/2],exitBase=[(A[0]+C[0])/2,(A[1]+C[1])/2];
+  const pulse=.85+.15*Math.sin(pT/500);
+  c.strokeStyle=`rgba(246,231,168,${pulse})`;c.lineWidth=6;c.beginPath();c.moveTo(40,ly);c.lineTo(entry[0],entry[1]);c.stroke();
+  // screen on the right
+  const sx=W-26,sTop=H*.12,sBot=H-34;c.fillStyle=css("--paper");c.strokeStyle=ink;c.lineWidth=1.5;c.fillRect(sx,sTop,12,sBot-sTop);c.strokeRect(sx,sTop,12,sBot-sTop);
+  const yOn=l=>sTop+18+(sBot-sTop-36)*((l-380)/370);
+  for(let l=380;l<=750;l+=3){const col=rgbs(wl2rgb(l));c.strokeStyle=col;c.globalAlpha=.6;c.lineWidth=2;c.beginPath();c.moveTo(entry[0],entry[1]);c.lineTo(exitBase[0],exitBase[1]+(l-565)/370*s*.25);c.lineTo(sx,yOn(l));c.stroke()}
+  c.globalAlpha=1;for(let l=380;l<=750;l+=2){c.fillStyle=rgbs(wl2rgb(l));c.fillRect(sx+2,yOn(l)-1.5,8,3)}
+  const yw=yOn(w);c.strokeStyle=ink;c.lineWidth=1;c.beginPath();c.moveTo(sx-14,yw);c.lineTo(sx-2,yw);c.stroke();c.fillStyle=ink;c.font="600 11px "+css("--mono");c.textAlign="right";c.fillText(w+" nm",sx-16,yw+4);
+  c.fillStyle="rgba(150,180,255,.22)";c.strokeStyle="rgba(90,120,200,.8)";c.lineWidth=2;c.beginPath();c.moveTo(...A);c.lineTo(...B);c.lineTo(...C);c.closePath();c.fill();c.stroke();c.lineWidth=1;
+  c.fillStyle=muted;c.font="11px "+css("--mono");c.textAlign="left";c.fillText("lamp",8,ly+28);c.textAlign="center";c.fillText("prism",cx,A[1]+16);c.textAlign="right";c.fillText("screen",W-4,sTop-6)}
+function emDraw(){const{c,W,H}=setupCanvas($("#emCv"));const w=+$("#wl").value;const ink=css("--ink"),muted=css("--muted"),line=css("--line");
+  // log10 wavelength in metres: 3 (km radio) to -12 (gamma)
+  const L=8,R=W-8,T=22,B=58;const X=lg=>L+(R-L)*(3-lg)/15;
+  const bands=[["Radio",3,-1],["Microwave",-1,-3.3],["Infrared",-3.3,-6.12],["",-6.12,-6.42],["UV",-6.42,-8],["X-ray",-8,-11],["Gamma",-11,-12]];
+  bands.forEach(([n,a,b],i)=>{c.fillStyle=i===3?"#fff":`hsl(${220-i*25},25%,${document.documentElement.dataset.theme==="dark"?30:82}%)`;c.fillRect(X(a),T,X(b)-X(a),B-T);if(n){c.fillStyle=ink;c.font="600 10.5px "+css("--body");c.textAlign="center";c.fillText(n,(X(a)+X(b))/2,T-6)}});
+  const g=c.createLinearGradient(X(-6.12),0,X(-6.42),0);for(let l=750;l>=380;l-=20)g.addColorStop((750-l)/370,rgbs(wl2rgb(l)));c.fillStyle=g;c.fillRect(X(-6.12),T,X(-6.42)-X(-6.12),B-T);
+  const xw=X(Math.log10(w*1e-9));c.fillStyle=ink;c.beginPath();c.moveTo(xw,B+2);c.lineTo(xw-6,B+12);c.lineTo(xw+6,B+12);c.closePath();c.fill();
+  c.fillStyle=muted;c.font="10.5px "+css("--mono");c.textAlign="left";c.fillText("1 km",L,H-12);c.textAlign="right";c.fillText("1 pm",R,H-12);c.textAlign="center";c.fillText("Visible: 380–750 nm",xw,H-12)}
+function wlUpd(){const w=+$("#wl").value;$("#wlV").textContent=w+" nm";const col=wl2rgb(w);$("#wlSw").style.background=rgbs(col);$("#wlName").textContent=nameOf(w);
+  const f=299792458/(w*1e-9);$("#wlF").textContent=(f/1e12).toFixed(0)+" THz";$("#wlN").textContent=Math.round(1e6/w).toLocaleString(LOC);pDraw();emDraw()}
+$("#wl").oninput=wlUpd;
+function pLoop(now){pT=now;if(pVis&&!reduce)pDraw();pRaf=requestAnimationFrame(pLoop)}
+
+/* ================= 2. mixing ================= */
+const MX={mode:"add",pts:null,drag:null};
+const MODES=[["add","Light (adds up)"],["sub","Paint and ink (takes away)"]];
+$("#mxMode").innerHTML=MODES.map(([k,l],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join("");
+document.querySelectorAll("#mxMode .pill").forEach(b=>b.onclick=()=>{MX.mode=b.dataset.k;document.querySelectorAll("#mxMode .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));mxDraw()});
+function mxDraw(){const cv=$("#mxCv");const{c,W,H}=setupCanvas(cv);const r=Math.min(W,H)*.27;if(!MX.pts){MX.pts=[[W/2,H/2-r*.55],[W/2-r*.55,H/2+r*.4],[W/2+r*.55,H/2+r*.4]]}MX.r=r;
+  const add=MX.mode==="add";c.fillStyle=add?"#000":"#fff";c.fillRect(0,0,W,H);c.globalCompositeOperation=add?"lighter":"multiply";
+  const cols=add?["#ff0000","#00ff00","#0000ff"]:["#00ffff","#ff00ff","#ffff00"];
+  MX.pts.forEach((p,i)=>{const g=c.createRadialGradient(p[0],p[1],r*.7,p[0],p[1],r);g.addColorStop(0,cols[i]);g.addColorStop(1,add?"#000":"#fff");c.fillStyle=g;c.beginPath();c.arc(p[0],p[1],r,0,7);c.fill()});
+  c.globalCompositeOperation="source-over";
+  const lab=add?["Red","Green","Blue"]:["Cyan","Magenta","Yellow"];c.font="600 12px "+css("--body");c.textAlign="center";c.fillStyle=add?"#fff":"#111";
+  MX.pts.forEach((p,i)=>{const dx=p[0]-W/2,dy=p[1]-H/2,d=Math.hypot(dx,dy)||1;c.fillText(lab[i],p[0]+dx/d*r*.55,p[1]+dy/d*r*.55)});
+  $("#mxTxt").innerHTML=add?"Screens, stage lights and your eyes work this way. Each light <b>adds</b> its wavelengths. All three primaries together look white.":"Printers, paints and dyes work this way. Each ink <b>absorbs</b> part of the light that hits it, and you see whatever is left. All three together absorb nearly everything.";
+  $("#mxEq").innerHTML=(add?[["#f00","#0f0","#ff0","Red + green = yellow"],["#0f0","#00f","#0ff","Green + blue = cyan"],["#f00","#00f","#f0f","Red + blue = magenta"],["#f00","#0f0","#fff","All three = white"]]:[["#0ff","#f0f","#00f","Cyan + magenta = blue"],["#f0f","#ff0","#f00","Magenta + yellow = red"],["#0ff","#ff0","#0f0","Cyan + yellow = green"],["#0ff","#f0f","#222","All three = near black"]]).map(([a,b,r2,t])=>`<div><i style="background:${a}"></i><i style="background:${b}"></i><span>→</span><i style="background:${r2}"></i><small>${t}</small></div>`).join("")}
+(function(){const cv=$("#mxCv");cv.addEventListener("pointerdown",e=>{const rc=cv.getBoundingClientRect();const x=e.clientX-rc.left,y=e.clientY-rc.top;let best=-1,bd=1e9;MX.pts.forEach((p,i)=>{const d=Math.hypot(p[0]-x,p[1]-y);if(d<MX.r&&d<bd){bd=d;best=i}});if(best>=0){MX.drag={i:best,dx:MX.pts[best][0]-x,dy:MX.pts[best][1]-y};cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"}});
+  cv.addEventListener("pointermove",e=>{if(!MX.drag)return;const rc=cv.getBoundingClientRect();MX.pts[MX.drag.i]=[Math.max(0,Math.min(rc.width,e.clientX-rc.left+MX.drag.dx)),Math.max(0,Math.min(rc.height,e.clientY-rc.top+MX.drag.dy))];mxDraw()});
+  const up=()=>{MX.drag=null;cv.style.cursor="grab"};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= 3. sky ================= */
+const TAU={r:.045,g:.095,b:.22},AER=.05;
+const airmass=el=>{const e=Math.max(-1.5,el);return 1/(Math.sin(Math.max(.1,e)*Math.PI/180)+.50572*Math.pow(Math.max(.1,e)+6.07995,-1.6364))};
+function skDraw(){const el=+$("#sun").value;$("#sunV").textContent=el+"°";const{c,W,H}=setupCanvas($("#skCv"));const ms=Math.min(40,airmass(el));const horizon=H*.82;
+  const trans=k=>Math.exp(-(TAU[k]+AER)*ms);const sun={r:trans("r"),g:trans("g"),b:trans("b")};const dim=el<0?Math.max(0,1+el/2):1;
+  for(let y=0;y<horizon;y++){const viewEl=Math.max(.5,90*(1-y/horizon));const mv=Math.min(38,airmass(viewEl));
+    const ch=k=>(1-Math.exp(-TAU[k]*mv))*sun[k]*(1+.6*Math.exp(-((viewEl-Math.max(el,0))**2)/120)*(.2+sun[k]));
+    const ex=6*dim;const v=["r","g","b"].map(k=>Math.round(Math.pow(1-Math.exp(-ch(k)*ex),.8)*255));
+    c.fillStyle=`rgb(${v[0]},${v[1]},${v[2]})`;c.fillRect(0,y,W,1.5)}
+  // sun
+  if(el>-1){const sy=horizon-(horizon-20)*Math.max(0,el)/70-0;const sx=W*.68;const mx=Math.max(sun.r,sun.g,sun.b);const col=`rgb(${Math.round(255*sun.r/mx)},${Math.round(255*sun.g/mx)},${Math.round(255*sun.b/mx)})`;
+    const gl=c.createRadialGradient(sx,sy,4,sx,sy,60);gl.addColorStop(0,col);gl.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=gl;c.globalAlpha=.6*dim;c.beginPath();c.arc(sx,sy,60,0,7);c.fill();c.globalAlpha=dim;c.fillStyle=col;c.beginPath();c.arc(sx,sy,14,0,7);c.fill();c.globalAlpha=1}
+  // ground
+  c.fillStyle="#1b2a1f";c.beginPath();c.moveTo(0,horizon);for(let x=0;x<=W;x+=W/12)c.lineTo(x,horizon-6-10*Math.sin(x*.03)-6*Math.sin(x*.011));c.lineTo(W,H);c.lineTo(0,H);c.closePath();c.fill();
+  $("#am").textContent=el<0?"–":ms.toFixed(1)+"×";$("#bs").textContent=el<0?"–":Math.round(Math.exp(-TAU.b*ms)*100)+"%";
+  $("#skTxt").textContent=el>=40?"High sun: light takes a short path through the air, and scattered blue fills the sky.":el>=10?"Lower sun: a longer path. The sky near the horizon starts to pale and warm.":el>=0?"Sunset: sunlight crosses a huge thickness of air. Blue has been scattered out sideways, lighting skies to the west for other people, and reds and oranges are all that reach you.":"Below the horizon: twilight, lit by sunlight scattered high in the atmosphere."}
+$("#sun").oninput=skDraw;
+
+/* ================= 4. eyes ================= */
+const cone=(l,peak,w)=>Math.exp(-.5*((l-peak)/w)**2);
+const S=l=>cone(l,437,26),M=l=>cone(l,533,42),Lc=l=>cone(l,564,48);
+function eyDraw(){const l=+$("#eyWl").value;$("#eyWlV").textContent=l+" nm";const{c,W,H}=setupCanvas($("#eyCv"));const muted=css("--muted"),line=css("--line"),ink=css("--ink");
+  const L=10,R=W-10,T=12,B=H-26;const X=v=>L+(R-L)*(v-400)/300,Y=v=>B-(B-T)*v;
+  const g=c.createLinearGradient(X(400),0,X(700),0);for(let v=400;v<=700;v+=20)g.addColorStop((v-400)/300,rgbs(wl2rgb(v)));c.fillStyle=g;c.globalAlpha=.85;c.fillRect(X(400),B+6,X(700)-X(400),8);c.globalAlpha=1;
+  [[S,"#4a6cff","S"],[M,"#2fae5c","M"],[Lc,"#e2533a","L"]].forEach(([f,col,n])=>{c.strokeStyle=col;c.lineWidth=2.6;c.beginPath();for(let v=400;v<=700;v+=2){v===400?c.moveTo(X(v),Y(f(v))):c.lineTo(X(v),Y(f(v)))}c.stroke();c.fillStyle=col;c.globalAlpha=.12;c.lineTo(X(700),B);c.lineTo(X(400),B);c.closePath();c.fill();c.globalAlpha=1});
+  c.strokeStyle=ink;c.setLineDash([4,4]);c.beginPath();c.moveTo(X(l),T);c.lineTo(X(l),B);c.stroke();c.setLineDash([]);c.lineWidth=1;
+  c.fillStyle=muted;c.font="10.5px "+css("--mono");c.textAlign="left";c.fillText("400 nm",L,H-4);c.textAlign="right";c.fillText("700 nm",R,H-4);
+  const v=[["S (blue)",S(l),"#4a6cff"],["M (green)",M(l),"#2fae5c"],["L (red)",Lc(l),"#e2533a"]];
+  $("#eyBars").innerHTML=v.map(([n,x,col])=>`<div class="cn"><span>${n}</span><div><i style="width:${Math.round(x*100)}%;background:${col}"></i></div><b>${Math.round(x*100)}%</b></div>`).join("")+`<div class="cn sw"><span>What you see</span><div style="background:${rgbs(wl2rgb(l))}"></div><b></b></div>`}
+$("#eyWl").oninput=eyDraw;
+const CB={k:"none"};
+const MAT={prot:[[0.152286,1.052583,-0.204868],[0.114503,0.786281,0.099216],[-0.003882,-0.048116,1.051998]],deut:[[0.367322,0.860646,-0.227968],[0.280085,0.672501,0.047413],[-0.011820,0.042940,0.968881]],trit:[[1.255528,-0.076749,-0.178779],[-0.078411,0.930809,0.147602],[0.004733,0.691367,0.303900]]};
+const CBN=[["none","Typical vision"],["deut","Deuteranopia"],["prot","Protanopia"],["trit","Tritanopia"],["mono","No color"]];
+const SWATCHES=[["Strawberry","#d7263d"],["Leaf","#3a7d2c"],["Ripe tomato","#e03b24"],["Unripe tomato","#7aa83a"],["Stop light","#e5281e"],["Go light","#21a35a"],["Orange","#f28a1d"],["Banana","#f4d03f"],["Sky","#5aa9e6"],["Grape","#6c3483"],["Pink","#f19cbb"],["Brown","#7b4a2a"]];
+const lin=v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)},unlin=v=>{v=Math.max(0,Math.min(1,v));return Math.round(255*(v<=.0031308?v*12.92:1.055*Math.pow(v,1/2.4)-.055))};
+function sim(hex,k){const rgb=[1,3,5].map(i=>lin(parseInt(hex.slice(i,i+2),16)));if(k==="none")return hex;let o;
+  if(k==="mono"){const y=.2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];o=[y,y,y]}else{const m=MAT[k];o=m.map(r=>r[0]*rgb[0]+r[1]*rgb[1]+r[2]*rgb[2])}
+  return "#"+o.map(v=>unlin(v).toString(16).padStart(2,"0")).join("")}
+$("#cbPick").innerHTML=CBN.map(([k,n],i)=>`<button class="pill" data-k="${k}" aria-pressed="${i===0}">${n}</button>`).join("");
+document.querySelectorAll("#cbPick .pill").forEach(b=>b.onclick=()=>{CB.k=b.dataset.k;document.querySelectorAll("#cbPick .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));cbDraw()});
+const CBT={none:"Three working cone types. Compare with the other options.",deut:"Medium-wavelength (green) cones missing: the most common type of color blindness. Reds and greens become hard to tell apart.",prot:"Long-wavelength (red) cones missing. Reds look darker and merge with greens.",trit:"Short-wavelength (blue) cones missing. Rare. Blues and greens, and yellows and pinks, get confused.",mono:"No working cones, or only one type. Very rare: the world is seen in shades of gray."};
+function cbDraw(){$("#cbGrid").innerHTML=SWATCHES.map(([n,h])=>`<div class="cbs"><i style="background:${sim(h,CB.k)}"></i><small>${n}</small></div>`).join("");$("#cbTxt").textContent=CBT[CB.k]}
+
+/* ================= 5. illusion ================= */
+let IL=false;
+function ilDraw(){const{c,W,H}=setupCanvas($("#ilCv"));const gray="#808080";
+  if(!IL){const g1=c.createLinearGradient(0,0,W,0);g1.addColorStop(0,"#111");g1.addColorStop(1,"#eee");c.fillStyle=g1;c.fillRect(0,0,W,H)}else{c.fillStyle=css("--card");c.fillRect(0,0,W,H)}
+  const s=Math.min(70,W*.14);c.fillStyle=gray;c.fillRect(W*.2-s/2,H/2-s/2,s,s);c.fillRect(W*.8-s/2,H/2-s/2,s,s);
+  if(IL){c.strokeStyle=css("--ink");c.setLineDash([5,4]);c.beginPath();c.moveTo(W*.2+s/2,H/2);c.lineTo(W*.8-s/2,H/2);c.stroke();c.setLineDash([]);c.fillStyle=css("--ink");c.font="600 13px "+css("--body");c.textAlign="center";c.fillText("#808080 = #808080",W/2,H/2-12)}
+  $("#ilBtn").textContent=IL?"Bring the backgrounds back":"Remove the backgrounds"}
+$("#ilBtn").onclick=()=>{IL=!IL;ilDraw()};
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["Newton’s prism","1666","Isaac Newton showed white light is a mixture of colors, and that a second prism can’t split a single color further. He named seven colors to match the seven notes of a musical scale."],
+ ["The speed of light","1676","Ole Rømer estimated it from delays in the eclipses of Jupiter’s moon Io. Since 1983 the metre has been defined by light: exactly 1/299,792,458 of the distance light travels in a second."],
+ ["Light is a wave…","1801","Thomas Young’s double-slit experiment produced interference stripes, proof that light behaves like a wave. In 1865 James Clerk Maxwell showed it is an electromagnetic wave."],
+ ["…and a particle","1905","Albert Einstein explained the photoelectric effect by treating light as packets of energy, photons. Light is both, depending on how you look. See the quantum page for more."],
+ ["Rainbows","1637","René Descartes worked out that rainbows appear about 42° from the point directly opposite the sun, as sunlight bends and reflects inside raindrops. That’s why you only see them with the sun behind you."],
+ ["Why plants are green","","Chlorophyll absorbs red and blue light for photosynthesis and reflects the green it doesn’t use. A leaf is green because of the light it rejects."],
+ ["Other eyes","","Many birds and insects see ultraviolet; bees navigate by patterns on flowers that are invisible to us. Mantis shrimp have 12 or more kinds of color receptor, but tests suggest they’re worse than us at telling similar colors apart."],
+ ["The laser","1960","Theodore Maiman built the first working laser from a ruby crystal. Laser light is a single wavelength with all its waves in step, which is why it stays a tight beam."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+wlUpd();mxDraw();skDraw();eyDraw();cbDraw();ilDraw();
+new IntersectionObserver(es=>{pVis=es[0].isIntersecting;if(pVis&&!pRaf)pRaf=requestAnimationFrame(pLoop);if(!pVis){cancelAnimationFrame(pRaf);pRaf=0}}).observe($("#pCv"));
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{MX.pts=null;wlUpd();mxDraw();skDraw();eyDraw();ilDraw()},120)});
+addEventListener("themechange",()=>{wlUpd();mxDraw();skDraw();eyDraw();ilDraw()});
+</script>
+</body>
+</html>
