@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Consent Mode v2: everything denied until the visitor accepts -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('consent')==='granted')gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}catch(e){}</script>
+<script src="../consent.js" defer></script>
+<!-- Google Analytics 4 (respects the consent settings above) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EL2GJW0J3"></script>
+<script>gtag('js',new Date());gtag('config','G-1EL2GJW0J3');</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9P7XFHH');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<style>@media (max-width:1180px){.js .site a.nl{display:none}}@media (max-width:640px){.js .site .wrap:has(a.nl)>.ctl{display:none}}</style>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="../theme.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlación y causalidad · concepts.how</title>
+<meta name="description" content="Arrastra puntos para crear correlaciones, mira cómo tendencias sin relación coinciden por azar, encuentra el tercer factor oculto, distingue causas de casualidades y haz un ensayo aleatorio.">
+<link rel="alternate" hreflang="en" href="https://concepts.how/correlation">
+<link rel="alternate" hreflang="es" href="https://concepts.how/es/correlation">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="concepts.how">
+<meta property="og:title" content="Correlación y causalidad · concepts.how">
+<meta property="og:description" content="Arrastra puntos para crear correlaciones, mira cómo tendencias sin relación coinciden por azar, encuentra el tercer factor oculto, distingue causas de casualidades y haz un ensayo aleatorio.">
+<meta property="og:url" content="https://concepts.how/correlation">
+<meta property="og:image" content="https://concepts.how/og.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Correlación y causalidad · concepts.how">
+<meta name="twitter:description" content="Arrastra puntos para crear correlaciones, mira cómo tendencias sin relación coinciden por azar, encuentra el tercer factor oculto, distingue causas de casualidades y haz un ensayo aleatorio.">
+<meta name="twitter:image" content="https://concepts.how/og.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F3F5F8; --card:#FFFFFF; --ink:#0E1A2B; --muted:#596579; --line:#D3DAE3;
+  --accent:#1D47F0; --accent-ink:#FFFFFF; --accent-soft:#E4EAFE;
+  --hot:#E4572E; --gold:#D99A0B; --good:#1E8A5A;
+  --display:"Syne","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0A0F17; --card:#111925; --ink:#E7EDF6; --muted:#97A3B6; --line:#243246;
+  --accent:#7E9CFF; --accent-ink:#0A0F17; --accent-soft:#18244A; --hot:#FF7A55; --gold:#F2B134; --good:#4CC38A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:clip;max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+a{color:var(--accent)}
+.site{border-bottom:1px solid var(--line);background:var(--paper)}
+.site .wrap{display:flex;align-items:center;gap:18px;min-height:52px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.045em;color:var(--ink);text-decoration:none;margin-right:auto}
+.site a.nl{color:var(--muted);text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.site a.nl:hover{color:var(--ink)}
+.site a.nl[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+/* logarithmic rule: decades of ticks */
+.rule{height:12px;opacity:.5;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 30px,var(--ink) 30px 31px,transparent 31px 48px,var(--ink) 48px 49px,transparent 49px 60px,var(--ink) 60px 61px,transparent 61px 68px,var(--ink) 68px 69px,transparent 69px 100px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero{padding:clamp(24px,4vw,44px) 0 6px}
+.hero h1{font-size:clamp(40px,6.6vw,86px);font-weight:800;letter-spacing:-.035em;margin:12px 0 14px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:66ch;color:var(--muted);font-size:17px;margin:0}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.jump a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--card)}
+.jump a:hover{border-color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);align-items:start;margin-top:22px}
+.cv{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:36px}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;min-height:40px;font-weight:500}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sl{display:grid;gap:2px}
+.sl label{display:flex;justify-content:space-between;font-size:14px}
+.sl label span{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.stack{display:grid;gap:14px}
+.callout{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:14px}
+.callout>b:first-child{display:block;margin-bottom:2px}
+.ro{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.ro .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.05}
+.obj{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.obj .nm{font-family:var(--display);font-size:24px;font-weight:700}
+.obj .sz{font-family:var(--mono);font-size:15px;color:var(--accent);margin:2px 0 6px}
+.obj p{margin:0;font-size:14px}
+section.block{padding-top:clamp(48px,6vw,80px);scroll-margin-top:20px}
+.shead{display:grid;gap:8px;margin-bottom:6px;max-width:74ch}
+.shead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;letter-spacing:-.02em}
+.shead p{margin:0;color:var(--muted)}
+.cal{margin-top:22px}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.mo{position:relative;height:74px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+.mo span{position:absolute;left:6px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.mk{position:absolute;bottom:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--card);cursor:pointer;padding:0}
+.mk.on{background:var(--hot);transform:scale(1.35)}
+.dec31{margin-top:10px;position:relative;height:56px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.dec31 .lb{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.evlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px;margin-top:14px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.ev:hover,.ev.on{border-color:var(--hot)}
+.ev .d{font-family:var(--mono);font-size:12px;color:var(--hot);grid-row:span 2;align-self:start;min-width:70px;padding-top:2px}
+.ev .t{font-weight:600;font-size:14px}
+.ev .a{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px;margin-top:22px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pc h3{font-size:21px;font-weight:700}
+.pc .yr{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+.pc .stat{font-family:var(--mono);font-size:13px;color:var(--hot)}
+.pc p{margin:0;font-size:14.5px}
+.pie{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:6px}
+.pie i{display:block;height:100%}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0 0}
+@media (max-width:960px){.demo{grid-template-columns:1fr}}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* game theory */
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:6px;font-size:14px}
+.mx .h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.mx .h.r{justify-content:flex-start;text-align:left}
+.mx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 8px;display:grid;place-items:center;gap:2px;text-align:center;min-height:84px;position:relative;transition:border-color .2s,background .2s}
+.mx .c.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));box-shadow:0 0 0 2px var(--gold) inset}
+.mx .c .pp{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:700;line-height:1}
+.mx .c small{font-size:12px;color:var(--muted)}
+.you{color:var(--accent)}.them{color:var(--hot)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;min-height:18px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.dot.C{background:var(--accent)}.dot.D{background:var(--hot)}
+.dot.e{border:1.5px dashed var(--line)}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mvbtn{flex:1;min-height:52px;font-size:16px}
+.mvbtn.d{background:var(--hot);border-color:var(--hot);color:#fff}
+.mvbtn.d:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sq{width:100%;max-width:560px;aspect-ratio:1;display:block;border-radius:10px;border:1px solid var(--line);background:var(--paper);margin:0 auto;image-rendering:pixelated}
+.nx{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.nx .h{font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;overflow-wrap:anywhere}
+.nx .h.r{justify-content:flex-start;text-align:left}
+.nx .h.col{color:var(--hot)}.nx .h.row{color:var(--accent)}
+.nx .c{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;position:relative}
+.nx .c.ne{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;background:color-mix(in srgb,var(--gold) 12%,var(--card))}
+.nx input{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--card);padding:6px 4px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:600}
+.nx input.a{color:var(--accent)}.nx input.b{color:var(--hot)}
+.nx input.br{border-color:currentColor;box-shadow:0 0 0 1px currentColor inset}
+.nx .tag{position:absolute;top:-9px;right:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;background:var(--gold);color:#111;border-radius:4px;padding:1px 5px}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mono{font-family:var(--mono)}
+select{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;max-width:100%;min-width:0}
+@media (max-width:520px){.bigs{grid-template-columns:1fr 1fr}.mx .c{min-height:70px;padding:8px 4px}}
+/* logic */
+.tf{font-family:var(--mono);font-weight:600}
+.tf.t{color:var(--good)}.tf.f{color:var(--hot)}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px;background:var(--card);cursor:pointer;font:inherit;color:inherit;min-height:40px}
+.tog b{font-family:var(--mono);font-size:15px}
+.tog span{font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--hot);color:#fff;min-width:54px;text-align:center}
+.tog[aria-pressed="true"] span{background:var(--good)}
+.opgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.opb{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 4px;cursor:pointer;font:inherit;color:inherit;display:grid;gap:2px;justify-items:center;min-height:58px}
+.opb b{font-family:var(--mono);font-size:20px;line-height:1}
+.opb small{font-size:11px;color:var(--muted);text-align:center}
+.opb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.mini{border-collapse:collapse;width:100%;font-size:14px}
+.mini th,.mini td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.mini th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.mini tr.on td{background:var(--accent-soft)}
+.scrollx{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.tt{border-collapse:collapse;font-family:var(--mono);font-size:14px;width:100%}
+.tt th{position:sticky;top:0;background:var(--card);font-weight:600;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tt td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.tt th.res,.tt td.res{background:var(--accent-soft)}
+.tt th.v,.tt td.v{border-right:1px solid var(--line)}
+.tt tr.bad td{background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.tt tr.good td{background:color-mix(in srgb,var(--good) 12%,transparent)}
+.inp{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:16px}
+.inp.err{border-color:var(--hot)}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.5}
+.keys{display:flex;flex-wrap:wrap;gap:4px}
+.keys button{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:40px;min-height:38px;font-family:var(--mono);font-size:16px;cursor:pointer}
+.keys button:hover{border-color:var(--accent)}
+.verdict{font-family:var(--display);font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.1}
+.verdict.ok{color:var(--good)}.verdict.no{color:var(--hot)}
+.steps{display:grid;gap:8px;counter-reset:st;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px;animation:fin .35s ease}
+.steps li::before{content:counter(st);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}
+.steps li.qed{border-color:var(--good)}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gate svg{width:100%;height:auto;display:block}
+.people{display:flex;gap:10px;flex-wrap:wrap}
+.who{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:10px 14px;cursor:pointer;font:inherit;color:inherit;display:grid;justify-items:center;gap:4px;min-width:92px}
+.who .face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;background:var(--paper);border:2px dashed var(--line)}
+.who.k .face{background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.who.v .face{background:var(--hot);color:#fff;border:2px solid var(--hot)}
+.who small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.say{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:14.5px}
+.say .sp{font-family:var(--display);font-weight:800}
+.say .ck{font-family:var(--mono);font-size:12px;font-weight:600}
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px;margin-top:14px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.fc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fc h3{font-size:19px;font-weight:700}
+.fc .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.fc p{margin:0;font-size:14px}
+.fc .ex{border-left:3px solid var(--line);padding-left:10px;color:var(--muted);font-style:italic}
+.qopt{display:grid;gap:6px}
+.qopt button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.qopt button:hover{border-color:var(--accent)}
+.qopt button.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.qopt button.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,var(--card))}
+.qtext{font-size:17px;font-style:italic;border-left:3px solid var(--accent);padding-left:12px;margin:0}
+.search{width:100%;min-width:0;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:9px 14px;font:inherit}
+.row2{display:flex;flex-wrap:wrap;gap:8px}
+.ghostb{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.ghostb[aria-pressed=true]{border-color:var(--accent)!important;color:var(--accent)!important}
+.k2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.note{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.note b{color:var(--ink)}
+.wrapseg{flex-wrap:wrap}
+.txt{width:100%;box-sizing:border-box;font:500 15px var(--mono);padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.v.sm{font-size:14px;line-height:1.35;word-break:break-word}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* correlation */
+#sCv{touch-action:none;cursor:crosshair}
+.meter{display:flex;align-items:center;gap:10px;font:12px var(--mono);color:var(--muted)}
+.mbar{flex:1;height:12px;border-radius:999px;position:relative;background:linear-gradient(90deg,#E4572E,var(--line) 50%,#1D47F0)}
+.mbar i{position:absolute;top:-5px;width:4px;height:22px;margin-left:-2px;border-radius:2px;background:var(--ink);transition:left .15s}
+.claim{font-size:clamp(18px,2.4vw,22px);font-weight:600;line-height:1.35;margin:0;min-height:3em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{font:600 14px var(--body);padding:12px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:48px}
+.opt:hover{border-color:var(--accent)}
+.opt.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 18%,transparent)}
+.opt.bad{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 14%,transparent)}
+.kinds{margin:0;display:grid;gap:4px}.kinds dt{font-weight:700;margin-top:8px}.kinds dd{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+#fBand{transition:opacity .2s}
+
+.dag{width:100%;max-width:340px;height:auto;align-self:center}.dag .dn{fill:var(--card);stroke:var(--line);stroke-width:1.5}.dag .dn.hot{stroke:var(--hot)}.dag text{font:600 14px var(--body);fill:var(--ink)}.dag .dd{stroke:var(--muted)}</style>
+
+<style>.sitefoot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:nowrap;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:13px;color:var(--muted)}.sitefoot:only-child{border-top:0;margin-top:0;padding-top:0}.sitefoot b{color:var(--ink);font-weight:600}.sitefoot>span{white-space:nowrap}.sitefoot a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sitefoot a:hover{color:var(--accent)}@media (max-width:640px){.sitefoot .sf-t{display:none}}@media (max-width:400px){.sitefoot{font-size:12px;gap:8px}}@media (max-width:350px){.sitefoot{font-size:11px}}</style><style>.lp{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.lp a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 8px;border-radius:999px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-decoration:none;border:0}.lp a:hover{color:var(--ink)}.lp a[aria-current=true]{background:var(--ink);color:var(--paper)}.lp a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ctl{display:inline-flex;gap:8px;align-items:center}@media (max-width:640px){.site .ctl{margin-left:auto}.site .wrap{row-gap:4px;padding-bottom:8px}}</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9P7XFHH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="site" aria-label="Sitio">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Inicio de concepts.how">concepts<span style="color:var(--accent)">.</span>how</a>
+    <a class="nl" href="units.html">Unidades</a>
+    <a class="nl" href="voting.html">Votación</a>
+    <a class="nl" href="time.html">Tiempo</a>
+    <a class="nl" href="blockchain.html">Blockchain</a>
+    <a class="nl" href="quantum.html">Cuántica</a>
+    <a class="nl" href="dimensions.html">Dimensiones</a>
+    <a class="nl" href="universe.html">Universo</a>
+    <a class="nl" href="gametheory.html">Teoría de juegos</a>
+    <a class="nl" href="logic.html">Lógica</a>
+    <a class="nl" href="probability.html">Probabilidad</a>
+    <a class="nl" href="correlation.html" aria-current="page">Correlación</a>
+    <a class="nl" href="codes.html">Códigos</a>
+    <a class="nl" href="infinity.html">Infinito</a>
+    <a class="nl" href="language.html">Lenguaje</a>
+    <a class="nl" href="maps.html">Mapas</a>
+    <a class="nl" href="money.html">Dinero</a>
+    <a class="nl" href="light.html">Luz y color</a>
+    <a class="nl" href="lightspeed.html">Velocidad de la luz</a>
+    <a class="nl" href="algorithms.html">Algoritmos</a>
+    <a class="nl" href="mind.html">Sesgos y mente</a>
+    <a class="nl" href="music.html">Música y sonido</a>
+    <a class="nl" href="evolution.html">Evolución</a>
+    <a class="nl" href="internet.html">Internet</a>
+    <a class="nl" href="wireless.html">Inalámbrico</a>
+    <span class="ctl"><span class="lp" role="group" aria-label="Idioma"><a href="../correlation.html" lang="en" hreflang="en" aria-current="false" title="English">EN</a><a href="correlation.html" lang="es" hreflang="es" aria-current="true" title="Español">ES</a></span><span data-theme-picker></span></span>
+  </div>
+</nav>
+<div class="rule" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><b>Correlación y causalidad</b> · ir juntos no es lo mismo que «porque»</div>
+    <h1>Los helados no causan <em>ataques de tiburón.</em></h1>
+    <p class="lede">Dos cosas están correlacionadas cuando tienden a subir y bajar juntas. Es útil saberlo, pero no te dice que una cause la otra. Quizá sea al revés, quizá otra cosa provoque las dos, o quizá sea pura casualidad. Arrastra puntos para crear correlaciones, mira cómo tendencias sin relación coinciden, encuentra el tercer factor oculto y haz un experimento que sí pueda demostrar una causa.</p>
+    <nav class="jump" aria-label="En esta página"><a href="#scatter">Correlación</a><a href="#spurious">Casualidad</a><a href="#confound">Factor oculto</a><a href="#which">¿Cuál es?</a><a href="#trial">Experimentos</a><a href="#ideas">Grandes ideas</a></nav>
+  </header>
+
+  <!-- ============ 1. scatter ============ -->
+  <section class="block" id="scatter" aria-labelledby="sH">
+    <div class="shead">
+      <span class="eyebrow">Demo 1 · medir si van juntos</span>
+      <h2 id="sH">Cómo es una correlación</h2>
+      <p>El coeficiente de correlación, r, va de −1 a +1. Cerca de +1, cuando uno sube el otro casi siempre sube; cerca de −1, uno sube mientras el otro baja; cerca de 0, no hay un patrón en línea recta. Arrastra los puntos, toca un espacio vacío para añadir uno o prueba un ejemplo. Mira cómo un solo valor atípico puede cambiar r, y cómo una curva clara puede dar r cerca de 0.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="sCv" height="320" aria-label="Diagrama de dispersión. Arrastra puntos o toca para añadir uno."></canvas>
+        <div class="seg wrapseg" id="sPre"></div>
+      </div>
+      <div class="panel stack">
+        <div class="meter"><span>−1</span><div class="mbar"><i id="sNeedle"></i></div><span>+1</span></div>
+        <div class="bigs">
+          <div class="ro"><div class="k">Correlación r</div><div class="v" id="sR"></div></div>
+          <div class="ro"><div class="k">Puntos</div><div class="v" id="sN"></div></div>
+        </div>
+        <p class="note" id="sTxt"></p>
+        <div class="callout"><b>Solo líneas rectas</b>r mide lo bien que los puntos encajan en una línea recta. Una U perfecta, como lo a gusto que estás según la temperatura de la habitación, puede tener r = 0 aunque las dos cosas estén muy relacionadas. Mira siempre el dibujo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. spurious ============ -->
+  <section class="block" id="spurious" aria-labelledby="cH">
+    <div class="shead">
+      <span class="eyebrow">Demo 2 · pura casualidad</span>
+      <h2 id="cH">Todo lo que crece parece relacionado</h2>
+      <p>Estas dos líneas se generan completamente al azar, cada una por su lado, y llevan nombres inventados. Aun así, cuando las dos tienden por casualidad hacia el mismo lado con el tiempo, r puede salir enorme. Si buscas entre suficientes parejas de estadísticas, siempre encontrarás alguna que coincida. Pulsa el botón unas cuantas veces y luego compara los cambios de un año a otro en lugar de los totales.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="cCv" height="260" aria-label="Dos series temporales generadas al azar"></canvas>
+        <div class="row2"><button class="btn" id="cGo">🎲 Dos cosas nuevas sin relación</button><button class="btn ghostb" id="cDiff" aria-pressed="false">Comparar cambios anuales</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">Correlación r</div><div class="v" id="cR"></div></div>
+          <div class="ro"><div class="k">Relación real</div><div class="v">0</div></div>
+        </div>
+        <p class="note" id="cTxt"></p>
+        <div class="callout"><b>Cigüeñas y bebés</b>En 2000, el estadístico Robert Matthews mostró que en 17 países europeos el número de parejas de cigüeñas que crían estaba correlacionado con el número de bebés nacidos. Los países más grandes tienen más de ambas cosas. Lo publicó precisamente para enseñar esta lección.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. confounder ============ -->
+  <section class="block" id="confound" aria-labelledby="fH">
+    <div class="shead">
+      <span class="eyebrow">Demo 3 · el tercer factor oculto</span>
+      <h2 id="fH">Helados y tiburones</h2>
+      <p>Los días en que una playa vende más helados, los socorristas avistan más tiburones. ¿Prohibimos los helados? No: el calor provoca las dos cosas, porque más gente compra helados y más gente se baña. Una causa oculta así se llama factor de confusión. Estos son datos simulados de 200 días. Activa «Solo la misma temperatura» para comparar únicamente días con un tiempo parecido, y la relación casi desaparece.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <canvas class="cv" id="fCv" height="300" aria-label="Ventas de helados frente a tiburones avistados; cada punto es un día, coloreado según la temperatura"></canvas>
+        <div class="row2"><button class="btn ghostb" id="fCtl" aria-pressed="false">Solo la misma temperatura</button><button class="btn ghostb" id="fNew">Datos nuevos</button></div>
+        <div class="sl" id="fBand"><label for="fT">Días en torno a <span id="fTV"></span></label><input type="range" id="fT" min="12" max="34" value="24"></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">r, todos los días</div><div class="v" id="fAll"></div></div>
+          <div class="ro"><div class="k">r, temperatura parecida</div><div class="v" id="fIn"></div></div>
+        </div>
+        <svg class="dag" viewBox="0 0 320 150" role="img" aria-label="La temperatura causa tanto las ventas de helados como los tiburones avistados; los dos solo están relacionados a través de ella"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#E4572E"/></marker></defs><rect x="95" y="6" width="130" height="34" rx="17" class="dn hot"/><text x="160" y="28" text-anchor="middle">Temperatura</text><rect x="6" y="108" width="120" height="34" rx="17" class="dn"/><text x="66" y="130" text-anchor="middle">Helados</text><rect x="194" y="108" width="120" height="34" rx="17" class="dn"/><text x="254" y="130" text-anchor="middle">Tiburones</text><path d="M135 42L80 104" stroke="#E4572E" stroke-width="2.5" marker-end="url(#ah)"/><path d="M185 42L240 104" stroke="#E4572E" stroke-width="2.5" marker-end="url(#ah)"/><path d="M130 125H190" class="dd" stroke-width="2" stroke-dasharray="5 5"/></svg>
+        <div class="callout"><b>Ejemplos reales</b>Los niños con los pies más grandes leen mejor (la edad provoca las dos cosas). Los países que comen más chocolate ganan más premios Nobel por persona (la riqueza es un factor de confusión probable). Las personas que llevan mechero tienen más cáncer de pulmón (por fumar).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. which ============ -->
+  <section class="block" id="which" aria-labelledby="wH">
+    <div class="shead">
+      <span class="eyebrow">Demo 4 · haz de científico</span>
+      <h2 id="wH">¿Cuál es?</h2>
+      <p>Cuando dos cosas están relacionadas, hay cuatro explicaciones habituales. Lee cada hallazgo y elige la más probable.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="k2" id="qNum"></div>
+        <p class="claim" id="qClaim"></p>
+        <div class="opts" id="qOpts"></div>
+        <p class="note" id="qWhy"></p>
+        <button class="btn" id="qNext">Siguiente →</button>
+      </div>
+      <div class="panel stack">
+        <div class="bigs"><div class="ro"><div class="k">Puntuación</div><div class="v" id="qScore"></div></div></div>
+        <dl class="kinds" id="qKinds"></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. trial ============ -->
+  <section class="block" id="trial" aria-labelledby="tH">
+    <div class="shead">
+      <span class="eyebrow">Demo 5 · cómo demostrar de verdad una causa</span>
+      <h2 id="tH">Que decida una moneda</h2>
+      <p>¿Una app de deberes mejora las notas? Si comparas sin más a los alumnos que eligieron la app con los que no, los más motivados tienen más probabilidades de elegirla, y sacarían mejores notas de todos modos. En un ensayo aleatorio, una moneda decide quién recibe la app, así que la motivación queda igual en los dos grupos y cualquier diferencia que quede la causa la app. Tú eliges el efecto real de la app; mira qué estudio lo encuentra.</p>
+    </div>
+    <div class="demo">
+      <div class="panel stack">
+        <div class="sl"><label for="tE">El efecto real de la app <span id="tEV"></span></label><input type="range" id="tE" min="0" max="10" value="2"></div>
+        <canvas class="cv" id="tCv" height="240" aria-label="Notas medias de los dos grupos en cada tipo de estudio"></canvas>
+        <div class="row2"><button class="btn" id="tObs">Hacer estudio por encuesta</button><button class="btn" id="tRct">🪙 Hacer ensayo aleatorio</button></div>
+      </div>
+      <div class="panel stack">
+        <div class="bigs">
+          <div class="ro"><div class="k">La encuesta dice que la app suma</div><div class="v" id="tO">—</div></div>
+          <div class="ro"><div class="k">El ensayo dice que la app suma</div><div class="v" id="tR">—</div></div>
+          <div class="ro"><div class="k">La verdad</div><div class="v" id="tT"></div></div>
+        </div>
+        <div class="callout"><b>Cuando los ensayos cambiaron la medicina</b>Durante años, los estudios observacionales sugirieron que la terapia hormonal protegía el corazón de las mujeres. Las mujeres que la elegían solían estar más sanas de por sí. Cuando un gran ensayo aleatorio publicó sus resultados en 2002, no encontró beneficio para el corazón y sí algunos riesgos mayores, y las recomendaciones cambiaron.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ideas ============ -->
+  <section class="block" id="ideas" aria-labelledby="idH">
+    <div class="shead">
+      <span class="eyebrow">Grandes ideas</span>
+      <h2 id="idH">Del escorbuto al tabaco</h2>
+    </div>
+    <div class="cards" id="ideaGrid"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <b>Fuentes y lecturas recomendadas</b>
+  <ul>
+    <li>Judea Pearl y Dana Mackenzie, <i>El libro del porqué</i> (2018)</li>
+    <li>David Spiegelhalter, <i>The Art of Statistics</i> (2019)</li>
+    <li>Austin Bradford Hill, «The environment and disease: association or causation?», <i>Proceedings of the Royal Society of Medicine</i> (1965)</li>
+    <li>Robert Matthews, «Storks deliver babies (p = 0.008)», <i>Teaching Statistics</i> (2000)</li>
+    <li>Bickel, Hammel y O’Connell, «Sex bias in graduate admissions: data from Berkeley», <i>Science</i> (1975)</li>
+    <li>Grupo de redacción de los investigadores de la Women’s Health Initiative, <i>JAMA</i> (2002)</li>
+  </ul>
+  <p>Los datos de las demos 2, 3 y 5 son simulados para mostrar la idea. No son datos reales sobre helados, tiburones ni apps.</p>
+<div class="sitefoot"><span class="sf-l"><span class="sf-t">concepts.how · pronto, más conceptos. · </span><a href="disclaimer.html">Aviso legal</a></span><span>Hecho por <b>Papá</b> para <b>Zara</b></span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function setupCanvas(cv){const d=window.devicePixelRatio||1;const h=+cv.dataset.h||+cv.getAttribute("height");if(!cv.dataset.h){cv.dataset.h=h;cv.style.height=h+"px"}const w=Math.round(cv.getBoundingClientRect().width);const c=cv.getContext("2d");if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d}c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);return{c,W:w,H:h}}
+const LANGES=document.documentElement.lang==="es";const LOC=LANGES?"es-ES":"en-US";const fmt=(n,d=0)=>n.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:d});
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+function corr(xs,ys){const n=xs.length;if(n<3)return NaN;let mx=0,my=0;for(let i=0;i<n;i++){mx+=xs[i];my+=ys[i]}mx/=n;my/=n;let sxy=0,sxx=0,syy=0;for(let i=0;i<n;i++){const a=xs[i]-mx,b=ys[i]-my;sxy+=a*b;sxx+=a*a;syy+=b*b}return sxx&&syy?sxy/Math.sqrt(sxx*syy):NaN}
+const rs=r=>isNaN(r)?"—":(r<0?"−":"+")+fmt(Math.abs(r),2);
+function words(r){const a=Math.abs(r);if(isNaN(r))return"";const s=a>.8?(LANGES?"muy fuerte":"very strong"):a>.6?(LANGES?"fuerte":"strong"):a>.4?(LANGES?"moderada":"moderate"):a>.2?(LANGES?"débil":"weak"):(LANGES?"casi nula":"almost none");return LANGES?`Correlación ${s}${a>.2?(r>0?", positiva":", negativa"):""}.`:`${s[0].toUpperCase()+s.slice(1)}${a>.2?(r>0?" positive":" negative"):""} correlation.`}
+const PALT=["#E4572E","#1D47F0","#2BB673","#F2B705"];
+
+/* ================= 1. scatter ================= */
+const S={pts:[],drag:-1};
+const PRE=LANGES?[["Positiva fuerte","pos"],["Ninguna","none"],["Negativa","neg"],["Curva en U","u"],["Un valor atípico","out"],["Vaciar","clear"]]:[["Strong positive","pos"],["None","none"],["Negative","neg"],["U-curve","u"],["One outlier","out"],["Clear","clear"]];
+$("#sPre").innerHTML=PRE.map(p=>`<button class="pill" data-k="${p[1]}">${p[0]}</button>`).join("");
+document.querySelectorAll("#sPre .pill").forEach(b=>b.onclick=()=>{sPreset(b.dataset.k);sDraw()});
+function sPreset(k){const n=24;S.pts=[];
+  for(let i=0;i<n;i++){const x=.08+.84*Math.random();let y;
+    if(k==="pos")y=x+gauss()*.08;else if(k==="neg")y=1-x+gauss()*.08;else if(k==="none")y=Math.random();else if(k==="u")y=.15+3.2*(x-.5)**2+gauss()*.03;else if(k==="out")y=.12+gauss()*.05;else break;
+    S.pts.push({x,y:clamp(y,.04,.96)})}
+  if(k==="out")S.pts.push({x:.9,y:.92})}
+function sDraw(){const{c,W,H}=setupCanvas($("#sCv"));const P=10,X=v=>P+(W-2*P)*v,Y=v=>H-P-(H-2*P)*v;
+  c.strokeStyle=css("--line");c.strokeRect(P,P,W-2*P,H-2*P);
+  const xs=S.pts.map(p=>p.x),ys=S.pts.map(p=>p.y),r=corr(xs,ys);
+  if(!isNaN(r)){const n=xs.length,mx=xs.reduce((a,b)=>a+b)/n,my=ys.reduce((a,b)=>a+b)/n;let sxy=0,sxx=0;for(let i=0;i<n;i++){sxy+=(xs[i]-mx)*(ys[i]-my);sxx+=(xs[i]-mx)**2}const m=sxy/sxx,b=my-m*mx;
+    c.strokeStyle=css("--hot");c.lineWidth=2;c.setLineDash([6,5]);c.beginPath();c.moveTo(X(0),Y(b));c.lineTo(X(1),Y(m+b));c.save();c.beginPath();c.rect(P,P,W-2*P,H-2*P);c.clip();c.beginPath();c.moveTo(X(0),Y(b));c.lineTo(X(1),Y(m+b));c.stroke();c.restore();c.setLineDash([]);c.lineWidth=1}
+  S.pts.forEach((p,i)=>{c.fillStyle=css("--accent");c.globalAlpha=i===S.drag?1:.8;c.beginPath();c.arc(X(p.x),Y(p.y),i===S.drag?9:7,0,7);c.fill()});c.globalAlpha=1;
+  $("#sR").textContent=rs(r);$("#sN").textContent=S.pts.length;$("#sNeedle").style.left=isNaN(r)?"50%":((r+1)/2*100)+"%";
+  $("#sTxt").textContent=isNaN(r)?(LANGES?"Añade al menos tres puntos.":"Add at least three points."):words(r)}
+(()=>{const cv=$("#sCv");const pos=e=>{const r=cv.getBoundingClientRect();return{x:clamp((e.clientX-r.left-10)/(r.width-20),.02,.98),y:clamp(1-(e.clientY-r.top-10)/(r.height-20),.02,.98),w:r.width,h:r.height}};
+  cv.addEventListener("pointerdown",e=>{const p=pos(e);let bi=-1,bd=1e9;S.pts.forEach((q,i)=>{const d=Math.hypot((q.x-p.x)*p.w,(q.y-p.y)*p.h);if(d<bd){bd=d;bi=i}});if(bd<22)S.drag=bi;else{S.pts.push({x:p.x,y:p.y});S.drag=S.pts.length-1}cv.setPointerCapture(e.pointerId);sDraw()});
+  cv.addEventListener("pointermove",e=>{if(S.drag<0)return;const p=pos(e);S.pts[S.drag]={x:p.x,y:p.y};sDraw()});
+  const up=()=>{S.drag=-1;sDraw()};cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up)})();
+
+/* ================= 2. spurious ================= */
+const NAMES=LANGES?["Calcetines desparejados encontrados","Ventas de paraguas de colores","Gatos llamados Bigotes","Concursos de comer tartas","Fotos de nubes con forma de pato","Bicis pintadas de verde","Faros visitados","Bocadillos de pepino","Canciones silbadas en ascensores","Patos de goma en bañeras","Cometas perdidas","Cuentos sobre dragones"]
+:["Odd socks found","Spotty umbrellas sold","Cats named Whiskers","Pie-eating contests","Duck-shaped cloud photos","Green bikes painted","Lighthouses visited","Cucumber sandwiches eaten","Songs whistled in lifts","Rubber ducks in baths","Kites lost","Bedtime stories about dragons"];
+const SP={a:[],b:[],na:"",nb:"",diff:false,yr0:2006};
+function walk(){const n=18;const a=[50];const drift=(Math.random()-.3)*3;for(let i=1;i<n;i++)a.push(Math.max(2,a[i-1]+drift+gauss()*2.4));return a}
+function cNew(){SP.a=walk();SP.b=walk();let i=Math.floor(Math.random()*NAMES.length),j;do{j=Math.floor(Math.random()*NAMES.length)}while(j===i);SP.na=NAMES[i];SP.nb=NAMES[j];cDraw()}
+const dif=a=>a.slice(1).map((v,i)=>v-a[i]);
+function cDraw(){const{c,W,H}=setupCanvas($("#cCv"));const a=SP.diff?dif(SP.a):SP.a,b=SP.diff?dif(SP.b):SP.b,n=a.length;const P=14,top=44;
+  const sc=arr=>{const lo=Math.min(...arr),hi=Math.max(...arr);return v=>top+(H-top-P-14)*(1-(v-lo)/((hi-lo)||1))};const ya=sc(a),yb=sc(b),X=i=>P+(W-2*P)*i/(n-1);
+  [[a,ya,PALT[0]],[b,yb,PALT[1]]].forEach(([arr,y,col])=>{c.strokeStyle=col;c.lineWidth=3;c.beginPath();arr.forEach((v,i)=>i?c.lineTo(X(i),y(v)):c.moveTo(X(i),y(v)));c.stroke();c.fillStyle=col;arr.forEach((v,i)=>{c.beginPath();c.arc(X(i),y(v),2.5,0,7);c.fill()})});c.lineWidth=1;
+  c.font="600 12px "+css("--body");c.textAlign="left";c.fillStyle=PALT[0];c.fillText("● "+SP.na,P,16);c.fillStyle=PALT[1];c.fillText("● "+SP.nb,P,34);
+  c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="left";c.fillText(SP.diff?SP.yr0+1:SP.yr0,P,H-4);c.textAlign="right";c.fillText(SP.yr0+SP.a.length-1,W-P,H-4);
+  const r=corr(a,b);$("#cR").textContent=rs(r);
+  $("#cTxt").textContent=SP.diff?(LANGES?"Comparando solo cuánto cambia cada uno de un año a otro, la tendencia común desaparece y r suele quedar cerca de 0: la verdadera relación.":"Comparing only how much each changes from one year to the next removes the shared trend, and r usually falls close to 0: the true relationship."):(Math.abs(r)>.6?(LANGES?"¡Una correlación fuerte entre dos cosas generadas por separado al azar! Ambas tienen tendencia, y eso basta.":"A strong correlation between two things generated separately at random! Both have a trend, and that’s enough."):(LANGES?"Esta vez no se parecen mucho. Prueba otra vez: a menudo saldrá una r alta.":"Not much alike this time. Try again: a high r turns up often."))}
+$("#cGo").onclick=cNew;$("#cDiff").onclick=e=>{SP.diff=!SP.diff;e.currentTarget.setAttribute("aria-pressed",SP.diff);cDraw()};
+
+/* ================= 3. confounder ================= */
+const F={d:[],ctl:false};
+function fNew(){F.d=Array.from({length:200},()=>{const t=10+Math.random()*26;const ice=Math.max(0,20+t*9+gauss()*45);const sw=Math.max(0,(t-14)*30+gauss()*60);const sh=Math.max(0,Math.round(sw/90+gauss()*1.1+(t>20?0:0)));return{t,ice,sh:sh+Math.random()*.6-.3}});fDraw()}
+const tCol=t=>{const f=clamp((t-10)/26);const a=[[29,71,240],[242,183,5],[228,87,46]];const i=f<.5?0:1,g=f<.5?f*2:f*2-1;return`rgb(${a[i].map((v,k)=>Math.round(v+(a[i+1][k]-v)*g))})`};
+function fDraw(){const{c,W,H}=setupCanvas($("#fCv"));const P=34,X=v=>P+(W-P-10)*v/360,Y=v=>H-P-(H-P-10)*v/8;const T=+$("#fT").value;$("#fTV").textContent=`${T-1}–${T+1} °C`;
+  c.strokeStyle=css("--line");c.strokeRect(P,10,W-P-10,H-P-10);c.fillStyle=css("--muted");c.font="11px "+css("--mono");c.textAlign="center";c.fillText(LANGES?"helados vendidos →":"ice creams sold →",P+(W-P)/2,H-10);
+  c.save();c.translate(12,(H-P)/2);c.rotate(-Math.PI/2);c.fillText(LANGES?"tiburones vistos →":"shark sightings →",0,0);c.restore();
+  const inB=p=>Math.abs(p.t-T)<=1;
+  F.d.forEach(p=>{const on=!F.ctl||inB(p);c.globalAlpha=on?.85:.08;c.fillStyle=tCol(p.t);c.beginPath();c.arc(X(Math.min(p.ice,355)),Y(Math.min(p.sh,7.9)),on&&F.ctl?5.5:4,0,7);c.fill()});c.globalAlpha=1;
+  const all=corr(F.d.map(p=>p.ice),F.d.map(p=>p.sh));const sub=F.d.filter(inB);const ri=corr(sub.map(p=>p.ice),sub.map(p=>p.sh));
+  $("#fAll").textContent=rs(all);$("#fIn").textContent=rs(ri);
+  // legend
+  const lg=c.createLinearGradient(W-140,0,W-20,0);lg.addColorStop(0,tCol(10));lg.addColorStop(.5,tCol(23));lg.addColorStop(1,tCol(36));c.fillStyle=lg;c.fillRect(W-140,18,120,8);c.fillStyle=css("--muted");c.textAlign="left";c.fillText("10 °C",W-140,40);c.textAlign="right";c.fillText("36 °C",W-20,40)}
+$("#fCtl").onclick=e=>{F.ctl=!F.ctl;e.currentTarget.setAttribute("aria-pressed",F.ctl);$("#fBand").style.opacity=F.ctl?1:.5;fDraw()};$("#fNew").onclick=fNew;$("#fT").oninput=fDraw;
+
+/* ================= 4. quiz ================= */
+const KINDS=LANGES?[["cause","A causa B","Uno provoca de verdad el otro. Para estar seguros hacen falta experimentos o muchas pruebas que apunten en la misma dirección."],["rev","B causa A","La flecha va al revés de lo que parece."],["conf","Un tercer factor","Algo oculto provoca las dos cosas."],["chance","Casualidad","No hay relación real: coincidieron por azar o por buscar entre muchísimos datos."]]
+:[["cause","A causes B","One really does produce the other. Being sure takes experiments, or many lines of evidence pointing the same way."],["rev","B causes A","The arrow runs the opposite way to how it looks."],["conf","A third factor","Something hidden causes both."],["chance","Coincidence","No real link: they matched by chance, or by searching through masses of data."]];
+const QS=LANGES?[
+ ["Los niños con los pies más grandes leen mejor.","conf","La edad: los niños mayores tienen pies más grandes y llevan más años leyendo."],
+ ["Cuanto más bomberos acuden a un incendio, más daños hay.","conf","El tamaño del incendio: los incendios grandes causan más daños y necesitan más bomberos."],
+ ["Los gallos cantan justo antes del amanecer.","rev","Es la luz que llega antes del amanecer la que hace cantar al gallo, no al revés."],
+ ["Fumar va unido al cáncer de pulmón.","cause","Décadas de estudios, efectos que crecen con la dosis, experimentos con animales y un mecanismo conocido lo demuestran: fumar causa cáncer."],
+ ["Las personas que van más al hospital están más enfermas.","rev","Estar enfermo hace que vayas al hospital, no al contrario."],
+ ["El número de piratas ha bajado mientras el mundo se calentaba.","chance","Dos tendencias en el tiempo sin ninguna relación. Cualquier par de cosas que suben o bajan parecerá relacionado."],
+ ["Los países que comen más chocolate tienen más premios Nobel por persona.","conf","La riqueza probablemente impulsa las dos: más dinero para chocolate y para universidades e investigación."],
+ ["Los niños que desayunan sacan mejores notas.","conf","Es difícil saberlo: las familias que pueden dar un buen desayuno a diario suelen tener otras ventajas. Hacen falta experimentos."],
+ ["En los años en que se estrenan más películas de piratas, hay más días de lluvia en Madrid.","chance","Si comparas suficientes estadísticas, algunas coinciden por pura suerte."],
+ ["Cuanto más pedaleas, más rápido va la bici.","cause","Aquí sí: sabemos exactamente cómo los pedales mueven la rueda, y puedes probarlo tú mismo."]
+]:[
+ ["Children with bigger feet read better.","conf","Age: older children have bigger feet and have been reading for longer."],
+ ["The more firefighters at a fire, the more damage it does.","conf","The size of the fire: big fires do more damage and need more firefighters."],
+ ["Roosters crow just before sunrise.","rev","It’s the light before dawn that makes the rooster crow, not the other way round."],
+ ["Smoking is linked to lung cancer.","cause","Decades of studies, effects that grow with the dose, animal experiments and a known mechanism show it: smoking causes cancer."],
+ ["People who go to hospital more often are sicker.","rev","Being ill makes you go to hospital, not the reverse."],
+ ["The number of pirates has fallen as the world has warmed.","chance","Two trends over time with no connection. Any two things that rise or fall will look related."],
+ ["Countries that eat more chocolate have more Nobel prizes per person.","conf","Wealth probably drives both: more money for chocolate, and for universities and research."],
+ ["Children who eat breakfast get better grades.","conf","Hard to know: families who can serve a good breakfast every day often have other advantages too. It takes experiments to tell."],
+ ["In years with more pirate films, it rains more in London.","chance","Compare enough statistics and some will match by pure luck."],
+ ["The faster you pedal, the faster the bike goes.","cause","This one is: we know exactly how the pedals turn the wheel, and you can test it yourself."]
+];
+const Q={i:0,score:0,done:false,order:[]};
+$("#qKinds").innerHTML=KINDS.map(k=>`<dt>${k[1]}</dt><dd>${k[2]}</dd>`).join("");
+function qShow(){const q=QS[Q.order[Q.i]];Q.done=false;$("#qNum").textContent=`${Q.i+1} / ${QS.length}`;$("#qClaim").textContent=q[0];$("#qWhy").textContent="";$("#qNext").style.visibility="hidden";
+  $("#qOpts").innerHTML=KINDS.map(k=>`<button class="opt" data-k="${k[0]}">${k[1]}</button>`).join("");
+  document.querySelectorAll("#qOpts .opt").forEach(b=>b.onclick=()=>{if(Q.done)return;Q.done=true;const ok=b.dataset.k===q[1];if(ok)Q.score++;
+    document.querySelectorAll("#qOpts .opt").forEach(x=>{if(x.dataset.k===q[1])x.classList.add("ok");else if(x===b)x.classList.add("bad")});
+    $("#qWhy").innerHTML=`<b>${ok?(LANGES?"¡Bien!":"Nice!"):(LANGES?"No exactamente.":"Not quite.")}</b> ${q[2]}`;$("#qScore").textContent=`${Q.score} / ${Q.i+1}`;$("#qNext").style.visibility="visible";
+    $("#qNext").textContent=Q.i<QS.length-1?(LANGES?"Siguiente →":"Next →"):(LANGES?"Empezar de nuevo ↺":"Start again ↺")})}
+function qStart(){Q.order=QS.map((_,i)=>i).sort(()=>Math.random()-.5);Q.i=0;Q.score=0;$("#qScore").textContent="0";qShow()}
+$("#qNext").onclick=()=>{if(Q.i<QS.length-1){Q.i++;qShow()}else qStart()};
+
+/* ================= 5. trial ================= */
+const TR={obs:null,rct:null};
+function students(n=400){return Array.from({length:n},()=>({keen:gauss()}))}
+function score(s,app){return 60+8*s.keen+(app?+$("#tE").value:0)+gauss()*6}
+function mean(a){return a.reduce((x,y)=>x+y,0)/a.length}
+function runObs(){const st=students();const g=st.map(s=>{const p=1/(1+Math.exp(-2*s.keen));const app=Math.random()<p;return{app,sc:score(s,app)}});TR.obs=[mean(g.filter(x=>x.app).map(x=>x.sc)),mean(g.filter(x=>!x.app).map(x=>x.sc))];tDraw()}
+function runRct(){const st=students();const g=st.map(s=>{const app=Math.random()<.5;return{app,sc:score(s,app)}});TR.rct=[mean(g.filter(x=>x.app).map(x=>x.sc)),mean(g.filter(x=>!x.app).map(x=>x.sc))];tDraw()}
+function tDraw(){const{c,W,H}=setupCanvas($("#tCv"));const groups=[[LANGES?"Encuesta":"Survey",TR.obs],[LANGES?"Ensayo aleatorio":"Randomised trial",TR.rct]];const base=50,top=80,Y=v=>H-30-(H-60)*(v-base)/(top-base);const gw=W/2;
+  c.strokeStyle=css("--line");c.beginPath();c.moveTo(0,H-30);c.lineTo(W,H-30);c.stroke();
+  groups.forEach(([name,v],gi)=>{const x0=gi*gw+gw*.16,bw=gw*.3;c.fillStyle=css("--ink");c.font="600 12px "+css("--body");c.textAlign="center";c.fillText(name,gi*gw+gw/2,H-10);
+    if(!v){c.fillStyle=css("--muted");c.font="12px "+css("--body");c.fillText(LANGES?"sin datos aún":"not run yet",gi*gw+gw/2,H/2);return}
+    [[v[0],css("--accent"),LANGES?"con app":"app"],[v[1],css("--muted"),LANGES?"sin app":"no app"]].forEach(([m,col,lab],k)=>{const x=x0+k*(bw+gw*.08);c.fillStyle=col;c.fillRect(x,Y(m),bw,H-30-Y(m));c.fillStyle=css("--ink");c.font="600 12px "+css("--mono");c.fillText(fmt(m,1),x+bw/2,Y(m)-6);c.fillStyle="#fff";c.font="11px "+css("--body");if(H-30-Y(m)>22)c.fillText(lab,x+bw/2,H-38)})});
+  const d=v=>v?(v[0]-v[1]>=0?"+":"−")+fmt(Math.abs(v[0]-v[1]),1):"—";$("#tO").textContent=d(TR.obs);$("#tR").textContent=d(TR.rct);$("#tT").textContent="+"+$("#tE").value;$("#tEV").textContent=(LANGES?"+":"+")+$("#tE").value+(LANGES?" puntos":" points")}
+$("#tObs").onclick=runObs;$("#tRct").onclick=runRct;$("#tE").oninput=()=>{TR.obs=null;TR.rct=null;tDraw()};
+
+/* ================= ideas ================= */
+const IDEAS=[
+ ["La primera prueba justa","1747","El cirujano naval James Lind dio distintos tratamientos a parejas de marineros con escorbuto. Los dos que recibieron naranjas y limones se recuperaron rápido. A menudo se considera el primer ensayo controlado."],
+ ["La correlación recibe un nombre","1888","Francis Galton, midiendo la estatura y la longitud del brazo de la gente, ideó el concepto de correlación. Su alumno Karl Pearson lo convirtió en la r que seguimos usando."],
+ ["El tabaco a juicio","1950","Richard Doll y Austin Bradford Hill descubrieron que los pacientes con cáncer de pulmón eran fumadores con mucha más frecuencia. No se puede obligar al azar a la gente a fumar, así que la prueba llegó de muchos estudios que coincidían."],
+ ["La lista de Hill","1965","Bradford Hill enumeró pistas que indican que una relación es causal: un efecto fuerte, resultados que se repiten, la causa antes que el efecto, más exposición con más efecto y un mecanismo creíble. Son pistas, no pruebas."],
+ ["La paradoja de Simpson","1973","Parecía que Berkeley admitía a más hombres que mujeres en proporción. Pero departamento por departamento, a las mujeres les iba igual o mejor: habían solicitado más los departamentos más competitivos. Una tendencia en el conjunto puede invertirse en cada una de sus partes."],
+ ["Regresión a la media","","Un resultado extremo suele ir seguido de otro más normal, por puro azar. Si felicitas tras un día genial y riñes tras uno malo, puede parecer que reñir funciona y felicitar no."],
+ ["Sesgo de supervivencia","","En la Segunda Guerra Mundial, el estadístico Abraham Wald señaló que los agujeros de bala de los aviones que volvían mostraban dónde podía recibir disparos un avión y sobrevivir. El blindaje había que ponerlo donde los supervivientes no tenían agujeros."],
+ ["Experimentos naturales","","Cuando un accidente del mundo real reparte a la gente casi al azar, como un sorteo o una frontera que atraviesa un pueblo, los investigadores pueden estudiar causas sin tener que hacer ellos el ensayo."]
+];
+$("#ideaGrid").innerHTML=IDEAS.map(a=>`<article class="pc"><div class="top"><h3>${a[0]}</h3>${a[1]?`<span class="yr">${a[1]}</span>`:""}</div><p>${a[2]}</p></article>`).join("");
+
+/* ================= boot ================= */
+sPreset("pos");sDraw();cNew();fNew();$("#fBand").style.opacity=.5;qStart();tDraw();
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{sDraw();cDraw();fDraw();tDraw()},120)});
+addEventListener("themechange",()=>{sDraw();cDraw();fDraw();tDraw()});
+</script>
+</body>
+</html>

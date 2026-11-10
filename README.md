@@ -30,6 +30,7 @@ A static site with no build step. Every page is a self-contained HTML file.
 | Internet & networks | `internet.html` | Packet-switching network with breakable routers and TCP resends, protocol layers as nested envelopes, step-by-step DNS lookup, fibre latency between cities on a world map, IPv4 bit decoder and IPv6 scale |
 | Radio & wireless | `wireless.html` | Log-scale radio spectrum explorer with wavelength and antenna size, Wi-Fi wall heat map at 2.4/5/28 GHz, range vs speed comparison (NFC to GPS), ASK/FSK/PSK and QAM constellation with noise, GPS-style trilateration with timing error |
 | Speed of light | `lightspeed.html` | Light-time race to the Moon, planets, Voyager 1 (live one-light-day countdown) and galaxies vs car/jet/Parker probe, Fizeau toothed-wheel measurement, look-back time for sky objects, light-clock time dilation with Proxima trip, refractive-index slow light |
+| Correlation vs causation | `correlation.html` | Draggable scatter plot with live r and best-fit line, spurious correlations from random walks (with differencing), ice-cream/shark confounder with temperature stratification, cause/reverse/confounder/chance quiz, observational study vs randomised trial simulator |
 
 ## Spanish
 

@@ -37,14 +37,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:title" content="concepts.how">
 <meta property="og:description" content="Explicaciones interactivas de grandes ideas: qué es cada concepto y cómo funciona. Unidades métricas, métodos de votación y más.">
 <meta property="og:url" content="https://concepts.how/es/">
-<meta property="og:image" content="https://concepts.how/og.png?v=4">
+<meta property="og:image" content="https://concepts.how/og.png?v=5">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="concepts.how: cómo funcionan. Explicaciones interactivas de unidades métricas, votación, tiempo, blockchain y física cuántica.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="concepts.how">
 <meta name="twitter:description" content="Explicaciones interactivas de grandes ideas: qué es cada concepto y cómo funciona. Unidades métricas, métodos de votación y más.">
-<meta name="twitter:image" content="https://concepts.how/og.png?v=4">
+<meta name="twitter:image" content="https://concepts.how/og.png?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -137,6 +137,7 @@ a.tile:hover .go::after{transform:translateX(4px)}
 .nett{position:absolute;inset:0;display:grid;place-items:center;color:var(--accent)}.nett svg{width:150px;height:76px}
 .radt{position:absolute;inset:0;display:grid;place-items:center;color:var(--accent)}.radt svg{width:120px;height:80px}
 .lst{position:absolute;inset:0;display:grid;place-items:center;color:var(--accent)}.lst svg{width:160px;height:60px}
+.corrt{position:absolute;inset:0;display:grid;place-items:center;color:var(--accent)}.corrt svg{width:150px;height:80px}
 .hyper i+i{width:30px;height:30px;border-color:#E4572E;transform:rotate(12deg)}
 footer{border-top:1px solid var(--line);padding-top:20px;padding-bottom:40px;color:var(--muted);font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -394,6 +395,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tags"><span>Tiempo luz</span><span>Fizeau</span><span>Relatividad</span></div>
       </div>
       <span class="go">Abrir Velocidad de la luz</span>
+    </a>
+    <a class="tile" href="correlation.html">
+      <div class="no"><span>24</span><span>Ir juntos no es «porque»</span></div>
+      <div>
+        <div class="inst" aria-hidden="true"><div class="corrt"><svg viewBox="0 0 150 80" aria-hidden="true"><path d="M10 72L140 10" stroke="#E4572E" stroke-width="2" stroke-dasharray="5 5"/><g fill="currentColor"><circle cx="18" cy="62" r="5"/><circle cx="34" cy="60" r="5"/><circle cx="46" cy="50" r="5"/><circle cx="60" cy="52" r="5"/><circle cx="74" cy="40" r="5"/><circle cx="88" cy="36" r="5"/><circle cx="100" cy="30" r="5"/><circle cx="116" cy="24" r="5"/><circle cx="130" cy="14" r="5"/></g></svg></div></div>
+        <h2 style="margin-top:16px">Correlación y causalidad</h2>
+        <p>Arrastra puntos para crear correlaciones, mira cómo tendencias al azar coinciden, encuentra el tercer factor oculto y haz un ensayo aleatorio.</p>
+        <div class="tags"><span>Dispersión</span><span>Confusión</span><span>Ensayos</span></div>
+      </div>
+      <span class="go">Abrir Correlación</span>
     </a>
   </div>
 <script>(function(){var g=document.querySelector("main .grid");if(!g)return;var t=[].slice.call(g.querySelectorAll(":scope>a.tile"));for(var i=t.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=t[i];t[i]=t[j];t[j]=x}t.forEach(function(el,k){g.appendChild(el);var n=el.querySelector(".no span");if(n)n.textContent=(k<9?"0":"")+(k+1)})})();</script>

@@ -34,6 +34,7 @@
       internet: ["Packet incoming", "Analytics cookies help us see which pages get used. Accept and they’re delivered; decline and they’re dropped, no resend."],
       wireless: ["No signal unless you say so", "Analytics cookies help us see which pages get used. They stay switched off unless you accept."],
       lightspeed: ["Faster than light? No, just faster than reading this", "Analytics cookies help us see which pages get used. Decide at your own speed."],
+      correlation: ["Cookies and better pages: correlated?", "Analytics cookies help us see which pages get used. Accepting doesn’t cause anything bad, we promise."],
       logic: ["If accept, then cookies", "Accept → analytics cookies help us see which pages get used. ¬Accept → ¬cookies. That’s the whole truth table."]
     },
     es: {
@@ -61,6 +62,7 @@
       internet: ["Paquete entrante", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Si aceptas, se entregan; si rechazas, se descartan, sin reenvío."],
       wireless: ["Sin señal hasta que tú digas", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Se quedan apagadas a menos que las aceptes."],
       lightspeed: ["¿Más rápido que la luz? No, pero casi", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Decide a tu ritmo."],
+      correlation: ["¿Cookies y mejores páginas: correlacionadas?", "Las cookies de analítica nos ayudan a ver qué páginas se usan. Aceptarlas no causa nada malo, lo prometemos."],
       logic: ["Si aceptas, entonces cookies", "Aceptar → las cookies de analítica nos ayudan a ver qué páginas se usan. ¬Aceptar → ¬cookies. Esa es toda la tabla de verdad."]
     }
   };
