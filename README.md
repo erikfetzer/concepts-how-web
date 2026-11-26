@@ -67,3 +67,7 @@ Topic links in each page’s header are folded by `theme.js` into a **Topics** b
 ## Analytics and cookie consent
 
 Google Tag Manager (`GTM-T9P7XFHH`) and Google Analytics 4 (`G-1EL2GJW0J3`, via gtag.js directly) load on every page. Don’t also add a GA4 tag for the same ID inside GTM, or page views will count twice. A small inline script sets Google Consent Mode v2 to denied for everything before GTM loads. `consent.js` shows an Accept / Decline banner (English or Spanish, from the page language), stores the choice in `localStorage` under `consent`, and sends `gtag('consent','update', …)` plus a `consent_update` dataLayer event. A **Cookies** link in each footer reopens the banner.
+
+## License
+
+Code and content: MIT, see `LICENSE`. Bundled libraries in `lib/` (d3, topojson-client, world-atlas) are ISC-licensed; see `THIRD_PARTY_NOTICES.md`. Map data is from Natural Earth (public domain).
